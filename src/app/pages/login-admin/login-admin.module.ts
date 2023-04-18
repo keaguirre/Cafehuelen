@@ -4,10 +4,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginAdminRoutingModule } from './login-admin-routing.module';
 import { LoginAdminComponent } from './login-admin.component';
 import { LoginService } from 'src/app/services/login.service';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 
 @NgModule({
-  declarations: [LoginAdminComponent, ], //Aqui se declaran los elementos que conocerá este módulo
+  declarations: [LoginAdminComponent, AdminHomeComponent, ], //Aqui se declaran los elementos que conocerá este módulo
   imports: [
     CommonModule,
     LoginAdminRoutingModule,

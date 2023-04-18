@@ -8,8 +8,9 @@ const routes: Routes = [
     loadChildren: () => import('./pages/catalogo/catalogo.module').then ( m => m.CatalogoModule),
   },
   {
-    path: 'login',
+    path: 'admin',
     loadChildren: () => import('./pages/login-admin/login-admin.module').then ( m => m.LoginAdminModule),
+    //anadir un guard para que si este logeado que pase a admin/ y si no a admin/login
   },
   {
     path: '404',
@@ -28,8 +29,6 @@ const routes: Routes = [
     path: '**',
     redirectTo: '404',
   },
-
-
 ];
 
 @NgModule({

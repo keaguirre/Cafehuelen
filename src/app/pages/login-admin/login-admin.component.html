@@ -1,4 +1,4 @@
-<form [formGroup]="formLogin" (ngSubmit)="onQuery()" autocomplete="off" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
+<form [formGroup]="formLogin" (ngSubmit)="onSearch()" autocomplete="off" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
   <div class="mb-4">
     <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
       Username
@@ -16,6 +16,6 @@
   </div>
 </form>
 
-<ul>
-  <li *ngFor="let i of response">Usuario: {{ i.username }} <br> contrasena: {{ i.password }}/li>
-</ul>
+<!-- <ul>
+  <li *ngIf="response">Usuario: {{ response.usuario }} <br> contrasena: {{ response.contrasena }} <br>Local: {{ response.local_asignado }}</li>
+</ul> -->

@@ -5,8 +5,7 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root'
 })
 export class LoginService {
-  // urlAdmin:string = environment.urlApiLogin
-  urlAdmin:string = 'https://fakerapi.it/api/v1/users?_quantity=5'
+  urlAdmin:string = environment.urlApiLogin
   constructor(private http: HttpClient) { }
 
   //ConsultaApi
@@ -17,7 +16,21 @@ export class LoginService {
           resolve(respuesta);
         },
         error: err => {
-          reject(err);
+          if (err.status == 500){
+            console.log(err.statusText)
+          }
+          else if(err.status == 400){
+            console.log(err.statusText)
+            //bad request
+          }
+          else if(err.status == 404){
+            console.log(err.statusText)
+            //404 not found
+          }
+          else {
+            // console.log(err.status)
+            reject(err.status);
+          }
         }
       });
     });
