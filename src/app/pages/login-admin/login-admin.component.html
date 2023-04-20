@@ -1,21 +1,46 @@
-<form [formGroup]="formLogin" (ngSubmit)="onSearch()" autocomplete="off" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
+<form [formGroup]="formLogin" (ngSubmit)="onSearch()" autocomplete="off" class="p-12 bg-BeigeHuelen mx-auto rounded-2xl w-100  px-8 pt-6 pb-8 mb-4 flex flex-col justify-center self-center  z-20">
   <div class="mb-4">
-    <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
-      Username
-    </label>
-    <input formControlName="usuario" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" placeholder="Username">
+    <h3 class="font-semibold text-2xl text-center text-neutral">Iniciar Sesión </h3>
+  </div>
+  <div class="mb-4">
+    <label class="text-sm  text-neutral tracking-wide font-semibold" for="username">Usuario</label>
+    <input formControlName="usuario" class="w-full text-neutral px-4 py-2 border  border-collapse rounded-lg focus:outline-none focus:border-VerdeHuelen" id="username" type="text" placeholder="Usuario">
   </div>
   <div class="mb-6">
-    <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
-      Password
-    </label>
-    <input formControlName="contrasena" class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3" id="password" type="password" placeholder="******************">
-  </div>
+    <label class="text-sm  text-neutral tracking-wide font-semibold" for="password">Contraseña</label>
+    <input formControlName="contrasena" class="w-full text-neutral px-4 py-2 border  border-collapse rounded-lg focus:outline-none focus:border-VerdeHuelen" id="password" type="password" placeholder="***********">
+  </div>  
   <div class="flex items-center justify-between">
-    <button class="bg-blue hover:bg-blue-dark text-grey-darker font-bold py-2 px-4 rounded" type="submit">Ingresar</button>
+    <button class="w-full flex justify-center text- bg-VerdeHuelen  hover:bg-accent-content text-Negro-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500" type="submit">Ingresar</button>
   </div>
 </form>
+  
 
 <!-- <ul>
   <li *ngIf="response">Usuario: {{ response.usuario }} <br> contrasena: {{ response.contrasena }} <br>Local: {{ response.local_asignado }}</li>
 </ul> -->
+
+
+  <!-- <div class="p-12 bg-BeigeHuelen mx-auto rounded-2xl w-100 ">
+      
+      <div class="space-y-5">
+        <div class="space-y-2">
+          <label class="text-sm  text-neutral tracking-wide font-semibold">Email</label>
+          <input class=" w-full text-neutral px-4 py-2 border  border-collapse rounded-lg focus:outline-none focus:border-VerdeHuelen" type="" placeholder="Ingrese Usuario">
+        </div>
+        <div class="space-y-2">
+          <label class="mb-5 text-sm font-semibold tracking-wide">
+            Password
+          </label>
+          <input class="w-full content-center text-base px-4 py-2 border rounded-lg focus:outline-none focus:border-VerdeHuelen" type="" placeholder="Ingrese Contraseña">
+        </div>
+        <div class="flex items-center justify-between">
+          
+          
+        </div>
+        <div>
+          <button type="submit" class="w-full flex justify-center text- bg-VerdeHuelen  hover:bg-accent-content text-Negro-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500">
+            Iniciar Sesión</button>
+      </div> -->
+
+          
