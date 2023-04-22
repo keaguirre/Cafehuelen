@@ -1,30 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Error404Component } from './components/error404/error404.component';
+import { CatalogoComponent } from './pages/catalogo/catalogo.component';
+import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
+import { StartComponent } from './pages/start/start.component';
 
 const routes: Routes = [
+ 
   {
-    path: 'catalogo',
-    loadChildren: () => import('./pages/catalogo/catalogo.module').then ( m => m.CatalogoModule),
+    path: '', component:StartComponent,
+    
   },
   {
-    path: 'admin',
-    loadChildren: () => import('./pages/login-admin/login-admin.module').then ( m => m.LoginAdminModule),
+    path: 'catalogo', component:CatalogoComponent,
+  },
+  {
+    path: 'admin', component:LoginAdminComponent,
     //anadir un guard para que si este logeado que pase a admin/ y si no a admin/login
   },
   {
-    path: '404',
-    component: Error404Component,
+    path: '404', component: Error404Component,
   },
-  {
-    path: 'start',
-    loadChildren: () => import('./pages/start/start.module').then ( m => m.StartModule),
-  },
-  {
-    path: '',
-    redirectTo: 'start',
-    pathMatch: 'full'
-  },
+  
   {
     path: '**',
     redirectTo: '404',
