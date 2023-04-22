@@ -20,6 +20,13 @@
 - Creados los componentes y rutas para los crud de Ingredientes, ingre-prep, preparaciones-categorias.
 - [x] Crear los componentes por crud de la pagina de admin.
 
+# 21/04/23 Primer crud creado, Ingredientes
+- Creado primer crud de ingredientes
+- Arreglado el backend con las peticiones put
+
 # To do:
+- [ ] Botones top de agregar items acceso rapido
+- [ ] Tabla de listados para items
+- [ ] Terminar de implementar todos los crud
 - [ ] Decorar home admin.
 - [ ] Dar estilos a estos componentes.

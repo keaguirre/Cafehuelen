@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment.development';
+import { environment } from 'src/environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,8 +8,10 @@ export class LoginService {
   urlAdmin:string = environment.urlApiLogin
   constructor(private http: HttpClient) { }
 
-  //ConsultaApi
-  obtenerAdminLogin(admin:any): Promise<any> {
+//LISTADOS
+//Admin login------------------------------------------------
+//Administrador + query
+  obtenerAdminDetalle(admin:any): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get(this.urlAdmin+admin).subscribe({
         next: respuesta => {
@@ -35,7 +37,7 @@ export class LoginService {
       });
     });
   }
-
+  //Listado administradores
   obtenerListadoAdmin(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get(this.urlAdmin).subscribe({
@@ -48,4 +50,5 @@ export class LoginService {
       });
     });
   }    
+
 }
