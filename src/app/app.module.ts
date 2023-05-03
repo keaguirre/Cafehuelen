@@ -9,7 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminHomeComponent } from './pages/login-admin/admin-home/admin-home.component';
-
+import { TostadaComponent } from './components/tostada/tostada.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -18,15 +19,15 @@ import { AdminHomeComponent } from './pages/login-admin/admin-home/admin-home.co
     CatalogoComponent, 
     StartComponent,
     LoginAdminComponent,
-    AdminHomeComponent
-    
+    AdminHomeComponent,
+    TostadaComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

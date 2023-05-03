@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/loginService/login.service';
+import{map} from 'rxjs/operators'
+
 @Component({
   selector: 'app-login-admin',
   templateUrl: './login-admin.component.html',
@@ -19,6 +21,8 @@ export class LoginAdminComponent{
   });
 
   ngOnInit(): void {
+   
+    
   }
   constructor(private loginserv: LoginService, private router: Router) { }
 

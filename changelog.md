@@ -24,9 +24,22 @@
 - Creado primer crud de ingredientes
 - Arreglado el backend con las peticiones put
 
+# 02/05/23 Bloque productos Gran avance
+- todos los crud creados y funcionando pero con detalles
+- [x] Tabla de listados para items
+
+### Detalles
+- [-] Terminar de implementar todos los crud
+- Los items que tienen relacion con otros item no se puedes eliminar(anidados).
+- Detalles en componentes como responsive item.
+- Detalle de modal editar de cada bloque(modificarlo a un sweerAlert)
+- Ajustar mejor el sidebarComponent que tenga mejor responsividad
+- Revision de carga en catálogo
+
 # To do:
-- [ ] Botones top de agregar items acceso rapido
-- [ ] Tabla de listados para items
-- [ ] Terminar de implementar todos los crud
-- [ ] Decorar home admin.
-- [ ] Dar estilos a estos componentes.
+- [ ] Pagination o Scrollbar para las tablas.
+- [ ] Última evaluacion de como implementar los agregar en las tablas(sidebar-dropdown)
+- [ ] Actualizar la tabla al momento de agregar, editar o eliminar por separado sin tener que recargar la pagina completa.
+- [ ] Login
+- [ ] Paleta de colores.
+- [ ] Decorar home admin. 
