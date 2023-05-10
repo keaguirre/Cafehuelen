@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
+import { Observable,Subject } from 'rxjs';
+import {tap} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductosService {
   urlIngredientes:string = environment.urlApiIngredientes
   urlPreparaciones:string = environment.urlApiPreparaciones
-  urlIngredPrep:string = environment.urlApiIngredPrep
+  urlDetallePrep:string = environment.urlApiDetallePrep
   urlCategorias:string = environment.urlApiCategorias
 
-  //private _refresh$ = new Subject<any>();
+  private _refresh$ = new Subject<void>();
 
   constructor(private http: HttpClient) { }
 
-  //get refresh$(){
-  //  return this._refresh$;}
+  get refresh$(){
+   return this._refresh$;}
 
   //LISTADOS-------------------------------------------------------
 
@@ -25,7 +27,7 @@ export class ProductosService {
     return new Promise((resolve, reject) => {
       this.http.get(this.urlIngredientes+ingre).subscribe({
         next: respuesta => {
-          resolve(respuesta);
+          resolve(respuesta)
         },
         error: err => {
           if (err.status == 500){
@@ -104,9 +106,9 @@ export class ProductosService {
   }    
   //Ingredientes Preparaciones------------------------------------------------
   // Ingredientes preparaciones + query
-  obtenerIngrePrepDetalle(ingrePrep:any): Promise<any> {
+  obtenerDetallePrepDetalle(idDetalleP:any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get(this.urlIngredPrep+ingrePrep).subscribe({
+      this.http.get(this.urlDetallePrep+idDetalleP).subscribe({
         next: respuesta => {
           resolve(respuesta);
         },
@@ -131,9 +133,9 @@ export class ProductosService {
     });
   }
   //Listado ingredientes preparaciones
-  obtenerListadoIngrePrep(): Promise<any> {
+  obtenerListadoDetallePrep(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get(this.urlIngredPrep).subscribe({
+      this.http.get(this.urlDetallePrep).subscribe({
         next: respuesta => {
           resolve(respuesta);
         },
@@ -190,9 +192,13 @@ export class ProductosService {
 
   crearIngrediente(ingrediente: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.post(this.urlIngredientes, ingrediente).subscribe({
+      this.http.post(this.urlIngredientes, ingrediente).pipe(
+        tap(()=>{
+          this._refresh$.next();
+        })
+      ).subscribe({
         next: respuesta => {
-          resolve(respuesta);
+          resolve(respuesta)
         },
         error: err => {
           if (err.status == 500){
@@ -251,9 +257,9 @@ export class ProductosService {
       });
     });
   }
-  crearIngrePrep(ingredPrep: any): Promise<any> {
+  crearDetallePrep(detallePrep: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.post(this.urlIngredPrep, ingredPrep).subscribe({
+      this.http.post(this.urlDetallePrep, detallePrep).subscribe({
         next: respuesta => {
           resolve(respuesta);
         },
@@ -384,9 +390,9 @@ export class ProductosService {
       });
     });
   }
-  actualizarIngrePrep(id_ingre: any, ingrePrepObj: any): Promise<any> {
+  actualizarDetallePrep(id_ingre: any, detallePrepObj: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.put(this.urlIngredPrep + id_ingre, ingrePrepObj)
+      this.http.put(this.urlDetallePrep + id_ingre, detallePrepObj)
       .subscribe({
         next: respuesta => {
           resolve(respuesta);
@@ -426,6 +432,139 @@ export class ProductosService {
         error: err => {
           if (err.status == 500){ 
             console.log(err.statusText)
+            //internal server error
+          }
+          else if(err.status == 400){
+            console.log(err.statusText)
+            //bad request
+          }
+          else if(err.status == 404){
+            console.log(err.statusText)
+            //404 not found
+          }
+          else if(err.status == 409){
+            console.log(err.statusText)
+            //409 Conflict
+          }
+          else {
+            // console.log(err.status)
+            reject(err.status);
+          }
+        }
+      });
+    });
+  }
+
+  //DESHABILITAR OBJETOS---------------------------------------------------------------
+  disableIngrediente(id_ingre: number): Promise<any> {
+    let jsonDisable: Object = {"estado": false}
+    return new Promise((resolve, reject) => {
+      this.http.patch(this.urlIngredientes + id_ingre, jsonDisable).subscribe({
+        next: respuesta => {
+          resolve(respuesta);
+        },
+        error: err => {
+          if (err.status == 500){
+            console.log(err.statusText)
+            //internal server error
+          }
+          else if(err.status == 400){
+            console.log(err.statusText)
+            //bad request
+          }
+          else if(err.status == 404){
+            console.log(err.statusText)
+            //404 not found
+          }
+          else if(err.status == 409){
+            console.log(err.statusText)
+            //409 Conflict
+          }
+          else {
+            // console.log(err.status)
+            reject(err.status);
+          }
+        }
+      });
+    });
+  }
+  disablePreparacion(id_prep: number): Promise<any> {
+    let jsonDisable: Object = {"estado": false}
+    return new Promise((resolve, reject) => {
+      this.http.patch(this.urlPreparaciones + id_prep,jsonDisable).subscribe({
+        next: respuesta => {
+          console.log(respuesta);
+          resolve(respuesta);
+        },
+        error: err => {
+          if (err.status == 500){
+            console.log(err.statusText)
+            //internal server error
+          }
+          else if(err.status == 400){
+            console.log(err.statusText)
+            //bad request
+          }
+          else if(err.status == 404){
+            console.log(err.statusText)
+            //404 not found
+          }
+          else if(err.status == 409){
+            console.log(err.statusText)
+            //409 Conflict
+          }
+          else {
+            // console.log(err.status)
+            reject(err.status);
+          }
+        }
+      });
+    });
+  }
+  disableDetallePrep(id_DetallePrep: number): Promise<any> {
+    let jsonDisable: Object = {"estado": false}
+    return new Promise((resolve, reject) => {
+      this.http.delete(this.urlDetallePrep + id_DetallePrep,jsonDisable).subscribe({
+        next: respuesta => {
+          console.log(respuesta);
+          resolve(respuesta);
+        },
+        error: err => {
+          if (err.status == 500){
+            console.log(err.statusText)
+            //internal server error
+          }
+          else if(err.status == 400){
+            console.log(err.statusText)
+            //bad request
+          }
+          else if(err.status == 404){
+            console.log(err.statusText)
+            //404 not found
+          }
+          else if(err.status == 409){
+            console.log(err.statusText)
+            //409 Conflict
+          }
+          else {
+            // console.log(err.status)
+            reject(err.status);
+          }
+        }
+      });
+    });
+  }
+  disableCategoria(id_cat: number): Promise<any> {
+    let jsonDisable: Object = {"estado": false}
+    return new Promise((resolve, reject) => {
+      this.http.delete(this.urlCategorias + id_cat,jsonDisable).subscribe({
+        next: respuesta => {
+          resolve(respuesta);
+        },
+        error: err => {
+          if (err.status == 500){
+            console.log('status: '+err.statusText)
+            // console.log(Object.values(err))
             //internal server error
           }
           else if(err.status == 400){
@@ -513,9 +652,9 @@ export class ProductosService {
       });
     });
   }
-  borrarIngrePrep(id_ingrePrep: number): Promise<any> {
+  borrarDetallePrep(id_DetallePrep: number): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.delete(this.urlIngredPrep + id_ingrePrep).subscribe({
+      this.http.delete(this.urlDetallePrep + id_DetallePrep).subscribe({
         next: respuesta => {
           console.log(respuesta);
           resolve(respuesta);

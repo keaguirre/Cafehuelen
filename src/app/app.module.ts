@@ -9,8 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminHomeComponent } from './pages/login-admin/admin-home/admin-home.component';
-import { TostadaComponent } from './components/tostada/tostada.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,6 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     StartComponent,
     LoginAdminComponent,
     AdminHomeComponent,
-    TostadaComponent,
   ],
   imports: [
     BrowserModule,

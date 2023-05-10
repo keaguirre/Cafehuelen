@@ -28,6 +28,13 @@
 - todos los crud creados y funcionando pero con detalles
 - [x] Tabla de listados para items
 
+# 08/05/23 Presentacion de avance
+- [x] Ppt de avance
+- [x] Actualizacion de los diagramas de db
+- [x] Definicion de que pasara con preparaciones las cuales se les 'elimine' la categoria
+- [x] Modificar los modal update por dropdown
+- [x] Última evaluacion de como implementar los agregar en las tablas(sidebar-dropdown) - SERÁ MODAL
+
 ### Detalles
 - [-] Terminar de implementar todos los crud
 - Los items que tienen relacion con otros item no se puedes eliminar(anidados).
@@ -36,10 +43,3 @@
 - Ajustar mejor el sidebarComponent que tenga mejor responsividad
 - Revision de carga en catálogo
 
-# To do:
-- [ ] Pagination o Scrollbar para las tablas.
-- [ ] Última evaluacion de como implementar los agregar en las tablas(sidebar-dropdown)
-- [ ] Actualizar la tabla al momento de agregar, editar o eliminar por separado sin tener que recargar la pagina completa.
-- [ ] Login
-- [ ] Paleta de colores.
-- [ ] Decorar home admin. 

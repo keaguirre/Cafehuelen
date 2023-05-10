@@ -1,6 +1,4 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
-    integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
 <main>
     <nav class=" bg-gray-900">
         <div class=" ml-44">
@@ -8,9 +6,7 @@
                 <h1 class="font-bold pl-2">Titulo</h1>
             </div>
         </div>
-        
     </nav>
-    
     <div class="flex flex-col md:flex-row bg-gray-900 "><!--Bg fondo-->
         <app-navbar-admin></app-navbar-admin>
         <section id="main" class="bg-gray-100 main-content flex-1 h-full pb-24 md:pb-10"><!-- Cartas y Formularios-->
@@ -22,57 +18,68 @@
                 <button class="btn btn-success mx-5">Agregar Ingrediente preparacion</button>
             </div>
             <section><!-- Tabla CATEGORIA -->
-                <div class="w-full pb-20"><!-- Tabla 1 BUSCAR LA LIBRERIA DE JS EventSource para actualizar la data de manera dinamica de las tablas sin tener que recargar la pagina entera denuevo-->
+                <div class="w-full pb-20">
                     <h1 class="text-4xl text-VerdeHuelen font-bold pt-20 mb-4 text-center">Categorias</h1>
-                    <table class="block table table-zebra w-10/12 mx-auto  ">
-                        
-                        <thead class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">
+                    <table class="block table table-zebra w-10/12 mx-auto  ">   
+                        <thead class="text-xl text-VerdeHuelen font-bold pb-10 text-center"><!-- head -->
                             <tr class=" text-center text-1xl ">
                                 <th>Identificador</th>
                                 <th>Nombre Categoria</th>
-                                <th><div class="dropdown">
-                                    <label tabindex="0" class="btn m-1 btn-success">Agregar <i
-                                        class="pl-2 fa-solid fa-plus"></i> </label>
-                                    <div tabindex="0" class="dropdown-content card  w-96 p-2 shadow bg-VerdeHuelen text-primary-content">
-                                      <div class="card-body">
-                                        <h1 class="text-xl font-bold pb-10 text-white text-center">Agregar Categoria</h1>
-                                        <!--Form 4 -->
-                                        <form [formGroup]="formCategorias" (ngSubmit)="onCreate('createCat')">
-                                            <div class="">
-                                                <div class="relative">
-                                                    <div class="form-control">
+                                <th>
+                                    <div class="dropdown dropdown-left"><!--Inicio dropdown agregar categoria-->
+                                        <label tabindex="0" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i></label>
+                                        <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-VerdeHuelen text-primary-content">
+                                            <div class="card-body">
+                                                <h1 class="text-xl font-bold text-white text-center">Agregar Categoria</h1>
+                                                <form [formGroup]="formCategorias" (ngSubmit)="onCreate('createCat')"> 
+                                                    <div class="form-control relative">
                                                         <label class="input-group input-group-vertical w-full max-w-xl">
                                                             <span>Nombre Categoria</span>
                                                             <input minlength="3" formControlName="nombre_cat" type="text"
-                                                                placeholder="Introduzca un nombre de categoria"
-                                                                class="input input-bordered" />
+                                                                placeholder="Introduzca un nombre de categoria" class="input input-bordered"/>
                                                         </label>
                                                     </div>
-                                                    <button class=" mt-2 btn w-full max-w-xl" type="submit">Crear</button>
-                                                </div>
+                                                    <button class="mt-2 btn w-full max-w-xl" type="submit">Crear</button>
+                                                </form>
                                             </div>
-                                        </form>
-                                        <!-- fin Form 4 -->
-                                      </div>
+                                        </div><!--Fin dropdown agregar categoria-->
                                     </div>
-                                  </div>
                                 </th>
                             </tr>
-                        </thead><!-- head -->
-                        <tbody>
+                        </thead><!-- Fin head -->
+                        <tbody><!-- tbody -->
                             <tr class="text-center" *ngFor="let categoriaTabla of responseListadoCategorias">
                                 <td>{{ categoriaTabla.id_cat }}</td>
                                 <td>{{ categoriaTabla.nombre_cat }}</td>
                                 <th class=" text-center">
-                                    <!--Ideal que estos dos botones sean un btn group // revisar la utilidad de los checkbox-->
-                                    <div class="btn-group xs:btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl ">
-                                        <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black drawer-button"
-                                            (click)="seleccionarId(categoriaTabla.id_cat); rellenarFormulario('formCat')" for="my-modal-3">Editar
-                                            <i class="pl-2 fa-solid fa-pencil text-green-600"></i>
-                                        </label>
-                                        <swal
+                                    <div class=" xs:btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl ">
+                                        <div class="dropdown dropdown-left">
+                                            <label  tabindex="0" class="btn bg-slate-700 hover:bg-green-500 hover:text-black "(click)="seleccionarId(categoriaTabla.id_cat); rellenarFormulario('formCat')">
+                                                Editar <i class="pl-2 fa-solid fa-pencil text-green-600"></i></label>
+                                            <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-VerdeHuelen text-primary-content"><!--Inicio dropdown Actualizar categoria-->
+                                                <div class="card-body ">
+                                                    <h1 class="text-xl font-bold text-white text-center">Actualizar categoria</h1>
+                                                    <form [formGroup]="formCategorias"(ngSubmit)="onActualizar('editCat', this.idSeleccionado)">
+                                                        <div class="form-control relative ">
+                                                            <label class="input-group input-group-vertical w-full max-w-xl">
+                                                                <span>Nuevo Nombre</span>
+                                                                <input minlength="3" formControlName="nombre_cat" type="text"
+                                                                    placeholder="Introduzca un nombre de categoria"
+                                                                    class="input input-bordered" [value]="this.formCategorias.value['nombre_cat']" />
+                                                            </label>
+                                                        </div>
+                                                        <button class="mt-2   btn w-full max-w-xl" type="submit">Actualizar</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div><!--Fin dropdown actualizar categoria-->
+                                        <!--Swal eliminar categoria-->
+                                        <button [swal]="deleteCatSwal" class="btn bg-slate-700  btn-group-horizontal hover:text-black font-bold hover:bg-red-200"
+                                            (click)="seleccionarId(categoriaTabla.id_cat);">Eliminar<i class="pl-2 fa-solid fa-trash text-red-600"></i>
+                                        </button>
+                                        <swal  
                                             #deleteCatSwal
-                                            title="¿Estás seguro de eliminar {{ categoriaTabla.nombre_cat }}?"
+                                            title="¿Estás seguro de eliminar {{categoriaTabla.nombre_cat }}?"
                                             icon="question"
                                             iconColor="#f8bb86"
                                             fontText="bold"
@@ -83,17 +90,11 @@
                                             [focusCancel]="true"
                                             (confirm)="(onDelete('deleteCat', this.idSeleccionado))">
                                         </swal>
-                                        <button 
-                                            [swal]="deleteCatSwal"
-                                            class="btn bg-slate-700  btn-group-horizontal hover:text-black font-bold hover:bg-red-200"
-                                            (click)="seleccionarId(categoriaTabla.id_cat);  ">Eliminar
-                                            <i class="pl-2 fa-solid fa-trash text-red-600"></i>
-                                        </button>
+                                         <!--FIn Swal eliminar categoria-->
                                     </div>
                                 </th>
                             </tr>
                         </tbody>
-
                         <tfoot><!-- foot -->
                             <tr>
                                 <th></th>
@@ -103,87 +104,29 @@
                         </tfoot>
                     </table>
                 </div>
-                <!---->
-                <!--modal edit categoria-->
-                <input type="checkbox" id="my-modal-3" class="modal-toggle" />
-                <div class="modal">
-                    <div class="modal-box relative bg-VerdeHuelen">
-                        <div class="max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg"><!--Form 4 -->
-                            <label for="my-modal-3" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"><i
-                                    class="fa-regular fa-circle-xmark fa-2xl" style="color: #ed333b;"></i></label>
-                            <h1 class="text-4xl font-bold pb-10 text-white text-center">Actualizar categoria</h1>
-                            <form [formGroup]="formCategorias"(ngSubmit)="onActualizar('editCat', this.idSeleccionado)">
-                                <div class="">
-                                    <div class="relative">
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical w-full max-w-xl">
-                                                <input minlength="3" formControlName="nombre_cat" type="text"
-                                                    placeholder="Introduzca un nombre de categoria"
-                                                    class="input input-bordered" [value]="this.formCategorias.value['nombre_cat']" />
-                                            </label>
-                                        </div>
-                                        <button class=" mt-2 btn w-full max-w-xl" type="submit">Actualizar</button>
-                                    </div>
-                                    <!--Al enviar el form si el envio fue valido, cambiar el contenido a un cambio realizado, que el modal se pueda cerrar haciendo click fuera tambien aparte de la x-->
-                                </div>
-                            </form>
-                        </div><!-- Fin form 4-->
-                    </div>
-                </div><!--fin modal edit categoria-->
-                <!--modal formulario agregar categoria-->
-                <input type="checkbox" id="my-modal-5" class="modal-toggle" />
-                <div class="modal">
-                    <div class="modal-box relative bg-VerdeHuelen">
-                        <div class="max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg">
-                            <label for="my-modal-5" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"><i
-                                    class="fa-regular fa-circle-xmark fa-2xl" style="color: #ed333b;"></i></label>
-                            <h1 class="text-xl font-bold pb-10 text-white text-center">Agregar Categoria</h1>
-                            <!--Form 4 -->
-                            <form [formGroup]="formCategorias" (ngSubmit)="onCreate('createCat')">
-                                <div class="">
-                                    <div class="relative">
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical w-full max-w-xl">
-                                                <span>Nombre Categoria</span>
-                                                <input minlength="3" formControlName="nombre_cat" type="text"
-                                                    placeholder="Introduzca un nombre de categoria"
-                                                    class="input input-bordered"/>
-                                            </label>
-                                        </div>
-                                        <button class=" mt-2 btn w-full max-w-xl" type="submit">Crear</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- fin Form 4 -->
-                        </div>
-                    </div>
-                </div>
-                <!--fin modal formulario agregar categoria-->
             </section><!-- Fin Tabla CATEGORIA -->
             <section> <!-- Tabla INGREDIENTE -->
-                <div class=" w-full pt-20   ">
+                <div class=" w-full  pb-20  ">
                     <h1 class="text-4xl text-VerdeHuelen font-bold pb-4 text-center">Ingredientes</h1>
                     <table class="block table table-zebra w-10/12 mx-auto  ">
                         <thead class="text-xl text-VerdeHuelen font-bold pb-10 text-center"><!-- head -->
                             <tr class=" text-center text-1xl ">
                                 <th>ID</th>
                                 <th>Marca</th>
-                                <th>Descripción</th>
+                                <th>Nombre</th>
                                 <th>Stock</th>
                                 <th>Cantidad por unidad (gr/ml)</th>
                                 <th>Tipo Unidad ingrediente</th>
                                 <th>Imagen</th>
                                 <th> 
-                                    <div class=" dropdown dropdown-left">
-                                        <label tabindex="0" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i> </label>
-                                        <div tabindex="0" class="dropdown-content card  w-70 p-2 shadow bg-VerdeHuelen text-primary-content">
+                                    <div class=" dropdown dropdown-left"><!--Inicio dropdown AGREGAR INGREDIENTE-->
+                                        <label  tabindex="0" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i> </label>
+                                        <div tabindex="0" class="dropdown-content card  w-96 p-2 shadow bg-VerdeHuelen text-primary-content">
                                             <div class="card-body">
                                                 <h1 class="text-xl font-bold pb-5 text-white text-center">Agregar Ingredientes</h1>
-                                                <!-- Form 1 INGREDIENTE-->
                                                 <form [formGroup]="formIngrediente" (ngSubmit)="onCreate('createIngre') ">
                                                     <div class=" w-full">
                                                         <div class="relative">
-                                                            <!-- input-->
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
                                                                     <span>Marca</span>
@@ -191,15 +134,13 @@
                                                                         placeholder="Ingrese la marca" class="input input-bordered" />
                                                                 </label>
                                                             </div>
-                                                            <!-- input-->
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                                    <span>Descripcion</span>
-                                                                    <input formControlName="descripcion_ingre" type="text"
+                                                                    <span>Nombre</span>
+                                                                    <input formControlName="nombre_ingre" type="text"
                                                                         placeholder="Ingrese la descripcion" class="input input-bordered" />
                                                                 </label>
                                                             </div>
-                                                            <!-- input-->
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
                                                                     <span>Cantidad de ML o GR por unidad</span>
@@ -208,7 +149,6 @@
                                                                         placeholder="Ingrese la cantidad" class="input input-bordered" />
                                                                 </label>
                                                             </div>
-                                                            <!-- input-->
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
                                                                     <span>Stock</span>
@@ -218,7 +158,6 @@
                                                                         class="input input-bordered" />
                                                                 </label>
                                                             </div>
-                                                            <!-- input-->
                                                             <div class=" mt-2 form-control">
                                                             <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
                                                                     <span>Unidad de medida</span>
@@ -230,7 +169,6 @@
                                                                 </select>
                                                             </label>
                                                             </div>
-                                                            <!-- input-->
                                                             <div class="form-control">
                                                                 <label class="label">
                                                                 </label>
@@ -241,14 +179,13 @@
                                                                         placeholder="Ingrese un enlace" class="input input-bordered" />
                                                                 </label>
                                                             </div>
-                                                            <!-- input-->
                                                             <button class="btn mt-2 w-full max-w-xl" type="submit">Crear</button>
                                                         </div>
-                                                    </div><!-- modal 4-->
-                                                </form><!-- Fin form 1-->
+                                                    </div>  
+                                                </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div><!--Fin dropdown AGREGAR INGREDIENTE-->
                                 </th>
                             </tr>
                         </thead>
@@ -256,7 +193,7 @@
                             <tr class="text-center" *ngFor="let ingredienteTabla of responseListadoIngrediente">
                                 <td>{{ ingredienteTabla.id_ingre }}</td>
                                 <td>{{ ingredienteTabla.marca_ingre }}</td>
-                                <td>{{ ingredienteTabla.descripcion_ingre }}</td>
+                                <td>{{ ingredienteTabla.nombre_ingre }}</td>
                                 <td>{{ ingredienteTabla.stock_ingrediente }}</td>
                                 <td>{{ ingredienteTabla.cantidad_por_unidad_ingrediente }}</td>
                                 <td>{{ ingredienteTabla.tipo_unidad_ingrediente }}</td>
@@ -264,17 +201,77 @@
                                     <div class="avatar">
                                         <div class="w-24 rounded">
                                             <img src="{{ingredienteTabla.imagen_ingre}}"
-                                                alt="{{ ingredienteTabla.descripcion_ingre }}" />
+                                                alt="{{ ingredienteTabla.nombre_ingre }}" />
                                         </div>
                                     </div>
                                 </td>
                                 <th class="text-center xs:btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl 1xl:btn-1xl">
-                                    <div
-                                        class="btn-group xs:btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl 1xl:btn-1xl ">
-                                        <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black"
-                                            (click)="seleccionarId(ingredienteTabla.id_ingre) ; rellenarFormulario('formIngre')" for="my-modal-6">Editar
-                                            <i class="pl-2 fa-solid fa-pencil text-green-600"></i>
-                                        </label>
+                                    <div class="xs:btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl 1xl:btn-1xl ">
+                                        <div class="dropdown dropdown-left"><!--Inicio dropdown actualizar ingrediente-->
+                                            <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black" tabindex="0"
+                                            (click)="seleccionarId(ingredienteTabla.id_ingre) ; rellenarFormulario('formIngre')">Editar
+                                            <i class="pl-2 fa-solid fa-pencil text-green-600"></i></label>
+                                            <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-VerdeHuelen text-primary-content">
+                                                <div class="card-body">
+                                                    <h1 class="text-4xl font-bold pb-10 text-white text-center">Actualizar Ingrediente</h1>
+                                                    <form [formGroup]="formIngrediente" (ngSubmit)="onActualizar('editIngre', this.idSeleccionado)">
+                                                        <div class="relative">
+                                                            <div class="form-control">
+                                                                <label class="input-group input-group-vertical mt-2 w-full max-w-xl">
+                                                                    <span>Ingrese la nueva marca</span>
+                                                                    <input formControlName="marca_ingre" type="text"
+                                                                        placeholder="Ingrese una nueva descripción"
+                                                                        class="input input-bordered" />
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-control">
+                                                                <label class="input-group input-group-vertical mt-2 w-full max-w-xl">
+                                                                    <span>Ingrese una nueva descripción</span>
+                                                                    <input formControlName="nombre_ingre" type="text"
+                                                                        placeholder="Ingrese una nueva descripción"
+                                                                        class="input input-bordered" />
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-control">
+                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
+                                                                    <span>Ingrese el nuevo stock</span>
+                                                                    <input min="0" formControlName="stock_ingrediente" type="number"
+                                                                        placeholder="Ingrese el nuevo stock"
+                                                                        class="input input-bordered" />
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-control">
+                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
+                                                                    <span>Ingrese el nuevo link de imagen</span>
+                                                                    <input formControlName="imagen_ingre" type="text"
+                                                                        placeholder="Ingrese un enlace" class="input input-bordered" />
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-control">
+                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
+                                                                    <span>Cantidad de ML o GR por unidad</span>
+                                                                    <input min="1" (keypress)="numberOnlyValidation($event)"
+                                                                        formControlName="cantidad_por_unidad_ingrediente" type="number"
+                                                                        placeholder="Ingrese la cantidad" class="input input-bordered" />
+                                                                </label>
+                                                            </div>
+                                                            <div class="mt-2 form-control">
+                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
+                                                                    <span>Unidad de medida</span>
+                                                                    <select formControlName="tipo_unidad_ingrediente" name="mlgr" required
+                                                                        class="select select-bordered  w-full max-w-xl">
+                                                                        <option selected disabled>ML o GR</option>
+                                                                        <option value="ml">(Ml) Mililitro</option>
+                                                                        <option value="gr">(Gr) Gramos</option>
+                                                                    </select>
+                                                                </label>
+                                                            </div>
+                                                            <button class="mt-4 btn w-full max-w-xl" type="submit">Actualizar</button><!--Al enviar el form si el envio fue valido, cambiar el contenido a un cambio realizado, que el modal se pueda cerrar haciendo click fuera tambien aparte de la x-->
+                                                         </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div><!--Fin dropdown actualizar ingrediente-->
                                         <swal
                                             #deleteIngreSwal
                                             title="¿Estás seguro de eliminar {{ ingredienteTabla.marca_ingre }}?"
@@ -295,7 +292,6 @@
                                             <i class="pl-2 fa-solid fa-trash text-red-600"></i>
                                         </button>
                                     </div>
-                                    <!--Tostada mensaje si se elimino correctamente, Esta deberá estar escondida y el evento de eliminarCat deberá detonar su aparición por x segundos-->
                                 </th>
                             </tr>
                         </tbody>
@@ -313,158 +309,10 @@
                         </tfoot>
                     </table>
                 </div>
-                <!--modal edit ingrediente-->
-                <input type="checkbox" id="my-modal-6" class="modal-toggle" />
-                <div class="modal">
-                    <div class="modal-box relative bg-VerdeHuelen">
-                        <div class="max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg"><!--Form 1 -->
-                            <label for="my-modal-6" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"><i
-                                    class="fa-regular fa-circle-xmark fa-2xl" style="color: #ed333b;"></i></label>
-                            <h1 class="text-4xl font-bold pb-10 text-white text-center">Actualizar Ingrediente</h1>
-                            <form [formGroup]="formIngrediente"
-                                (ngSubmit)="onActualizar('editIngre', this.idSeleccionado)">
-                                <div class="">
-                                    <div class="relative">
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical mt-2 w-full max-w-xl">
-                                                <span>Ingrese la nueva marca</span>
-                                                <input formControlName="marca_ingre" type="text"
-                                                    placeholder="Ingrese una nueva descripción"
-                                                    class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical mt-2 w-full max-w-xl">
-                                                <span>Ingrese una nueva descripción</span>
-                                                <input formControlName="descripcion_ingre" type="text"
-                                                    placeholder="Ingrese una nueva descripción"
-                                                    class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                <span>Ingrese el nuevo stock</span>
-                                                <input min="0" formControlName="stock_ingrediente" type="number"
-                                                    placeholder="Ingrese el nuevo stock"
-                                                    class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical mt-4 w-full max-w-xl"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
-                                                <span>Ingrese el nuevo link de imagen</span>
-                                                <input formControlName="imagen_ingre" type="text"
-                                                    placeholder="Ingrese un enlace" class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                <span>Cantidad de ML o GR por unidad</span>
-                                                <input min="1" (keypress)="numberOnlyValidation($event)"
-                                                    formControlName="cantidad_por_unidad_ingrediente" type="number"
-                                                    placeholder="Ingrese la cantidad" class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <div class="mt-2 form-control">
-                                           <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                <span>Unidad de medida</span>
-                                             <select formControlName="tipo_unidad_ingrediente" name="mlgr" required
-                                                 class="select select-bordered  w-full max-w-xl">
-                                                 <option selected disabled>ML o GR</option>
-                                                 <option value="ml">(Ml) Mililitro</option>
-                                                 <option value="gr">(Gr) Gramos</option>
-                                             </select>
-                                           </label>
-                                        </div>
-                                        <button class="mt-4 btn w-full max-w-xl" type="submit">Actualizar</button>
-                                    </div>
-                                    <!--Al enviar el form si el envio fue valido, cambiar el contenido a un cambio realizado, que el modal se pueda cerrar haciendo click fuera tambien aparte de la x-->
-                                </div>
-                            </form>
-                        </div>
-                        <!-- Fin form 4-->
-                    </div>
-                </div><!--fin modal edit ingrediente-->
-                <!--modal formulario agregar ingrediente-->
-                <input type="checkbox" id="my-modal-8" class="modal-toggle" />
-                <div class="modal">
-                    <div class="modal-box relative bg-VerdeHuelen ">
-                        <div class="max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg overflow-auto">
-                            <label for="my-modal-8" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"><i
-                                    class="fa-regular fa-circle-xmark fa-2xl" style="color: #ed333b;"></i></label>
-                            <h1 class="text-xl font-bold pb-5 text-white text-center">Agregar Ingredientes</h1>
-                            <!-- Form 1 INGREDIENTE-->
-                            <form [formGroup]="formIngrediente" (ngSubmit)="onCreate('createIngre') ">
-                                <div class=" w-full">
-                                    <div class="relative">
-                                        <!-- input-->
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                <span>Marca</span>
-                                                <input formControlName="marca_ingre" type="text"
-                                                    placeholder="Ingrese la marca" class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                <span>Descripcion</span>
-                                                <input formControlName="descripcion_ingre" type="text"
-                                                    placeholder="Ingrese la descripcion" class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                <span>Cantidad de ML o GR por unidad</span>
-                                                <input min="1" (keypress)="numberOnlyValidation($event)"
-                                                    formControlName="cantidad_por_unidad_ingrediente" type="number"
-                                                    placeholder="Ingrese la cantidad" class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                <span>Stock</span>
-                                                <input min="0" (keypress)="numberOnlyValidation($event)"
-                                                    formControlName="stock_ingrediente" type="number"
-                                                    placeholder="Ingrese la cantidad de stock"
-                                                    class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <div class=" mt-2 form-control">
-                                           <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                <span>Unidad de medida</span>
-                                             <select formControlName="tipo_unidad_ingrediente" name="mlgr" required
-                                                 class="select select-bordered  w-full max-w-xl">
-                                                 <option selected disabled>ML o GR</option>
-                                                 <option value="ml">(Ml) Mililitro</option>
-                                                 <option value="gr">(Gr) Gramos</option>
-                                             </select>
-                                           </label>
-                                        </div>
-                                        <!-- input-->
-                                        <div class="form-control">
-                                            <label class="label">
-                                            </label>
-                                            <label
-                                                class="input-group input-group-vertical mt-4 w-full max-w-xl"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
-                                                <span>Link imagen</span>
-                                                <input formControlName="imagen_ingre" type="text"
-                                                    placeholder="Ingrese un enlace" class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <button class="btn mt-2 w-full max-w-xl" type="submit">Crear</button>
-                                    </div>
-                                </div><!-- modal 4-->
-                            </form><!-- Fin form 1-->
-                        </div>
-                    </div>
-                </div>
-                <!--fin modal formulario agregar ingrediente-->
-            </section><!-- Fin Tabla INGREDIENTE -->
-            <section><!-- Tabla PREPARACIONES -->
+            </section>
+            <!-- Fin Tabla INGREDIENTE -->
+            <!-- Tabla PREPARACIONES -->
+            <section>
                 <div class=" w-full pb-20 ">
                     <h1 class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">Preparaciones</h1>
                     <table class="block table w-10/12 mx-auto">
@@ -481,67 +329,56 @@
                                     <div tabindex="0" class="dropdown-content card  w-70 p-2 shadow bg-VerdeHuelen text-primary-content">
                                         <div class="card-body">
                                             <h1 class="text-xl font-bold pb-10 text-white text-center">Agregar Preparaciones</h1>
-                                            <!-- Form 2 PREPARACIONES-->
                                             <form [formGroup]="formPreparaciones" (ngSubmit)="onCreate('createPrep')">
-                                                <div class="">
-                                                    <div class="relative">
-                                                        <!-- input-->
-                                                        <div class="form-control">
-                                                            <label class="label">
-                                                            </label>
-                                                            <label class="input-group input-group-vertical">
-                                                                <span>Nombre preparacion</span>
-                                                                <input formControlName="nombre_prep" type="text"
-                                                                    placeholder="Ingrese un nombre" class="input input-bordered" />
-                                                            </label>
-                                                        </div>
-                                                        <!-- input-->
-                                                        <div class="form-control">
-                                                            <label class="label">
-                                                            </label>
-                                                            <label class="input-group input-group-vertical">
-                                                                <span>Descripcion de la preparacion</span>
-                                                                <input formControlName="descripcion_prep" type="text"
-                                                                    placeholder="Ingrese una descripcion"
-                                                                    class="input input-bordered" />
-                                                            </label>
-                                                        </div>
-                                                        <!-- input-->
-                                                        <div class="form-control">
-                                                            <label class="label">
-                                                            </label>
-                                                            <label class="input-group input-group-vertical">
-                                                                <span>Precio</span>
-                                                                <input min="1" (keypress)="numberOnlyValidation($event)"
-                                                                    formControlName="precio_prep" type="number"
-                                                                    placeholder="Ingrese el precio" class="input input-bordered" />
-                                                            </label>
-                                                        </div>
-                                                        <!-- input-->
-                                                        <div class="form-control">
-                                                            <select name="listCat-Preparaciones" formControlName="id_cat_prep"
-                                                                required class="ml-5 mt-5 select select-bordered w-full max-w-xs">
-                                                                <option disabled selected>Seleccione una categoria</option>
-                                                                <option *ngFor="let categoria of responseListadoCategorias"
-                                                                    value="{{categoria.id_cat}}">{{categoria.nombre_cat}}</option>
-                                                            </select>
-                                                        </div>
-                                                        <!-- input-->
-                                                        <div class="form-control">
-                                                            <label class="label">
-                                                            </label>
-                                                            <label
-                                                                class="input-group input-group-vertical"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
-                                                                <span>Link imagen</span>
-                                                                <input formControlName="imagen_prep" type="text"
-                                                                    placeholder="Ingrese un enlace" class="input input-bordered" />
-                                                            </label>
-                                                        </div>
-                                                        <!-- input-->
-                                                        <button class="ml-24 mt-2 btn btn-wide" type="submit">Crear</button>
-                                                    </div>
-                                                </div><!-- modal 4-->
-                                            </form><!-- fin Form 2 PREPARACIONES-->
+                                                <div class="form-control">
+                                                    <label class="label">
+                                                    </label>
+                                                    <label class="input-group input-group-vertical">
+                                                        <span>Nombre preparacion</span>
+                                                        <input formControlName="nombre_prep" type="text"
+                                                            placeholder="Ingrese un nombre" class="input input-bordered" />
+                                                    </label>
+                                                </div>
+                                                <div class="form-control">
+                                                    <label class="label">
+                                                    </label>
+                                                    <label class="input-group input-group-vertical">
+                                                        <span>Descripcion de la preparacion</span>
+                                                        <input formControlName="descripcion_prep" type="text"
+                                                            placeholder="Ingrese una descripcion"
+                                                            class="input input-bordered" />
+                                                    </label>
+                                                </div>
+                                                <div class="form-control">
+                                                    <label class="label">
+                                                    </label>
+                                                    <label class="input-group input-group-vertical">
+                                                        <span>Precio</span>
+                                                        <input min="1" (keypress)="numberOnlyValidation($event)"
+                                                            formControlName="precio_prep" type="number"
+                                                            placeholder="Ingrese el precio" class="input input-bordered" />
+                                                    </label>
+                                                </div>
+                                                <div class="form-control">
+                                                    <select name="listCat-Preparaciones" formControlName="id_cat_prep"
+                                                        required class="ml-5 mt-5 select select-bordered w-full max-w-xs">
+                                                        <option disabled selected>Seleccione una categoria</option>
+                                                        <option *ngFor="let categoria of responseListadoCategorias"
+                                                            value="{{categoria.id_cat}}">{{categoria.nombre_cat}}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-control">
+                                                    <label class="label">
+                                                    </label>
+                                                    <label
+                                                        class="input-group input-group-vertical"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
+                                                        <span>Link imagen</span>
+                                                        <input formControlName="imagen_prep" type="text"
+                                                            placeholder="Ingrese un enlace" class="input input-bordered" />
+                                                    </label>
+                                                </div>
+                                                <button class="ml-24 mt-2 btn btn-wide" type="submit">Crear</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div></th>
@@ -553,7 +390,6 @@
                                     <td>{{ preparacionTabla.nombre_prep }}</td>
                                     <td>{{ preparacionTabla.descripcion_prep }}</td>
                                     <td>{{ preparacionTabla.id_cat_prep }}</td>
-                                    <!-- <td>{{ encontrarNombreCat(preparacionTabla.id_cat_prep) }}</td> -->
                                     <td>{{ preparacionTabla.precio_prep }}</td>
                                     <td>
                                         <div class="avatar">
@@ -564,11 +400,58 @@
                                         </div>
                                     </td>
                                     <th class="text-center">
-                                        <div class="btn-group sm:btn-sm md:btn-md lg:btn-lg ">
-                                            <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black"
-                                                (click)="seleccionarId(preparacionTabla.id_prep) ; rellenarFormulario('formPreparaciones')" for="my-modal-9">Editar
-                                                <i class="pl-2 fa-solid fa-pencil text-green-600"></i>
-                                            </label>
+                                        <div class="sm:btn-sm md:btn-md lg:btn-lg ">
+                                            <div class=" dropdown dropdown-left">
+                                                <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black" tabindex="0"    
+                                                (click)="seleccionarId(preparacionTabla.id_prep) ; rellenarFormulario('formPreparaciones')">Editar
+                                                <i class="pl-2 fa-solid fa-pencil text-green-600"></i></label>
+                                                <div tabindex="0" class="dropdown-content card  w-70 p-2 shadow bg-VerdeHuelen text-primary-content">
+                                                    <div class="card-body">
+                                                        <h1 class="text-xl font-bold pb-10 text-white text-center">Actualizar Preparación</h1>
+                                                        <form [formGroup]="formPreparaciones"(ngSubmit)="onActualizar('editPrep', this.idSeleccionado)">
+                                                            <div class="form-control">
+                                                                <label class="input-group input-group-vertical">
+                                                                    <span>Nuevo nombre para la preparacion</span>
+                                                                    <input formControlName="nombre_prep" type="text"
+                                                                        placeholder="Introduzca un nombre de la preparación"
+                                                                        class="mb-4 input input-bordered pt-2" />
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-control">
+                                                                <label class="input-group input-group-vertical">
+                                                                    <span>Nueva descripcion</span>
+                                                                        <input formControlName="descripcion_prep" type="text"
+                                                                            placeholder="Introduzca la descripcion de la preparación"
+                                                                            class="mb-4 input input-bordered pt-2" />
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-control">
+                                                                <label class="input-group input-group-vertical">
+                                                                    <span>Nuevo precio</span>
+                                                                        <input formControlName="precio_prep" type="text"
+                                                                            placeholder="Introduzca el precio de la preparación"
+                                                                            class="mb-4 input input-bordered pt-2" />
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-control">
+                                                                <label class="input-group input-group-vertical">
+                                                                <span>Nueva link de imagen</span>
+                                                                    <input formControlName="imagen_prep" type="text" placeholder="Introduzca la imagen de la preparación" class="mb-4 input input-bordered pt-2" />
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-control">
+                                                                <select name="listCat-Preparaciones" formControlName="id_cat_prep"
+                                                                    required class="ml-5 mt-5 select select-bordered w-full max-w-xs">
+                                                                    <option disabled selected>Seleccione una categoria</option>
+                                                                    <option *ngFor="let categoria of responseListadoCategorias"
+                                                                        value="{{categoria.id_cat}}">{{categoria.nombre_cat}}</option>
+                                                                </select>
+                                                            </div>
+                                                            <button class=" mt-2 btn w-full max-w-xl" type="submit">Actualizar</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <swal
                                                 #deletePrepSwal
                                                 title="¿Estás seguro de eliminar {{preparacionTabla.nombre_prep }}?"
@@ -605,251 +488,156 @@
                         </tfoot>
                     </table>
                 </div>
-                <!--modal edit preparación-->
-                <input type="checkbox" id="my-modal-9" class="modal-toggle" />
-                <div class="modal">
-                    <div class="modal-box relative bg-VerdeHuelen">
-                        <div class="max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg"><!--Form 4 -->
-                            <label for="my-modal-9" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"><i
-                                    class="fa-regular fa-circle-xmark fa-2xl" style="color: #ed333b;"></i></label>
-                            <h1 class="text-xl font-bold pb-10 text-white text-center">Actualizar Preparación</h1>
-                            <form [formGroup]="formPreparaciones"
-                                (ngSubmit)="onActualizar('editPrep', this.idSeleccionado)">
-                                <div class="">
-                                    <div class="relative">
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical">
-                                                <span>Nuevo nombre para la preparacion</span>
-                                                <input formControlName="nombre_prep" type="text"
-                                                    placeholder="Introduzca un nombre de la preparación"
-                                                    class="mb-4 input input-bordered pt-2" />
-                                            </label>
-                                        </div>
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical">
-                                                <span>Nueva descripcion</span>
-                                                    <input formControlName="descripcion_prep" type="text"
-                                                        placeholder="Introduzca la descripcion de la preparación"
-                                                        class="mb-4 input input-bordered pt-2" />
-                                                    <!--select categorias-->
-                                                    <!--end select categorias-->
-                                            </label>
-                                        </div>
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical">
-                                                <span>Nuevo precio</span>
-                                                    <input formControlName="precio_prep" type="text"
-                                                        placeholder="Introduzca el precio de la preparación"
-                                                        class="mb-4 input input-bordered pt-2" />
-                                            </label>
-                                        </div>
-                                        <div class="form-control">
-                                            <label class="input-group input-group-vertical">
-                                            <span>Nueva link de imagen</span>
-                                                <input formControlName="imagen_prep" type="text" placeholder="Introduzca la imagen de la preparación" class="mb-4 input input-bordered pt-2" />
-                                            </label>
-                                        </div>
-                                        <div class="form-control">
-                                            <select name="listCat-Preparaciones" formControlName="id_cat_prep"
-                                                required class="ml-5 mt-5 select select-bordered w-full max-w-xs">
-                                                <option disabled selected>Seleccione una categoria</option>
-                                                <option *ngFor="let categoria of responseListadoCategorias"
-                                                    value="{{categoria.id_cat}}">{{categoria.nombre_cat}}</option>
-                                            </select>
-                                        </div>
-                                        <button class=" mt-2 btn w-full max-w-xl" type="submit">Actualizar</button>
-                                    </div>
-                                    <!--Al enviar el form si el envio fue valido, cambiar el contenido a un cambio realizado, que el modal se pueda cerrar haciendo click fuera tambien aparte de la x-->
-                                </div>
-                            </form>
-                        </div>
-                        <!-- Fin form 4-->
-                    </div>
-                </div><!--fin modal edit preparación-->
-                <!--modal eliminar preparación-->
-                <input type="checkbox" id="my-modal-10" class="modal-toggle " />
-                <div class="modal">
-                    <div class="max-w-sm modal-box relative bg-VerdeHuelen">
-                        <div class="mx-auto md:p-6 rounded-lg text-center">
-                            <label for="my-modal-10" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"><i
-                                    class="fa-regular fa-circle-xmark fa-2xl" style="color: #ed333b;"></i></label>
-                            <h1 class="text-4xl font-bold pb-10 text-white text-center">Deseas eliminar esta Preparación?</h1>
-                            <button (click)="onDelete('deletePrep', this.idSeleccionado)"
-                                class="btn btn-wide m-2 hover:bg-red-600 hover:text-white" type="submit">Eliminar
-                            </button>
-                            <input type="checkbox" id="my-modal-4" class="modal-toggle" />
-                            <label for="my-modal-10"
-                                class="btn btn-l btn-ghost bg-gray-900  btn-wide m-2 hover:bg-gray-400 hover:text-black">Cancelar</label>
-                        </div>
-                    </div>
-                </div>
-                <!-- fin modal eliminar preparación-->
-                <!--modal formulario agregar preparación-->
-                <input type="checkbox" id="my-modal-11" class="modal-toggle"/>
-                <div class="modal">
-                    <div class="modal-box relative bg-VerdeHuelen">
-                        <div class="max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg">
-                            <label for="my-modal-11" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"><i
-                                    class="fa-regular fa-circle-xmark fa-2xl" style="color: #ed333b;"></i></label>
-                            <h1 class="text-4xl font-bold pb-10 text-white text-center">Agregar Preparaciones</h1>
-                            <!-- Form 2 PREPARACIONES-->
-                            <form [formGroup]="formPreparaciones" (ngSubmit)="onCreate('createPrep')">
-                                <div class="">
-                                    <div class="relative">
-                                        <!-- input-->
-                                        <div class="form-control">
-                                            <label class="label">
-                                            </label>
-                                            <label class="input-group input-group-vertical">
-                                                <span>Nombre preparacion</span>
-                                                <input formControlName="nombre_prep" type="text"
-                                                    placeholder="Ingrese un nombre" class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <div class="form-control">
-                                            <label class="label">
-                                            </label>
-                                            <label class="input-group input-group-vertical">
-                                                <span>Descripcion de la preparacion</span>
-                                                <input formControlName="descripcion_prep" type="text"
-                                                    placeholder="Ingrese una descripcion"
-                                                    class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <div class="form-control">
-                                            <label class="label">
-                                            </label>
-                                            <label class="input-group input-group-vertical">
-                                                <span>Precio</span>
-                                                <input min="1" (keypress)="numberOnlyValidation($event)"
-                                                    formControlName="precio_prep" type="number"
-                                                    placeholder="Ingrese el precio" class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <div class="form-control">
-                                            <select name="listCat-Preparaciones" formControlName="id_cat_prep"
-                                                required class="ml-5 mt-5 select select-bordered w-full max-w-xs">
-                                                <option disabled selected>Seleccione una categoria</option>
-                                                <option *ngFor="let categoria of responseListadoCategorias"
-                                                    value="{{categoria.id_cat}}">{{categoria.nombre_cat}}</option>
-                                            </select>
-                                        </div>
-                                        <!-- input-->
-                                        <div class="form-control">
-                                            <label class="label">
-                                            </label>
-                                            <label
-                                                class="input-group input-group-vertical"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
-                                                <span>Link imagen</span>
-                                                <input formControlName="imagen_prep" type="text"
-                                                    placeholder="Ingrese un enlace" class="input input-bordered" />
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <button class="ml-24 mt-2 btn btn-wide" type="submit">Crear</button>
-                                    </div>
-                                </div><!-- modal 4-->
-                            </form><!-- fin Form 2 PREPARACIONES-->
-                        </div>
-                    </div>
-                </div>
-                <!--fin modal formulario agregar preparación-->
-            </section><!-- Fin Tabla PREPARACIONES -->
-            <section><!-- Tabla INGRE PREP -->
+            </section>
+            <!-- Fin Tabla PREPARACIONES -->
+            <!-- Tabla DETALLE PREP -->
+            <section>
                 <div class=" w-full pt-10">
-
-                    <h1 class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">Ingre Prep</h1>
-                    <table class="block table table-zebra w-10/12 mx-auto  ">
+                    <h1 class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">Detalle Preparacion</h1>
+                    <table class="block table table-zebra w-10/12 mx-auto">
                         <thead class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">
                             <tr class=" text-center text-1xl ">
+                                <th>ID Detalle</th>
                                 <th>ID Preparación</th>
                                 <th>ID ingrediente</th>
                                 <th>Cantidad Necesaria</th>
                                 <th>Tipo Unidad</th>
                                 <th><div class=" dropdown dropdown-left">
                                         <label tabindex="0" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i> </label>
-                                        <div tabindex="0" class="dropdown-content card  w-70 p-2 shadow bg-VerdeHuelen text-primary-content">
+                                        <div tabindex="0" class="dropdown-content card w-96 p-2 shadow bg-VerdeHuelen text-primary-content">
                                             <div class="card-body">
-                                                <h1 class="text-4xl font-bold pb-10 text-white text-center">Agregar un Ingre Prep</h1>
-                                                <!--Form 3 INGRED PREP-->
-                                                <form [formGroup]="formIngredientePrep" (ngSubmit)="onCreate('createIngrePrep')">
-                                                    <!--input PREPARACION-->
-                                                    <div class="">
-                                                        <div class="relative">
-                                                            <div class="form-control pt-4">
-                                                                <label class=" input-group input-group-vertical w-full max-w-auto">
-                                                                    <span>Seleccione una Preparacion</span>
-                                                                    <select formControlName="id_prep" name="listPrep-IngrePrep" required
-                                                                        class="select select-bordered w-full max-w-auto">
-                                                                        <option value="{{preparacion.id_prep}}"
-                                                                            *ngFor="let preparacion of responseListadoPreparacion">
-                                                                            {{preparacion.nombre_prep}}</option>
-                                                                    </select>
-                                                                </label>
-                                                            </div>
-                                                            <!--input INGREDIENTE-->
-                                                            <div class="form-control pt-4">
-                                                                <label class=" input-group input-group-vertical w-full max-w-auto">
-                                                                    <span>Seleccione un ingrediente</span>
-                                                                    <select formControlName="id_ingre" form name="listIngred-IngrePrep"
-                                                                        required class="select select-bordered w-full max-w-auto">
-                                                                        <option value="{{ingrediente.id_ingre}}"
-                                                                            *ngFor="let ingrediente of responseListadoIngrediente">
-                                                                            {{ingrediente.descripcion_ingre}}</option>
-                                                                    </select>
-                                                                </label>
-                                                            </div>
-                                                            <!-- input-->
-                                                            <div class="form-control pt-4 ">
-                                                                <label class="input-group input-group-vertical w-full max-w-auto">
-                                                                    <span>Cantidad necesaria del ingrediente</span>
-                                                                    <input min="1" formControlName="cantidad_necesaria" type="number"
-                                                                        placeholder="Ingrese la cantidad" class=" input input-bordered"
-                                                                        (keypress)="numberOnlyValidation($event)" />
-                                                                </label>
-                                                            </div>
-                                                            <!-- input-->
-                                                            <div class="form-control pt-4">
-                                                                <label class=" input-group input-group-vertical w-full max-w-auto">
-                                                                    <span>Seleccione unidad de medida</span>
-                                                                    <select formControlName="tipo_unidad" name="mlgr" required
-                                                                        class=" select select-bordered w-full max-w-auto">
-                                                                        <option disabled selected>ML o GR</option>
-                                                                        <option value="ml">(Ml) Mililitro</option>
-                                                                        <option value="gr">(Gr) Gramos</option>
-                                                                    </select>
-                                                                </label>
-                                                            </div>
-                                                            <!-- input-->
-                                                            <button class=" mt-4 btn w-full max-w-auto  " type="submit">Crear</button>
-                                                            <!-- modal 4-->
-                                                        </div>
+                                                <h1 class="text-xl font-bold text-white text-center">Agregar Detalle Preparación</h1>
+                                                <form [formGroup]="formDetallePrep" (ngSubmit)="onCreate('createDetallePrep')">
+                                                    <div class="form-control pt-4">
+                                                        <label class=" input-group input-group-vertical w-full max-w-auto">
+                                                            <span>Seleccione una Preparacion</span>
+                                                            <select formControlName="id_prep" name="listPrep-DetallePrep" required
+                                                                class="select select-bordered w-full max-w-auto">
+                                                                <option value="{{preparacion.id_prep}}"
+                                                                    *ngFor="let preparacion of responseListadoPreparacion">
+                                                                    {{preparacion.nombre_prep}}</option>
+                                                            </select>
+                                                        </label>
                                                     </div>
-                                                </form><!-- Fin form 3-->
+                                                    <div class="form-control pt-4">
+                                                        <label class=" input-group input-group-vertical w-full max-w-auto">
+                                                            <span>Seleccione un ingrediente</span>
+                                                            <select formControlName="id_ingre" form name="listIngred-DetallePrep"
+                                                                required class="select select-bordered w-full max-w-auto">
+                                                                <option value="{{ingrediente.id_ingre}}"
+                                                                    *ngFor="let ingrediente of responseListadoIngrediente">
+                                                                    {{ingrediente.nombre_ingre}}</option>
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-control pt-4 ">
+                                                        <label class="input-group input-group-vertical w-full max-w-auto">
+                                                            <span>Cantidad necesaria del ingrediente</span>
+                                                            <input min="1" formControlName="cantidad_necesaria" type="number"
+                                                                placeholder="Ingrese la cantidad" class=" input input-bordered"
+                                                                (keypress)="numberOnlyValidation($event)" />
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-control pt-4">
+                                                        <label class=" input-group input-group-vertical w-full max-w-auto">
+                                                            <span>Seleccione unidad de medida</span>
+                                                            <select formControlName="tipo_unidad" name="mlgr" required
+                                                                class=" select select-bordered w-full max-w-auto">
+                                                                <option disabled selected>ML o GR</option>
+                                                                <option value="ml">(Ml) Mililitro</option>
+                                                                <option value="gr">(Gr) Gramos</option>
+                                                            </select>
+                                                        </label>
+                                                    </div>
+                                                    <button class=" mt-4 btn w-full max-w-auto" type="submit">Crear</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 </th>
-                            </tr>
-                            
+                            </tr>   
                         </thead><!-- head -->
                         <tbody><!-- body -->
-                            <tr class="text-center" *ngFor="let ingrePrepTabla of responseListadoIngredPrep">
-                                <td>{{ ingrePrepTabla.id_prep }}</td>
-                                <td>{{ ingrePrepTabla.id_ingre }}</td>
-                                <td>{{ ingrePrepTabla.cantidad_necesaria }}</td>
-                                <td>{{ ingrePrepTabla.tipo_unidad }}</td>
-                                <th class=" text-center">
-                                    <div class="btn-group sm:btn-sm md:btn-md lg:btn-lg">
-                                        <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black"
-                                            (click)="seleccionarId(ingrePrepTabla.id_prep) ; rellenarFormulario('formIngrePrep')" for="my-modal-12">Editar
+                            <tr class="text-center" *ngFor="let detallePrepTabla of responseListadoDetallePrep">
+                                <td>{{ detallePrepTabla.id_detalle_prep }}</td>
+                                <td>{{ detallePrepTabla.id_prep }}</td>
+                                <td>{{ detallePrepTabla.id_ingre }}</td>
+                                <td>{{ detallePrepTabla.cantidad_necesaria }}</td>
+                                <td>{{ detallePrepTabla.tipo_unidad }}</td>
+                                <th class="text-center">
+                                    <div class=" sm:btn-sm md:btn-md lg:btn-lg">
+                                        <div class=" dropdown dropdown-left">
+                                            <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black" tabindex="0"
+                                            (click)="seleccionarId(detallePrepTabla.id_detalle_prep) ; rellenarFormulario('formDetallePrep')">Editar
                                             <i class="pl-2 fa-solid fa-pencil text-green-600"></i>
-                                        </label>
+                                            </label>
+                                            <div tabindex="0" class="dropdown-content card  w-70 p-2 shadow bg-VerdeHuelen text-primary-content">
+                                                <div class="card-body">
+                                                    <h1 class="text-xl font-bold pb-2 text-white text-center">Actualizar Detalle</h1>
+                                                    <form [formGroup]="formDetallePrep"
+                                                        (ngSubmit)="onActualizar('editDetallePrep', this.idSeleccionado)">
+                                                        <div class="">
+                                                            <div class="relative">
+                                                                <div class="form-control pt-4">
+                                                                    <label class=" input-group input-group-vertical w-full max-w-auto">
+                                                                        <span>Seleccione una nueva Preparacion</span>
+                                                                        <select formControlName="id_prep" name="listPrep-DetallePrep" required
+                                                                            class="select select-bordered w-full max-w-auto">
+                                                                            <option value="{{preparacion.id_prep}}"
+                                                                                *ngFor="let preparacion of responseListadoPreparacion">
+                                                                                {{preparacion.nombre_prep}}</option>
+                                                                        </select>
+                                                                    </label>
+                                                                </div>
+                                                                <!--input INGREDIENTE-->
+                                                                <div class="form-control pt-4">
+                                                                    <label class=" input-group input-group-vertical w-full max-w-auto">
+                                                                        <span>Seleccione un nuevo ingrediente</span>
+                                                                        <select formControlName="id_ingre" name="listIngred-DetallePrep"
+                                                                            required class="select select-bordered w-full max-w-auto">
+                                                                            <option value="{{ingrediente.id_ingre}}"
+                                                                                *ngFor="let ingrediente of responseListadoIngrediente">
+                                                                                {{ingrediente.nombre_ingre}}</option>
+                                                                        </select>
+                                                                    </label>
+                                                                </div>
+                                                                <!-- input-->
+                                                                <div class="form-control pt-4 ">
+                                                                    <label class="input-group input-group-vertical w-full max-w-auto">
+                                                                        <span>Nueva cantidad necesaria del ingrediente</span>
+                                                                        <input min="1" formControlName="cantidad_necesaria" type="number"
+                                                                            placeholder="Ingrese la cantidad" class=" input input-bordered"
+                                                                            (keypress)="numberOnlyValidation($event)" />
+                                                                    </label>
+                                                                </div>
+                                                                <!-- input-->
+                                                                <div class="form-control pt-4">
+                                                                    <label class=" input-group input-group-vertical w-full max-w-auto">
+                                                                        <span>Seleccione una nueva unidad de medida</span>
+                                                                        <select formControlName="tipo_unidad" name="mlgr" required
+                                                                            class=" select select-bordered w-full max-w-auto">
+                                                                            <option disabled selected>ML o GR</option>
+                                                                            <option value="ml">(Ml) Mililitro</option>
+                                                                            <option value="gr">(Gr) Gramos</option>
+                                                                        </select>
+                                                                    </label>
+                                                                </div>
+                                                                <!-- input-->
+                                                                <button class=" mt-4 btn w-full max-w-auto  " type="submit">Crear</button>
+                                                            </div>
+                                                        </div>
+                                                    </form> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button 
+                                            [swal]="deleteDetallePrepSwal"
+                                            class="btn bg-slate-700  btn-group-horizontal hover:text-black font-bold hover:bg-red-200"
+                                            (click)="seleccionarId(detallePrepTabla.id_detalle_prep); ">Eliminar
+                                            <i class="pl-2 fa-solid fa-trash text-red-600"></i>
+                                        </button>
                                         <swal
-                                            #deleteIngrePrepSwal
+                                            #deleteDetallePrepSwal
                                             title="¿Estás seguro de eliminar esta Receta?"
                                             icon="question"
                                             iconColor="#f8bb86"
@@ -860,16 +648,8 @@
                                             [showCancelButton]="true"
                                             [focusCancel]="true"
                                             (confirm)="(onDelete('deletePrep', this.idSeleccionado))">
-                                        </swal>
-                                        <button 
-                                            [swal]="deleteIngrePrepSwal"
-                                            class="btn bg-slate-700  btn-group-horizontal hover:text-black font-bold hover:bg-red-200"
-                                            (click)="seleccionarId(ingrePrepTabla.id_prep); ">Eliminar
-                                            <i class="pl-2 fa-solid fa-trash text-red-600"></i>
-                                        </button>
+                                        </swal> 
                                     </div>
-                                    <!--Tostada mensaje si se elimino correctamente, Esta deberá estar escondida y el evento de eliminarCat deberá detonar su aparición por x segundos-->
-
                                 </th>
                             </tr>
                         </tbody>
@@ -880,26 +660,27 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </tfoot>
                     </table>
                 </div>
-                <!--modal edit ingreprep-->
+                <!--modal edit DetallePrep-->
                 <input type="checkbox" id="my-modal-12" class="modal-toggle" />
                 <div class="modal">
                     <div class="modal-box relative bg-VerdeHuelen">
                         <div class="max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg"><!--Form 4 -->
                             <label for="my-modal-12" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"><i
                                     class="fa-regular fa-circle-xmark fa-2xl" style="color: #ed333b;"></i></label>
-                            <h1 class="text-4xl font-bold pb-10 text-white text-center">Actualizar IngrePrep</h1>
-                            <form [formGroup]="formIngredientePrep"
-                                (ngSubmit)="onActualizar('editIngrePrep', this.idSeleccionado)">
+                            <h1 class="text-4xl font-bold pb-10 text-white text-center">Actualizar Detalle</h1>
+                            <form [formGroup]="formDetallePrep"
+                                (ngSubmit)="onActualizar('editDetallePrep', this.idSeleccionado)">
                                 <div class="">
                                     <div class="relative">
                                         <div class="form-control pt-4">
                                             <label class=" input-group input-group-vertical w-full max-w-auto">
                                                 <span>Seleccione una nueva Preparacion</span>
-                                                <select formControlName="id_prep" name="listPrep-IngrePrep" required
+                                                <select formControlName="id_prep" name="listPrep-DetallePrep" required
                                                     class="select select-bordered w-full max-w-auto">
                                                     <option value="{{preparacion.id_prep}}"
                                                         *ngFor="let preparacion of responseListadoPreparacion">
@@ -911,11 +692,11 @@
                                         <div class="form-control pt-4">
                                             <label class=" input-group input-group-vertical w-full max-w-auto">
                                                 <span>Seleccione un nuevo ingrediente</span>
-                                                <select formControlName="id_ingre" form name="listIngred-IngrePrep"
+                                                <select formControlName="id_ingre" name="listIngred-DetallePrep"
                                                     required class="select select-bordered w-full max-w-auto">
                                                     <option value="{{ingrediente.id_ingre}}"
                                                         *ngFor="let ingrediente of responseListadoIngrediente">
-                                                        {{ingrediente.descripcion_ingre}}</option>
+                                                        {{ingrediente.nombre_ingre}}</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -942,83 +723,13 @@
                                         </div>
                                         <!-- input-->
                                         <button class=" mt-4 btn w-full max-w-auto  " type="submit">Crear</button>
-                                        <!-- modal 4-->
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <!-- Fin form 4-->
                     </div>
-                </div><!--fin modal edit ingreprep-->
-                <!--modal formulario agregar ingreprep-->
-                <input type="checkbox" id="my-modal-14" class="modal-toggle" />
-                <div class="modal">
-                    <div class="modal-box relative bg-VerdeHuelen">
-                        <div class="max-w-xl mx-auto  md:p-12 my-10 rounded-lg ">
-                            <label for="my-modal-14" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"><i
-                                    class="fa-regular fa-circle-xmark fa-2xl" style="color: #ed333b;"></i></label>
-                            <h1 class="text-4xl font-bold pb-10 text-white text-center">Agregar un Ingre Prep</h1>
-                            <!--Form 3 INGRED PREP-->
-                            <form [formGroup]="formIngredientePrep" (ngSubmit)="onCreate('createIngrePrep')">
-                                <!--input PREPARACION-->
-                                <div class="">
-                                    <div class="relative">
-                                        <div class="form-control pt-4">
-                                            <label class=" input-group input-group-vertical w-full max-w-auto">
-                                                <span>Seleccione una Preparacion</span>
-                                                <select formControlName="id_prep" name="listPrep-IngrePrep" required
-                                                    class="select select-bordered w-full max-w-auto">
-                                                    <option value="{{preparacion.id_prep}}"
-                                                        *ngFor="let preparacion of responseListadoPreparacion">
-                                                        {{preparacion.nombre_prep}}</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                        <!--input INGREDIENTE-->
-                                        <div class="form-control pt-4">
-                                            <label class=" input-group input-group-vertical w-full max-w-auto">
-                                                <span>Seleccione un ingrediente</span>
-                                                <select formControlName="id_ingre" form name="listIngred-IngrePrep"
-                                                    required class="select select-bordered w-full max-w-auto">
-                                                    <option value="{{ingrediente.id_ingre}}"
-                                                        *ngFor="let ingrediente of responseListadoIngrediente">
-                                                        {{ingrediente.descripcion_ingre}}</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <div class="form-control pt-4 ">
-                                            <label class="input-group input-group-vertical w-full max-w-auto">
-                                                <span>Cantidad necesaria del ingrediente</span>
-                                                <input min="1" formControlName="cantidad_necesaria" type="number"
-                                                    placeholder="Ingrese la cantidad" class=" input input-bordered"
-                                                    (keypress)="numberOnlyValidation($event)" />
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <div class="form-control pt-4">
-                                            <label class=" input-group input-group-vertical w-full max-w-auto">
-                                                <span>Seleccione unidad de medida</span>
-                                                <select formControlName="tipo_unidad" name="mlgr" required
-                                                    class=" select select-bordered w-full max-w-auto">
-                                                    <option disabled selected>ML o GR</option>
-                                                    <option value="ml">(Ml) Mililitro</option>
-                                                    <option value="gr">(Gr) Gramos</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <button class=" mt-4 btn w-full max-w-auto  " type="submit">Crear</button>
-                                        <!-- modal 4-->
-                                    </div>
-                                </div>
-                            </form><!-- Fin form 3-->
-                        </div>
-                    </div>
-                </div>
-                <!--fin modal formulario agregar categoria-->
-            </section><!-- Fin Tabla INGRE PREP -->
-            
+                </div><!--fin modal edit Detalleprep-->
+            </section><!-- Fin Tabla DETALLE PREP -->
 <!--------------------------------------------------------------------------------------------------- Analytics Cards -------------------------------------------------------------------------------------------------------------------------------------------->
             <section><!-- CARTAS -->
                 <div class="flex flex-wrap">
@@ -1302,7 +1013,7 @@
                                 </table>
                                 <p class="py-2"><a href="#">See More issues...</a></p>
                                 <!---->
-                                
+                            
                                 <!---->
                             </div>
                         </div>
