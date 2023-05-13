@@ -13,6 +13,6 @@ module.exports = {
       
     },
   },
-  plugins: [require("daisyui"), require('tailwindcss-animatecss'), require('tailwind-scrollbar')],
+  plugins: [require("daisyui"), require('tailwindcss-animatecss'), require('tailwind-scrollbar'),],
   
 }

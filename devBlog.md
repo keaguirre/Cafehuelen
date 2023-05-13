@@ -19,18 +19,34 @@
 - [x] Modificar los modal update por dropdown
 - [x] Última evaluacion de como implementar los agregar en las tablas(sidebar-dropdown) - SERÁ MODAL
 
-# To do:
-- [ ] Cuando se haga una actualizacion, traer los select de las cosas relacionadas,
+# 10/05/23
+- [x] Actualizar la tabla al momento de agregar, editar o eliminar por separado sin tener que recargar la pagina completa
+- [x] Actualizar las tablas al hacer una operacion
+- [x] Arreglado product service que eliminaba en vez de hacer el path
+
+# 11/05/23
+- [x] Crear tabla para categorias deshabilitadas
+- [x] Cuando se haga una actualizacion, traer los select de las cosas relacionadas,
       para poder mostar las opciones y seleccionar el id en base al nombre
-- [ ] Pagination o Scrollbar para las tablas.
+- [/] Pagination o Scrollbar para las tablas.      
 
-- [ ] Actualizar la tabla al momento de agregar, editar o eliminar por separado sin tener que recargar la pagina completa.
-- [ ] Login
+# 12/05/23
+- [/] modificacion a la tabla de categorias desactivadas (falta que en vez de eliminar haga patch true a la categoria, insertar el estado true en la soli en el ts)
+- [x] minificar los inputs 
+- [x] capitalizar las tablas
+
+# Ideas
+- Posible drop de detalle preparacion e ingredientes, priorizar bloque de compras con preparaciones y evaluar la posibilidad de seguir con la automatizacion
+    del inventario.
+
+# To do:
+- [ ] Currency pipe para mostrar precios en clp
+- [ ] Colocar en el input visualmente el . de los miles, pero enviar los enteros solos al back
+- [ ] Rematar validaciones de url, si la url no es valida background rojo o borde, si es val back o borde verde y activar o desactivar boton de submit segun.
+- [ ] Implementar Amazon S3 para subir las imagenes y entregarlas como url.
+
+-----------------
+- [ ] Crear boques de compra y local.
+- [ ] Login.
 - [ ] Paleta de colores.
-- [ ] Decorar home admin. 
-
-# To do Backend: 
-- [ ] Categorias repetidas, pero no permitir categorias repetidas activas
-- [ ] Las categorias desactivads, desactivarán las preparciones relacionadas y ambos no se listarán en las vistas principales.
-- [ ] Listado de categorías descartadas y mostrar con un collapse de daisyUI las preparaciones relacionadas.
-- [ ] Si se vuelve a activar una categoría, No deberá tener una copia activa también, reactivará todas las preparaciones asociadas.
+- [ ] Decorar home admin.

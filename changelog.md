@@ -35,6 +35,23 @@
 - [x] Modificar los modal update por dropdown
 - [x] Última evaluacion de como implementar los agregar en las tablas(sidebar-dropdown) - SERÁ MODAL
 
+# 12/05/23 Avances con vista a cierre semanal (parcial) de bloque productos
+- [x] Ppt de avance
+- [x] Actualizacion de los diagramas de db
+- [x] Definicion de que pasara con preparaciones las cuales se les 'elimine' la categoria
+- [x] Modificar los modal update por dropdown
+- [x] Última evaluacion de como implementar los agregar en las tablas(sidebar-dropdown) - SERÁ MODAL
+- [x] Actualizar la tabla al momento de agregar, editar o eliminar por separado sin tener que recargar la pagina completa
+- [x] Actualizar las tablas al hacer una operacion
+- [x] Arreglado product service que eliminaba en vez de hacer el path
+- [x] Crear tabla para categorias deshabilitadas
+- [x] Cuando se haga una actualizacion, traer los select de las cosas relacionadas, para poder mostar las opciones y seleccionar el id en base al nombre
+- [/] Pagination o Scrollbar para las tablas.      
+- [/] modificacion a la tabla de categorias desactivadas (falta que en vez de eliminar haga patch true a la categoria, insertar el estado true en la soli en el ts)
+- [x] minificar los inputs 
+- [x] capitalizar las tablas
+
+
 ### Detalles
 - [-] Terminar de implementar todos los crud
 - Los items que tienen relacion con otros item no se puedes eliminar(anidados).

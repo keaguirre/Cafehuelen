@@ -35,7 +35,7 @@
                                                     <div class="form-control relative">
                                                         <label class="input-group input-group-vertical w-full max-w-xl">
                                                             <span>Nombre Categoria</span>
-                                                            <input minlength="3" formControlName="nombre_cat" type="text"
+                                                                <input (keyup)="passToLower(formCategorias, 'nombre_cat')" minlength="3" formControlName="nombre_cat" type="text"
                                                                 placeholder="Introduzca un nombre de categoria" class="input input-bordered"/>
                                                         </label>
                                                     </div>
@@ -49,8 +49,8 @@
                         </thead><!-- Fin head -->
                         <tbody><!-- tbody -->
                             <tr class="text-center" *ngFor="let categoriaTabla of responseListadoCategorias">
-                                <td>{{ categoriaTabla.id_cat }}</td>
-                                <td>{{ categoriaTabla.nombre_cat }}</td>
+                                <td>{{ categoriaTabla.id_cat}}</td>
+                                <td>{{ categoriaTabla.nombre_cat | titlecase }}</td>
                                 <th class=" text-center">
                                     <div class=" xs:btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl ">
                                         <div class="dropdown dropdown-left">
@@ -63,9 +63,9 @@
                                                         <div class="form-control relative ">
                                                             <label class="input-group input-group-vertical w-full max-w-xl">
                                                                 <span>Nuevo Nombre</span>
-                                                                <input minlength="3" formControlName="nombre_cat" type="text"
+                                                                <input (keyup)="passToLower(formCategorias, 'nombre_cat')" minlength="3" formControlName="nombre_cat" type="text"
                                                                     placeholder="Introduzca un nombre de categoria"
-                                                                    class="input input-bordered" [value]="this.formCategorias.value['nombre_cat']" />
+                                                                    class="input input-bordered"  />
                                                             </label>
                                                         </div>
                                                         <button class="mt-2   btn w-full max-w-xl" type="submit">Actualizar</button>
@@ -79,7 +79,7 @@
                                         </button>
                                         <swal  
                                             #deleteCatSwal
-                                            title="¿Estás seguro de eliminar {{categoriaTabla.nombre_cat }}?"
+                                            title="¿Estás seguro de eliminar {{ categoriaTabla.nombre_cat | titlecase}}?"
                                             icon="question"
                                             iconColor="#f8bb86"
                                             fontText="bold"
@@ -90,7 +90,7 @@
                                             [focusCancel]="true"
                                             (confirm)="(onDelete('deleteCat', this.idSeleccionado))">
                                         </swal>
-                                         <!--FIn Swal eliminar categoria-->
+                                        <!--Fin Swal eliminar categoria-->
                                     </div>
                                 </th>
                             </tr>
@@ -130,14 +130,14 @@
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
                                                                     <span>Marca</span>
-                                                                    <input formControlName="marca_ingre" type="text"
+                                                                    <input (keyup)="passToLower(formIngrediente, 'marca_ingre')" formControlName="marca_ingre" type="text"
                                                                         placeholder="Ingrese la marca" class="input input-bordered" />
                                                                 </label>
                                                             </div>
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
                                                                     <span>Nombre</span>
-                                                                    <input formControlName="nombre_ingre" type="text"
+                                                                    <input (keyup)="passToLower(formIngrediente, 'nombre_ingre')" formControlName="nombre_ingre" type="text"
                                                                         placeholder="Ingrese la descripcion" class="input input-bordered" />
                                                                 </label>
                                                             </div>
@@ -155,7 +155,7 @@
                                                                     <input min="0" (keypress)="numberOnlyValidation($event)"
                                                                         formControlName="stock_ingrediente" type="number"
                                                                         placeholder="Ingrese la cantidad de stock"
-                                                                        class="input input-bordered" />
+                                                                        class="input input-bordered"/>
                                                                 </label>
                                                             </div>
                                                             <div class=" mt-2 form-control">
@@ -175,7 +175,8 @@
                                                                 <label
                                                                     class="input-group input-group-vertical mt-4 w-full max-w-xl"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
                                                                     <span>Link imagen</span>
-                                                                    <input formControlName="imagen_ingre" type="text"
+                                                                    <input pattern="(((ftp|http|https):\/\/)|(\/)|(..\/))(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?"
+                                                                        formControlName="imagen_ingre" type="text"
                                                                         placeholder="Ingrese un enlace" class="input input-bordered" />
                                                                 </label>
                                                             </div>
@@ -192,16 +193,16 @@
                         <tbody><!-- Body -->
                             <tr class="text-center" *ngFor="let ingredienteTabla of responseListadoIngrediente">
                                 <td>{{ ingredienteTabla.id_ingre }}</td>
-                                <td>{{ ingredienteTabla.marca_ingre }}</td>
-                                <td>{{ ingredienteTabla.nombre_ingre }}</td>
+                                <td>{{ ingredienteTabla.marca_ingre | titlecase }}</td>
+                                <td>{{ ingredienteTabla.nombre_ingre | titlecase }}</td>
                                 <td>{{ ingredienteTabla.stock_ingrediente }}</td>
                                 <td>{{ ingredienteTabla.cantidad_por_unidad_ingrediente }}</td>
-                                <td>{{ ingredienteTabla.tipo_unidad_ingrediente }}</td>
+                                <td>{{ ingredienteTabla.tipo_unidad_ingrediente | titlecase }}</td>
                                 <td>
                                     <div class="avatar">
                                         <div class="w-24 rounded">
                                             <img src="{{ingredienteTabla.imagen_ingre}}"
-                                                alt="{{ ingredienteTabla.nombre_ingre }}" />
+                                                alt="{{ ingredienteTabla.nombre_ingre }}"/>
                                         </div>
                                     </div>
                                 </td>
@@ -219,7 +220,7 @@
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical mt-2 w-full max-w-xl">
                                                                     <span>Ingrese la nueva marca</span>
-                                                                    <input formControlName="marca_ingre" type="text"
+                                                                    <input (keyup)="passToLower(formIngrediente, 'marca_ingre')" formControlName="marca_ingre" type="text"
                                                                         placeholder="Ingrese una nueva descripción"
                                                                         class="input input-bordered" />
                                                                 </label>
@@ -227,7 +228,7 @@
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical mt-2 w-full max-w-xl">
                                                                     <span>Ingrese una nueva descripción</span>
-                                                                    <input formControlName="nombre_ingre" type="text"
+                                                                    <input (keyup)="passToLower(formIngrediente, 'marca_ingre')" formControlName="nombre_ingre" type="text"
                                                                         placeholder="Ingrese una nueva descripción"
                                                                         class="input input-bordered" />
                                                                 </label>
@@ -243,7 +244,8 @@
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical mt-4 w-full max-w-xl"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
                                                                     <span>Ingrese el nuevo link de imagen</span>
-                                                                    <input formControlName="imagen_ingre" type="text"
+                                                                    <input pattern="(((ftp|http|https):\/\/)|(\/)|(..\/))(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?" 
+                                                                    formControlName="imagen_ingre" type="text"
                                                                         placeholder="Ingrese un enlace" class="input input-bordered" />
                                                                 </label>
                                                             </div>
@@ -267,14 +269,14 @@
                                                                 </label>
                                                             </div>
                                                             <button class="mt-4 btn w-full max-w-xl" type="submit">Actualizar</button><!--Al enviar el form si el envio fue valido, cambiar el contenido a un cambio realizado, que el modal se pueda cerrar haciendo click fuera tambien aparte de la x-->
-                                                         </div>
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div><!--Fin dropdown actualizar ingrediente-->
                                         <swal
                                             #deleteIngreSwal
-                                            title="¿Estás seguro de eliminar {{ ingredienteTabla.marca_ingre }}?"
+                                            title="¿Estás seguro de eliminar {{ ingredienteTabla.marca_ingre | titlecase}}?"
                                             icon="question"
                                             iconColor="#f8bb86"
                                             fontText="bold"
@@ -335,7 +337,7 @@
                                                     </label>
                                                     <label class="input-group input-group-vertical">
                                                         <span>Nombre preparacion</span>
-                                                        <input formControlName="nombre_prep" type="text"
+                                                        <input (keyup)="passToLower(formPreparaciones, 'nombre_prep')" formControlName="nombre_prep" type="text"
                                                             placeholder="Ingrese un nombre" class="input input-bordered" />
                                                     </label>
                                                 </div>
@@ -344,7 +346,7 @@
                                                     </label>
                                                     <label class="input-group input-group-vertical">
                                                         <span>Descripcion de la preparacion</span>
-                                                        <input formControlName="descripcion_prep" type="text"
+                                                        <input (keyup)="passToLower(formPreparaciones, 'descripcion_prep')" formControlName="descripcion_prep" type="text"
                                                             placeholder="Ingrese una descripcion"
                                                             class="input input-bordered" />
                                                     </label>
@@ -354,9 +356,8 @@
                                                     </label>
                                                     <label class="input-group input-group-vertical">
                                                         <span>Precio</span>
-                                                        <input min="1" (keypress)="numberOnlyValidation($event)"
-                                                            formControlName="precio_prep" type="number"
-                                                            placeholder="Ingrese el precio" class="input input-bordered" />
+                                                        <input min="1" (keypress)="numberOnlyValidation($event)"formControlName="precio_prep" type="number"
+                                                            placeholder="Ingrese el precio" class="input input-bordered">
                                                     </label>
                                                 </div>
                                                 <div class="form-control">
@@ -364,7 +365,7 @@
                                                         required class="ml-5 mt-5 select select-bordered w-full max-w-xs">
                                                         <option disabled selected>Seleccione una categoria</option>
                                                         <option *ngFor="let categoria of responseListadoCategorias"
-                                                            value="{{categoria.id_cat}}">{{categoria.nombre_cat}}</option>
+                                                            value="{{ categoria.id_cat }}">{{ categoria.nombre_cat | titlecase}}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-control">
@@ -373,7 +374,8 @@
                                                     <label
                                                         class="input-group input-group-vertical"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
                                                         <span>Link imagen</span>
-                                                        <input formControlName="imagen_prep" type="text"
+                                                        <input pattern="(((ftp|http|https):\/\/)|(\/)|(..\/))(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?" 
+                                                            formControlName="imagen_prep" type="text"
                                                             placeholder="Ingrese un enlace" class="input input-bordered" />
                                                     </label>
                                                 </div>
@@ -387,9 +389,9 @@
                             <tbody><!-- body -->
                                 <tr class="text-center" *ngFor="let preparacionTabla of responseListadoPreparacion">
                                     <td>{{ preparacionTabla.id_prep }}</td>
-                                    <td>{{ preparacionTabla.nombre_prep }}</td>
-                                    <td>{{ preparacionTabla.descripcion_prep }}</td>
-                                    <td>{{ preparacionTabla.id_cat_prep }}</td>
+                                    <td>{{ preparacionTabla.nombre_prep | titlecase }}</td>
+                                    <td>{{ preparacionTabla.descripcion_prep | titlecase }}</td>
+                                    <td>{{ preparacionTabla.nombre_cat | titlecase}}</td>
                                     <td>{{ preparacionTabla.precio_prep }}</td>
                                     <td>
                                         <div class="avatar">
@@ -399,7 +401,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <th class="text-center">
+                                    <th class="text-center"> <!--dropdown edit prep-->
                                         <div class="sm:btn-sm md:btn-md lg:btn-lg ">
                                             <div class=" dropdown dropdown-left">
                                                 <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black" tabindex="0"    
@@ -412,7 +414,7 @@
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical">
                                                                     <span>Nuevo nombre para la preparacion</span>
-                                                                    <input formControlName="nombre_prep" type="text"
+                                                                    <input (keyup)="passToLower(formPreparaciones, 'nombre_prep')" formControlName="nombre_prep" type="text"
                                                                         placeholder="Introduzca un nombre de la preparación"
                                                                         class="mb-4 input input-bordered pt-2" />
                                                                 </label>
@@ -420,7 +422,7 @@
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical">
                                                                     <span>Nueva descripcion</span>
-                                                                        <input formControlName="descripcion_prep" type="text"
+                                                                        <input (keyup)="passToLower(formPreparaciones, 'descripcion_prep')" formControlName="descripcion_prep" type="text"
                                                                             placeholder="Introduzca la descripcion de la preparación"
                                                                             class="mb-4 input input-bordered pt-2" />
                                                                 </label>
@@ -428,7 +430,8 @@
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical">
                                                                     <span>Nuevo precio</span>
-                                                                        <input formControlName="precio_prep" type="text"
+                                                                        <input formControlName="precio_prep" type="number"
+                                                                        
                                                                             placeholder="Introduzca el precio de la preparación"
                                                                             class="mb-4 input input-bordered pt-2" />
                                                                 </label>
@@ -436,7 +439,8 @@
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical">
                                                                 <span>Nueva link de imagen</span>
-                                                                    <input formControlName="imagen_prep" type="text" placeholder="Introduzca la imagen de la preparación" class="mb-4 input input-bordered pt-2" />
+                                                                    <input pattern="(((ftp|http|https):\/\/)|(\/)|(..\/))(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?" 
+                                                                        formControlName="imagen_prep" type="text" placeholder="Introduzca la imagen de la preparación" class="mb-4 input input-bordered pt-2" />
                                                                 </label>
                                                             </div>
                                                             <div class="form-control">
@@ -444,17 +448,18 @@
                                                                     required class="ml-5 mt-5 select select-bordered w-full max-w-xs">
                                                                     <option disabled selected>Seleccione una categoria</option>
                                                                     <option *ngFor="let categoria of responseListadoCategorias"
-                                                                        value="{{categoria.id_cat}}">{{categoria.nombre_cat}}</option>
+                                                                        value="{{categoria.id_cat}}">{{categoria.nombre_cat | titlecase}}</option>
                                                                 </select>
                                                             </div>
                                                             <button class=" mt-2 btn w-full max-w-xl" type="submit">Actualizar</button>
                                                         </form>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <swal
+                                            </div><!-- Fin dropdown edit prep-->
+                                            <!-- alert eliminar prep-->
+                                            <swal 
                                                 #deletePrepSwal
-                                                title="¿Estás seguro de eliminar {{preparacionTabla.nombre_prep }}?"
+                                                title="¿Estás seguro de eliminar {{preparacionTabla.nombre_prep | titlecase }}?"
                                                 icon="question"
                                                 iconColor="#f8bb86"
                                                 fontText="bold"
@@ -471,8 +476,9 @@
                                                 (click)="seleccionarId(preparacionTabla.id_ingre); ">Eliminar
                                                 <i class="pl-2 fa-solid fa-trash text-red-600"></i>
                                             </button>
+                                            <!-- Fin alert eliminar prep-->
                                         </div>
-                                    </th>
+                                    </th> 
                                 </tr>
                             </tbody>
                         <tfoot><!-- foot -->
@@ -502,7 +508,8 @@
                                 <th>ID ingrediente</th>
                                 <th>Cantidad Necesaria</th>
                                 <th>Tipo Unidad</th>
-                                <th><div class=" dropdown dropdown-left">
+                                <th><!--dropdown agregar detalle prep-->
+                                    <div class="dropdown dropdown-left">
                                         <label tabindex="0" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i> </label>
                                         <div tabindex="0" class="dropdown-content card w-96 p-2 shadow bg-VerdeHuelen text-primary-content">
                                             <div class="card-body">
@@ -512,10 +519,10 @@
                                                         <label class=" input-group input-group-vertical w-full max-w-auto">
                                                             <span>Seleccione una Preparacion</span>
                                                             <select formControlName="id_prep" name="listPrep-DetallePrep" required
-                                                                class="select select-bordered w-full max-w-auto">
+                                                                class="select select-bordered w-full max-w-auto" >
                                                                 <option value="{{preparacion.id_prep}}"
                                                                     *ngFor="let preparacion of responseListadoPreparacion">
-                                                                    {{preparacion.nombre_prep}}</option>
+                                                                    {{preparacion.nombre_prep | titlecase}}</option>
                                                             </select>
                                                         </label>
                                                     </div>
@@ -526,7 +533,7 @@
                                                                 required class="select select-bordered w-full max-w-auto">
                                                                 <option value="{{ingrediente.id_ingre}}"
                                                                     *ngFor="let ingrediente of responseListadoIngrediente">
-                                                                    {{ingrediente.nombre_ingre}}</option>
+                                                                    {{ingrediente.nombre_ingre | titlecase}}</option>
                                                             </select>
                                                         </label>
                                                     </div>
@@ -554,16 +561,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                </th>
+                                </th> <!-- Fin dropdown agregar detalle prep-->
                             </tr>   
                         </thead><!-- head -->
                         <tbody><!-- body -->
                             <tr class="text-center" *ngFor="let detallePrepTabla of responseListadoDetallePrep">
                                 <td>{{ detallePrepTabla.id_detalle_prep }}</td>
-                                <td>{{ detallePrepTabla.id_prep }}</td>
-                                <td>{{ detallePrepTabla.id_ingre }}</td>
+                                <td>{{ detallePrepTabla.nombre_prep | titlecase}}</td>
+                                <td>{{ detallePrepTabla.nombre_ingre | titlecase}}</td>
                                 <td>{{ detallePrepTabla.cantidad_necesaria }}</td>
-                                <td>{{ detallePrepTabla.tipo_unidad }}</td>
+                                <td>{{ detallePrepTabla.tipo_unidad | titlecase }}</td>
                                 <th class="text-center">
                                     <div class=" sm:btn-sm md:btn-md lg:btn-lg">
                                         <div class=" dropdown dropdown-left">
@@ -585,7 +592,7 @@
                                                                             class="select select-bordered w-full max-w-auto">
                                                                             <option value="{{preparacion.id_prep}}"
                                                                                 *ngFor="let preparacion of responseListadoPreparacion">
-                                                                                {{preparacion.nombre_prep}}</option>
+                                                                                {{preparacion.nombre_prep | titlecase}}</option>
                                                                         </select>
                                                                     </label>
                                                                 </div>
@@ -597,7 +604,7 @@
                                                                             required class="select select-bordered w-full max-w-auto">
                                                                             <option value="{{ingrediente.id_ingre}}"
                                                                                 *ngFor="let ingrediente of responseListadoIngrediente">
-                                                                                {{ingrediente.nombre_ingre}}</option>
+                                                                                {{ingrediente.nombre_ingre | titlecase}}</option>
                                                                         </select>
                                                                     </label>
                                                                 </div>
@@ -665,71 +672,68 @@
                         </tfoot>
                     </table>
                 </div>
-                <!--modal edit DetallePrep-->
-                <input type="checkbox" id="my-modal-12" class="modal-toggle" />
-                <div class="modal">
-                    <div class="modal-box relative bg-VerdeHuelen">
-                        <div class="max-w-lg mx-auto p-8 md:p-12 my-10 rounded-lg"><!--Form 4 -->
-                            <label for="my-modal-12" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"><i
-                                    class="fa-regular fa-circle-xmark fa-2xl" style="color: #ed333b;"></i></label>
-                            <h1 class="text-4xl font-bold pb-10 text-white text-center">Actualizar Detalle</h1>
-                            <form [formGroup]="formDetallePrep"
-                                (ngSubmit)="onActualizar('editDetallePrep', this.idSeleccionado)">
-                                <div class="">
-                                    <div class="relative">
-                                        <div class="form-control pt-4">
-                                            <label class=" input-group input-group-vertical w-full max-w-auto">
-                                                <span>Seleccione una nueva Preparacion</span>
-                                                <select formControlName="id_prep" name="listPrep-DetallePrep" required
-                                                    class="select select-bordered w-full max-w-auto">
-                                                    <option value="{{preparacion.id_prep}}"
-                                                        *ngFor="let preparacion of responseListadoPreparacion">
-                                                        {{preparacion.nombre_prep}}</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                        <!--input INGREDIENTE-->
-                                        <div class="form-control pt-4">
-                                            <label class=" input-group input-group-vertical w-full max-w-auto">
-                                                <span>Seleccione un nuevo ingrediente</span>
-                                                <select formControlName="id_ingre" name="listIngred-DetallePrep"
-                                                    required class="select select-bordered w-full max-w-auto">
-                                                    <option value="{{ingrediente.id_ingre}}"
-                                                        *ngFor="let ingrediente of responseListadoIngrediente">
-                                                        {{ingrediente.nombre_ingre}}</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <div class="form-control pt-4 ">
-                                            <label class="input-group input-group-vertical w-full max-w-auto">
-                                                <span>Nueva cantidad necesaria del ingrediente</span>
-                                                <input min="1" formControlName="cantidad_necesaria" type="number"
-                                                    placeholder="Ingrese la cantidad" class=" input input-bordered"
-                                                    (keypress)="numberOnlyValidation($event)" />
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <div class="form-control pt-4">
-                                            <label class=" input-group input-group-vertical w-full max-w-auto">
-                                                <span>Seleccione una nueva unidad de medida</span>
-                                                <select formControlName="tipo_unidad" name="mlgr" required
-                                                    class=" select select-bordered w-full max-w-auto">
-                                                    <option disabled selected>ML o GR</option>
-                                                    <option value="ml">(Ml) Mililitro</option>
-                                                    <option value="gr">(Gr) Gramos</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                        <!-- input-->
-                                        <button class=" mt-4 btn w-full max-w-auto  " type="submit">Crear</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div><!--fin modal edit Detalleprep-->
             </section><!-- Fin Tabla DETALLE PREP -->
+            <!--TABLA Categorias desactivas-->
+            <section>
+                <div class=" w-full pt-10">
+                    <h1 class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">Categorias Desactivadas</h1>
+                    <table class="block table table-zebra w-10/12 mx-auto">
+                        <thead class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">
+                            <tr class=" text-center text-1xl ">
+                                <th>Nombre Cat</th>                                
+                                <th>Estado</th>
+                                <th></th>
+                                <th>preparaciones asignadas</th> 
+                            </tr>   
+                        </thead><!-- head -->
+                        <tbody>
+                            <tr class="text-center" *ngFor="let detalleDesactivadosTabla of responseListadoCategoriasDes" >
+                                <td>{{ detalleDesactivadosTabla.nombre_cat | titlecase}}</td>
+                                <td>{{ detalleDesactivadosTabla.estado }}</td><!-- Cambiar el estado y dejar solo el toggle-->
+                                <td class="text-center">
+                                    
+                                    <input [swal]="enableCat" type="checkbox" class="toggle toggle-success toggle-md" [(ngModel)]="detalleDesactivadosTabla.isChecked" (click)="toggleChecked();seleccionarId(detalleDesactivadosTabla.id_cat)"/>
+                                    {{(detalleDesactivadosTabla.isChecked)}}
+                                    <swal
+                                            #enableCat
+                                            title="¿Estás seguro de habilitar esta categoría?"
+                                            icon="question"
+                                            iconColor="#f8bb86"
+                                            fontText="bold"
+                                            confirmButtonText="<b>Habilitar</b>"
+                                            cancelButtonText="<b>Cancelar</b>"
+                                            confirmButtonColor = "#2b8565"
+                                            [showCancelButton]="true"
+                                            [focusCancel]="true"
+                                            
+                                            (confirm)="(onDelete('deletePrep', this.idSeleccionado))">>
+                                        </swal> 
+                                </td>
+                                <td>
+                                    <div  class="dropdown dropdown-right">
+                                        <label tabindex="0" class="btn m-1">Preparaciones asignadas</label>
+                                        <ul tabindex="0" class="dropdown-content listDots text-left p-2 shadow bg-base-100 rounded-box w-52">
+                                            <p class="text-xl">Preparaciones: </p>
+                                            <span *ngFor="let prep of detalleDesactivadosTabla.preparaciones; let j = index">
+                                                <li> {{ prep.nombre_prep | titlecase}} </li>
+                                            </span>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot><!-- foot -->
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+            <!--FIN tabla Categorias desactivas-->
 <!--------------------------------------------------------------------------------------------------- Analytics Cards -------------------------------------------------------------------------------------------------------------------------------------------->
             <section><!-- CARTAS -->
                 <div class="flex flex-wrap">

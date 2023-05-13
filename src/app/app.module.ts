@@ -9,8 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminHomeComponent } from './pages/login-admin/admin-home/admin-home.component';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2'; 
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
