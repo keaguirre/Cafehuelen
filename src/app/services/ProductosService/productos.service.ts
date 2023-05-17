@@ -456,10 +456,9 @@ obtenerListadoCategoriaDesahabilitadas(): Promise<any> {
       });
     });
   }
-  actualizarCategoriaDesh(id_cat: any, catObj: any,estado:boolean): Promise<any> {
-    catObj=estado;
+  actualizarCategoriaDesh(id_cat: any, catObj: any,): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.put(this.urlCategoriasDesh + id_cat, catObj)
+      this.http.patch(this.urlCategorias + id_cat, catObj)
       .subscribe({
         next: respuesta => {
           resolve(respuesta);

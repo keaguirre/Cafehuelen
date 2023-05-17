@@ -48,9 +48,9 @@
                             </tr>
                         </thead><!-- Fin head -->
                         <tbody><!-- tbody -->
-                            <tr class="text-center" *ngFor="let categoriaTabla of responseListadoCategorias">
-                                <td>{{ categoriaTabla.id_cat}}</td>
-                                <td>{{ categoriaTabla.nombre_cat | titlecase }}</td>
+                            <tr class="text-center" *ngFor="let categoriaTabla of obtenerPageItemsCat()">
+                                    <td>{{ categoriaTabla.id_cat}}</td>
+                                    <td>{{ categoriaTabla.nombre_cat | titlecase }}</td>
                                 <th class=" text-center">
                                     <div class=" xs:btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl ">
                                         <div class="dropdown dropdown-left">
@@ -97,9 +97,9 @@
                         </tbody>
                         <tfoot><!-- foot -->
                             <tr>
+                                <th><button class="btn btn-md" (click)="paginaAnterior()" [disabled]="pages===1">Anterior</button></th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
+                                <th><button class="btn btn-md ml-10" (click)="siguientePag()" [disabled]="pages===totalPag()">Siguiente</button></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -298,15 +298,14 @@
                             </tr>
                         </tbody>
                         <tfoot><!-- foot -->
-                            <tr>
+                            <tr><th><button class="btn btn-md" (click)="paginaAnterior()" [disabled]="pages===1">Anterior</button></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
+                                <th><button class="btn btn-md ml-10" (click)="siguientePag()" [disabled]="pages===totalPag()">Siguiente</button></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -356,7 +355,7 @@
                                                     </label>
                                                     <label class="input-group input-group-vertical">
                                                         <span>Precio</span>
-                                                        <input min="1" (keypress)="numberOnlyValidation($event)"formControlName="precio_prep" type="number"
+                                                        <input min="1" (keypress)="numberOnlyValidation($event)"formControlName="precio_prep" type="text"
                                                             placeholder="Ingrese el precio" class="input input-bordered">
                                                     </label>
                                                 </div>
@@ -392,7 +391,7 @@
                                     <td>{{ preparacionTabla.nombre_prep | titlecase }}</td>
                                     <td>{{ preparacionTabla.descripcion_prep | titlecase }}</td>
                                     <td>{{ preparacionTabla.nombre_cat | titlecase}}</td>
-                                    <td>{{ preparacionTabla.precio_prep }}</td>
+                                    <td>{{ preparacionTabla.precio_prep | currency: '$': 'symbol':'1.0-0' }}</td>
                                     <td>
                                         <div class="avatar">
                                             <div class="w-24 rounded">
@@ -431,7 +430,6 @@
                                                                 <label class="input-group input-group-vertical">
                                                                     <span>Nuevo precio</span>
                                                                         <input formControlName="precio_prep" type="number"
-                                                                        
                                                                             placeholder="Introduzca el precio de la preparación"
                                                                             class="mb-4 input input-bordered pt-2" />
                                                                 </label>
@@ -483,13 +481,13 @@
                             </tbody>
                         <tfoot><!-- foot -->
                             <tr>
+                                <th><button class="btn btn-md" (click)="paginaAnterior()" [disabled]="pages===1">Anterior</button></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
+                                <th><button class="btn btn-md item-end" (click)="siguientePag()" [disabled]="pages===totalPag()">Siguiente</button></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -662,12 +660,12 @@
                         </tbody>
                         <tfoot><!-- foot -->
                             <tr>
+                                <th><button class="btn btn-md" (click)="paginaAnterior()" [disabled]="pages===1">Anterior</button></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
+                                <th><button class="btn btn-md item-end" (click)="siguientePag()" [disabled]="pages===totalPag()">Siguiente</button></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -690,10 +688,8 @@
                             <tr class="text-center" *ngFor="let detalleDesactivadosTabla of responseListadoCategoriasDes" >
                                 <td>{{ detalleDesactivadosTabla.nombre_cat | titlecase}}</td>
                                 <td>{{ detalleDesactivadosTabla.estado }}</td><!-- Cambiar el estado y dejar solo el toggle-->
-                                <td class="text-center">
-                                    
-                                    <input [swal]="enableCat" type="checkbox" class="toggle toggle-success toggle-md" [(ngModel)]="detalleDesactivadosTabla.isChecked" (click)="toggleChecked();seleccionarId(detalleDesactivadosTabla.id_cat)"/>
-                                    {{(detalleDesactivadosTabla.isChecked)}}
+                                <td class="text-center ">
+                                    <button [swal]="enableCat" type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"  (click)="toggleChecked(); seleccionarId(detalleDesactivadosTabla.id_cat)">Activar</button>
                                     <swal
                                             #enableCat
                                             title="¿Estás seguro de habilitar esta categoría?"
@@ -705,8 +701,7 @@
                                             confirmButtonColor = "#2b8565"
                                             [showCancelButton]="true"
                                             [focusCancel]="true"
-                                            
-                                            (confirm)="(onDelete('deletePrep', this.idSeleccionado))">>
+                                            (confirm)="(onActualizar('editCatDesh', this.idSeleccionado))">>
                                         </swal> 
                                 </td>
                                 <td>
@@ -734,6 +729,64 @@
                 </div>
             </section>
             <!--FIN tabla Categorias desactivas-->
+            <!--TABLA preparaciones desactivadas-->
+            <section>
+                <div class=" w-full pt-10">
+                    <h1 class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">Preparacines Desactivadas</h1>
+                    <table class="block table table-zebra w-10/12 mx-auto">
+                        <thead class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">
+                            <tr class=" text-center text-1xl ">
+                                <th>Nombre Preparación</th>                                
+                                <th>Estado</th>
+                                <th></th>
+                                <th>categoria asignada</th> 
+                            </tr>   
+                        </thead><!-- head -->
+                        <tbody>
+                            <tr class="text-center" *ngFor="let detalleDesactivadosTabla of responseListadoPreparacion " >
+                                <td>{{ detalleDesactivadosTabla.nombre_prep | titlecase}}</td>
+                                <td>{{ detalleDesactivadosTabla.estado }}</td><!-- Cambiar el estado y dejar solo el toggle-->
+                                <td class="text-center ">
+                                    <button [swal]="enableCat" type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"  (click)="toggleChecked(); seleccionarId(detalleDesactivadosTabla.id_cat)">Activar</button>
+                                    <swal
+                                            #enableCat
+                                            title="¿Estás seguro de habilitar esta preparación?"
+                                            icon="question"
+                                            iconColor="#f8bb86"
+                                            fontText="bold"
+                                            confirmButtonText="<b>Habilitar</b>"
+                                            cancelButtonText="<b>Cancelar</b>"
+                                            confirmButtonColor = "#2b8565"
+                                            [showCancelButton]="true"
+                                            [focusCancel]="true"
+                                            (confirm)="(onActualizar('editCatDesh', this.idSeleccionado))">>
+                                        </swal> 
+                                </td>
+                                <td>
+                                    <div  class="dropdown dropdown-right">
+                                        <label tabindex="0" class="btn m-1">categoria asignada</label>
+                                        <ul tabindex="0" class="dropdown-content listDots text-left p-2 shadow bg-base-100 rounded-box w-52">
+                                            <p class="text-xl">Categoria: </p>
+                                            <span *ngFor="let cat of detalleDesactivadosTabla.categoria; let j = index">
+                                                <li> {{ cat.nombre_cat | titlecase}} </li>
+                                            </span>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot><!-- foot -->
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+            <!--FIN tabla preparaciones desactivadas-->
 <!--------------------------------------------------------------------------------------------------- Analytics Cards -------------------------------------------------------------------------------------------------------------------------------------------->
             <section><!-- CARTAS -->
                 <div class="flex flex-wrap">

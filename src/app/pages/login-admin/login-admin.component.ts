@@ -4,6 +4,15 @@ import { FormGroup, FormControl, FormBuilder, Validators, ReactiveFormsModule } 
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/loginService/login.service';
 import{map} from 'rxjs/operators'
+import { SHA256 } from 'crypto-js';
+import Swal from 'sweetalert2';
+
+/**
+  * Descripción de la clase
+  * @method this.formLogin formulario de login
+  * @method this.onSearch() Toma los valores de formlogin, hashea la pass y
+  * envia un request al back para validar las credenciales.
+*/
 
 @Component({
   selector: 'app-login-admin',
@@ -11,7 +20,6 @@ import{map} from 'rxjs/operators'
   styleUrls: ['./login-admin.component.css']
 })
 export class LoginAdminComponent{
-  // response!: any[];
   response!: any
   respuesta: any;
 
@@ -20,34 +28,69 @@ export class LoginAdminComponent{
     contrasena: new FormControl('',[Validators.required])
   });
 
-  ngOnInit(): void {
-   
-    
-  }
-  constructor(private loginserv: LoginService, private router: Router) { }
+  ngOnInit(): void {}
+  constructor(private loginserv: LoginService, private router: Router) {}
 
-  // onQuery(): void{
-  //   this.loginserv.obtenerListadoAdmin().then(respuesta => {
-  //     this.response = respuesta;
-  //     // console.log('Response: '+this.response.data)
-  //   });
-  // }
+  toastCheck = Swal.mixin({
+    toast: true,
+    icon:'success',
+    position: 'bottom-right',
+    iconColor: 'green',
+    showConfirmButton: false, 
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    },
+    customClass: {
+      popup: 'colored-toast',
+    },
+  })
+
+  //TOAST ERROR
+  toastError = Swal.mixin({
+    toast: true,
+    position: 'bottom-right',
+    icon:'error',
+    iconColor: 'red',
+    showConfirmButton: false, 
+    timer: 5000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    },
+    customClass: {
+      popup: 'colored-toast'
+    },
+  })
+
+/**
+  * Descripción de metodo
+  * @method this.onSearch() Toma los valores de formlogin, hashea la pass y
+  * envia un request al back para validar las credenciales.
+  * el método anterior @fires toastCheck y @fires toastError segun la respuesta.
+  * @eventProperty Redirije al home una vez @fires toastCheck
+*/
   onSearch(): void{
     try{
-      this.loginserv.obtenerAdminDetalle(this.formLogin.value.usuario).then(respuesta => {
+      let pass = SHA256(this.formLogin.value.contrasena).toString();
+      this.formLogin.patchValue({contrasena: pass})
+      this.loginserv.obtenerAdminDetalle(this.formLogin.value).then(respuesta => {
         this.response = respuesta;
-        if (this.formLogin.value.usuario == this.response.usuario && this.response.contrasena == this.response.contrasena){
+        if (this.response){
           //aqui agregar algun metodo para manejar la session
-          // this.router.navigateByUrl('/admin')
-          console.log('Home admin')
+          this.router.navigateByUrl('/admin/home')
+          this.toastCheck.fire({icon: 'success',title: 'Sesión iniciada correctamente.'}) 
         }
-        else{
-            //levantar algun error tostada o tooltip
-            console.log('Intenta denuevo')
-        }
+      }).catch(err => { //cachea el error de la solicitud
+        this.toastError.fire({icon: 'error',title: 'Ha habido un error, revise los datos ingresados e intente nuevamente.'});
       });
     }catch (e: any){
-    console.log(e);
+      console.log(e);
     }
   }
+
+
 }

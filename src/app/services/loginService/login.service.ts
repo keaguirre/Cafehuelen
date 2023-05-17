@@ -11,9 +11,10 @@ export class LoginService {
 //LISTADOS
 //Admin login------------------------------------------------
 //Administrador + query
-  obtenerAdminDetalle(admin:any): Promise<any> {
+  obtenerAdminDetalle(usr:any): Promise<any> {
+    let usuario = usr['usuario']
     return new Promise((resolve, reject) => {
-      this.http.get(this.urlAdmin+admin).subscribe({
+      this.http.post(this.urlAdmin+usuario, usr).subscribe({
         next: respuesta => {
           resolve(respuesta);
         },
@@ -23,6 +24,7 @@ export class LoginService {
           }
           else if(err.status == 400){
             console.log(err.statusText)
+            reject(err)
             //bad request
           }
           else if(err.status == 404){

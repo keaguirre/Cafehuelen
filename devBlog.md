@@ -35,18 +35,45 @@
 - [x] minificar los inputs 
 - [x] capitalizar las tablas
 
+# 14/05/23
+- Instalado el modulo Cryto-js y definido con @types/crypto-js.
+- Implementado el cifrado de contraseña con el login. El admin al momento de registrar a un supervisor, lo hará asignandole una contraseña ya hasheada, desde el front
+    una vez el usuario usa el login, el sistema hashea la contraseña que el usuario intenta y si el hash que corresponde a la pass, coincide con el hash almacenado
+    como pass en el back, esta persona se logea.
+
+# 14/05/23
+### Agustin to do
+- [x] Currency pipe para mostrar precios en clp
+- [/] Implementar la pagination
+- [ ] Implementar Amazon S3 para subir las imagenes y entregarlas como url.
+- Login con validaciones en el front.
+
+# 15/05/23
+- [x] ¡POPE! login-admin.component.ts MIRAR @beta en onSearch. PASAR LA VALIDACION AL BACK
+- [x] Comienza el desarrollo del webview del totem con las consultas al backend.
+- Se completa las primeras paginaciones, falta terminarlas
+- Comienzo de creacion del carrito
+- [/] empezar a hacer las consultas con electronjs
+- [x] Login con validaciones en el back.
+
+# 16/05/23
+- [x] Botón de para habilitar las categorias
+- Se avanza en las consultas con electronjs al back
+- [x] empezar a hacer las consultas con electronjs
+
 # Ideas
 - Posible drop de detalle preparacion e ingredientes, priorizar bloque de compras con preparaciones y evaluar la posibilidad de seguir con la automatizacion
     del inventario.
 
 # To do:
-- [ ] Currency pipe para mostrar precios en clp
-- [ ] Colocar en el input visualmente el . de los miles, pero enviar los enteros solos al back
-- [ ] Rematar validaciones de url, si la url no es valida background rojo o borde, si es val back o borde verde y activar o desactivar boton de submit segun.
-- [ ] Implementar Amazon S3 para subir las imagenes y entregarlas como url.
+- Terminar el crud con electronjs
+- Benjamin, crear el crud con la api de la compra
+- Crear vista tabla de preparaciones deshabilitadas en el back
+- terminar la paginacion
+- iniciar la implementacion de amazon s3
+- [ ] Revisar drf los tokens y las sesiones para el front
 
 -----------------
-- [ ] Crear boques de compra y local.
-- [ ] Login.
+- [ ] Crear bloques de compra y local.
 - [ ] Paleta de colores.
 - [ ] Decorar home admin.
