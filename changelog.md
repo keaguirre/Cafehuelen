@@ -51,6 +51,26 @@
 - [x] minificar los inputs 
 - [x] capitalizar las tablas
 
+# 17/05/23
+- Instalado el modulo Cryto-js y definido con @types/crypto-js.
+- Implementado el cifrado de contraseña con el login. El admin al momento de registrar a un supervisor, lo hará asignandole una contraseña ya hasheada, desde el front
+    una vez el usuario usa el login, el sistema hashea la contraseña que el usuario intenta y si el hash que corresponde a la pass, coincide con el hash almacenado
+    como pass en el back, esta persona se logea.
+- [x] Currency pipe para mostrar precios en clp
+- [/] Implementar la pagination
+- Login con validaciones en el front.
+- [x] ¡POPE! login-admin.component.ts MIRAR @beta en onSearch. PASAR LA VALIDACION AL BACK
+- [x] Comienza el desarrollo del webview del totem con las consultas al backend.
+- Se completa las primeras paginaciones, falta terminarlas
+- Comienzo de creacion del carrito
+- [/] empezar a hacer las consultas con electronjs
+- [x] Login con validaciones en el back.
+- [x] Botón de para habilitar las categorias
+- Se avanza en las consultas con electronjs al back
+- [x] empezar a hacer las consultas con electronjs
+
+## To do: 
+- [ ] Implementar Amazon S3 para subir las imagenes y entregarlas como url.
 
 ### Detalles
 - [-] Terminar de implementar todos los crud
