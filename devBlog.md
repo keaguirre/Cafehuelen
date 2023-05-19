@@ -61,6 +61,14 @@
 - Se avanza en las consultas con electronjs al back
 - [x] empezar a hacer las consultas con electronjs
 
+# 17/05/23
+- Terminada la tabla de preparaciones deshabilitadas, se pueden reactivar de manera funcional.
+- Se crea servicio compra y se generan sus metodos, get, post y patch(para tabla compra).
+
+# 18/05/23
+- Nueva libreria para paginaciones **ngx-pagination**
+- [x] Implementar la pagination
+
 # Ideas
 - Posible drop de detalle preparacion e ingredientes, priorizar bloque de compras con preparaciones y evaluar la posibilidad de seguir con la automatizacion
     del inventario.
