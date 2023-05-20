@@ -69,6 +69,10 @@
 - Nueva libreria para paginaciones **ngx-pagination**
 - [x] Implementar la pagination
 
+# 19/05/23
+- Responsibilidad de las tablas
+- Paginación
+
 # Ideas
 - Posible drop de detalle preparacion e ingredientes, priorizar bloque de compras con preparaciones y evaluar la posibilidad de seguir con la automatizacion
     del inventario.

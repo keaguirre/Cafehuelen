@@ -62,12 +62,20 @@
 - [x] ¡POPE! login-admin.component.ts MIRAR @beta en onSearch. PASAR LA VALIDACION AL BACK
 - [x] Comienza el desarrollo del webview del totem con las consultas al backend.
 - Se completa las primeras paginaciones, falta terminarlas
-- Comienzo de creacion del carrito
+- Comienzo de creacion del carrito.
 - [/] empezar a hacer las consultas con electronjs
 - [x] Login con validaciones en el back.
 - [x] Botón de para habilitar las categorias
 - Se avanza en las consultas con electronjs al back
 - [x] empezar a hacer las consultas con electronjs
+
+# 19/05/23
+- Terminada la tabla de preparaciones deshabilitadas, se pueden reactivar de manera funcional.
+- Se crea servicio compra y se generan sus metodos, get, post y patch(para tabla compra).
+- Nueva libreria para paginaciones **ngx-pagination**
+- [x] Implementar la pagination
+- Responsibilidad de las tablas
+- Paginación
 
 ## To do: 
 - [ ] Implementar Amazon S3 para subir las imagenes y entregarlas como url.

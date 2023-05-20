@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminHomeComponent } from './pages/login-admin/admin-home/admin-home.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2'; 
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     SweetAlert2Module.forRoot(),
     FormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

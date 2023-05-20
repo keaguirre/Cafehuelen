@@ -10,6 +10,7 @@ export const environment = {
     urlApiDetallePrep: 'http://127.0.0.1:8000/api/detalle_prep/',
     urlApiCategorias: 'http://127.0.0.1:8000/api/categoria/',
     urlApiCategoriasDesh: 'http://localhost:8000/api/categoria/deshabilitadas',
+    urlApiPreparacionesDesh: 'http://127.0.0.1:8000/api/preparacion/deshabilitadas',
 
     // urlApiLogin: 'https://cafehuelenbackend.onrender.com/api/superv_local/',
     // urlApiIngredientes: 'https://cafehuelenbackend.onrender.com/api/ingrediente/',

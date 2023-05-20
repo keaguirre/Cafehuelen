@@ -10,6 +10,7 @@ export class ProductosService {
   urlDetallePrep:string = environment.urlApiDetallePrep
   urlCategorias:string = environment.urlApiCategorias
   urlCategoriasDesh:string = environment.urlApiCategoriasDesh
+  urlPreparacionesDesh:string = environment.urlApiPreparacionesDesh
 
   constructor(private http: HttpClient) { }
 
@@ -184,6 +185,19 @@ export class ProductosService {
 obtenerListadoCategoriaDesahabilitadas(): Promise<any> {
   return new Promise((resolve, reject) => {
     this.http.get(this.urlCategoriasDesh).subscribe({
+      next: respuesta => {
+        resolve(respuesta);
+      },
+      error: err => {
+        reject(err);
+      }
+    });
+  });
+}    
+//Listado Preparaciones deshactivadas
+obtenerListadoPreparacionesDesahabilitadas(): Promise<any> {
+  return new Promise((resolve, reject) => {
+    this.http.get(this.urlPreparacionesDesh).subscribe({
       next: respuesta => {
         resolve(respuesta);
       },
@@ -459,6 +473,38 @@ obtenerListadoCategoriaDesahabilitadas(): Promise<any> {
   actualizarCategoriaDesh(id_cat: any, catObj: any,): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.patch(this.urlCategorias + id_cat, catObj)
+      .subscribe({
+        next: respuesta => {
+          resolve(respuesta);
+        },
+        error: err => {
+          if (err.status == 500){ 
+            console.log(err.statusText)
+            //internal server error
+          }
+          else if(err.status == 400){
+            console.log(err.statusText)
+            //bad request
+          }
+          else if(err.status == 404){
+            console.log(err.statusText)
+            //404 not found
+          }
+          else if(err.status == 409){
+            console.log(err.statusText)
+            //409 Conflict
+          }
+          else {
+            // console.log(err.status)
+            reject(err.status);
+          }
+        }
+      });
+    });
+  }
+  actualizarPreparacionDesh(id_ingre: any, catObj: any,): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.patch(this.urlPreparaciones + id_ingre, catObj)
       .subscribe({
         next: respuesta => {
           resolve(respuesta);
