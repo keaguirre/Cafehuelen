@@ -5,6 +5,7 @@ import { ProductosService } from 'src/app/services/ProductosService/productos.se
 import Swal from 'sweetalert2';
 import { Subject, Subscription } from 'rxjs';
 import { tap,switchMap,map, startWith} from 'rxjs/operators';
+import { ImgServiceService } from 'src/app/services/imgService/img-service.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -37,6 +38,9 @@ export class AdminHomeComponent {
   pagesCatDes: number = 1;
   totalItems:number=0;
   missingCategories: any[] = [];
+  imagenSelecta: any | undefined;
+  base64Image:any;
+  formularioActivo: string = '';
   
   ngOnInit(): void {
     this.onList('listCat');
@@ -52,21 +56,47 @@ export class AdminHomeComponent {
       this.onList('listDetallePrep');
       this.onList('listCatDesh');
       this.onList('listPrepDesh');
-      
-    
     });
   }
   ngOnDestroy():void{
     this.suscripcion.unsubscribe();
-  
   }
   // ngOnChange();void{}; pasarle la funcion del checkbox 
-  constructor(private prodService:ProductosService){}
+  constructor(private prodService:ProductosService, private imgService:ImgServiceService){}
 
-  // getDesactivadosTabla(): any[] {
-  //   return this.responseListadoPreparacion.filter(this.responseListadoPreparacion => preparacion.estado === false);
-  // }
- 
+  //API subir imagen a imgbb-----------------------------------------------------------------
+async onImagenSelecta(event: any) {
+  const imagen: FileList | null = event?.target?.files;
+  if (imagen && imagen.length > 0) {
+    this.imagenSelecta = imagen.item(0);
+    this.convertToBase64(this.imagenSelecta);
+    const imagenUrl = await this.imgService.uploadImage(this.imagenSelecta);
+
+    if (this.formIngrediente.controls['imagen_ingre']) {
+      this.formIngrediente.controls['imagen_ingre'].setValue(imagenUrl);
+    }
+    if (this.formPreparaciones.controls['imagen_prep']) {
+      this.formPreparaciones.controls['imagen_prep'].setValue(imagenUrl);
+    }
+  }
+}
+convertToBase64(file: File) {
+  const reader = new FileReader();
+  reader.onloadstart = () => {
+    this.base64Image = reader.result as string;
+  };
+  reader.readAsDataURL(file);
+}
+async uploadImage() {
+  if (this.imagenSelecta) {
+    const imagenUrl = await this.imgService.uploadImage(this.imagenSelecta);
+    console.log('URL', imagenUrl);
+    this.formIngrediente.controls['imagen_ingre'].setValue(imagenUrl);
+    this.formPreparaciones.controls['imagen_prep'].setValue(imagenUrl);
+  
+  }
+}
+//FIN API subir imagen a imgbb-------------------------------------------------------------------
   //Esta funcion le pasa el id a la variable para que en el update se la injecte al formulario edit para enviarlo
   public seleccionarId(id: number): void { 
     this.idSeleccionado = id;
@@ -102,13 +132,11 @@ export class AdminHomeComponent {
 //FORMULARIOS-----------------------------------------------------------------------------------
   public formIngrediente: FormGroup = new FormGroup({
     id_ingre: new FormControl('',[Validators.required]),
-    marca_ingre: new FormControl('',[Validators.required]),
     nombre_ingre: new FormControl('',[Validators.required]),
     stock_ingrediente: new FormControl('',[Validators.required]),
-    cantidad_por_unidad_ingrediente: new FormControl('',[Validators.required, ]),
     tipo_unidad_ingrediente: new FormControl('',[Validators.required]),
-    imagen_ingre: new FormControl('',[Validators.required]),
-    estado: new FormControl('',[Validators.required])
+    tamano_envase: new FormControl(''),
+    cantidad_envase: new FormControl(''),
   });
   public formPreparaciones: FormGroup = new FormGroup({
     id_prep: new FormControl('',[Validators.required]), 
@@ -117,7 +145,6 @@ export class AdminHomeComponent {
     imagen_prep: new FormControl('',[Validators.required]),
     id_cat_prep: new FormControl('',[Validators.required]),
     precio_prep: new FormControl('',[Validators.required]),
-    estado: new FormControl('',[Validators.required]),
   });
   public formDetallePrep: FormGroup = new FormGroup({
     id_detalle_prep: new FormControl('',[Validators.required],),
@@ -125,17 +152,15 @@ export class AdminHomeComponent {
     id_ingre: new FormControl('',[Validators.required]),
     cantidad_necesaria: new FormControl('',[Validators.required]),
     tipo_unidad: new FormControl('',[Validators.required]),
-    estado: new FormControl('',[Validators.required]),
   });
   public formCategorias: FormGroup = new FormGroup({
     id_cat: new FormControl('',[Validators.required]),
     nombre_cat: new FormControl('',[Validators.required, Validators.minLength(3)]),
-    estado: new FormControl('',[Validators.required]),                
+               
   });
   public formCategoriasEdit: FormGroup = new FormGroup({
     id_cat: new FormControl('',[Validators.required]),
     nombre_cat: new FormControl('',[Validators.required, Validators.minLength(3)]),
-    estado: new FormControl('',[Validators.required]),
   });
 //FIN FORMULARIOS---------------------------------------------------------------------------------
 //DECLARACION DE TOASTS---------------------------------------------------------------------------
@@ -173,6 +198,7 @@ toastError = Swal.mixin({
     popup: 'colored-toast'
   },
 })
+//FIN DECLARACION TOASTSs
 //LISTADOS----------------------------------------------------------------------------------------
   onList(cod: string): void{
     switch(cod) { 
@@ -256,15 +282,14 @@ toastError = Swal.mixin({
   }
 //FIN LISTADOS----------------------------------------------------------------------------------------
 //CREACIONES----------------------------------------------------------------------------------------
-  onCreate(cod: string,valor?:any): void{
+  onCreate(cod: string): void{
     switch(cod) { 
       case 'createCat': { 
         try{
-          this.formCategorias.controls['estado'].setValue(true)
           let formCatValue = JSON.stringify(this.formCategorias.value);
           this.prodService.crearCategoria(formCatValue).then(respuesta => { this.response = respuesta;
             if(this.response.includes(this.formCategorias.value.nombre_cat)){
-              this.toastCheck.fire({icon: 'success',title: this.response})  
+              this.toastCheck.fire({icon: 'success',title: 'categoria correctamente creada'})  
               this.refrescar.next();
               this.totalItems = this.responseListadoCategorias.length;
               this.formCategorias.reset();
@@ -274,7 +299,7 @@ toastError = Swal.mixin({
             }
             this.formCategorias.reset();
           })
-          .catch(err => { //cachea el error de crear una categoria
+          .catch(err => { //cachea el error de promise al crear una categoria
             this.toastError.fire({icon: 'error',title: err});
             this.formCategorias.reset();
           });
@@ -285,16 +310,15 @@ toastError = Swal.mixin({
       } 
       case 'createIngre': {
         try{
-          this.formIngrediente.controls['estado'].setValue(true)
           let formIngreValue = JSON.stringify(this.formIngrediente.value);
           this.prodService.crearIngrediente(formIngreValue).then(respuesta => {
             this.response = respuesta;
-            if (typeof this.response.id_ingre == 'number'){
+            if (typeof this.response.id_ingre =='number'){
               this.toastCheck.fire({icon: 'success',title: 'Ingrediente creado correctamente'})  
               this.refrescar.next();
               this.formIngrediente.reset();
             }else{
-              this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al crear el ingrediente. Inténtelo nuevamente más tarde.'})  
+              this.toastError.fire({icon:'error',title: 'Ha ocurrido un error al crear el ingrediente. Inténtelo nuevamente más tarde.'})  
               this.formIngrediente.reset();
             }
             this.formIngrediente.reset();
@@ -309,14 +333,13 @@ toastError = Swal.mixin({
       } 
       case 'createDetallePrep': { 
         try{
-          this.formDetallePrep.controls['estado'].setValue(true)
           let formDetallePrepValue = JSON.stringify(this.formDetallePrep.value);
           this.prodService.crearDetallePrep(formDetallePrepValue).then(respuesta => {
             this.response = respuesta;
             if (typeof this.response.id_prep == 'number' && typeof this.response.id_ingre == 'number'){
               this.toastCheck.fire({icon: 'success',title: 'Ingrediente de receta creado correctamente'})  
-              this.refrescar.next();
               this.formDetallePrep.reset();
+              this.refrescar.next();
             }else{
               this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al crear la preparacion. Inténtelo nuevamente más tarde.'})  
               this.formDetallePrep.reset();
@@ -334,20 +357,19 @@ toastError = Swal.mixin({
       } 
       case 'createPrep': { 
         try{
-          this.formPreparaciones.controls['estado'].setValue(true)
           let formPrepValue = JSON.stringify(this.formPreparaciones.value);
           this.prodService.crearPreparaciones(formPrepValue).then(respuesta => {
             this.response = respuesta;
             if (this.formPreparaciones.value.nombre_prep === this.response.nombre_prep){
-              this.refrescar.next();
               this.toastCheck.fire({icon: 'success',title: 'Preparación creada correctamente'})  
-              
+              this.refrescar.next()
               this.formPreparaciones.reset();
             }else{
               this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al crear la preparación. Inténtelo nuevamente más tarde.'})  
               this.formPreparaciones.reset();
             }
             this.formPreparaciones.reset();
+            ;
           })
           .catch(err => {
             this.toastError.fire({icon: 'error', title: err})
@@ -581,12 +603,9 @@ rellenarFormulario(cod:string): void{
         this.prodService.obtenerIngredienteDetalle(this.idSeleccionado).then(respuesta =>{
           this.formIngrediente.patchValue({
             id_ingre: this.idSeleccionado,
-            marca_ingre: respuesta['marca_ingre'],
             nombre_ingre: respuesta['nombre_ingre'],
             stock_ingrediente: respuesta['stock_ingre'],
-            cantidad_por_unidad_ingrediente: respuesta['cantidad_por_unidad_ingrediente'],
             tipo_unidad_ingrediente: respuesta['tipo_unidad_ingrediente'],
-            imagen_ingre: respuesta['imagen_ingre'],
             estado: respuesta['estado']
           })
         })
@@ -625,7 +644,29 @@ rellenarFormulario(cod:string): void{
     }
   }  
 
+//Agregar Stock
+  agregarStock(id:number){
+    this.idSeleccionado= id;
+     const tamanoEnvase = this.formIngrediente.get('tamano_envase')!.value;
+     const cantidadEnvase = this.formIngrediente.get('cantidad_envase')!.value;
+    const stockIngre= tamanoEnvase * cantidadEnvase;
 
+    this.formIngrediente.patchValue({stock_ingrediente:stockIngre});
+    
+    this.prodService.agregarStockIngre(this.idSeleccionado, this.formIngrediente.value).then(respuesta =>{
+      this.response= respuesta;
+      if(this.formIngrediente.value.id_ingre === this.response.id_ingre){
+        this.toastCheck.fire({ icon: 'success', title: 'Stock actualizado correctamente.'})  
+        this.refrescar.next(); 
+        this.formIngrediente.reset();
+      }else{
+        this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al ingresar el stock. Inténtelo nuevamente más tarde.'})  
+        this.formIngrediente.reset();
+      }
+      this.formIngrediente.reset();
+    })
+  }
+//Fin Agregar Stock
 
 
 

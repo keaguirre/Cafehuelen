@@ -12,7 +12,12 @@ import { AdminHomeComponent } from './pages/login-admin/admin-home/admin-home.co
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2'; 
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { DetallePrepComponent } from './pages/login-admin/detalle-prep/detalle-prep.component';
+import { ApiWatcherComponent } from './pages/api-watcher/api-watcher.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
+import { TitleCasePipe } from '@angular/common';
+import { NavbarClienteComponent } from './components/navbar-cliente/navbar-cliente.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +27,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     StartComponent,
     LoginAdminComponent,
     AdminHomeComponent,
+    DetallePrepComponent,
+    ApiWatcherComponent,
+    CarritoComponent,
+    NavbarClienteComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +42,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [TitleCasePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

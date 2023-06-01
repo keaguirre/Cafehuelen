@@ -5,12 +5,13 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class ProductosService {
-  urlIngredientes:string = environment.urlApiIngredientes
-  urlPreparaciones:string = environment.urlApiPreparaciones
-  urlDetallePrep:string = environment.urlApiDetallePrep
-  urlCategorias:string = environment.urlApiCategorias
-  urlCategoriasDesh:string = environment.urlApiCategoriasDesh
-  urlPreparacionesDesh:string = environment.urlApiPreparacionesDesh
+  urlIngredientes:string = environment.urlApiIngredientes;
+  urlPreparaciones:string = environment.urlApiPreparaciones;
+  urlDetallePrep:string = environment.urlApiDetallePrep;
+  urlCategorias:string = environment.urlApiCategorias;
+  urlCategoriasDesh:string = environment.urlApiCategoriasDesh;
+  urlPreparacionesDesh:string = environment.urlApiPreparacionesDesh;
+  urlComprasRecientes:string = environment.urlApiComprasRecientes;
 
   constructor(private http: HttpClient) { }
 
@@ -53,6 +54,33 @@ export class ProductosService {
         },
         error: err => {
           reject(err);
+        }
+      });
+    });
+  }    
+
+  obtenerListadoComprasRecientes(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.urlComprasRecientes).subscribe({
+        next: respuesta => {
+          resolve(respuesta);
+        },
+        error: err => {
+          if (err.status == 500){
+            console.log('500'+err.statusText)
+          }
+          else if(err.status == 400){
+            console.log('400'+err.statusText)
+            //bad request
+          }
+          else if(err.status == 404){
+            console.log('404'+err.statusText)
+            //404 not found
+          }
+          else {
+            // console.log(err.status)
+            reject(err.status);
+          }
         }
       });
     });
@@ -319,6 +347,7 @@ obtenerListadoPreparacionesDesahabilitadas(): Promise<any> {
           }
           else if(err.status == 400){
             if('nombre_cat' in err.error){
+              console.log('Error interno'+err.statusText)
               //Revisar este in por un .includes()
               reject(err.error.nombre_cat[0])
             }
@@ -340,7 +369,6 @@ obtenerListadoPreparacionesDesahabilitadas(): Promise<any> {
       });
     });
   }
-
   //ACTUALIZAR OBJETOS---------------------------------------------------------------
   actualizarIngrediente(id_ingre: any, ingreObj: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -666,7 +694,38 @@ obtenerListadoPreparacionesDesahabilitadas(): Promise<any> {
       });
     });
   }
-
+  agregarStockIngre(stock: any,id_ingre: any ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.put(this.urlIngredientes + stock, id_ingre )
+      .subscribe({
+        next: respuesta => {
+          resolve(respuesta);
+        },
+        error: err => {
+          if (err.status == 500){ 
+            console.log(err.statusText)
+            //internal server error
+          }
+          else if(err.status == 400){
+            console.log(err.statusText)
+            //bad request
+          }
+          else if(err.status == 404){
+            console.log(err.statusText)
+            //404 not found
+          }
+          else if(err.status == 409){
+            console.log(err.statusText)
+            //409 Conflict
+          }
+          else {
+            // console.log(err.status)
+            reject(err.status);
+          }
+        }
+      });
+    });
+  }
   //ELIMINAR OBJETOS---------------------------------------------------------------
   // borrarIngrediente(id_ingre: number): Promise<any> {
   //   return new Promise((resolve, reject) => {

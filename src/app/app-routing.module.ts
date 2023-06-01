@@ -5,11 +5,12 @@ import { CatalogoComponent } from './pages/catalogo/catalogo.component';
 import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
 import { StartComponent } from './pages/start/start.component';
 import { IngrePrepComponent } from './pages/login-admin/ingre-prep/ingre-prep.component';
+import { DetallePrepComponent } from './pages/login-admin/detalle-prep/detalle-prep.component';
 import { IngredientesComponent } from './pages/login-admin/ingredientes/ingredientes.component';
 import { PreparacionesComponent } from './pages/login-admin/preparaciones/preparaciones.component';
 import { AdminHomeComponent } from './pages/login-admin/admin-home/admin-home.component';
 import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component';
-
+import { ApiWatcherComponent } from './pages/api-watcher/api-watcher.component';
 const routes: Routes = [
  
   {
@@ -39,6 +40,9 @@ const routes: Routes = [
     path: 'admin/ingre-prep', component: IngrePrepComponent, 
   },
   {
+    path: 'admin/detalle-prep', component: DetallePrepComponent,
+  },
+  {
     path: 'admin/compras', component: IngrePrepComponent, //Para pruebas de crud, simular y probar borrar una vez probado todo 
   },
   {
@@ -46,6 +50,9 @@ const routes: Routes = [
   },
   {
     path: 'navbar', component: NavbarAdminComponent,
+  },
+  {
+    path: 'api-watcher', component: ApiWatcherComponent,
   },
   {
     path: '**',

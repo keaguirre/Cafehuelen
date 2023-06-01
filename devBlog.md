@@ -73,19 +73,53 @@
 - Responsibilidad de las tablas
 - Paginación
 
-# Ideas
-- Posible drop de detalle preparacion e ingredientes, priorizar bloque de compras con preparaciones y evaluar la posibilidad de seguir con la automatizacion
-    del inventario.
+# 22/05/23
+- Comienzo de implementacion de imgBB dentro de la tabla de ingredientes y preparaciones.
+- Investigacion de insertar en un input la url para subirla al backend
+
+# 23/05/23
+- Completada la implementacion de imgbb 
+
+# 24/05/23
+- Comienza el desarrollo de la nueva pagina de preparacion e detalle preparacion
+- Se necesita que al crear la preparacion se deba crear el detalle de dicha preparacion, segun esto se necesti que el detalle preparacion se cree dentro del session storage para luego ser enviado al backend.
+
+# 25/05/23
+- Avance de la nueva pagina de preparaciones.
+- Se crean los opbjetos dentro del session Storage.
+- [/] Solucionar problema de sobreescritura de objetos.
+
+# 26/05/23
+- Avance de la nueva pagina de preparaciones.
+- Se crean los opbjetos dentro del session Storage.
+- [x] Solucionado problema de sobreescritura de objetos.
+- [/] Solucionar error del array al usar el metodo .parse *is not a funtion*
+
+# 29/05/23
+- Completada la pagina agregar preparaciones y detalle preparaciones. 
+- [x] Solucionado error del array al usar el metodo .parse *is not a funtion*
+- Se utiliza el modulo uidv4 para entregar el id del detalle preparacion
+
+# 30/05/23
+- Integracion de imgbb y la pagina detalle preparaciaon al proyecto main.
+- Refactor a la tabla de ingrediente
+- Actulaizcion de la rutas.
+- Eliminar los setValue del estado en los metodos onCreate (considerar que no deben eliminarse en los metodos con funciones pull).
+
+# 31/03/23
+- [x] Completada creacion de  Formulario de agregar stock
+- Unificacion de las vistas de admin y catalogo en el mismo proyecto.
+- [ ] tabla de compras
+# ideas
+- integrar un paso antes de subir la imagen al imb bb
 
 # To do:
-- Terminar el crud con electronjs
-- Benjamin, crear el crud con la api de la compra
-- Crear vista tabla de preparaciones deshabilitadas en el back
-- terminar la paginacion
-- iniciar la implementacion de amazon s3
-- [ ] Revisar drf los tokens y las sesiones para el front
+- [ ] integracion de MP
+- [ ] agregar el cerrar session
+- [ ] seccionar por componente tablas del admin home
+- [ ] Decorar home admin.
 
 -----------------
 - [ ] Crear bloques de compra y local.
-- [ ] Paleta de colores.
-- [ ] Decorar home admin.
+- [x] Paleta de colores.
+

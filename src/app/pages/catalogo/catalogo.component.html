@@ -1,81 +1,75 @@
 <head>
-	<title>CafeHuelén</title>
+    <title>{{'{...}'}}CafeScript</title>
 </head>
 
-<body class="bg-VerdeHuelen">
-	<header class="mx-auto bg-BeigeHuelen px-4 py-6">
-		<div class="container mx-auto">
-			<h1 class="text-4xl font-bold text-gray-800" id="Home">Catálogo Café Huelén</h1>
-		</div>
-	</header>
-	<nav class="navbar bg-white shadow-lg fixed top-0 right-0 w-72 h-screen flex flex-col justify-between">
-		<div class="flex-none hidden lg:flex">
-		<button class="btn btn-square btn-ghost">
-			<span class="text-lg font-bold">My Website</span>
-		</button>
-		</div>
-		<div class="flex-1 hidden px-2 mx-2 lg:flex">
-		    <div class="items-stretch hidden lg:flex">
-			    <a class="btn btn-ghost btn-sm rounded-btn">Home</a>
-			    <a class="btn btn-ghost btn-sm rounded-btn">About</a>
-			    <a class="btn btn-ghost btn-sm rounded-btn">Contact</a>
-		    </div>
-		</div>
-		<div class="flex-none lg:hidden">
-		    <button class="btn btn-square btn-ghost">
-			    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
-			        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-			    </svg>
-		    </button>
-		</div>
-	  </nav>
-	  
-	<!-- <div class="navbar bg-white shadow-lg fixed top-0 right-0 w-72 h-nscree flex flex-col justify-between">
-		<div class="p-4">
-			<ul >
-				<li>
-					<a href="catalogo#Home"><h2 class=" font-bold text-gray-800 mb-4 text-4xl"> Navigation</h2></a>
-				</li>
-				<li *ngFor="let categoria of Categories, let i = index">
-					<a class="text-gray-600 hover:text-gray-800 block mb-2 text-4xl" href="catalogo#{{categoria.id}}" > <button class="btn btn-wide">{{categoria.name}}</button> </a>
-				</li>
-			</ul>
+<body class="">
+    <header class="mx-auto px-4 py-6">
+        <div class="container mx-auto">
+            <div class="navbar bg-base-100">
+                <div class="flex-1">
+                    <a class="normal-case text-xl">
+                        <span class="text-4xl font-bold text-neutral-content" id="Home">{{'{...}'}}
+                            CatálogoScript</span>
+                    </a>
+                    <a class="btn btn-ghost ml-14 normal-case text-xl">Preparaciones</a>
+                    <a class="btn btn-ghost ml-14 normal-case text-xl">Nuestro software</a>
+                </div>
+            </div>
+        </div>
+    </header>
+ 
+    <div>
+        <main class=" container mx-28 content-allign-center">
 
-		</div>
-	</div> -->
 
-	<main class="container mx-auto max-w-5xl">
+            <ng-container *ngIf="mostrarCatalogo ">
+                
+                <div class="mr-72">
+                    <div class="hero">
+                        <div class="hero-content flex-col lg:flex-row-reverse ">
+                            <img src="../../../assets/indexCafe.png" class="max-w-sm rounded-lg " />
+                            <div>
+                                <h1 class="text-5xl font-bold">Cafe Commit</h1>
+                                <h1 class="py-6 text-2xl">El cafe lleno de conflictos</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-		<!-- SECCION DE OTROS -->
-		<div *ngFor="let categoria of Categories">
-			<br>
-			<h1 class=" bg-BeigeHuelen2 text-3xl font-semibold text-gray-800 max-w-full" id="{{categoria.id}}">
-				{{categoria.name}}</h1>
-			<br>
-			<div class="grid gap-5  md:grid-cols-2 lg:grid-cols-3 h-38 pr-60 pl-50 ">
-				<div *ngFor="let item of categoria.items, let i = index">
-					<div>
-						<section id="card_Item{{ item.id }}" class="card card-compact w-60 h-96 bg-white shadow-2xl">
-							<figure><img src="{{ item.img }}" alt="{{ item.name }}" class="w-full"></figure>
-							<div class="card-body">
-								<h2 class="card-title text-xl font-bold text-gray-800 mb-2">{{ item.name}}</h2>
-								<h3 class=" font-semibold">{{ item.ingredients }}</h3>
-								<!-- <ul class="list-disc mt-2">	<li *ngFor="let ingredient of item.ingredients">{{ ingredient }}</li> </ul> -->
-								<p class="text-gray-800 font-bold mb-0">Precio: $ {{ item.price }}</p>
-							</div>
-						</section>
+                <app-navbar-cliente></app-navbar-cliente>
+                <app-menu></app-menu>
 
-					</div>
-				</div>
-			</div> 
-		</div>
+                
+            </ng-container>
 
 
 
+            <ng-container *ngIf="mostrarCarrito">
+                <app-carrito></app-carrito>
+            </ng-container>
 
-	</main>
-	<br>
-	<footer class="footer bg-gray-800 text-white text-center p-10 ">
-		<p class="text-sm">© 2020 BrewSoftware - Todos los derechos reservados</p>
-	</footer>
+            <br>
+
+        </main>
+
+        <footer class="footer bg-gray-800 text-white text-center p-10 ">
+            <p class="text-sm">© 2023 BrewSoftware - Todos los derechos reservados</p>
+            <br>
+            <br><br>
+        </footer>
+    </div>
+    <div class="bg-info-content btm-nav">
+        <button (click)="mostrarCatalogoMenu()">
+            <i class="fa-solid fa-mug-saucer"></i>
+        </button>
+
+        <button (click)="mostrarComponenteCarrito()" [disabled]="itemsCarrito().length === 0">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <span class="badge badge-sm indicator-item">{{carritoLength()}}</span>
+
+        </button>
+    </div>
+
 </body>

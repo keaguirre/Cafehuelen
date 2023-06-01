@@ -1,0 +1,84 @@
+<nav class="navbar sidebar bg-neutral shadow-lg fixed top-0 right-0 w-72 h-screen flex flex-col">
+    <div class="container mx-auto">
+        <div>
+            <ul>
+                <li class="menu-title">
+                    <a href="catalogo#Home">
+                        <h2 class=" font-bold text-gray-800 mb-4 text-4xl text-center">Carrito</h2>
+                    </a>
+                </li>
+                <ng-container *ngFor="let categoria of MenuCatalogonavbar">
+                    <li>
+                        <a class="text-gray-600 hover:text-gray-800 block mb-2 text-4xl"
+                            href="catalogo#Categoria_{{categoria?.categoria?.id_cat}}"> <button
+                                class="btn btn-wide bg-secondary-focus">{{categoria?.categoria?.nombre_cat | titlecase }}</button>
+                        </a>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="container mx-auto">
+        <h3 class="text-left items-start font-bold text-gray-800 mb-4 text-3xl">Bolsa de productos</h3>
+    </div>
+    <ul>
+        <li *ngIf="itemsCarrito().length === 0; else carrito  ">
+            <p>Tu carrito está vacío.</p>
+            <br>
+        </li>
+    </ul>
+
+    <ng-template #carrito>
+        <div class="w-72 bg-neutral overflow-y-auto h-72">
+            <ul class=" list-none p-0">
+                <li class="mb-2" *ngFor="let item of itemsCarrito()">
+                    <div class="flex items-center">
+                        <div class="w-16 h-16 overflow-hidden">
+                            <img [src]="item.producto.imagen_prep" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex items-center justify-between flex-grow">
+                            <div class="w-16">
+                                <p class="font-semibold text-neutral-content">{{ item.producto.nombre_prep | titlecase}}</p>
+                                <p class="font-semibold text-neutral-content"> {{item.producto.precio_prep * item.cantidad | currency: '$':
+                                    'symbol':'1.0-0' }}</p>
+                                <div class="flex items-center">
+                                    <p class=" text-s font-semibold p-2 text-neutral-content">Un. </p>
+                                    <button class="btn btn-s bg-neutral-focus" (click)="decrementarCantidad(item)">-</button>
+                                    <span class="item-quantity font-semibold text-neutral-content">{{item.cantidad}}</span>
+                                    <button class="btn btn-s bg-neutral-focus" (click)="incrementarCantidad(item)">+</button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <button class="btn btn-square btn-sm btn-error" (click)="eliminarItem(item)"><i
+                                        class="fa-regular fa-trash-can"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </ng-template>
+
+
+    <div class="container mx-auto">
+        <h3 class="text-left items-start font-bold text-gray-800 mb-4 text-3xl">Total</h3>
+    </div>
+    <ul>
+        <li *ngIf="itemsCarrito().length === 0; else totalcompra">
+            <p>Tu carrito está vacío.</p>
+            <br>
+        </li>
+    </ul>
+    <ng-template #totalcompra>
+        <div>
+        <p class="text-right text-slate-600 text-2xl ">{{totalCarrito() | currency: '$': 'symbol':'1.0-0' }}</p>
+            <div class="container mx-auto btn-group">
+                <button class="btn text-xs btn-success" (click)="botonPreCheckout()">Ir a pagar</button>
+                <button class="btn text-xs btn-error" (click)="botonClearCart()">Limpiar bolsa</button>
+            </div>
+        </div>
+        <br>
+    </ng-template>
+</nav>

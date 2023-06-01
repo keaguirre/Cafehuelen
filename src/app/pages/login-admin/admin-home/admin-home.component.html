@@ -1,15 +1,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
 <main>
-    <nav class=" bg-gray-900">
+    <nav class="bg-gray-900">
         <div class=" ml-44">
-            <div class="bg-VerdeHuelen py-4 ml-4 pl-4 shadow  text-2xl  text-white ">
+            <div class="bg-neutral py-4 ml-4 pl-4 shadow  text-2xl  text-white ">
                 <h1 class="font-bold pl-2">Titulo</h1>
             </div>
         </div>
     </nav>
     <div class="flex flex-col md:flex-row bg-gray-900 "><!--Bg fondo-->
         <app-navbar-admin></app-navbar-admin>
-        <section id="main" class="bg-gray-100 main-content flex-1  pb-24 "><!-- Cartas y Formularios-->
+        <section id="main" class="bg-base-content main-content flex-1  pb-24 "><!-- Cartas y Formularios-->
             <div class="flex flex-row flex-wrap pb-10 pt-10"><!-- Solo Accesos Rápidos -->
                 <h1 class="text-2xl text-black">Acceso rápido</h1>
                 <button class="btn btn-success mx-5">Agregar categoria</button>
@@ -18,8 +18,8 @@
                 <button class="btn btn-success mx-5">Agregar Ingrediente preparacion</button>
             </div>
             <section class="pb-20 w-10/12 mx-auto"><!-- Tabla CATEGORIA -->
-                <h1 class="text-4xl text-VerdeHuelen font-bold pt-20 mb-4 text-center ">Categorias</h1>
-                <table class="block mx-auto table table-zebra table-auto border-4 md:w-32 lg:w-48">   
+                <h1 class="text-4xl text-neutral font-bold pt-20 mb-4 text-center ">Categorias</h1>
+                <table class="block mx-auto table table-zebra table-auto md:w-32 lg:w-48">   
                     <thead class="text-xl text-VerdeHuelen font-bold pb-10"><!-- head -->
                         <tr class="text-center text-xl">
                             <th class="sm:w-1/4 md:w-1/2 lg:w-1/3" >Identificador</th>
@@ -27,11 +27,11 @@
                             <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">
                                 <div class="dropdown dropdown-left"><!--Inicio dropdown agregar categoria-->
                                     <label tabindex="0" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i></label>
-                                    <div tabindex="0" class="dropdown-content card text-black w-92 p-2 shadow bg-VerdeHuelen ">
+                                    <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-neutral-focus ">
                                         <div class="card-body">
-                                            <h1 class="text-xl font-bold text-black text-center">Agregar Categoria</h1>
+                                            <h1 class="text-xl font-bold text-center">Agregar Categoria</h1>
                                             <form [formGroup]="formCategorias" (ngSubmit)="onCreate('createCat')"> 
-                                                <div class="form-control relative text-black">
+                                                <div class="form-control relative ">
                                                     <label class="input-group input-group-vertical w-full max-w-xl">
                                                         <span>Nombre Categoria</span>
                                                             <input (keyup)="passToLower(formCategorias,'nombre_cat')" minlength="3" formControlName="nombre_cat" type="text"
@@ -53,10 +53,10 @@
                             <th class=" text-center">
                                 <div class=" mr-10 ">
                                     <div class="dropdown dropdown-left">
-                                        <label  tabindex="0" class="btn bg-slate-700 hover:bg-green-500 hover:text-black "(click)="seleccionarId(categoriaTabla.id_cat); rellenarFormulario('formCat')">
+                                        <label  tabindex="0" class="btn bg-slate-700 hover:bg-green-500 hover:text-black"(click)="seleccionarId(categoriaTabla.id_cat); rellenarFormulario('formCat')">
                                             Editar <i class="pl-2 fa-solid fa-pencil text-green-600"></i></label>
-                                        <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-VerdeHuelen text-primary-content"><!--Inicio dropdown Actualizar categoria-->
-                                            <div class="card-body ">
+                                        <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-neutral-focus"><!--Inicio dropdown Actualizar categoria-->
+                                            <div class="card-body">
                                                 <h1 class="text-xl font-bold text-white text-center">Actualizar categoria</h1>
                                                 <form [formGroup]="formCategorias"(ngSubmit)="onActualizar('editCat', this.idSeleccionado)">
                                                     <div class="form-control relative ">
@@ -118,21 +118,19 @@
             </section><!-- Fin Tabla CATEGORIA -->
             <section> <!-- Tabla INGREDIENTE -->
                 <div class="pb-20 w-10/12 mx-auto">
-                    <h1 class="text-4xl text-VerdeHuelen font-bold pb-4 text-center">Ingredientes</h1>
-                    <table class="block mx-auto table table-zebra table-auto border-4 md:w-32 lg:w-48">
-                        <thead class="text-xl text-VerdeHuelen font-bold pb-10 text-center"><!-- head -->
+                    <h1 class="text-4xl text-neutral font-bold pb-4 text-center">Ingredientes</h1>
+                    <table class="block mx-auto table table-zebra table-auto  md:w-32 lg:w-48">
+                        <thead class="text-xl text-base-content font-bold pb-10 text-center"><!-- head -->
                             <tr class=" text-center text-1xl ">
                                 <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">ID</th>
-                                <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">Marca</th>
                                 <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">Nombre</th>
                                 <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">Stock</th>
-                                <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">Cantidad por unidad (gr/ml)</th>
                                 <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">Tipo Unidad ingrediente</th>
-                                <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">Imagen</th>
+                                <th class="sm:w-1/4 md:w-1/2 lg:w-1/3"></th>
                                 <th class="sm:w-1/4 md:w-1/2 lg:w-1/3"> 
                                     <div class=" dropdown dropdown-left"><!--Inicio dropdown AGREGAR INGREDIENTE-->
                                         <label  tabindex="0" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i></label>
-                                        <div tabindex="0" class="dropdown-content card  w-96 p-2 shadow bg-VerdeHuelen text-primary-content">
+                                        <div tabindex="0" class="dropdown-content card  w-96 p-2 shadow bg-neutral-focus">
                                             <div class="card-body">
                                                 <h1 class="text-xl font-bold text-white text-center">Agregar Ingredientes</h1>
                                                 <form [formGroup]="formIngrediente" (ngSubmit)="onCreate('createIngre') ">
@@ -140,24 +138,9 @@
                                                         <div class="relative">
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                                    <span>Marca</span>
-                                                                    <input (keyup)="passToLower(formIngrediente, 'marca_ingre')" formControlName="marca_ingre" type="text"
-                                                                        placeholder="Ingrese la marca" class="input input-bordered" />
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-control">
-                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
                                                                     <span>Nombre</span>
                                                                     <input (keyup)="passToLower(formIngrediente, 'nombre_ingre')" formControlName="nombre_ingre" type="text"
                                                                         placeholder="Ingrese la descripcion" class="input input-bordered" />
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-control">
-                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                                    <span>Cantidad de ML o GR por unidad</span>
-                                                                    <input min="1" (keypress)="numberOnlyValidation($event)"
-                                                                        formControlName="cantidad_por_unidad_ingrediente" type="number"
-                                                                        placeholder="Ingrese la cantidad" class="input input-bordered" />
                                                                 </label>
                                                             </div>
                                                             <div class="form-control">
@@ -180,18 +163,7 @@
                                                                 </select>
                                                             </label>
                                                             </div>
-                                                            <div class="form-control">
-                                                                <label class="label">
-                                                                </label>
-                                                                <label
-                                                                    class="input-group input-group-vertical mt-4 w-full max-w-xl"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
-                                                                    <span>Link imagen</span>
-                                                                    <input pattern="(((ftp|http|https):\/\/)|(\/)|(..\/))(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?"
-                                                                        formControlName="imagen_ingre" type="text"
-                                                                        placeholder="Ingrese un enlace" class="input input-bordered" />
-                                                                        
-                                                                </label>
-                                                            </div>
+                                                            
                                                             <button class="btn mt-2 w-full max-w-xl" type="submit">Crear</button>
                                                         </div>
                                                     </div>  
@@ -205,42 +177,59 @@
                         <tbody><!-- Body -->
                             <tr class="text-center" *ngFor="let ingredienteTabla of responseListadoIngrediente | paginate:{itemsPerPage:5,currentPage:pagesIngre,id:'ingre'}">
                                 <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">{{ ingredienteTabla.id_ingre }}</td>
-                                <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">{{ ingredienteTabla.marca_ingre | titlecase }}</td>
                                 <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">{{ ingredienteTabla.nombre_ingre | titlecase }}</td>
                                 <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">{{ ingredienteTabla.stock_ingrediente }}</td>
-                                <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">{{ ingredienteTabla.cantidad_por_unidad_ingrediente }}</td>
                                 <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">{{ ingredienteTabla.tipo_unidad_ingrediente | titlecase }}</td>
-                                <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">
-                                    <div class="avatar">
-                                        <div class="w-24 rounded">
-                                            <img src="{{ingredienteTabla.imagen_ingre}}"
-                                                alt="{{ ingredienteTabla.nombre_ingre }}"/>
+                                <td class="sm:w-1/4 md:w-1/2 lg:w-1/3"> 
+                                    <div class="mr-10"><!--Inicio dropdown Agregar Stock-->
+                                        <div class="dropdown dropdown-left">
+                                            <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black" tabindex="0"
+                                            (click)="seleccionarId(ingredienteTabla.id_ingre) ; rellenarFormulario('formIngre')">agregar Stock
+                                            <i class="pl-2 fa-solid fa-pencil text-green-600"></i></label>
+                                            <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-neutral-focus ">
+                                                <div class="card-body">
+                                                    <h1 class="text-4xl font-bold pb-10 text-white text-center">Agregar Stock</h1>
+                                                    <form [formGroup]="formIngrediente" (ngSubmit)="agregarStock(this.idSeleccionado)">
+                                                        <div class="relative">  
+                                                            <div class="form-control">
+                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
+                                                                    <span>Tamaño del envase (Gr/Ml)</span>
+                                                                    <input min="0" formControlName="tamano_envase" type="number"
+                                                                        placeholder="Tamaño envase en Gr/Ml."
+                                                                        class="input input-bordered" />
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-control">
+                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
+                                                                    <span>Cantidad de envases</span>
+                                                                    <input min="0"  formControlName="cantidad_envase" type="number"
+                                                                        placeholder="cantidad de envases."
+                                                                        class="input input-bordered" />
+                                                                </label>
+                                                            </div>
+                                                            <button class="mt-4 btn w-full max-w-xl" type="submit">Agregar Stock</button><!--Al enviar el form si el envio fue valido, cambiar el contenido a un cambio realizado, que el modal se pueda cerrar haciendo click fuera tambien aparte de la x-->
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </div> <!--FIN dropdown Agregar Stock-->
                                 </td>
-                                <th class="text-center sm:w-1/4 md:w-1/2 lg:w-1/3">
+                                <td class="text-center sm:w-1/4 md:w-1/2 lg:w-1/3">
                                     <div class="mr-10 ">
                                         <div class="dropdown dropdown-left"><!--Inicio dropdown actualizar ingrediente-->
                                             <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black" tabindex="0"
                                             (click)="seleccionarId(ingredienteTabla.id_ingre) ; rellenarFormulario('formIngre')">Editar
                                             <i class="pl-2 fa-solid fa-pencil text-green-600"></i></label>
-                                            <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-VerdeHuelen text-primary-content">
+                                            <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-neutral-focus ">
                                                 <div class="card-body">
                                                     <h1 class="text-4xl font-bold pb-10 text-white text-center">Actualizar Ingrediente</h1>
                                                     <form [formGroup]="formIngrediente" (ngSubmit)="onActualizar('editIngre', this.idSeleccionado)">
                                                         <div class="relative">
                                                             <div class="form-control">
                                                                 <label class="input-group input-group-vertical mt-2 w-full max-w-xl">
-                                                                    <span>Ingrese la nueva marca</span>
-                                                                    <input (keyup)="passToLower(formIngrediente, 'marca_ingre')" formControlName="marca_ingre" type="text"
-                                                                        placeholder="Ingrese una nueva descripción"
-                                                                        class="input input-bordered" />
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-control">
-                                                                <label class="input-group input-group-vertical mt-2 w-full max-w-xl">
                                                                     <span>Ingrese una nueva descripción</span>
-                                                                    <input (keyup)="passToLower(formIngrediente, 'marca_ingre')" formControlName="nombre_ingre" type="text"
+                                                                    <input (keyup)="passToLower(formIngrediente, 'nombre_ingre')" formControlName="nombre_ingre" type="text"
                                                                         placeholder="Ingrese una nueva descripción"
                                                                         class="input input-bordered" />
                                                                 </label>
@@ -251,22 +240,6 @@
                                                                     <input min="0" formControlName="stock_ingrediente" type="number"
                                                                         placeholder="Ingrese el nuevo stock"
                                                                         class="input input-bordered" />
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-control">
-                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
-                                                                    <span>Ingrese el nuevo link de imagen</span>
-                                                                    <input pattern="(((ftp|http|https):\/\/)|(\/)|(..\/))(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?" 
-                                                                    formControlName="imagen_ingre" type="text"
-                                                                        placeholder="Ingrese un enlace" class="input input-bordered" />
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-control">
-                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                                    <span>Cantidad de ML o GR por unidad</span>
-                                                                    <input min="1" (keypress)="numberOnlyValidation($event)"
-                                                                        formControlName="cantidad_por_unidad_ingrediente" type="number"
-                                                                        placeholder="Ingrese la cantidad" class="input input-bordered" />
                                                                 </label>
                                                             </div>
                                                             <div class="mt-2 form-control">
@@ -288,7 +261,7 @@
                                         </div><!--Fin dropdown actualizar ingrediente-->
                                         <swal
                                             #deleteIngreSwal
-                                            title="¿Estás seguro de eliminar {{ ingredienteTabla.marca_ingre | titlecase}}?"
+                                            title="¿Estás seguro de eliminar {{ ingredienteTabla.nombre_ingre| titlecase}}?"
                                             icon="question"
                                             iconColor="#f8bb86"
                                             fontText="bold"
@@ -306,13 +279,11 @@
                                             <i class="pl-2 fa-solid fa-trash text-red-600"></i>
                                         </button>
                                     </div>
-                                </th>
+                                </td>
                             </tr>
                         </tbody>
                         <tfoot><!-- foot -->
                             <tr><th></th>
-                                <th></th>
-                                <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -340,8 +311,8 @@
             <!-- Tabla PREPARACIONES -->
             <section>
                 <div class=" w-full pb-20 ">
-                    <h1 class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">Preparaciones</h1>
-                    <table class="block mx-auto table table-zebra table-auto border-4 md:w-32 lg:w-48">
+                    <h1 class="text-4xl text-neutral font-bold pb-10 text-center">Preparaciones</h1>
+                    <table class="block mx-auto table table-zebra table-auto  md:w-32 lg:w-48">
                         <thead class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">
                             <tr class=" text-center text-1xl ">
                                 <th>ID</th>
@@ -352,59 +323,9 @@
                                 <th>Imagen</th>
                                 <th><div class=" dropdown dropdown-left">
                                     <label tabindex="0" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i> </label>
-                                    <div tabindex="0" class="dropdown-content card  w-70 p-2 shadow bg-VerdeHuelen text-primary-content">
+                                    <div tabindex="0" class="dropdown-content card  w-70 p-2 shadow bg-neutral-focus">
                                         <div class="card-body">
-                                            <h1 class="text-xl font-bold pb-10 text-white text-center">Agregar Preparaciones</h1>
-                                            <form [formGroup]="formPreparaciones" (ngSubmit)="onCreate('createPrep')">
-                                                <div class="form-control">
-                                                    <label class="label">
-                                                    </label>
-                                                    <label class="input-group input-group-vertical">
-                                                        <span>Nombre preparacion</span>
-                                                        <input (keyup)="passToLower(formPreparaciones, 'nombre_prep')" formControlName="nombre_prep" type="text"
-                                                            placeholder="Ingrese un nombre" class="input input-bordered" />
-                                                    </label>
-                                                </div>
-                                                <div class="form-control">
-                                                    <label class="label">
-                                                    </label>
-                                                    <label class="input-group input-group-vertical">
-                                                        <span>Descripcion de la preparacion</span>
-                                                        <input (keyup)="passToLower(formPreparaciones, 'descripcion_prep')" formControlName="descripcion_prep" type="text"
-                                                            placeholder="Ingrese una descripcion"
-                                                            class="input input-bordered" />
-                                                    </label>
-                                                </div>
-                                                <div class="form-control">
-                                                    <label class="label">
-                                                    </label>
-                                                    <label class="input-group input-group-vertical">
-                                                        <span>Precio</span>
-                                                        <input min="1" (keypress)="numberOnlyValidation($event)"formControlName="precio_prep" type="text"
-                                                            placeholder="Ingrese el precio" class="input input-bordered">
-                                                    </label>
-                                                </div>
-                                                <div class="form-control">
-                                                    <select name="listCat-Preparaciones" formControlName="id_cat_prep"
-                                                        required class="ml-5 mt-5 select select-bordered w-full max-w-xs">
-                                                        <option disabled selected>Seleccione una categoria</option>
-                                                        <option *ngFor="let categoria of responseListadoCategorias"
-                                                            value="{{ categoria.id_cat }}">{{ categoria.nombre_cat | titlecase}}</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-control">
-                                                    <label class="label">
-                                                    </label>
-                                                    <label
-                                                        class="input-group input-group-vertical"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
-                                                        <span>Link imagen</span>
-                                                        <input pattern="(((ftp|http|https):\/\/)|(\/)|(..\/))(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?" 
-                                                            formControlName="imagen_prep" type="text"
-                                                            placeholder="Ingrese un enlace" class="input input-bordered" />
-                                                    </label>
-                                                </div>
-                                                <button class="ml-24 mt-2 btn btn-wide" type="submit">Crear</button>
-                                            </form>
+                                            <app-detalle-prep></app-detalle-prep>
                                         </div>
                                     </div>
                                 </div></th>
@@ -431,7 +352,7 @@
                                                 <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black" tabindex="0"    
                                                 (click)="seleccionarId(preparacionTabla.id_prep) ; rellenarFormulario('formPreparaciones')">Editar
                                                 <i class="pl-2 fa-solid fa-pencil text-green-600"></i></label>
-                                                <div tabindex="0" class="dropdown-content card  w-70 p-2 shadow bg-VerdeHuelen text-primary-content">
+                                                <div tabindex="0" class="dropdown-content card  w-70 p-2 shadow bg-neutral-focus ">
                                                     <div class="card-body">
                                                         <h1 class="text-xl font-bold pb-10 text-white text-center">Actualizar Preparación</h1>
                                                         <form [formGroup]="formPreparaciones"(ngSubmit)="onActualizar('editPrep', this.idSeleccionado)">
@@ -496,7 +417,7 @@
                                             <button 
                                                 [swal]="deletePrepSwal"
                                                 class="btn bg-slate-700  btn-group-horizontal hover:text-black font-bold hover:bg-red-200"
-                                                (click)="seleccionarId(preparacionTabla.id_ingre); ">Eliminar
+                                                (click)="seleccionarId(preparacionTabla.id_prep); ">Eliminar
                                                 <i class="pl-2 fa-solid fa-trash text-red-600"></i>
                                             </button>
                                             <!-- Fin alert eliminar prep-->
@@ -534,8 +455,8 @@
             <!-- Tabla DETALLE PREP -->
             <section>
                 <div class=" w-full pt-10">
-                    <h1 class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">Detalle Preparacion</h1>
-                    <table class="block mx-auto table table-zebra table-auto border-4 md:w-32 lg:w-48">
+                    <h1 class="text-4xl text-neutral font-bold pb-10 text-center">Detalle Preparacion</h1>
+                    <table class="block mx-auto table table-zebra table-auto  md:w-32 lg:w-48">
                         <thead class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">
                             <tr class=" text-center text-1xl ">
                                 <th>ID Detalle</th>
@@ -546,7 +467,7 @@
                                 <th><!--dropdown agregar detalle prep-->
                                     <div class="dropdown dropdown-left">
                                         <label tabindex="0" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i> </label>
-                                        <div tabindex="0" class="dropdown-content card w-96 p-2 shadow bg-VerdeHuelen text-primary-content">
+                                        <div tabindex="0" class="dropdown-content card w-96 p-2 shadow bg-neutral-focus ">
                                             <div class="card-body">
                                                 <h1 class="text-xl font-bold text-white text-center">Agregar Detalle Preparación</h1>
                                                 <form [formGroup]="formDetallePrep" (ngSubmit)="onCreate('createDetallePrep')">
@@ -613,7 +534,7 @@
                                             (click)="seleccionarId(detallePrepTabla.id_detalle_prep) ; rellenarFormulario('formDetallePrep')">Editar
                                             <i class="pl-2 fa-solid fa-pencil text-green-600"></i>
                                             </label>
-                                            <div tabindex="0" class="dropdown-content card  w-70 p-2 shadow bg-VerdeHuelen text-primary-content">
+                                            <div tabindex="0" class="dropdown-content card  w-70 p-2 shadow bg-neutral-focus ">
                                                 <div class="card-body">
                                                     <h1 class="text-xl font-bold pb-2 text-white text-center">Actualizar Detalle</h1>
                                                     <form [formGroup]="formDetallePrep"
@@ -689,7 +610,7 @@
                                             confirmButtonColor = "#2b8565"
                                             [showCancelButton]="true"
                                             [focusCancel]="true"
-                                            (confirm)="(onDelete('deletePrep',this.idSeleccionado))">
+                                            (confirm)="(onDelete('deleteDetallePrep',this.idSeleccionado))">
                                         </swal> 
                                     </div>
                                 </th>
@@ -723,9 +644,9 @@
             <!--TABLA Categorias desactivas-->
             <section>
                 <div class=" w-full pt-10">
-                    <h1 class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">Categorias Desactivadas</h1>
-                    <table class="block mx-auto table table-zebra table-auto border-4 md:w-32 lg:w-48">
-                        <thead class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">
+                    <h1 class="text-4xl text-neutral font-bold pb-10 text-center">Categorias Desactivadas</h1>
+                    <table class="block mx-auto table table-zebra table-auto md:w-32 lg:w-48">
+                        <thead class="text-4xl  font-bold pb-10 text-center">
                             <tr class=" text-center text-1xl ">
                                 <th>Nombre Cat</th>                                
                                 <th>Estado</th>
@@ -793,9 +714,9 @@
             <!--TABLA preparaciones desactivadas-->
             <section>
                 <div class=" w-full pt-10">
-                    <h1 class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">Preparaciones Desactivadas</h1>
+                    <h1 class="text-4xl text-neutral font-bold pb-10 text-center">Preparaciones Desactivadas</h1>
                     <table class="block mx-auto table table-zebra table-auto border-4 md:w-32 lg:w-48">
-                        <thead class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">
+                        <thead class="text-4xl font-bold pb-10 text-center">
                             <tr class=" text-center text-1xl ">
                                 <th>Nombre Preparación</th>                                
                                 <th>Estado</th>

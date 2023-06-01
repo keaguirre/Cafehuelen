@@ -1,0 +1,53 @@
+<div class="cart">
+    <br>
+    <h1 class=" bg-BeigeHuelen2 text-3xl font-semibold text-gray-800 max-w-full" id="cart">
+        Carrito</h1>
+    <br>
+    <div *ngIf="itemsCarrito().length === 0; else elseblock">
+        <p>No existen objetos en la bolsa de compras.</p>
+    </div>
+
+    <ng-template #elseblock>
+        <table class="table">
+            <thead class="table-header-group">
+                <tr>
+                    <th></th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="">
+                <tr *ngFor="let item of itemsCarrito()" class>
+                    <td><img src="{{item.producto.imagen_prep}}" class=" h-10"></td>
+                    <td class="text-lg">{{ item.producto.nombre_prep | titlecase }}</td>
+                    <td class="text-lg">{{ item.producto.precio_prep | currency: '$': 'symbol':'1.0-0' }}</td>
+                    <td>
+                        <button class="btn btn-xs" (click)="decrementarCantidad(item)"
+                            [disabled]="item.cantidad === 1">-</button>
+                        {{ item.cantidad }}
+                        <button class="btn btn-xs" (click)="incrementarCantidad(item)">+</button>
+                    </td>
+                    <td class="text-lg">{{ item.producto.precio_prep * item.cantidad | currency: '$': 'symbol':'1.0-0'}}</td>
+                    <td>
+                        <button class="btn btn-error no-animation" (click)="eliminarItem(item)">Eliminar item</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot class="table-footer-group">
+                <tr>
+                    <td colspan="3" class="text-xl">Total:</td>
+                    <td></td>
+
+                    <td class="text-xl">{{totalCarrito() | currency: '$': 'symbol':'1.0-0'}}</td>
+                    <td> <button class="btn btn-success " (click)="botonPreCheckout()">Ir a pagar</button></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <button class="btn btn-error" (click)="clearCart()">Limpiar carrito de compras</button>
+        <!-- <button (click)="checkout()">Checkout</button> -->
+    </ng-template>
+</div>

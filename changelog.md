@@ -77,14 +77,64 @@
 - Responsibilidad de las tablas
 - Paginación
 
+# 22/05/23
+- Comienzo de implementacion de imgBB dentro de la tabla de ingredientes y preparaciones.
+- Investigacion de insertar en un input la url para subirla al backend.
+
+# 23/05/23
+- Completada la implementacion de imgbb 
+- [] Integrarla al proyecto main.
+
+# 24/05/23
+- [/] Comienza el desarrollo de la nueva pagina de preparacion e detalle preparacion.
+
+# 25/05/23
+- Avance de la nueva pagina de preparaciones.
+- Se crean los opbjetos dentro del session Storage.
+- [/] Solucionar problema de sobreescritura de objetos.
+
+# 26/05/23
+- Avance de la nueva pagina de preparaciones.
+- [x] Solucionado problema de sobreescritura de objetos.
+- [/] Solucionar error del array al usar el metodo .parse *is not a funtion*
+
+# 29/05/23
+- Completada la pagina agregar preparaciones y detalle preparaciones. 
+- [x] Solucionado error del array al usar el metodo .parse *is not a funtion*
+- Se utiliza el modulo uidv4 para entregar el id del detalle preparacion.
+
+# 30/05/23
+- [x] Integracion de imgbb y la pagina detalle preparaciaon al proyecto main.
+- [x] Refactor a la tabla de ingrediente.
+- [] Actualizacion de la rutas.
+- [x] Eliminar los setValue del estado en los metodos onCreate (considerar que no deben eliminarse en los metodos con funciones pull).
+
+# 31/05/23
+- [x] Completada creacion de  Formulario de agregar stock
+- Unificacion de las vistas de admin y catalogo en el mismo proyecto.
 ## To do: 
-- [ ] Implementar Amazon S3 para subir las imagenes y entregarlas como url.
+- [ ] Formulario de agregar stock
+- [ ] tabla de compras
+- [ ] integracion de MP
+- [ ] agregar el cerrar session
+- [ ] seccionar por componente tablas del admin home
+- [ ] Decorar Front.
+-----------------
+- [ ] Crear bloques de compra y local.
+- [x] Paleta de colores.
 
 ### Detalles
 - [-] Terminar de implementar todos los crud
 - Los items que tienen relacion con otros item no se puedes eliminar(anidados).
 - Detalles en componentes como responsive item.
-- Detalle de modal editar de cada bloque(modificarlo a un sweerAlert)
 - Ajustar mejor el sidebarComponent que tenga mejor responsividad
 - Revision de carga en catálogo
+
+
+
+
+
+
+
+
 
