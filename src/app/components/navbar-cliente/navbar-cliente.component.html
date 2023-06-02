@@ -13,7 +13,7 @@
                     <li>
                         <a class="text-gray-600 hover:text-gray-800 block mb-2 text-4xl"
                             href="catalogo#Categoria_{{categoria?.categoria?.id_cat}}"> <button
-                                class="btn btn-wide bg-secondary-focus">{{categoria?.categoria?.nombre_cat | titlecase }}</button>
+                                class="text-base-content btn btn-wide bg-secondary-focus">{{categoria?.categoria?.nombre_cat | titlecase }}</button>
                         </a>
                     </li>
                 </ng-container>
@@ -71,7 +71,7 @@
     </ul>
     <ng-template #totalcompra>
         <div>
-        <p class="text-right text-neutral-content text-2xl ">{{totalCarrito() | currency: '$': 'symbol':'1.0-0' }}</p>
+        <p class="text-right text-accent text-2xl ">{{totalCarrito() | currency: '$': 'symbol':'1.0-0' }}</p>
             <div class="container mx-auto btn-group">
                 <button class="btn text-xs btn-success" (click)="botonPreCheckout()">Ir a pagar</button>
                 <button class="btn text-xs btn-error" (click)="botonClearCart()">Limpiar bolsa</button>
