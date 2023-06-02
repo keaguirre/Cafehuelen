@@ -1,27 +1,29 @@
 
 <ng-container *ngFor="let Menu of MenuCatalogo, let i = index">
-    <br>
-    <div class="max-w-full">
-        <h1 class="text-center bg-neutral-content text-3xl font-semibold text-neutral max-w-full"
-            id="Categoria_{{Menu?.categoria?.id_cat}}">
-            {{Menu?.categoria?.nombre_cat| titlecase }}</h1>
-        <br>
-        
-            <div class="bg-neutral grid gap-5   md:grid-cols-2 lg:grid-cols-3 h-38 pr-60 pl-50 ">
-                <ng-container *ngFor="let item of Menu?.items, let i = index">
-                    <section id="card_Item{{ item.id_prep }}" class="card card-compact w-60 h-96 bg-white shadow-2xl">
-                        <label (click)="ModalPreparacion(item)">
-                            <figure class=""><img src="{{ item.imagen_prep }}" alt="{{ item.nombre_prep }}" class="">
-                            </figure>
-                            <div class="card-body">
-                                <h2 class="card-title text-xl font-bold text-gray-800 mb-2">{{ item.nombre_prep |
-                                    titlecase }}</h2>
-                                <h3 class=" font-semibold">{{ item.descripcion_prep | titlecase }}</h3>
-                                <p class="text-gray-800 font-bold mb-0">Precio: $ {{ item.precio_prep}}</p>
-                            </div>
-                        </label>
-                    </section>
-                </ng-container>
+    <div class="max-w-full containerWidthWithoutCart px-24">
+        <div class=" flex justify-center">
+            <div class=" py-24 w-4/12" style="display: inline-block; background-repeat: no-repeat; background-position: 50%; background-size: 100%; background-image: url(../../../assets/catalogo/categorias/1.svg);">
+                <h1 class="text-center pt-10 text-3xl font-semibold text-neutral"
+                    id="Categoria_{{Menu?.categoria?.id_cat}}">
+                    {{Menu?.categoria?.nombre_cat| titlecase }}
+                </h1>
             </div>
+        </div>
+        <div class="place-content-end grid gap-5 bg-primary md:grid-cols-3 lg:grid-cols-4 h-38  mb-12">
+            <ng-container *ngFor="let item of Menu?.items, let i = index">
+                <section id="card_Item{{ item.id_prep }}" class="card card-compact  w-60 h-96 bg-white shadow-2xl">
+                    <label (click)="ModalPreparacion(item)">
+                        <figure class=""><img  class="" src="{{ item.imagen_prep }}" alt="{{ item.nombre_prep }}" class="">
+                        </figure>
+                        <div class="card-body">
+                            <h2 class="card-title text-xl font-bold text-gray-800 mb-2">{{ item.nombre_prep |
+                                titlecase }}</h2>
+                            <h3 class=" font-semibold">{{ item.descripcion_prep | titlecase }}</h3>
+                            <p class="text-gray-800 font-bold mb-0">Precio: $ {{ item.precio_prep}}</p>
+                        </div>
+                    </label>
+                </section>
+            </ng-container>
+        </div>
     </div>
 </ng-container>

@@ -4,9 +4,11 @@
             <ul>
                 <li class="menu-title">
                     <a href="catalogo#Home">
-                        <h2 class=" font-bold text-gray-800 mb-4 text-4xl text-center">Carrito</h2>
+                        <h2 class=" font-bold text-primary mb-4 text-4xl text-center">Carrito</h2>
                     </a>
                 </li>
+                <div class="divider font-bold text-success text-2xl">Categorias</div> 
+                <!-- <h2 class=" font-bold text-success mb-4 text-2xl text-center">Categorias</h2> -->
                 <ng-container *ngFor="let categoria of MenuCatalogonavbar">
                     <li>
                         <a class="text-gray-600 hover:text-gray-800 block mb-2 text-4xl"
@@ -17,10 +19,6 @@
                 </ng-container>
             </ul>
         </div>
-    </div>
-    
-    <div class="container mx-auto">
-        <h3 class="text-left items-start font-bold text-gray-800 mb-4 text-3xl">Bolsa de productos</h3>
     </div>
     <ul>
         <li *ngIf="itemsCarrito().length === 0; else carrito  ">
@@ -63,7 +61,7 @@
 
 
     <div class="container mx-auto">
-        <h3 class="text-left items-start font-bold text-gray-800 mb-4 text-3xl">Total</h3>
+        <h3 class="text-left items-start font-bold text-base-content mb-4 text-xl">Total</h3>
     </div>
     <ul>
         <li *ngIf="itemsCarrito().length === 0; else totalcompra">
@@ -73,7 +71,7 @@
     </ul>
     <ng-template #totalcompra>
         <div>
-        <p class="text-right text-slate-600 text-2xl ">{{totalCarrito() | currency: '$': 'symbol':'1.0-0' }}</p>
+        <p class="text-right text-neutral-content text-2xl ">{{totalCarrito() | currency: '$': 'symbol':'1.0-0' }}</p>
             <div class="container mx-auto btn-group">
                 <button class="btn text-xs btn-success" (click)="botonPreCheckout()">Ir a pagar</button>
                 <button class="btn text-xs btn-error" (click)="botonClearCart()">Limpiar bolsa</button>

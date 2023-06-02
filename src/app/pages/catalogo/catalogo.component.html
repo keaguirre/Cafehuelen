@@ -1,4 +1,4 @@
-<head>
+                    <head>
     <title>{{'{...}'}}CafeScript</title>
 </head>
 
@@ -8,57 +8,46 @@
             <div class="navbar bg-base-100">
                 <div class="flex-1">
                     <a class="normal-case text-xl">
-                        <span class="text-4xl font-bold text-neutral-content" id="Home">{{'{...}'}}
-                            CatálogoScript</span>
+                        <span class="text-4xl font-bold text-neutral-content" id="Home">{{'{...}'}}CatálogoScript</span>
                     </a>
-                    <a class="btn btn-ghost ml-14 normal-case text-xl">Preparaciones</a>
-                    <a class="btn btn-ghost ml-14 normal-case text-xl">Nuestro software</a>
+                    <div class="ml-96 animate__animated animate__fadeIn">
+                        <a class="btn btn-ghost ml-14 normal-case text-xl">Preparaciones</a>
+                        <a class="btn btn-ghost ml-14 normal-case text-xl">Nuestro equipo</a>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
- 
-    <div>
-        <main class=" container mx-28 content-allign-center">
-
-
-            <ng-container *ngIf="mostrarCatalogo ">
-                
-                <div class="mr-72">
-                    <div class="hero">
-                        <div class="hero-content flex-col lg:flex-row-reverse ">
-                            <img src="../../../assets/indexCafe.png" class="max-w-sm rounded-lg " />
-                            <div>
-                                <h1 class="text-5xl font-bold">Cafe Commit</h1>
-                                <h1 class="py-6 text-2xl">El cafe lleno de conflictos</h1>
-                            </div>
-                        </div>
-                    </div>
+    
+        <ng-template class="hero h-96" #Hero>
+            <!-- <div class="ml-20 hero h-96" style="height: 400px; background-image: url(../../../assets/catalogo/Bigfoot-bro.svg);"  > -->
+            <div class="hero-content flex-col lg:flex-row-reverse containerWidthWithoutCart" >
+                <!-- <img  src="../../../assets/catalogo/indexCafe_1.png" class=" h-96 max-w-sm rounded-lg " /> -->
+                <img src="../../../assets/catalogo/dracula1.1.svg" class="animate__animated animate__fadeIn h-96 max-w-sm rounded-lg " />
+                <!-- <img src="../../../assets/indexCafe.png" class="max-w-sm rounded-lg " /> -->
+                <!-- <img src= class="max-w-sm rounded-lg " /> -->
+                <div class="">
+                    <h1 class="animate__animated animate__fadeIn text-5xl font-bold ">Cafe Commit</h1>
+                    <h1 class="animate__animated animate__fadeIn py-6 text-2xl">El café lleno de conflictos</h1>
                 </div>
-
-                <app-navbar-cliente></app-navbar-cliente>
-                <app-menu></app-menu>
-
-                
-            </ng-container>
-
-
-
-            <ng-container *ngIf="mostrarCarrito">
+            </div>
+        </ng-template>
+        <main>
+            <ng-container *ngIf="mostrarCarrito; else Hero">
                 <app-carrito></app-carrito>
             </ng-container>
-
+            <ng-container *ngIf="mostrarCatalogo ">
+                
+                    <app-navbar-cliente></app-navbar-cliente>
+                    <app-menu></app-menu>
+            </ng-container>
             <br>
-
         </main>
-
-        <footer class="footer bg-gray-800 text-white text-center p-10 ">
+        <!-- <footer class="footer bg-gray-800 text-white text-center p-10 ">
             <p class="text-sm">© 2023 BrewSoftware - Todos los derechos reservados</p>
-            <br>
-            <br><br>
-        </footer>
-    </div>
-    <div class="bg-info-content btm-nav">
+        </footer> -->
+    
+    <div class="bg-neutral btm-nav containerWidthWithoutCart">
         <button (click)="mostrarCatalogoMenu()">
             <i class="fa-solid fa-mug-saucer"></i>
         </button>

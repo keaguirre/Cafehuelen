@@ -8,10 +8,18 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        'drac-comment': '#627a4',
+        'drac-comment': '#6272A4',
       },
-      
     },
+    animatedSettings: {
+      animatedSpeed: 1000,
+      heartBeatSpeed: 500,
+      hingeSpeed: 2000,
+      bounceInSpeed: 750,
+      bounceOutSpeed: 750,
+      animationDelaySpeed: 500,
+      classes: ['bounce', 'heartBeat', 'fadeIn']
+    }
   },
   plugins: [require("daisyui"), require('tailwindcss-animatecss'), require('tailwind-scrollbar'),],
   

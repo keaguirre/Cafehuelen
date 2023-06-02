@@ -113,13 +113,17 @@
 # ideas
 - integrar un paso antes de subir la imagen al imb bb
 
+# 02/06/23
+- [x] Decorar home admin.
+- Arreglar estructuras en catalogo
+- Centrar muchas cosas en catalogo
+- Finalizado producto destacado
+- Titulo categorias en el catalogo
+
 # To do:
 - [ ] integracion de MP
 - [ ] agregar el cerrar session
 - [ ] seccionar por componente tablas del admin home
-- [ ] Decorar home admin.
 
------------------
-- [ ] Crear bloques de compra y local.
 - [x] Paleta de colores.
 

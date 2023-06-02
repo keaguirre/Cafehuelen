@@ -6,6 +6,7 @@ import { Subject, Subscription } from 'rxjs';
 import { TitleCasePipe } from '@angular/common';
 import { CompraService } from 'src/app/services/compraService/compra.service';
 import { HttpHeaders } from '@angular/common/http';
+import { CatalogoComponent} from 'src/app/pages/catalogo/catalogo.component'
 
 @Component({
   selector: 'app-menu',
@@ -53,6 +54,7 @@ export class MenuComponent implements OnInit{
   }
 
   constructor(
+    private catalogoComponent: CatalogoComponent, 
       private prodService: ProductosService,
       private carritoService: CarritoService,
       private titlecasePipe: TitleCasePipe,
@@ -182,9 +184,14 @@ export class MenuComponent implements OnInit{
           showCancelButton: true,
           preConfirm: () => {
               this.carritoService.addtoCart(item);
+              this.refrescarMenu();
           },
       });
   }
+
+  refrescarMenu() {
+    this.refrescar.next();
+}
 
   addtoCart(item: any) {
       this.carritoService.addtoCart(item);
