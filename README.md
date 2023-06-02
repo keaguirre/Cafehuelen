@@ -2,7 +2,7 @@
 
 ¡Bienvenido al repositorio de la App de Autoservicio para Cafetería cafeScript! Esta aplicación en Angular está diseñada para brindar a los usuarios la capacidad de realizar compras de forma rápida y sencilla en una cafetería, al tiempo que proporciona a los administradores un control completo sobre el inventario a través de un panel de administración intuitivo y automatización de inventario en base a las compras en conjunto con [**cafeScript-Backend**](https://github.com/keaguirre/cafeScript-Backend).
 
-![Home](https://raw.githubusercontent.com/keaguirre/cafeScript-Backend/main/Documentos/indexWeb.png)
+![Home](https://raw.githubusercontent.com/keaguirre/cafeScript/master/Documentos/Screenshots/cafeScript_ss1.png)
 
 ## Características principales
 - **Autoservicio intuitivo**: Los clientes pueden realizar pedidos en la cafetería de forma rápida y sencilla utilizando la aplicación. La interfaz de usuario intuitiva permite a los usuarios navegar por los productos, seleccionar los artículos deseados y realizar pagos de manera segura.
