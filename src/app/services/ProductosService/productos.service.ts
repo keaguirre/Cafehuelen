@@ -66,6 +66,7 @@ export class ProductosService {
           resolve(respuesta);
         },
         error: err => {
+          console.log('serv_err: ', err)
           if (err.status == 500){
             console.log('500'+err.statusText)
           }

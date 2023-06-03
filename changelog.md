@@ -112,6 +112,10 @@
 # 31/05/23
 - [x] Completada creacion de  Formulario de agregar stock
 - Unificacion de las vistas de admin y catalogo en el mismo proyecto.
+
+# 02/06/23
+- Creacion del apiwatcher en el front(falta optimizar el observable y que solo liste como maximo 3 compras y las renueve)
+
 ## To do: 
 - [ ] Formulario de agregar stock
 - [ ] tabla de compras
