@@ -1,0 +1,198 @@
+<main>
+    <nav class="bg-gray-900">
+        <div class=" ml-44">
+            <div class="bg-neutral py-4 ml-4 pl-4 shadow  text-2xl  text-white ">
+                <h1 class="font-bold pl-2">Titulo</h1>
+            </div>
+        </div>
+    </nav>
+    <div class="flex flex-col md:flex-row bg-gray-900 "><!--Bg fondo-->
+        <app-navbar-admin></app-navbar-admin>
+        <section id="main" class="bg-base-content h-screen flex-1 mx-auto   "><!-- Cartas y Formularios-->
+            <div class="flex flex-row flex-wrap pb-5 pt-5"><!-- Solo Accesos Rápidos -->
+                <h1 class="text-2xl text-black">Acceso rápido</h1>
+                <button class="btn btn-success mx-5 router"> Agregar categoria</button>
+                <button class="btn btn-success mx-5">Agregar ingrediente</button>
+                <button class="btn btn-success mx-5">Agregar Preparacion</button>
+                <button class="btn btn-success mx-5">Agregar Ingrediente preparacion</button>
+            </div>
+             <table class="mx-auto">
+                <th >
+                    <section class="mr-10 w-10/12 relative items-end  pt-5"><!-- Tabla CATEGORIA -->
+                        <h1 class="text-4xl text-neutral font-bold pt-10 mb-5 text-center ">Categorias</h1>
+                        <table class="block mx-auto table table-zebra  md:w-32 lg:w-48">   
+                            <thead class="text-xl text-VerdeHuelen font-bold pb-10"><!-- head -->
+                                <tr class="text-center text-xl">
+                                    <th class="sm:w-1/4 md:w-1/2 lg:w-1/3" >Identificador</th>
+                                    <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">Nombre Categoria</th>
+                                    <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">
+                                        <div class="dropdown dropdown-left"><!--Inicio dropdown agregar categoria-->
+                                            <label tabindex="0" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i></label>
+                                            <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-neutral-focus ">
+                                                <div class="card-body">
+                                                    <h1 class="text-xl font-bold text-center">Agregar Categoria</h1>
+                                                    <form [formGroup]="formCategorias" (ngSubmit)="onCreate('createCat')"> 
+                                                        <div class="form-control relative ">
+                                                            <label class="input-group input-group-vertical w-full max-w-xl">
+                                                                <span>Nombre Categoria</span>
+                                                                    <input (keyup)="passToLower(formCategorias,'nombre_cat')" minlength="3" formControlName="nombre_cat" type="text"
+                                                                    placeholder="Introduzca un nombre de categoria" class="input input-bordered"/>
+                                                            </label>
+                                                        </div>
+                                                        <button class="mt-2 btn w-full max-w-xl" type="submit">Crear</button>
+                                                    </form>
+                                                </div>
+                                            </div><!--Fin dropdown agregar categoria-->
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead><!-- Fin head -->
+                            <tbody><!-- tbody -->
+                                <tr  class="text-center" *ngFor="let categoriaTabla of responseListadoCategorias | paginate:{itemsPerPage:5,currentPage:pagesCat,id:'cat'}">
+                                        <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">{{ categoriaTabla.id_cat}}</td>
+                                        <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">{{ categoriaTabla.nombre_cat | titlecase }}</td>
+                                    <th class=" text-center">
+                                        <div class=" mr-10 ">
+                                            <div class="dropdown dropdown-left">
+                                                <label  tabindex="0" class="btn bg-slate-700 hover:bg-green-500 hover:text-black"(click)="seleccionarId(categoriaTabla.id_cat); rellenarFormulario('formCat')">
+                                                    Editar <i class="pl-2 fa-solid fa-pencil text-green-600"></i></label>
+                                                <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-neutral-focus"><!--Inicio dropdown Actualizar categoria-->
+                                                    <div class="card-body">
+                                                        <h1 class="text-xl font-bold text-white text-center">Actualizar categoria</h1>
+                                                        <form [formGroup]="formCategorias"(ngSubmit)="onActualizar('editCat', this.idSeleccionado)">
+                                                            <div class="form-control relative ">
+                                                                <label class="input-group input-group-vertical w-full max-w-xl">
+                                                                    <span>Nuevo Nombre</span>
+                                                                    <input (keyup)="passToLower(formCategorias, 'nombre_cat')" minlength="3" formControlName="nombre_cat" type="text"
+                                                                        placeholder="Introduzca un nombre de categoria"
+                                                                        class="input input-bordered"  />
+                                                                </label>
+                                                            </div>
+                                                            <button class="mt-2 btn w-full max-w-xl" type="submit">Actualizar</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div><!--Fin dropdown actualizar categoria-->
+                                            <!--Swal eliminar categoria-->
+                                            <button [swal]="deleteCatSwal" class="btn bg-slate-700  btn-group-horizontal hover:text-black font-bold hover:bg-red-200"
+                                                (click)="seleccionarId(categoriaTabla.id_cat);">Eliminar<i class="pl-2 fa-solid fa-trash text-red-600"></i>
+                                            </button>
+                                            <swal  
+                                                #deleteCatSwal
+                                                title="¿Estás seguro de eliminar {{ categoriaTabla.nombre_cat | titlecase}}?"
+                                                icon="question"
+                                                iconColor="#f8bb86"
+                                                fontText="bold"
+                                                confirmButtonText="<b>Sí, quiero eliminar</b>"
+                                                cancelButtonText="<b>Cancelar</b>"
+                                                confirmButtonColor = "#2b8565"
+                                                [showCancelButton]="true"
+                                                [focusCancel]="true"
+                                                (confirm)="(onDelete('deleteCat', this.idSeleccionado))">
+                                            </swal>
+                                            <!--Fin Swal eliminar categoria-->
+                                        </div>
+                                    </th> 
+                                </tr>  
+                            </tbody>
+                            <tfoot><!-- foot -->
+                                <tr>
+                                    <th></th>
+                                    
+                                    <th ></th>
+                                    <th class=" sm:w-1/4 md:w-1/2 lg:w-1/3 last:text-center"><pagination-controls 
+                                        id="cat" 
+                                        screenReaderPaginationLabel="Paginación"
+                                        screenReaderPageLabel="página"
+                                        screenReaderCurrentLabel="Estás en esta pagina" 
+                                        (pageBoundsCorrection)="pagesCat=$event" 
+                                        (pageChange)="pagesCat=$event" 
+                                        previousLabel="" 
+                                        nextLabel="" 
+                                        [autoHide]="true"
+                                        [responsive]="true"
+                                        [maxSize]="5"
+                                        class=" font-bold text-sm   pb-1 pt-5 items-center "></pagination-controls></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </section><!-- Fin Tabla CATEGORIA -->
+                </th>
+                <th>
+                    <section><!--TABLA Categorias desactivas-->
+                        <div class=" w-full pt-10">
+                            <h1 class="text-4xl text-neutral font-bold pb-5 text-center">Categorias Desactivadas</h1>
+                            <table class="block mx-auto table table-zebra  md:w-32 lg:w-48">
+                                <thead class="text-4xl  font-bold  text-center">
+                                    <tr class=" text-center text-1xl ">
+                                        <th>Nombre Cat</th>                                
+                                        <th>Estado</th>
+                                        <th></th>
+                                        <th>preparaciones asignadas</th> 
+                                    </tr>   
+                                </thead><!-- head -->
+                                <tbody>
+                                    <tr class="text-center" *ngFor="let detalleDesactivadosTabla of responseListadoCategoriasDes | paginate:{itemsPerPage:5,currentPage:pagesCatDes,id:'catDes'}" >
+                                        <td>{{ detalleDesactivadosTabla.nombre_cat | titlecase}}</td>
+                                        <td>{{ detalleDesactivadosTabla.estado }}</td><!-- Cambiar el estado y dejar solo el toggle-->
+                                        <td class="text-center ">
+                                            <button [swal]="enableCat" type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"  (click)="toggleChecked(); seleccionarId(detalleDesactivadosTabla.id_cat)">Activar</button>
+                                            <swal
+                                                    #enableCat
+                                                    title="¿Estás seguro de habilitar esta categoría?"
+                                                    icon="question"
+                                                    iconColor="#f8bb86"
+                                                    fontText="bold"
+                                                    confirmButtonText="<b>Habilitar</b>"
+                                                    cancelButtonText="<b>Cancelar</b>"
+                                                    confirmButtonColor = "#2b8565"
+                                                    [showCancelButton]="true"
+                                                    [focusCancel]="true"
+                                                    (confirm)="(onActualizar('editCatDesh', this.idSeleccionado))">>
+                                                </swal> 
+                                        </td>
+                                        <td>
+                                            <div  class="dropdown dropdown-right">
+                                                <label tabindex="0" class="btn m-1">Preparaciones asignadas</label>
+                                                <ul tabindex="0" class="dropdown-content listDots text-left p-2 shadow bg-base-100 rounded-box w-52">
+                                                    <p class="text-sm">Preparaciones: </p>
+                                                    <span *ngFor="let prep of detalleDesactivadosTabla.preparaciones; let j = index">
+                                                        <li> {{ prep.nombre_prep | titlecase}} </li>
+                                                    </span>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot><!-- foot -->
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th class=" sm:w-1/4 md:w-1/2 lg:w-1/3 last:text-center"><pagination-controls 
+                                            id="catDes" 
+                                            screenReaderPaginationLabel="Paginación"
+                                            screenReaderPageLabel="página"
+                                            screenReaderCurrentLabel="Estás en esta pagina" 
+                                            (pageBoundsCorrection)="pagesCatDes=$event" 
+                                            (pageChange)="pagesCatDes=$event" 
+                                            previousLabel="" 
+                                            nextLabel="" 
+                                            [autoHide]="true"
+                                            [responsive]="true"
+                                            [maxSize]="5"
+                                            class=" font-bold text-sm pb-1 pt-5 items-center "></pagination-controls></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </section><!--FIN tabla Categorias desactivas-->
+                </th>
+             </table>
+            
+    
+     
+            
+        </section>
+    </div>
+</main>
