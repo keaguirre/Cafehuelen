@@ -11,6 +11,7 @@ import { AdminHomeComponent } from './pages/login-admin/admin-home/admin-home.co
 import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component';
 import { ApiWatcherComponent } from './pages/api-watcher/api-watcher.component';
 import { CategoriaComponent } from './pages/login-admin/admin-home/categoria/categoria.component';
+import { GraficosAdminComponent } from './components/graficos-admin/graficos-admin.component';
 const routes: Routes = [
  
   {
@@ -56,6 +57,9 @@ const routes: Routes = [
   },
   {
     path: 'api-watcher', component: ApiWatcherComponent,
+  },
+  {
+    path: 'admin/analiticas', component: GraficosAdminComponent,
   },
   {
     path: '**',

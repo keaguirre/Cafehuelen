@@ -21,6 +21,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { IngredientesComponent } from './pages/login-admin/admin-home/ingredientes/ingredientes.component';
 import { CategoriaComponent } from './pages/login-admin/admin-home/categoria/categoria.component';
 import { PreparacionesComponent } from './pages/login-admin/admin-home/preparaciones/preparaciones.component';
+import { GraficosAdminComponent } from './components/graficos-admin/graficos-admin.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { PreparacionesComponent } from './pages/login-admin/admin-home/preparaci
     IngredientesComponent,
     CategoriaComponent,
     PreparacionesComponent,
+    GraficosAdminComponent,
   ],
   imports: [
     BrowserModule,
