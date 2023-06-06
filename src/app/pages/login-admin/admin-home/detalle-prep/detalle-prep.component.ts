@@ -585,4 +585,291 @@ dP.forEach((detallePrep:any)=>{
 }
 }
 // FIN FUNCIONES PARA EL USO DEL SESSION STORAGE
+
+//ACTUALIZACIONES----------------------------------------------------------------------------------------
+onActualizar(cod: string, id: number): void{
+  switch(cod) { 
+    case 'editCat': { 
+      try{
+        this.idSeleccionado = id;
+        this.formCategorias.controls['id_cat'].setValue(this.idSeleccionado)
+        let formCatValue = JSON.stringify(this.formCategorias.value);
+        this.rellenarFormulario('formCat');
+        this.prodService.actualizarCategoria(this.formCategorias.value.id_cat, formCatValue).then(respuesta => {
+          this.response = respuesta;
+          if(this.formCategorias.value.id_cat === this.response.id_cat){
+            this.toastCheck.fire({icon: 'success', title: 'La categoria se actualizó correctamente.'})
+            this.refrescar.next();  
+            this.formCategorias.reset();
+          }else{
+            this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al actualizar la categoría. Inténtelo nuevamente más tarde.'})  
+            this.formCategorias.reset();
+          }
+          this.formCategorias.reset();
+        });
+      }catch (e: any){console.log(e);}
+    break; 
+    } 
+    case 'editIngre': { 
+      try{
+        this.idSeleccionado = id;
+        this.formIngrediente.controls['id_ingre'].setValue(this.idSeleccionado)
+        let formIngreValue = JSON.stringify(this.formIngrediente.value);
+        this.prodService.actualizarIngrediente(this.formIngrediente.value.id_ingre, formIngreValue).then(respuesta => {
+          this.response = respuesta;
+          if(this.formIngrediente.value.id_ingre === this.response.id_ingre){
+            this.toastCheck.fire({ icon: 'success', title: 'El ingrediente se actualizó correctamente.'})  
+            this.refrescar.next(); 
+            this.formIngrediente.reset();
+          }else{
+            this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al actualizar el ingrediente. Inténtelo nuevamente más tarde.'})  
+            this.formIngrediente.reset();
+          }
+          this.formIngrediente.reset();
+          
+        });
+      }catch (e: any){console.log(e);}
+    break; 
+    }
+    case 'editDetallePrep': { 
+      try{
+        this.idSeleccionado = id;
+        this.formDetallePrep.controls['id_detalle_prep'].setValue(this.idSeleccionado)
+        let formDetallePrepValue = JSON.stringify(this.formDetallePrep.value);
+        console.log(formDetallePrepValue);
+        this.prodService.actualizarDetallePrep(this.formDetallePrep.value.id_detalle_prep, formDetallePrepValue).then(respuesta => {
+          console.log('val: '+Object.keys(respuesta))
+          this.response = respuesta
+          if(this.formDetallePrep.value.id_detalle_prep === this.response.id_detalle_prep){
+            this.toastCheck.fire({ icon: 'success', title: 'El detalle de preparación se actualizó correctamente.'})  
+            this.refrescar.next();
+            this.formDetallePrep.reset();
+          }else{
+            this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al actualizar el ingrediente de receta. Inténtelo nuevamente más tarde.'})  
+            this.formDetallePrep.reset();
+          }
+          this.formDetallePrep.reset();
+        });
+      }catch (e: any){console.log(e);}
+    break; 
+    } 
+    case 'editPrep': { 
+      try{
+        this.idSeleccionado = id;
+        this.formPreparaciones.controls['id_prep'].setValue(this.idSeleccionado)
+        let formPrepValue = JSON.stringify(this.formPreparaciones.value);
+        this.prodService.actualizarPreparacion(this.formPreparaciones.value.id_prep, formPrepValue).then(respuesta => {
+          this.response = respuesta;
+          if(this.formPreparaciones.value.id_prep == this.response.id_prep){
+            this.toastCheck.fire({icon: 'success', title: 'La preparación se actualizó correctamente.'})  
+            this.refrescar.next();
+            this.formPreparaciones.reset();
+          }else{
+            this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al actualizar la preparación. Inténtelo nuevamente más tarde.'})  
+            this.formPreparaciones.reset();
+          }
+          this.formPreparaciones.reset();
+        });
+      }catch (e: any){
+        console.log(e);
+      }
+    break; 
+    }
+    case 'editCatDesh': {
+    try {
+      this.idSeleccionado = id;
+      let formCatValue = JSON.stringify({"id_cat":this.idSeleccionado,"estado":true});
+      this.prodService.actualizarCategoriaDesh(this.idSeleccionado, formCatValue).then(respuesta => {
+          this.response= respuesta;
+        if(this.idSeleccionado == this.response.id_cat){
+          this.toastCheck.fire({icon: 'success', title: 'El cambio de estado se realizó exitosamente.'})  
+            this.refrescar.next();
+            this.toggleChecked();
+        }else{
+          this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al cambiar el estado. Inténtelo nuevamente más tarde.'})  
+          this.formPreparaciones.reset();
+        }
+        });
+      }catch (e: any) {
+      console.log(e);
+      } 
+    break;
+    }
+    case 'editPrepDesh': {
+      try {
+        this.idSeleccionado = id;
+        let formPrepValue = JSON.stringify({"id_ingre":this.idSeleccionado,"estado":true});
+        this.prodService.actualizarPreparacionDesh(this.idSeleccionado, formPrepValue).then(respuesta => {
+            this.response= respuesta;
+          if(this.idSeleccionado == this.response.id_prep){
+            this.toastCheck.fire({icon: 'success', title: 'El cambio de estado se realizó exitosamente.'})  
+              this.refrescar.next();
+              this.toggleChecked();
+          }else{
+            this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al cambiar el estado. Inténtelo nuevamente más tarde.'})  
+            this.formPreparaciones.reset();
+          }
+          });
+        }catch (e: any) {
+        console.log(e);
+        } 
+      break;
+      }
+    default: { 
+      console.log('Error codigo: '+cod)
+      this.toastCheck.fire({icon: 'error',title: 'Error desconocido, intente nuevamente más tarde. Inténtelo nuevamente más tarde.'})  
+    break; 
+    } 
+  } 
+}
+actualizarCategoriaDesh(id_cat: any, catObj: any): Promise<any> {
+  return this.prodService.actualizarCategoriaDesh(id_cat, catObj);
+}
+//FIN ACTUALIZACIONES----------------------------------------------------------------------------------------
+//ELIMINAR DESHABILITAR----------------------------------------------------------------------------------------
+onDelete(cod: string, id: number): void{
+switch(cod) { 
+  case 'deleteCat': {  
+    this.idSeleccionado = id;
+    this.prodService.disableCategoria(this.idSeleccionado).then(respuesta => {
+      this.response = respuesta;
+      if(this.idSeleccionado == this.response.id_cat){
+        this.toastCheck.fire({ icon: 'success', title: 'Categoria eliminada correctamente.'})
+        this.refrescar.next();
+      }else{
+        this.toastError.fire({ icon: 'error',title: 'Ha ocurrido un error al eliminar la categoría. Inténtelo nuevamente más tarde.'})  
+      }
+    });
+  break; 
+  } 
+  case 'deleteIngre': { 
+    this.idSeleccionado = id;
+    this.prodService.disableIngrediente(this.idSeleccionado).then(respuesta => {
+      this.response = respuesta;
+      if(this.idSeleccionado == this.response.id_ingre){
+        this.toastCheck.fire({icon: 'success', title: 'Ingrediente deshabilitado correctamente'}) 
+        this.refrescar.next(); 
+      }else{
+        this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al eliminar la categoría. Inténtelo nuevamente más tarde.'})  
+      }
+    });
+  break; 
+  } 
+  case 'deleteDetallePrep': { 
+    this.idSeleccionado = id;
+    this.prodService.disableDetallePrep(this.idSeleccionado).then(respuesta => {
+      this.response = respuesta;
+      if(this.idSeleccionado == this.response.id_detalle_prep){
+        this.toastCheck.fire({icon: 'success', title: 'Detalle de preparación deshabilitado correctamente.'})
+        this.refrescar.next();  
+      }else{
+        this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al eliminar el ingrediente de receta. Inténtelo nuevamente más tarde.'})  
+      }
+    });
+  break;
+  }
+  case 'deletePrep': { 
+    this.idSeleccionado = id;
+    this.prodService.disablePreparacion(this.idSeleccionado).then(respuesta => {
+      this.response = respuesta;
+      if(this.idSeleccionado == this.response.id_prep){
+        this.toastCheck.fire({ icon: 'success', title: 'Preparación deshabilitada correctamente.' }) 
+        this.refrescar.next(); 
+      }else{
+        this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al eliminar la preparación. Inténtelo nuevamente más tarde.'})  
+      }
+    });
+  break;
+  }default: {
+    console.log('Error codigo: '+cod)
+    this.toastError.fire({icon: 'error',title: 'Error desconocido, intente nuevamente más tarde. Inténtelo nuevamente más tarde.'})  
+  break; 
+  } 
+} 
+}
+//RELLENAR CAMPOS EDIT
+rellenarFormulario(cod:string): void{
+  switch(cod){
+    case 'formCat':{
+      this.prodService.obtenerCategoriaDetalle(this.idSeleccionado).then(respuesta =>{
+        this.formCategorias.patchValue({
+          id_cat: this.idSeleccionado,
+          nombre_cat: respuesta['nombre_cat'],
+          estado: respuesta['estado']
+        })
+      })
+      break
+    }
+    case 'formIngre':{
+      this.prodService.obtenerIngredienteDetalle(this.idSeleccionado).then(respuesta =>{
+        this.formIngrediente.patchValue({
+          id_ingre: this.idSeleccionado,
+          nombre_ingre: respuesta['nombre_ingre'],
+          stock_ingrediente: respuesta['stock_ingre'],
+          tipo_unidad_ingrediente: respuesta['tipo_unidad_ingrediente'],
+          estado: respuesta['estado']
+        })
+      })
+      break
+    }
+    case 'formPreparaciones': {
+      this.prodService.obtenerPreparacionDetalle(this.idSeleccionado).then(respuesta =>{
+        this.formPreparaciones.patchValue({
+          id_prep: this.idSeleccionado,
+          nombre_prep: respuesta['nombre_prep'],
+          descripcion_prep: respuesta['descripcion_prep'],
+          imagen_prep: respuesta['imagen_prep'],
+          precio_prep: respuesta['precio_prep'],
+          id_cat_prep: respuesta['id_cat_prep'],
+          estado: respuesta['estado']
+        })
+      })
+      break
+    }
+    case 'formDetallePrep':{
+      this.prodService.obtenerDetallePrepDetalle(this.idSeleccionado).then(respuesta =>{
+        this.formDetallePrep.patchValue({
+          id_detalle_prep: this.idSeleccionado,
+          id_prep: respuesta['id_prep'],
+          id_ingre: respuesta['id_ingre'],
+          cantidad_necesaria: respuesta['cantidad_necesaria'],
+          tipo_unidad: respuesta['tipo_unidad'],
+          estado: respuesta['estado']
+        })
+      })
+      break
+    }default:{
+      console.log('Error codigo: '+cod)
+      this.toastCheck.fire({icon: 'error',title: 'Error desconocido, intente nuevamente más tarde. Inténtelo nuevamente más tarde.'})  
+    }
+  }
+}  
+
+//Agregar Stock
+agregarStock(id:number){
+  this.idSeleccionado= id;
+   const tamanoEnvase = this.formIngrediente.get('tamano_envase')!.value;
+   const cantidadEnvase = this.formIngrediente.get('cantidad_envase')!.value;
+  const stockIngre= tamanoEnvase * cantidadEnvase;
+
+  this.formIngrediente.patchValue({stock_ingrediente:stockIngre});
+  
+  this.prodService.agregarStockIngre(this.idSeleccionado, this.formIngrediente.value).then(respuesta =>{
+    this.response= respuesta;
+    if(this.formIngrediente.value.id_ingre === this.response.id_ingre){
+      this.toastCheck.fire({ icon: 'success', title: 'Stock actualizado correctamente.'})  
+      this.refrescar.next(); 
+      this.formIngrediente.reset();
+    }else{
+      this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al ingresar el stock. Inténtelo nuevamente más tarde.'})  
+      this.formIngrediente.reset();
+    }
+    this.formIngrediente.reset();
+  })
+}
+//Fin Agregar Stock
+
+
+
+
 }

@@ -21,7 +21,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { IngredientesComponent } from './pages/login-admin/admin-home/ingredientes/ingredientes.component';
 import { CategoriaComponent } from './pages/login-admin/admin-home/categoria/categoria.component';
 import { PreparacionesComponent } from './pages/login-admin/admin-home/preparaciones/preparaciones.component';
- 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +38,7 @@ import { PreparacionesComponent } from './pages/login-admin/admin-home/preparaci
     CategoriaComponent,
     IngredientesComponent,
     CategoriaComponent,
-    PreparacionesComponent
+    PreparacionesComponent,
   ],
   imports: [
     BrowserModule,

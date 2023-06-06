@@ -79,6 +79,7 @@ export class LoginAdminComponent{
       this.formLogin.patchValue({contrasena: pass})
       this.loginserv.obtenerAdminDetalle(this.formLogin.value).then(respuesta => {
         this.response = respuesta;
+        
         if (this.response){
           //aqui agregar algun metodo para manejar la session
           this.router.navigateByUrl('/admin/home')

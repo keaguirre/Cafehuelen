@@ -3,6 +3,9 @@
     <ul class="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left"><!--Listado elementos izquierda-->
         <!-- li-->
         <li class="mr-3 flex-1">
+            <a class="ml-4" routerLink="/admin/home">
+                Home
+            </a>
             <div class="collapse">
                 <input type="checkbox" class="peer" />
                 <div class="collapse-title">
@@ -10,19 +13,19 @@
                 </div>
                 <div class="collapse-content">
                     <!-- Contenido dinamico, apretando en algun lugar de desplegara algun bloque de codigo para administrar las secciones dentro del item productos-->
-                    <a class="link no-underline" routerLink="admin/categoria">
+                    <a class="link no-underline" routerLink="/admin/categoria" routerLinkActive="active">
                         <p>Categorias</p>
                     </a>
-                    <a class="link no-underline" routerlink="admin/ingredientes">
+                    <a class="link no-underline" routerLink="/admin/ingredientes" routerLinkActive="active">
                         <p>Ingredientes</p>
                     </a>
-                    <a class="link no-underline" routerlink="admin/preparaciones">
+                    <a class="link no-underline" routerLink="/admin/preparaciones">
                         <p>Preparaciones</p>
                     </a>
-                    <a class="link no-underline" routerlink="admin/ingre-prep">
+                    <a class="link no-underline" routerLink="/admin/detalle-prep">
                         <p>Ingredientes-prep</p>
                     </a>
-                    <a class="link no-underline" routerlink="#">
+                    <a class="link no-underline" routerLink="#">
                         <p>Ver todo</p>
                     </a>
                 </div>
@@ -37,8 +40,8 @@
                 </div>
                 <div class="collapse-content">
                     <!-- Contenido dinamico, apretando en algun lugar de desplegara algun bloque de codigo para administrar las secciones dentro del item compras-->
-                    <a routerlink="admin/compras">
-                        <p>Compra</p>
+                    <a class="link no-underline" routerlink="/ingredientes " routerLinkActive="active">
+                        <p>Ingredientes</p>
                     </a>
                     <!-- items compra se generan mediante una compra automaticamente, habilitar un form de items-compra para hacer las pruebas -->
                     <a routerlink="admin/ingre-prep">
