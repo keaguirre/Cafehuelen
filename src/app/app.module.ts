@@ -8,19 +8,20 @@ import { StartComponent } from './pages/start/start.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarAdminComponent } from './components/navbar-admin/navbar-admin.component'; 
 import { ReactiveFormsModule } from '@angular/forms';
-import { AdminHomeComponent } from './pages/login-admin/admin-home/admin-home.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2'; 
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { DetallePrepComponent } from './pages/login-admin/admin-home/detalle-prep/detalle-prep.component';
 import { ApiWatcherComponent } from './pages/api-watcher/api-watcher.component';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { TitleCasePipe } from '@angular/common';
 import { NavbarClienteComponent } from './components/navbar-cliente/navbar-cliente.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { IngredientesComponent } from './pages/login-admin/admin-home/ingredientes/ingredientes.component';
-import { CategoriaComponent } from './pages/login-admin/admin-home/categoria/categoria.component';
-import { PreparacionesComponent } from './pages/login-admin/admin-home/preparaciones/preparaciones.component';
+import { CategoriaComponent } from './pages/administracion/categoria/categoria.component';
+import { IngredientesComponent } from './pages/administracion/ingredientes/ingredientes.component';
+import { PreparacionesComponent } from './pages/administracion/preparaciones/preparaciones.component';
+import { DetallePrepComponent } from './pages/administracion/detalle-prep/detalle-prep.component';
+import { ThousandsPipe } from './pipes/thousands.pipe';
+import { HomeComponent } from './pages/administracion/home/home.component';
 import { GraficosAdminComponent } from './components/graficos-admin/graficos-admin.component';
 
 @NgModule({
@@ -30,7 +31,6 @@ import { GraficosAdminComponent } from './components/graficos-admin/graficos-adm
     CatalogoComponent, 
     StartComponent,
     LoginAdminComponent,
-    AdminHomeComponent,
     DetallePrepComponent,
     ApiWatcherComponent,
     CarritoComponent,
@@ -40,7 +40,9 @@ import { GraficosAdminComponent } from './components/graficos-admin/graficos-adm
     IngredientesComponent,
     CategoriaComponent,
     PreparacionesComponent,
+    HomeComponent,
     GraficosAdminComponent,
+    ThousandsPipe,
   ],
   imports: [
     BrowserModule,

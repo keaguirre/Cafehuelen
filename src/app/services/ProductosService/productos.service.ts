@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
-import { Observable,Subject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +13,7 @@ export class ProductosService {
   urlCategoriasDesh:string = environment.urlApiCategoriasDesh;
   urlPreparacionesDesh:string = environment.urlApiPreparacionesDesh;
   urlComprasRecientes:string = environment.urlApiComprasRecientes;
-refresh$=new Subject<void>();
+
   constructor(private http: HttpClient) { }
 
   //LISTADOS-------------------------------------------------------

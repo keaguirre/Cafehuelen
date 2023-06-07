@@ -8,11 +8,11 @@ import { tap,switchMap,map, startWith} from 'rxjs/operators';
 import { ImgServiceService } from 'src/app/services/imgService/img-service.service';
 
 @Component({
-  selector: 'app-preparaciones',
-  templateUrl: './preparaciones.component.html',
-  styleUrls: ['./preparaciones.component.css']
+  selector: 'app-categoria',
+  templateUrl: './categoria.component.html',
+  styleUrls: ['./categoria.component.css']
 })
-export class PreparacionesComponent {
+export class CategoriaComponent {
   response!: any
   responseListadoCategorias: any = []
   responseListadoCategoriasDes: any = []
@@ -156,7 +156,6 @@ async uploadImage() {
   public formCategorias: FormGroup = new FormGroup({
     id_cat: new FormControl('',[Validators.required]),
     nombre_cat: new FormControl('',[Validators.required, Validators.minLength(3)]),
-               
   });
   public formCategoriasEdit: FormGroup = new FormGroup({
     id_cat: new FormControl('',[Validators.required]),

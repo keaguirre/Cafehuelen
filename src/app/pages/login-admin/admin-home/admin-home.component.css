@@ -1,8 +1,0 @@
- ul.listDots{
-    list-style: disc !important;
-    list-style-position: inside !important;
- }
-
- form input {
-    text-transform: lowercase;
- }

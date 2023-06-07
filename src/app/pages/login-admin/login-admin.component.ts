@@ -79,11 +79,12 @@ export class LoginAdminComponent{
       this.formLogin.patchValue({contrasena: pass})
       this.loginserv.obtenerAdminDetalle(this.formLogin.value).then(respuesta => {
         this.response = respuesta;
-        
         if (this.response){
+          localStorage.setItem('userSession', 'True')
           //aqui agregar algun metodo para manejar la session
           this.router.navigateByUrl('/admin/home')
           this.toastCheck.fire({icon: 'success',title: 'Sesión iniciada correctamente.'}) 
+
         }
       }).catch(err => { //cachea el error de la solicitud
         this.toastError.fire({icon: 'error',title: 'Ha habido un error, revise los datos ingresados e intente nuevamente.'});

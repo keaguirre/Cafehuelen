@@ -122,10 +122,14 @@
 - Comienza la investigación de mercadopago
 - [x] seccionar por componente tablas del admin home
 
+# 06/06/23
+- [x] Agregar el cerrar session. solo falta descomentarlo en routing para implementarlo
+- Se muestran los primeros graficos en el adminHome
+- [x] Corregir agregar preparaciones
+
 # To do:
-- [ ] CORREGIR AGREGAR INGREDIENTES, PAGINAR LA CREACION DEL INGREDIENTE CON EL SIGUIENTE PASO DE DETALLES PREPARACION!!!!
+
 - [ ] Integracion de MP.
-- [ ] Agregar el cerrar session.
 - [ ] Catalogo biblioteca de audios investigar ['Howler.js', 'SoundJS', 'Web Audio API'].
 - [ ] SheperdJS para el tutorial.
 - [ ] Integrar audio y tutorial juntos en la seccion de enseñame a comprar del catalogo.

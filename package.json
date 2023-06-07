@@ -24,6 +24,7 @@
     "chart.js": "^4.3.0",
     "crypto-js": "^4.1.1",
     "daisyui": "^2.51.5",
+    "mercadopago": "^1.5.16",
     "ngx-pagination": "^6.0.3",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.4.8",

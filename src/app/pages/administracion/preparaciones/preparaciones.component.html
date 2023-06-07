@@ -8,11 +8,10 @@
     </nav>
     <div class="flex flex-col md:flex-row bg-gray-900 "><!--Bg fondo-->
         <app-navbar-admin></app-navbar-admin>
-        <section id="main" class="bg-base-content h-screen flex-1 mx-auto   "><!-- Cartas y Formularios-->
-
+        <section id="main" class="bg-base-content h-screen flex-auto mx-auto  "><!-- Cartas y Formularios-->
             <!-- Tabla PREPARACIONES -->
             <section>
-                <div class=" w-full pb-20 ">
+                <div class="  py-20 ">
                     <h1 class="text-4xl text-neutral font-bold pb-10 text-center">Preparaciones</h1>
                     <table class="block mx-auto table table-zebra table-auto  md:w-32 lg:w-48">
                         <thead class="text-4xl text-VerdeHuelen font-bold pb-10 text-center">
@@ -23,14 +22,85 @@
                                 <th>Categoria</th>
                                 <th>Precio</th>
                                 <th>Imagen</th>
-                                <th><div class=" dropdown dropdown-left">
-                                    <label tabindex="0" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i> </label>
-                                    <div tabindex="0" class="dropdown-content card  w-70 p-2 shadow bg-neutral-focus">
-                                        <div class="card-body">
-                                            <app-detalle-prep></app-detalle-prep>
-                                        </div>
-                                    </div>
-                                </div></th>
+                                <th><label for="modal" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i> </label>
+                                    
+                                        <input type="checkbox" id="modal" class="modal-toggle" />
+                                        <label for="my-modal-4" class="modal cursor-pointer">
+                                            <label for="modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                                            <div class="hero min-h-screen bg-base-200">
+                                                <div class="hero-content text-center">
+                                                  <div class="max-w-md">
+                                                    <div class="card-body">
+                                                        <div class="container w-fit " [hidden]="!mostrarFormPrep">
+                                                            <h1 class="text-xl font-bold pb-10  text-center">Agregar Preparaciones</h1>
+                                                            <form [formGroup]="formPreparaciones" (ngSubmit)="onCreate('createPrep')">
+                                                                <div class="form-control">
+                                                                    <label class="label">
+                                                                    </label>
+                                                                    <label class="input-group input-group-vertical">
+                                                                        <span>Nombre preparacion</span>
+                                                                        <input (keyup)="passToLower(formPreparaciones, 'nombre_prep')" formControlName="nombre_prep" type="text"
+                                                                            placeholder="Ingrese un nombre" class="input input-bordered input-accent	" />
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-control">
+                                                                    <label class="label">
+                                                                    </label>
+                                                                    <label class="input-group input-group-vertical">
+                                                                        <span>Descripcion de la preparacion</span>
+                                                                        <input (keyup)="passToLower(formPreparaciones, 'descripcion_prep')" formControlName="descripcion_prep" type="text"
+                                                                            placeholder="Ingrese una descripcion"
+                                                                            class="input input-bordered" />
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-control">
+                                                                    <label class="label">
+                                                                    </label>
+                                                                    <label class="input-group input-group-vertical">
+                                                                        <span>Precio</span>
+                                                                        <input min="1" (keypress)="numberOnlyValidation($event)"formControlName="precio_prep" type="text"
+                                                                            placeholder="Ingrese el precio" class="input input-bordered">
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-control">
+                                                                    <select name="listCat-Preparaciones" formControlName="id_cat_prep" 
+                                                                        required class=" mt-5 select select-bordered input-group-vertical">
+                                                                        <option disabled selected>Seleccione una categoria</option>
+                                                                        <option *ngFor="let categoria of responseListadoCategorias"
+                                                                            value="{{ categoria.id_cat }}">{{ categoria.nombre_cat | titlecase}}</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-control">
+                                                                    <label class="label">
+                                                                    </label>
+                                                                    <label
+                                                                        class="input-group input-group-vertical"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
+                                                                        <span>Link imagen</span>
+                                                                        <input pattern="(((ftp|http|https):\/\/)|(\/)|(..\/))(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?" 
+                                                                            formControlName="imagen_prep" type="text"
+                                                                            placeholder="enlace" class="input input-bordered" readonly />
+                                                                    </label>
+                                                                </div>
+                                                                <button type="button" class="btn" (click)="limpiarCampos()">Limpiar</button>
+                                                                <div class="form-control">
+                                                                    <label class="label">
+                                                                    </label>
+                                                                    <label
+                                                                        class="input-group input-group-vertical"><!--FALTA UNA FUNCION QUE VALIDE LA URL-->
+                                                                        <span>Imagen</span>
+                                                                        <input  type="file"  (change)="onImagenSelecta($event)" class="file-input file-input-bordered w-full" #imagenInput />
+                                                                    </label>
+                                                                </div>
+                                                                <button class="mt-4 btn w-full max-w-auto" type="submit" >Siguiente</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                        
+                                    </label>
+                                </th>
                             </tr>
                         </thead><!-- head -->
                             <tbody><!-- body -->
@@ -152,11 +222,11 @@
                         </tfoot>
                     </table>
                 </div>
-            </section>
+            
             <!-- Fin Tabla PREPARACIONES -->
 
             <!--TABLA preparaciones desactivadas-->
-            <section>
+            
                 <div class=" w-full pt-10">
                     <h1 class="text-4xl text-neutral font-bold pb-10 text-center">Preparaciones Desactivadas</h1>
                     <table class="block mx-auto table table-zebra table-auto border-4 md:w-32 lg:w-48">
