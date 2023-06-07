@@ -109,21 +109,31 @@
 # 31/03/23
 - [x] Completada creacion de  Formulario de agregar stock
 - Unificacion de las vistas de admin y catalogo en el mismo proyecto.
-- [ ] tabla de compras
+- [x] tabla de compras
 # ideas
 - integrar un paso antes de subir la imagen al imb bb
 
 # 02/06/23
 - [x] Decorar home admin.
+- [x] Paleta de colores.
 - Arreglar estructuras en catalogo
 - Centrar muchas cosas en catalogo
 - Finalizado producto destacado
 - Titulo categorias en el catalogo
 
+# 05/06/23
+- Api watcher terminado totalmente
+- Comienzan las graficas y las analiticas para el home admin
+- Comienza la investigación de mercadopago
+- [x] seccionar por componente tablas del admin home
+
 # To do:
-- [ ] integracion de MP
-- [ ] agregar el cerrar session
-- [ ] seccionar por componente tablas del admin home
-
-- [x] Paleta de colores.
-
+- [ ] CORREGIR AGREGAR INGREDIENTES, PAGINAR LA CREACION DEL INGREDIENTE CON EL SIGUIENTE PASO DE DETALLES PREPARACION!!!!
+- [ ] Integracion de MP.
+- [ ] Agregar el cerrar session.
+- [ ] Catalogo biblioteca de audios investigar ['Howler.js', 'SoundJS', 'Web Audio API'].
+- [ ] SheperdJS para el tutorial.
+- [ ] Integrar audio y tutorial juntos en la seccion de enseñame a comprar del catalogo.
+- [ ] Cambiar el fondo de las categorias en el catalogo.
+- [ ] Nuevas cartas con ajuste de imagenes, por si las imagenes son mas chicas, se deberán estirar en base a su marco.
+- [ ] Adaptar mejor el catalogo a las distintas resoluciones.

@@ -116,29 +116,19 @@
 # 02/06/23
 - Creacion del apiwatcher en el front(falta optimizar el observable y que solo liste como maximo 3 compras y las renueve)
 
-## To do: 
-- [ ] Formulario de agregar stock
-- [ ] tabla de compras
-- [ ] integracion de MP
-- [ ] agregar el cerrar session
-- [ ] seccionar por componente tablas del admin home
-- [ ] Decorar Front.
------------------
-- [ ] Crear bloques de compra y local.
-- [x] Paleta de colores.
+# 05/06/23
+- Api watcher terminado totalmente
+- Comienzan las graficas y las analiticas para el home admin
+- Comienza la investigación de mercadopago
+- [x] seccionar por componente tablas del admin home
 
-### Detalles
-- [-] Terminar de implementar todos los crud
-- Los items que tienen relacion con otros item no se puedes eliminar(anidados).
-- Detalles en componentes como responsive item.
-- Ajustar mejor el sidebarComponent que tenga mejor responsividad
-- Revision de carga en catálogo
-
-
-
-
-
-
-
-
-
+# To do:
+- [ ] CORREGIR AGREGAR INGREDIENTES, PAGINAR LA CREACION DEL INGREDIENTE CON EL SIGUIENTE PASO DE DETALLES PREPARACION!!!!
+- [ ] Integracion de MP.
+- [ ] Agregar el cerrar session.
+- [ ] Catalogo biblioteca de audios investigar ['Howler.js', 'SoundJS', 'Web Audio API'].
+- [ ] SheperdJS para el tutorial.
+- [ ] Integrar audio y tutorial juntos en la seccion de enseñame a comprar del catalogo.
+- [ ] Cambiar el fondo de las categorias en el catalogo.
+- [ ] Nuevas cartas con ajuste de imagenes, por si las imagenes son mas chicas, se deberán estirar en base a su marco.
+- [ ] Adaptar mejor el catalogo a las distintas resoluciones.
