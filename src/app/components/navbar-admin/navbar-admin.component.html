@@ -1,96 +1,12 @@
-<div class=" h-20 fixed top-0 mt-12 md:relative md:h-full z-10 w-full md:w-48 content-center"><!--Nav Izquierda-->
+<div class="fixed top-0 mt-12 md:relative md:h-full z-10 w-full md:w-48 content-center"><!--Nav Izquierda-->
     <!-- <img src="https://img.icons8.com/color/96/null/coffee-to-go.png%22/%3E"> -->
-    <ul class="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left"><!--Listado elementos izquierda-->
-        <!-- li-->
-        <li class="mr-3 flex-1">
-            <a class="ml-4" routerLink="/admin/home">
-                Home
-            </a>
-            <div class="collapse">
-                <input type="checkbox" class="peer" />
-                <div class="collapse-title">
-                    Productos
-                </div>
-                <div class="collapse-content">
-                    <!-- Contenido dinamico, apretando en algun lugar de desplegara algun bloque de codigo para administrar las secciones dentro del item productos-->
-                    <a class="link no-underline" routerLink="/admin/categoria" routerLinkActive="active">
-                        <p>Categorias</p>
-                    </a>
-                    <a class="link no-underline" routerLink="/admin/ingredientes" routerLinkActive="active">
-                        <p>Ingredientes</p>
-                    </a>
-                    <a class="link no-underline" routerLink="/admin/preparaciones">
-                        <p>Preparaciones</p>
-                    </a>
-                    <a class="link no-underline" routerLink="/admin/detalle-prep">
-                        <p>Detalles preparaciones</p>
-                    </a>
-                    <a class="link no-underline" routerLink="#">
-                        <p>Ver todo</p>
-                    </a>
-                </div>
-            </div>
-        </li>
-        <!-- li-->
-        <li class="mr-3 flex-1">
-            <div class="collapse">
-                <input type="checkbox" class="peer" />
-                <div class="collapse-title">
-                    Compras
-                </div>
-                <div class="collapse-content">
-                    <!-- Contenido dinamico, apretando en algun lugar de desplegara algun bloque de codigo para administrar las secciones dentro del item compras-->
-                    <a class="link no-underline" routerlink="/ingredientes " routerLinkActive="active">
-                        <p>Ingredientes</p>
-                    </a>
-                    <!-- items compra se generan mediante una compra automaticamente, habilitar un form de items-compra para hacer las pruebas -->
-                    <a routerlink="admin/ingre-prep">
-                        <p>Cupones</p>
-                    </a>
-                    <a routerlink="#">
-                        <p>Ver todo</p>
-                    </a>
-                </div>
-            </div>
-        </li>
-        <li class="mr-3 flex-1">
-            <div class="collapse">
-                <input type="checkbox" class="peer" />
-                <div class="collapse-title">
-                    <!-- Para pruebas de crud, simular y probar borrar una vez probado todo -->
-                    Local
-                </div>
-                <div class="collapse-content">
-                    <a routerlink="admin/ingredientes">
-                        <p>Proveedores</p>
-                    </a>
-                    <a routerlink="admin/preparaciones">
-                        <p>Totems</p>
-                    </a>
-                    <a routerlink="#">
-                        <p>Ver todo</p>
-                    </a>
-                </div>
-            </div>
-        </li>
-        <!-- li -->
-        <li class="mr-3 flex-1">
-            <div class="collapse">
-                <input type="checkbox" class="peer" />
-                <div class="collapse-title">
-                    <a href="/admin/analiticas">Analiticas</a>
-                </div>
-                <div class="collapse-content">
-                    <a routerlink="admin/ingredientes">
-                        <p>Compra</p>
-                    </a>
-                    <a routerlink="admin/preparaciones">
-                        <p>Ingredientes</p>
-                    </a>
-                </div>
-            </div>
-        </li>
-        <!-- li -->
+    <ul class="menu w-48 list-reset flex flex-row md:flex-col pt-3 md:py-3 md:text-left">
+        <li><a routerLink="/admin/home" routerLinkActive="active">Home</a></li>
+        <li><a class="" routerLink="/admin/categoria" routerLinkActive="active">Categorias</a></li>
+        <li><a routerLink="/admin/ingredientes" routerLinkActive="active">Ingredientes</a></li>
+        <li><a routerLink="/admin/preparaciones" routerLinkActive="active">Preparaciones</a></li>
+        <li><a routerLink="/admin/detalle-prep" routerLinkActive="active">Detalles preparaciones</a></li>
     </ul>
-    <a class="ml-5 mt-96 btn btn-secondary" (click)="cerrarSesion()">Cerrar sesión</a>
+    
+    <a class="ml-5 mt-80 btn btn-secondary" (click)="cerrarSesion()">Cerrar sesión</a>
 </div><!-- fin barra izquierda -->

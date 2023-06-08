@@ -127,8 +127,12 @@
 - Se muestran los primeros graficos en el adminHome
 - [x] Corregir agregar preparaciones
 
-# To do:
+# 07/06/23
+- Hay un error de django que muestra dias que no existen, pero si se hace la query directa esta esta bien en la base de datos
+    la vista en question en el backend es: def total_compra_diaria_semanal.
+- Falta implementar mas detalle de graficas, pero la base esta
 
+# To do:
 - [ ] Integracion de MP.
 - [ ] Catalogo biblioteca de audios investigar ['Howler.js', 'SoundJS', 'Web Audio API'].
 - [ ] SheperdJS para el tutorial.

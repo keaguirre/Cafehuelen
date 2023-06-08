@@ -18,7 +18,7 @@ module.exports = {
       bounceInSpeed: 750,
       bounceOutSpeed: 750,
       animationDelaySpeed: 500,
-      classes: ['bounce', 'heartBeat', 'fadeIn', 'fadeOut']
+      classes: ['bounce', 'heartBeat', 'fadeIn', 'fadeOut', 'fadeInLeft', 'fadeInUp']
     }
   },
   plugins: [require("daisyui"), require('tailwindcss-animatecss'), require('tailwind-scrollbar'),],

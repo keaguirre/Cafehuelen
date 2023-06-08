@@ -1,4 +1,4 @@
-import { Component, ViewChild  } from '@angular/core';
+import { Component, ViewChild,ChangeDetectionStrategy, Input  } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductosService } from 'src/app/services/ProductosService/productos.service';
@@ -8,11 +8,12 @@ import { tap,switchMap,map, startWith} from 'rxjs/operators';
 import {v4 as uudidv4} from 'uuid';
 import { ImgServiceService } from 'src/app/services/imgService/img-service.service';
 declare var sessionStorage:any;
-
+import {PaginationInstance} from 'ngx-pagination';
 @Component({
   selector: 'app-preparaciones',
   templateUrl: './preparaciones.component.html',
-  styleUrls: ['./preparaciones.component.css']
+  styleUrls: ['./preparaciones.component.css'],
+ 
 })
 export class PreparacionesComponent {
   @ViewChild('imagenInput') imagenInput: any;
@@ -74,6 +75,7 @@ export class PreparacionesComponent {
       sessionStorage.removeItem('detallePrep');
     });
   }
+  
 
   //API subir imagen a imgbb-----------------------------------------------------------------
 async onImagenSelecta(event: any) {
