@@ -124,8 +124,8 @@ export class GraficosAdminComponent implements OnInit {
     this.chart = new Chart("comprasDiarias", {
       type: 'line', //this denotes tha type of chart
       data: {
-        labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves',
-          'Viernes', 'Sabado', 'Domingo'],
+        labels: ['Domingo', 'Lunes', 'Martes', 'Miercoles',
+          'Jueves', 'Viernes', 'Sabado',],
           
         datasets: [{
           label: 'Compras por dia de esta semana',
