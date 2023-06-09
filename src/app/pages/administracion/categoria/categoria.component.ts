@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import { Subject, Subscription } from 'rxjs';
 import { tap,switchMap,map, startWith} from 'rxjs/operators';
 import { ImgServiceService } from 'src/app/services/imgService/img-service.service';
-
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.component.html',

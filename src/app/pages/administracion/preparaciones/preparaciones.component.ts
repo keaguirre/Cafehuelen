@@ -333,7 +333,7 @@ onCreate(cod: string,valor?:any): void{
     } 
     case 'createIngre': {
       try{
-        this.formIngrediente.controls['estado'].setValue(true)
+        
         let formIngreValue = JSON.stringify(this.formIngrediente.value);
         this.prodService.crearIngrediente(formIngreValue).then(respuesta => {
           this.response = respuesta;
@@ -357,7 +357,6 @@ onCreate(cod: string,valor?:any): void{
     } 
     case 'createPrep': { 
       try{
-        this.formPreparaciones.controls['estado'].setValue(true)
         let formPrepValue = JSON.stringify(this.formPreparaciones.value);
         this.prodService.crearPreparaciones(formPrepValue).then(respuesta => {
           this.response = respuesta;
@@ -394,7 +393,6 @@ onCreate(cod: string,valor?:any): void{
         
         let obj = this.getObj();
         const id= uudidv4();
-        this.formDetallePrep.controls['estado'].setValue(true);
         this.formDetallePrep.controls['id_prep'].setValue(this.tomarId);
         this.formDetallePrep.controls['id_detalle_prep'].setValue(id);
         obj[id] = { detallePrep: this.formDetallePrep.value,                 
