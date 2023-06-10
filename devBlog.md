@@ -120,20 +120,25 @@
 - Centrar muchas cosas en catalogo
 - Finalizado producto destacado
 - Titulo categorias en el catalogo
-
+- [x] Cambiar el fondo de las categorias en el catalogo.
+- [x] Nuevas cartas con ajuste de imagenes, por si las imagenes son mas chicas, se deberán estirar en base a su marco.
+- [x] Adaptar mejor el catalogo a las distintas resoluciones.
+- [x] Agregar el cerrar session.
 # 05/06/23
 - Api watcher terminado totalmente
 - Comienzan las graficas y las analiticas para el home admin
 - Comienza la investigación de mercadopago
 - [x] seccionar por componente tablas del admin home
+# 10/06/23
+-  Vista administrador al 90%
+- [ ] Revisar responsividad
+- [ ] Corregir los problemas con charJS
 
 # To do:
 - [ ] CORREGIR AGREGAR INGREDIENTES, PAGINAR LA CREACION DEL INGREDIENTE CON EL SIGUIENTE PASO DE DETALLES PREPARACION!!!!
 - [ ] Integracion de MP.
-- [ ] Agregar el cerrar session.
 - [ ] Catalogo biblioteca de audios investigar ['Howler.js', 'SoundJS', 'Web Audio API'].
 - [ ] SheperdJS para el tutorial.
 - [ ] Integrar audio y tutorial juntos en la seccion de enseñame a comprar del catalogo.
-- [ ] Cambiar el fondo de las categorias en el catalogo.
-- [ ] Nuevas cartas con ajuste de imagenes, por si las imagenes son mas chicas, se deberán estirar en base a su marco.
-- [ ] Adaptar mejor el catalogo a las distintas resoluciones.
+- [ ] Realizar el autoLaunch
+- [ ] Revisar los documentos 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,6 +8,13 @@ import { Router } from '@angular/router';
 })
 export class NavbarAdminComponent {
   constructor(private router:Router) { }
+  isNavbarFixed = false;
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(event: Event) {
+  const verticalOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  this.isNavbarFixed = verticalOffset > 100; 
+}
 
 
   cerrarSesion(){

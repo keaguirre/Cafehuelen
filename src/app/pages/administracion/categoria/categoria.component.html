@@ -1,17 +1,21 @@
 <main class="">
     <nav class="bg-gray-900">
+        <a class="text-2xl font-bold text-base-content m-5 fixed">
+            <span>{{'{..'}}</span><span class="text-warning">.</span><span>{{'}'}}cafe</span><span
+                class="text-warning">S</span><span>cript</span>
+        </a>
         <div class=" ml-44">
             <div class="bg-neutral py-4 ml-4 pl-4 shadow  text-2xl  text-white ">
-                <h1 class="font-bold pl-2">Titulo</h1>
+                <h1 class="font-bold pl-2">Categorias</h1>
             </div>
         </div>
     </nav>
     <div class="flex flex-col md:flex-row bg-gray-900 "><!--Bg fondo-->
         <app-navbar-admin></app-navbar-admin>
         <section id="main" class=" bg-base-content h-screen flex-1 mx-auto   "><!-- Cartas y Formularios-->
-            <table class="mx-auto">
+            <table class="mx-auto my-40">
                 <th >
-                    <section class="mr-10 w-10/12 relative items-end  pt-5"><!-- Tabla CATEGORIA -->
+                    <section class="mr-10 w-10/12 relative items-end  "><!-- Tabla CATEGORIA -->
                         <h1 class="text-4xl text-neutral font-bold pt-10 mb-5 text-center ">Categorias</h1>
                         <table class="block mx-auto table table-zebra  md:w-32 lg:w-48">   
                             <thead class="text-xl text-VerdeHuelen font-bold pb-10"><!-- head -->
@@ -182,10 +186,7 @@
                     </section><!--FIN tabla Categorias desactivas-->
                 </th>
              </table>
-            
-    
-     
-            
         </section>
     </div>
+    <app-footer-admin></app-footer-admin>
 </main>

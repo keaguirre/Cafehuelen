@@ -23,6 +23,7 @@ import { DetallePrepComponent } from './pages/administracion/detalle-prep/detall
 import { ThousandsPipe } from './pipes/thousands.pipe';
 import { HomeComponent } from './pages/administracion/home/home.component';
 import { GraficosAdminComponent } from './components/graficos-admin/graficos-admin.component';
+import { FooterAdminComponent } from './components/footer-admin/footer-admin.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { GraficosAdminComponent } from './components/graficos-admin/graficos-adm
     HomeComponent,
     GraficosAdminComponent,
     ThousandsPipe,
+    FooterAdminComponent,
   ],
   imports: [
     BrowserModule,

@@ -132,6 +132,11 @@
     la vista en question en el backend es: def total_compra_diaria_semanal.
 - Falta implementar mas detalle de graficas, pero la base esta
 
+# 10/06/23
+- diseño de la vista admin 
+- 
+
+
 # To do:
 - [ ] Integracion de MP.
 - [ ] Catalogo biblioteca de audios investigar ['Howler.js', 'SoundJS', 'Web Audio API'].

@@ -1,0 +1,9 @@
+.navbar-fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+  }
+  .mt-navbar {
+    margin-top: 90px; /* Ajusta este valor según la altura del navbar */
+  }

@@ -1,54 +1,63 @@
-<section class="bg-white display-inline pb-5">
+<section class="bg-base-content display-inline m-10 ">
     <!--cards-->
-    <div class="flex flex-nowrap"><!-- cards-->
-        <div class="card w-86 bg-neutral inline-flex my-10 mx-10">
-            <div class="items-center card-body text-center">
-                <h2 class="card-title text-primary text-2xl">Numero de ventas</h2>
-                <div class="stat">
-                    <div class="stat-title">Total hoy</div>
-                    <div class="stat-value">{{responseComprasHoy.count | thousands}}</div>
+    <table class=" my-auto mx-12 p-3  ">
+        <th class="w-2/12 h-2/6 "> 
+            <div class=" card  m-5 bg-neutral">
+                <div class="items-center card-body text-center">
+                    <h2 class="card-title text-primary text-2xl">Numero de ventas</h2>
+                    <div class="stat">
+                        <div class="stat-title">Total hoy</div>
+                        <div class="stat-value">{{responseComprasHoy.count | thousands}}</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card w-86 bg-neutral inline-flex my-10 mx-10">
-            <div class="items-center card-body text-center">
-                <h2 class="card-title text-primary text-2xl">Total recaudado</h2>
-                <div class="stat">
-                    <div class="stat-title">Total hoy</div>
-                    <div class="stat-value">{{responseRecaudacionHoy.total_compra | thousands}}</div>
+        </th>
+        <th class="w-2/12 h-2/6 "> 
+            <div class=" card m-5 bg-neutral">
+                <div class="items-center card-body text-center">
+                    <h2 class="card-title text-primary text-2xl">Total recaudado</h2>
+                    <div class="stat">
+                        <div class="stat-title">Total hoy</div>
+                        <div class="stat-value">{{responseRecaudacionHoy.total_compra | thousands}}</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card w-86 bg-neutral inline-flex my-10 mx-10">
-            <div class="items-center card-body text-center">
-                <h2 class="card-title text-primary text-2xl">Numero de ventas</h2>
-                <div class="stat">
-                    <div class="stat-title">Esta semana</div>
-                    <div class="stat-value">{{responseComprasSemanal.count | thousands}}</div>
+        </th>
+        <th class="w-2/12 h-2/6 ">
+            <div class=" card m-5 bg-neutral">
+                <div class="items-center card-body text-center">
+                    <h2 class="card-title text-primary text-2xl">Numero de ventas</h2>
+                    <div class="stat">
+                        <div class="stat-title">Esta semana</div>
+                        <div class="stat-value">{{responseComprasSemanal.count | thousands}}</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card w-86 bg-neutral inline-flex my-10 mx-10">
-            <div class="items-center card-body text-center">
-                <h2 class="card-title text-primary text-2xl">Total recaudado esta semana</h2>
-                <div class="stat">
-                    <div class="stat-title">Total Page Views</div>
-                    <div class="stat-value">{{responseRecaudacionSemanal.total_compra | thousands}}</div>
-                    <div class="stat-desc">21% more than last month</div>
+        </th>
+        <th class="w-2/12 h-2/6  "> 
+            <div class=" card m-5 bg-neutral ">
+                <div class="items-center card-body text-center">
+                    <h2 class="card-title text-primary text-2xl">Total recaudado</h2>
+                    <div class="stat">
+                        <div class="stat-title">Esta semana</div>
+                        <div class="stat-value">{{responseRecaudacionSemanal.total_compra | thousands}}</div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </th>
+    </table>
+    <div ><!-- cards-->
     </div>
-    <div class="chart-container bg-neutral-focus mx-5 pl-3 my-5 rounded">
+    <div class="chart-container bg-neutral-focus mx-16 p-3 my-10 rounded-lg">
         <canvas  id="comprasDiarias" ></canvas>
     </div> 
-    <div class="chart-container bg-neutral-focus mx-5 pl-3 my-5 rounded">
+    <div class="chart-container bg-neutral-focus mx-16 pl-3 my-10 rounded-lg">
         <canvas id="ingresoDiario" ></canvas>
     </div>
-    <div class="chart-container bg-neutral-focus mx-5 pl-3 my-5 rounded">
+    <div class="chart-container bg-neutral-focus mx-16 pl-3 my-10 rounded-lg">
         <canvas id="compraSemanalMes" ></canvas>
     </div>
-    <div class="chart-container bg-neutral-focus mx-5 pl-3 my-5 rounded">
+    <div class="chart-container bg-neutral-focus mx-16 pl-3 my-10 rounded-lg">
         <canvas id="ingresoSemanalMes" ></canvas>
     </div>
 </section>
