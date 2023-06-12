@@ -1,55 +1,68 @@
-<nav class="navbar sidebar bg-neutral shadow-lg fixed top-0 right-0 w-72 h-screen flex flex-col">
-    <div class="container mx-auto">
-        <div>
-            <ul>
-                <li class="menu-title">
-                    <a href="catalogo#Home">
-                        <h2 class=" font-bold text-primary mb-4 text-4xl text-center">Carrito</h2>
-                    </a>
-                </li>
-                <div class="divider font-bold text-success text-2xl">Categorias</div> 
+<nav class="navbar bg-neutral shadow-lg fixed top-0 right-0 w-72 h-screen flex flex-col">
+    <div class="container inset-x-0 top-0">
+
+        <ul>
+            <li class="menu-title">
+                <a href="catalogo#Home">
+                    <h2 class=" font-bold text-primary mb-4 text-4xl text-center">Carrito</h2>
+                </a>
+            </li>
+            <div class="divider font-bold text-success text-2xl">Categorias</div>
+            <div class="overflow-y-auto overflow-x-hidden lg:h-52 md:h-32">
                 <!-- <h2 class=" font-bold text-success mb-4 text-2xl text-center">Categorias</h2> -->
                 <ng-container *ngFor="let categoria of MenuCatalogonavbar">
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800 block mb-2 text-4xl"
-                            href="catalogo#Categoria_{{categoria?.categoria?.id_cat}}"> <button
-                                class="text-base-content btn btn-wide bg-secondary-focus">{{categoria?.categoria?.nombre_cat | titlecase }}</button>
-                        </a>
-                    </li>
+                    <div class="">
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800 block mb-2 text-4xl"
+                                href="catalogo#Categoria_{{categoria?.categoria?.id_cat}}"> <button
+                                    class="text-base-content btn btn-wide bg-secondary-focus">{{categoria?.categoria?.nombre_cat
+                                    | titlecase }}</button>
+                            </a>
+                        </li>
+                    </div>
                 </ng-container>
-            </ul>
-        </div>
+            </div>
+        </ul>
+
     </div>
+
     <ul>
         <li *ngIf="itemsCarrito().length === 0; else carrito  ">
-            <p>Tu carrito está vacío.</p>
-            <br>
         </li>
     </ul>
 
     <ng-template #carrito>
-        <div class="w-72 bg-neutral overflow-y-auto h-72">
+
+        <div class="w-72 bg-neutral flex-grow overflow-y-auto lg:h-96 md:h-40" >
             <ul class=" list-none p-0">
                 <li class="mb-2" *ngFor="let item of itemsCarrito()">
                     <div class="flex items-center">
-                        <div class="w-16 h-16 overflow-hidden">
+                        <div class="w-20 h-20 overflow-hidden">
                             <img [src]="item.producto.imagen_prep" class="w-full h-full object-cover">
                         </div>
                         <div class="flex items-center justify-between flex-grow">
                             <div class="w-16">
-                                <p class="font-semibold text-neutral-content">{{ item.producto.nombre_prep | titlecase}}</p>
-                                <p class="font-semibold text-neutral-content"> {{item.producto.precio_prep * item.cantidad | currency: '$':
-                                    'symbol':'1.0-0' }}</p>
+                                <div class="my-4 flex items-center">
+                                    <p  class="font-semibold  text-neutral-content mx-2">{{ item.producto.nombre_prep |
+                                        titlecase}}
+                                    </p>
+                                    <p class="font-semibold text-accent"> {{item.producto.precio_prep *
+                                        item.cantidad | currency: '$':
+                                        'symbol':'1.0-0' }}</p>
+                                </div>
                                 <div class="flex items-center">
                                     <p class=" text-s font-semibold p-2 text-neutral-content">Un. </p>
-                                    <button class="btn btn-s bg-neutral-focus" (click)="decrementarCantidad(item)">-</button>
-                                    <span class="item-quantity font-semibold text-neutral-content">{{item.cantidad}}</span>
-                                    <button class="btn btn-s bg-neutral-focus" (click)="incrementarCantidad(item)">+</button>
+                                    <button class="btn btn-s bg-neutral-focus"
+                                        (click)="decrementarCantidad(item)">-</button>
+                                    <span
+                                        class="text-error-content font-semibold ">{{item.cantidad}}</span>
+                                    <button class="btn btn-s bg-neutral-focus"
+                                        (click)="incrementarCantidad(item)">+</button>
                                 </div>
                             </div>
-                            
+
                             <div class="flex items-center">
-                                <button class="btn btn-square btn-sm btn-error" (click)="eliminarItem(item)"><i
+                                <button class="btn btn-square btn-lg btn-error" (click)="eliminarItem(item)"><i
                                         class="fa-regular fa-trash-can"></i></button>
                             </div>
                         </div>
@@ -60,23 +73,29 @@
     </ng-template>
 
 
-    <div class="container mx-auto">
-        <h3 class="text-left items-start font-bold text-base-content mb-4 text-xl">Total</h3>
-    </div>
-    <ul>
-        <li *ngIf="itemsCarrito().length === 0; else totalcompra">
-            <p>Tu carrito está vacío.</p>
-            <br>
-        </li>
-    </ul>
-    <ng-template #totalcompra>
-        <div>
-        <p class="text-right text-accent text-2xl ">{{totalCarrito() | currency: '$': 'symbol':'1.0-0' }}</p>
-            <div class="container mx-auto btn-group">
-                <button class="btn text-xs btn-success" (click)="botonPreCheckout()">Ir a pagar</button>
-                <button class="btn text-xs btn-error" (click)="botonClearCart()">Limpiar bolsa</button>
-            </div>
+    <div class="absolute bottom-0 w-full bg-neutral ">
+        <div class="container mx-auto lg:py-4 lg:h-52 md:py-0 md:h-24">
+            <h3 class="text-center items-start font-bold text-base-content mb-4 lg:text-3xl md:text-xl">Total</h3>
+
+            <ul>
+                <li *ngIf="itemsCarrito().length === 0; else totalcompra">
+                    <p class="text-center">Tu carrito está vacío.</p>
+                    <br>
+                </li>
+            </ul>
+            <ng-template #totalcompra>
+                <div>
+                    <p class="text-center text-accent lg:text-4xl md:text-2xl mb-5 ">{{totalCarrito() | currency: '$':
+                        'symbol':'1.0-0'
+                        }}
+                    </p>
+                    <div class="container justify-center mx-auto btn-group">
+                        <button class="btn text-xs btn-success" (click)="botonPreCheckout()">Ir a pagar</button>
+                        <button class="btn text-xs btn-error" (click)="botonClearCart()">Limpiar bolsa</button>
+                    </div>
+                </div>
+                <br>
+            </ng-template>
         </div>
-        <br>
-    </ng-template>
+    </div>
 </nav>

@@ -1,25 +1,29 @@
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
 
 <ng-container *ngFor="let Menu of MenuCatalogo, let i = index">
-    <div class="max-w-full containerWidthWithoutCart px-24">
+    <div  class="max-w-full containerWidthWithoutCart px-24" style="font-family: 'Noto Sans', sans-serif;">
         <div class=" flex justify-center">
-            <div class=" py-24 w-4/12" style="display: inline-block; background-repeat: no-repeat; background-position: 50%; background-size: 100%; background-image: url(../../../assets/catalogo/categorias/1.svg);">
-                <h1 class="text-center pt-10 text-3xl font-semibold text-neutral"
+            <div class=" btn btn-active bg-secondary my-14 "> <!--  style="display: inline-block; background-repeat: no-repeat; background-position: 50%; background-size: 100%; background-image: url(../../../assets/Catalogo/categorias/1.svg);" -->
+                <h1 class=" text-center  text-3xl text-neutral " style="font-family: 'Kanit', sans-serif;"
                     id="Categoria_{{Menu?.categoria?.id_cat}}">
                     {{Menu?.categoria?.nombre_cat| titlecase }}
                 </h1>
             </div>
         </div>
-        <div class="place-content-end grid gap-5 bg-primary md:grid-cols-3 lg:grid-cols-4 h-38  mb-12">
+        
+        <div class="place-content-end grid gap-5  md:grid-cols-2 lg:grid-cols-4 h-38  mb-12">
             <ng-container *ngFor="let item of Menu?.items, let i = index">
-                <section id="card_Item{{ item.id_prep }}" class="card card-compact  w-60 h-96 bg-white shadow-2xl">
+                <section id="card_Item{{ item.id_prep }}" class="card card-compact overflow-clip w-60 h-96 ">
                     <label (click)="ModalPreparacion(item)">
-                        <figure class=""><img  class="" src="{{ item.imagen_prep }}" alt="{{ item.nombre_prep }}" class="">
+                        <figure class="cardFig"><img style="display: inline-block; background-repeat: no-repeat;background-position-y: bottom;background-position-x: center;   background-size: 100%; background-image: url(../../../assets/Catalogo/dracula4.svg);"
+                                            class="" src="{{ item.imagen_prep }}" alt="{{ item.nombre_prep }}" class="">
                         </figure>
-                        <div class="card-body">
-                            <h2 class="card-title text-xl font-bold text-gray-800 mb-2">{{ item.nombre_prep |
+                        <div class="card-body content-center ghost h-40">
+                            <h2 class="card-title text-xl justify-center font-bold ">{{ item.nombre_prep |
                                 titlecase }}</h2>
-                            <h3 class=" font-semibold">{{ item.descripcion_prep | titlecase }}</h3>
-                            <p class="text-gray-800 font-bold mb-0">Precio: $ {{ item.precio_prep}}</p>
+                            <h3 class="text-secondary text-center font-semibold">{{ item.descripcion_prep | titlecase }}</h3>
+                            <p class="text-info font-bold mb-0 text-center">Precio: $ {{ item.precio_prep}}</p>
                         </div>
                     </label>
                 </section>

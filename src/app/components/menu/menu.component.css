@@ -1,0 +1,4 @@
+.cardFig img {
+    height: 15rem;
+    object-fit: cover;
+}
