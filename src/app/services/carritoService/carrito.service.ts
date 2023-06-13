@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 import { CompraService } from '../compraService/compra.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +14,8 @@ export class CarritoService {
 
     constructor(
         private titleCasePipe: TitleCasePipe,
-        private compraService: CompraService
+        private compraService: CompraService,
+        private Router: Router
     ) {}
 
     getCart(): any {
@@ -199,7 +201,7 @@ export class CarritoService {
         for (let item in cart) {
             total += cart[item].producto.precio_prep * cart[item].cantidad;
         }
-        return total * 1.19;
+        return total * 0.19;
     }
 
     OnSubmitItemCompra(id_compra: number) {
@@ -223,7 +225,7 @@ export class CarritoService {
         let total_compra = this.getCartTotal(); // Precio total de la compra
         let procesador_pago_compra = 'MercadoPago'; // MercadoPago, PayPal, Stripe
         let id_transaccion_compra = '123456789'; // Id del pago en el procesador de pagos
-        // let iva = this.getCartTotalIva();
+        let iva = this.getCartTotalIva();
         // let cart = this.getCart();
         let totem_compra = 12;
         // let orderNumber = Math.floor(Math.random() * 1000000000);
@@ -231,9 +233,10 @@ export class CarritoService {
             tipo_servicio_compra,
             estado_compra,
             total_compra,
+            iva,
             procesador_pago_compra,
             id_transaccion_compra,
-            totem_compra,
+            totem_compra
         };
         localStorage.setItem('orderData', JSON.stringify(orderData));
     }
@@ -258,8 +261,7 @@ export class CarritoService {
                 .crearItemCompra(itemCompra)
                 .then((res) => {
                     this.response = res;
-                    // console.log('response', this.response);
-                    // console.log('RES', res);
+
                 })
                 .catch((err) => {
                     console.log('err', err);
@@ -279,13 +281,13 @@ export class CarritoService {
             return null;
         }
     }
+    itemsCarritoservice: any;
 
     onCreate(cod: string): void {
         switch (cod) {
             case 'crearCompra':
                 try {
                     const InfoOrden = this.retirarInfoOrden();
-
                     // console.log('infoOrden', InfoOrden);
                     if (InfoOrden) {
                         this.compraService
@@ -300,10 +302,11 @@ export class CarritoService {
                                         timer: 1125,
                                     });
                                     this.ultimaCompra = respuesta;
+                                    this.Router.navigate(['print'], {queryParams: this.retirarInfoOrden(), skipLocationChange: true});
                                     this.clearOrderData();
+                                    this.itemsCarritoservice = this.getCartItems();
                                     this.sendOrderItem(this.getCartItems());
                                     this.clearCart();
-                                    this.clearOrderData();
                                 }
                                 // console.log('ultimaCompra', this.ultimaCompra);
                             });
@@ -353,7 +356,7 @@ export class CarritoService {
                 }) +
                 '</div>' +
                 '<div class="col-md-6">' +
-                '<p class="text-left">Total: $ ' +
+                '<p class="text-center">Total: $ ' +
                 this.getCartTotal() +
                 '</p>' +
                 '</div>' +

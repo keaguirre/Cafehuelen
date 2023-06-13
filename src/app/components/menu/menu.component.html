@@ -16,14 +16,14 @@
             <ng-container *ngFor="let item of Menu?.items, let i = index">
                 <section id="card_Item{{ item.id_prep }}" class="card card-compact overflow-clip w-60 h-96 ">
                     <label (click)="ModalPreparacion(item)">
-                        <figure class="cardFig"><img style="display: inline-block; background-repeat: no-repeat;background-position-y: bottom;background-position-x: center;   background-size: 100%; background-image: url(../../../assets/Catalogo/dracula4.svg);"
+                        <figure class="cardFig"><img style="display: inline-block; background-repeat: no-repeat;background-position-y: bottom;background-position-x: center;   background-size: 100%; background-image: url(../../../assets/catalogo/dracula4.svg);"
                                             class="" src="{{ item.imagen_prep }}" alt="{{ item.nombre_prep }}" class="">
                         </figure>
                         <div class="card-body content-center ghost h-40">
                             <h2 class="card-title text-xl justify-center font-bold ">{{ item.nombre_prep |
                                 titlecase }}</h2>
                             <h3 class="text-secondary text-center font-semibold">{{ item.descripcion_prep | titlecase }}</h3>
-                            <p class="text-info font-bold mb-0 text-center">Precio: $ {{ item.precio_prep}}</p>
+                            <p class="text-info font-bold mb-0 text-center">Precio: $ {{ item.precio_prep | thousands }}</p>
                         </div>
                     </label>
                 </section>

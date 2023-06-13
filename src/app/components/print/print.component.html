@@ -1,0 +1,84 @@
+<div id="invoice-POS">
+    <div id="mid top">
+        <div class="info text-base-100 mt-4 ">
+            <h2 class="font-bold mb-2 text-center">{{'{'}}...{{'}'}}cafeScript</h2>
+            <ul class="mb-2">
+                <li><p>Sucursal:<br> Providencia, Manuel Montt #357</p></li>
+                <li><p>Email:<br> contacto@cafescript.com</p></li>
+                <li><p>Teléfono:<br> 28323775</p></li>
+                <li><p>Fecha:<br> {{infoBack?.fecha_compra | date: 'd/M/yyyy HH:m'}}</p></li>
+                <!-- <li><p>Hora:<br> {{infoBack?.fecha_compra | date: 'HH:m'}}</p></li> -->
+            </ul>
+        </div>
+    </div><!--End Invoice Mid-->
+    <div id="bot">
+        <div id="table">
+            <table class="text-base-100">
+                <tr class="tabletitle">
+                    <td class="item ">
+                        <h2>Producto</h2>
+                    </td>
+                    <td class="Hours">
+                        <h2>Cantidad</h2>
+                    </td>
+                    <td class="Rate">
+                        <h2>Valor</h2>
+                    </td>
+                </tr>
+                <tr *ngFor="let item of itemsCarrito" class="service">
+                    <td class="tableitem">
+                        <p class="itemtext">{{ item?.producto?.nombre_prep |titlecase}}</p>
+                    </td>
+                    <td class="tableitem">
+                        <p class="itemtext">{{item?.cantidad}}</p>
+                    </td>
+                    <td class="tableitem">
+                        <p class="itemtext">{{item?.producto?.precio_prep *
+                            item?.cantidad | thousands }}</p>
+                    </td>
+                </tr>
+
+                <tr class="tabletitle">
+                    <td></td>
+                    <td class="Rate">
+                        <h2>Neto</h2>
+                    </td>
+                    <td class="payment">
+                        <h2>{{orderCarrito.total_compra | thousands}}</h2>
+                    </td>
+                </tr>
+                <hr>
+                <tr class="tabletitle">
+                    <td></td>
+                    <td class="Rate">
+                        <h2>IVA</h2>
+                    </td>
+                    <td class="payment">
+                        <h2>{{orderCarrito.iva | thousands}}</h2>
+                    </td>
+                </tr>
+                <hr>
+                <tr class="tabletitle">
+                    <td></td>
+                    <td class="Rate">
+                        <h2>Total</h2>
+                    </td>
+                    <td class="payment">
+                        <h2>${{+orderCarrito.total_compra + +orderCarrito.iva | thousands}}</h2>
+                    </td>
+                </tr>
+
+            </table>
+        </div><!--End Table-->
+
+
+        <div id="legalcopy" class="justify-center font-bold text-base-100">
+            <p class="legal text-center">Gracias por su compra,</p><p class="text-center"> su numero es el {{infoBack?.id_compra}}</p>
+             <p class="text-center">Le llamarán de la barra a la brevedad</p>
+        </div>
+
+        <p class="text-center">NO VÁLIDO COMO BOLETA</p>
+        <!-- <p class="text-center">SOLO USO CONTROL INTERNO</p> -->
+
+    </div><!--End InvoiceBot-->
+</div><!--End Invoice-->

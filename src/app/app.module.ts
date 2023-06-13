@@ -24,6 +24,7 @@ import { ThousandsPipe } from './pipes/thousands.pipe';
 import { HomeComponent } from './pages/administracion/home/home.component';
 import { GraficosAdminComponent } from './components/graficos-admin/graficos-admin.component';
 import { FooterAdminComponent } from './components/footer-admin/footer-admin.component';
+import { PrintComponent } from './components/print/print.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { FooterAdminComponent } from './components/footer-admin/footer-admin.com
     GraficosAdminComponent,
     ThousandsPipe,
     FooterAdminComponent,
+    PrintComponent,
   ],
   imports: [
     BrowserModule,

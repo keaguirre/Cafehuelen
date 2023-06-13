@@ -13,6 +13,7 @@ import { ApiWatcherComponent } from './pages/api-watcher/api-watcher.component';
 import { GraficosAdminComponent } from './components/graficos-admin/graficos-admin.component';
 import { HomeComponent } from './pages/administracion/home/home.component';
 import { SessionGuard } from './guards/session.guard';
+import { PrintComponent } from './components/print/print.component';
 const routes: Routes = [
 
   {
@@ -66,6 +67,9 @@ const routes: Routes = [
   {
     path: 'admin/analiticas', component: GraficosAdminComponent,
     //canActivate: [SessionGuard]
+  },
+  {
+    path: 'print', component: PrintComponent,
   },
   {
     path: '**',

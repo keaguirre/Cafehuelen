@@ -46,9 +46,8 @@
                                     <p  class="font-semibold  text-neutral-content mx-2">{{ item.producto.nombre_prep |
                                         titlecase}}
                                     </p>
-                                    <p class="font-semibold text-accent"> {{item.producto.precio_prep *
-                                        item.cantidad | currency: '$':
-                                        'symbol':'1.0-0' }}</p>
+                                    <p class="font-semibold text-accent"> $ {{item.producto.precio_prep *
+                                        item.cantidad | thousands }}</p>
                                 </div>
                                 <div class="flex items-center">
                                     <p class=" text-s font-semibold p-2 text-neutral-content">Un. </p>
@@ -85,9 +84,7 @@
             </ul>
             <ng-template #totalcompra>
                 <div>
-                    <p class="text-center text-accent lg:text-4xl md:text-2xl mb-5 ">{{totalCarrito() | currency: '$':
-                        'symbol':'1.0-0'
-                        }}
+                    <p class="text-center text-accent lg:text-4xl md:text-2xl mb-5 ">$ {{totalCarrito() | thousands}}
                     </p>
                     <div class="container justify-center mx-auto btn-group">
                         <button class="btn text-xs btn-success" (click)="botonPreCheckout()">Ir a pagar</button>

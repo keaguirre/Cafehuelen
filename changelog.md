@@ -134,7 +134,11 @@
 
 # 10/06/23
 - diseño de la vista admin 
-- 
+
+# 12/06/23
+- Ruta de print, se comienza a configurar print desde angular
+- Creacion de voucher de pago
+- Correcciones del catalogo
 
 
 # To do:
