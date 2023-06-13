@@ -25,6 +25,7 @@ import { HomeComponent } from './pages/administracion/home/home.component';
 import { GraficosAdminComponent } from './components/graficos-admin/graficos-admin.component';
 import { FooterAdminComponent } from './components/footer-admin/footer-admin.component';
 import { PrintComponent } from './components/print/print.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { PrintComponent } from './components/print/print.component';
     HttpClientModule,
     SweetAlert2Module.forRoot(),
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    QRCodeModule
   ],
   providers: [TitleCasePipe],
   bootstrap: [AppComponent]

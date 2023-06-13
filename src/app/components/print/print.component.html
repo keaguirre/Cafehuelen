@@ -14,14 +14,14 @@
     <div id="bot">
         <div id="table">
             <table class="text-base-100">
-                <tr class="tabletitle">
-                    <td class="item ">
+                <tr class="tabletitle ">
+                    <td class="item darkItem">
                         <h2>Producto</h2>
                     </td>
-                    <td class="Hours">
+                    <td class="Hours darkItem">
                         <h2>Cantidad</h2>
                     </td>
-                    <td class="Rate">
+                    <td class="Rate darkItem">
                         <h2>Valor</h2>
                     </td>
                 </tr>
@@ -33,7 +33,7 @@
                         <p class="itemtext">{{item?.cantidad}}</p>
                     </td>
                     <td class="tableitem">
-                        <p class="itemtext">{{item?.producto?.precio_prep *
+                        <p class="itemtext">$ {{item?.producto?.precio_prep *
                             item?.cantidad | thousands }}</p>
                     </td>
                 </tr>
@@ -44,7 +44,7 @@
                         <h2>Neto</h2>
                     </td>
                     <td class="payment">
-                        <h2>{{orderCarrito.total_compra | thousands}}</h2>
+                        <h2>$ {{orderCarrito.total_compra | thousands}}</h2>
                     </td>
                 </tr>
                 <hr>
@@ -54,16 +54,16 @@
                         <h2>IVA</h2>
                     </td>
                     <td class="payment">
-                        <h2>{{orderCarrito.iva | thousands}}</h2>
+                        <h2>$ {{orderCarrito.iva | thousands}}</h2>
                     </td>
                 </tr>
                 <hr>
                 <tr class="tabletitle">
-                    <td></td>
-                    <td class="Rate">
+                    <td class="darkItem"></td>
+                    <td class="Rate darkItem">
                         <h2>Total</h2>
                     </td>
-                    <td class="payment">
+                    <td class="payment darkItem">
                         <h2>${{+orderCarrito.total_compra + +orderCarrito.iva | thousands}}</h2>
                     </td>
                 </tr>
@@ -73,12 +73,15 @@
 
 
         <div id="legalcopy" class="justify-center font-bold text-base-100">
-            <p class="legal text-center">Gracias por su compra,</p><p class="text-center"> su numero es el {{infoBack?.id_compra}}</p>
+            <p class="legal text-center">Gracias por su compra,</p>
+            <p class="text-center text-3xl"> su numero es el {{infoBack?.id_compra}}</p>
              <p class="text-center">Le llamarán de la barra a la brevedad</p>
         </div>
-
+        <div class="qrcodeImage flex justify-center">
+            <qrcode [qrdata]="infoQr" [colorDark]="'#414558'" [width]="150" [errorCorrectionLevel]="'M'" [imageHeight]="15" [imageWidth]="15" ></qrcode>
+        </div>
         <p class="text-center">NO VÁLIDO COMO BOLETA</p>
         <!-- <p class="text-center">SOLO USO CONTROL INTERNO</p> -->
-
+        
     </div><!--End InvoiceBot-->
 </div><!--End Invoice-->

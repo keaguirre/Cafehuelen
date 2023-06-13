@@ -139,10 +139,11 @@
 - Ruta de print, se comienza a configurar print desde angular
 - Creacion de voucher de pago
 - Correcciones del catalogo
-
+- qrcode en el voucher
 
 # To do:
-- [ ] Integracion de MP.
+- [ ] Carousel en cafeCommit
+- [ ] post print, volver al catalogo
 - [ ] Catalogo biblioteca de audios investigar ['Howler.js', 'SoundJS', 'Web Audio API'].
 - [ ] SheperdJS para el tutorial.
 - [ ] Integrar audio y tutorial juntos en la seccion de enseñame a comprar del catalogo.
