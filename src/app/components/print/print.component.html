@@ -3,10 +3,10 @@
         <div class="info text-base-100 mt-4 ">
             <h2 class="font-bold mb-2 text-center">{{'{'}}...{{'}'}}cafeScript</h2>
             <ul class="mb-2">
-                <li><p>Sucursal:<br> Providencia, Manuel Montt #357</p></li>
-                <li><p>Email:<br> contacto@cafescript.com</p></li>
-                <li><p>Teléfono:<br> 28323775</p></li>
-                <li><p>Fecha:<br> {{infoBack?.fecha_compra | date: 'd/M/yyyy HH:m'}}</p></li>
+                <li><p class="">Sucursal: Providencia, Manuel Montt #357</p></li>
+                <li><p class="">Email: contacto@cafescript.com</p></li>
+                <li><p class="">Teléfono: 28323775</p></li>
+                <li><p class="">Fecha: {{infoBack?.fecha_compra | date: 'd/MM/yyyy HH:m'}}</p></li>
                 <!-- <li><p>Hora:<br> {{infoBack?.fecha_compra | date: 'HH:m'}}</p></li> -->
             </ul>
         </div>
@@ -73,9 +73,9 @@
 
 
         <div id="legalcopy" class="justify-center font-bold text-base-100">
-            <p class="legal text-center">Gracias por su compra,</p>
-            <p class="text-center text-3xl"> su numero es el {{infoBack?.id_compra}}</p>
-             <p class="text-center">Le llamarán de la barra a la brevedad</p>
+            <h3 class="legal text-center text footertext">Orden ingresada, su número es el</h3>
+            <h3 class="text-center footertext bg-accent "> {{infoBack?.id_compra}}</h3>
+            <h3 class="text-center footertext">Le llamarán de caja a la brevedad</h3>
         </div>
         <div class="qrcodeImage flex justify-center">
             <qrcode [qrdata]="infoQr" [colorDark]="'#414558'" [width]="150" [errorCorrectionLevel]="'M'" [imageHeight]="15" [imageWidth]="15" ></qrcode>

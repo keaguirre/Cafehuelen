@@ -14,15 +14,17 @@
     font-size: 0.9em;
 }
 #invoice-POS h3 {
-    font-size: 1.2em;
-    font-weight: 300;
-    line-height: 2em;
+    font-size: 0.6em;
+    line-height: 1.2em;
+    color: #666;
 }
+
 #invoice-POS p {
-    font-size: 0.7em;
+    font-size: 0.4em;
     color: #666;
     line-height: 1.2em;
 }
+
 #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
    /* Targets all id with 'col-' */
     border-bottom: 1px solid #eee;
