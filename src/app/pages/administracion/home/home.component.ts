@@ -23,6 +23,7 @@ export class HomeComponent {
   onOnInit(): void {
     console.log('home init')
     this.onList();
+    this.limitarTamanoPestanaNavegador();
   }
 
 
@@ -34,6 +35,13 @@ export class HomeComponent {
     });
   }
 
+  limitarTamanoPestanaNavegador() {
+    const tamanoMinimo = 800; // Puedes ajustar este valor según tus necesidades
+
+    if (window.innerWidth < tamanoMinimo) {
+      window.resizeTo(tamanoMinimo, window.innerHeight);
+    }
+  }
 
 
 }

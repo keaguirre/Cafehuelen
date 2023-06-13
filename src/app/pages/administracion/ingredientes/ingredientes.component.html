@@ -1,83 +1,99 @@
-<main>
-    <nav class="bg-gray-900">
-        <a class="text-2xl font-bold text-base-content m-5 fixed">
-            <span>{{'{..'}}</span><span class="text-warning">.</span><span>{{'}'}}cafe</span><span
-                class="text-warning">S</span><span>cript</span>
-        </a>
-        <div class=" ml-44">
-            <div class="bg-neutral py-4 ml-4 pl-4 shadow  text-2xl  text-white ">
-                <h1 class="font-bold pl-2">Ingredientes</h1>
+<main class="min-h-screen flex flex-col">
+    <nav class="bg-gray-900 flex">
+        <div class=" md:block items-center ml-5 mt-3 hidden">
+            <div class="text-2xl font-bold text-base-content" style="width: 172px;">
+                <span>{{'{..'}}</span><span class="text-warning">.</span><span>{{'}'}}cafe</span><span class="text-warning">S</span><span>cript</span>
+            </div>
+        </div>
+        <div class="flex-grow hidden md:block">
+            <div class="bg-neutral p-4 shadow text-2xl text-white text-left">
+                <h1 class="font-bold">Categorias</h1>
+            </div>
+        </div>
+        <div class="md:hidden">
+            <div class="navbar bg-base-100" id="navbar">
+            <div class="flex-none">
+                <ul class="menu menu-horizontal px-1">
+                <li><a routerLink="/admin/home" routerLinkActive="active">Home</a></li>
+                <li><a class="" routerLink="/admin/categoria" routerLinkActive="active">Categorias</a></li>
+                <li><a routerLink="/admin/ingredientes" routerLinkActive="active">Ingredientes</a></li>
+                <li><a routerLink="/admin/preparaciones" routerLinkActive="active">Preparaciones</a></li>
+                <li><a routerLink="/admin/detalle-prep" routerLinkActive="active">Detalles preparaciones</a></li>
+                </ul>
+            </div>
             </div>
         </div>
     </nav>
     <div class="flex flex-col md:flex-row bg-gray-900 "><!--Bg fondo-->
         <app-navbar-admin></app-navbar-admin>
-        <section id="main" class="bg-base-content h-screen flex-1 mx-auto   "><!-- Cartas y Formularios-->
-            <section> <!-- Tabla INGREDIENTE -->
-                <div class="py-40 w-10/12 mx-auto">
-                    <h1 class="text-4xl text-neutral font-bold pb-4 text-center">Ingredientes</h1>
-                    <table class="block mx-auto table table-zebra table-auto  md:w-32 lg:w-48">
-                        <thead class="text-xl text-base-content font-bold pb-10 text-center"><!-- head -->
-                            <tr class=" text-center text-1xl ">
-                                <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">ID</th>
-                                <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">Nombre</th>
-                                <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">Stock</th>
-                                <th class="sm:w-1/4 md:w-1/2 lg:w-1/3">Tipo Unidad ingrediente</th>
-                                <th class="sm:w-1/4 md:w-1/2 lg:w-1/3"></th>
-                                <th class="sm:w-1/4 md:w-1/2 lg:w-1/3"> 
-                                    <div class=" dropdown dropdown-left"><!--Inicio dropdown AGREGAR INGREDIENTE-->
-                                        <label  tabindex="0" class="btn m-1 btn-success">Agregar <i class="pl-2 fa-solid fa-plus"></i></label>
-                                        <div tabindex="0" class="dropdown-content card  w-96 p-2 shadow bg-neutral-focus">
-                                            <div class="card-body">
-                                                <h1 class="text-xl font-bold text-white text-center">Agregar Ingredientes</h1>
-                                                <form [formGroup]="formIngrediente" (ngSubmit)="onCreate('createIngre') ">
-                                                    <div class=" w-full">
-                                                        <div class="relative">
-                                                            <div class="form-control">
-                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                                    <span>Nombre</span>
-                                                                    <input (keyup)="passToLower(formIngrediente, 'nombre_ingre')" formControlName="nombre_ingre" type="text"
-                                                                        placeholder="Ingrese la descripcion" class="input input-bordered" />
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-control">
-                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                                    <span>Stock</span>
-                                                                    <input min="0" (keypress)="numberOnlyValidation($event)"
-                                                                        formControlName="stock_ingrediente" type="number"
-                                                                        placeholder="Ingrese la cantidad de stock"
-                                                                        class="input input-bordered"/>
-                                                                </label>
-                                                            </div>
-                                                            <div class=" mt-2 form-control">
+        <section id="main" class="bg-base-content  flex-1 mx-auto  "><!-- Cartas y Formularios-->
+            <section >
+                   <div class="pt-20 pb-72">
+                     <h1 class="text-4xl text-neutral font-bold pb-10 text-center">Ingredientes</h1>
+                     <div class=" ">
+                        <table class="block mx-auto table table-zebra w-full sm:w-1/4 md:w-2/6 lg:w-3/6 ">
+                          <thead class="text-4xl h-16  font-bold pb-10 text-center">
+                            <tr class=" text-center  text-1xl ">
+                              <th class="sm:w-1/6 md:w-1/4 lg:w-1/5">ID</th>
+                              <th class="sm:w-1/6 md:w-1/4 lg:w-1/5">Nombre</th>
+                              <th class="sm:w-1/6 md:w-1/4 lg:w-1/5">Stock</th>
+                              <th class="sm:w-1/6 md:w-1/4 lg:w-1/5">Tipo Unidad Ingrediente</th>
+                              <th class="sm:w-1/6 md:w-1/4 lg:w-1/5"></th>
+                              <th class="sm:w-1/6 md:w-1/4 lg:w-1/5">
+                                <div class=" dropdown dropdown-left"><!--Inicio dropdown AGREGAR INGREDIENTE-->
+                                    <label  tabindex="0" class="btn m-1 btn-success" (click)=" formIngrediente.reset()">Agregar <i class="pl-2 fa-solid fa-plus"></i></label>
+                                    <div tabindex="0" class="dropdown-content card  w-96 p-2 shadow bg-neutral-focus">
+                                        <div class="card-body">
+                                            <h1 class="text-xl font-bold text-white text-center">Agregar Ingredientes</h1>
+                                            <form [formGroup]="formIngrediente" (ngSubmit)="onCreate('createIngre') ">
+                                                <div class=" w-full">
+                                                    <div class="relative">
+                                                        <div class="form-control">
                                                             <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                                    <span>Unidad de medida</span>
-                                                                <select formControlName="tipo_unidad_ingrediente" name="mlgr" required
-                                                                    class="select select-bordered  w-full max-w-xl">
-                                                                    <option selected disabled>ML o GR</option>
-                                                                    <option value="ml">(Ml) Mililitro</option>
-                                                                    <option value="gr">(Gr) Gramos</option>
-                                                                </select>
+                                                                <span>Nombre</span>
+                                                                <input (keyup)="passToLower(formIngrediente, 'nombre_ingre')" formControlName="nombre_ingre" type="text"
+                                                                    placeholder="Ingrese la descripcion" class="input input-bordered" />
                                                             </label>
-                                                            </div>
-                                                            
-                                                            <button class="btn mt-2 w-full max-w-xl" type="submit">Crear</button>
                                                         </div>
-                                                    </div>  
-                                                </form>
-                                            </div>
+                                                        <div class="form-control">
+                                                            <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
+                                                                <span>Stock</span>
+                                                                <input min="0" (keypress)="numberOnlyValidation($event)"
+                                                                    formControlName="stock_ingrediente" type="number"
+                                                                    placeholder="Ingrese la cantidad de stock"
+                                                                    class="input input-bordered"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class=" mt-2 form-control">
+                                                        <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
+                                                                <span>Unidad de medida</span>
+                                                            <select formControlName="tipo_unidad_ingrediente" name="mlgr" required
+                                                                class="select select-bordered  w-full max-w-xl">
+                                                                <option selected disabled>ML o GR</option>
+                                                                <option value="ml">(Ml) Mililitro</option>
+                                                                <option value="gr">(Gr) Gramos</option>
+                                                            </select>
+                                                        </label>
+                                                        </div>
+                                                        
+                                                        <button class="btn mt-2 w-full max-w-xl" type="submit">Crear</button>
+                                                    </div>
+                                                </div>  
+                                            </form>
                                         </div>
-                                    </div><!--Fin dropdown AGREGAR INGREDIENTE-->
-                                </th>
+                                    </div>
+                                </div><!--Fin dropdown AGREGAR INGREDIENTE-->
+                              </th>
                             </tr>
-                        </thead>
-                        <tbody><!-- Body -->
-                            <tr class="text-center" *ngFor="let ingredienteTabla of responseListadoIngrediente | paginate:{itemsPerPage:5,currentPage:pagesIngre,id:'ingre'}">
-                                <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">{{ ingredienteTabla.id_ingre }}</td>
-                                <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">{{ ingredienteTabla.nombre_ingre | titlecase }}</td>
-                                <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">{{ ingredienteTabla.stock_ingrediente }}</td>
-                                <td class="sm:w-1/4 md:w-1/2 lg:w-1/3">{{ ingredienteTabla.tipo_unidad_ingrediente | titlecase }}</td>
-                                <td class="sm:w-1/4 md:w-1/2 lg:w-1/3"> 
+                          </thead>
+                          <tbody>
+                            <tr class="text-center h-16" *ngFor="let ingredienteTabla of responseListadoIngrediente | paginate:{itemsPerPage:5,currentPage:pagesIngre,id:'ingre'}">
+                              <td class="sm:w-1/6 md:w-1/4 lg:w-1/5">{{ ingredienteTabla.id_ingre }}</td>
+                              <td class="sm:w-1/6 md:w-1/4 lg:w-1/5">{{ ingredienteTabla.nombre_ingre | titlecase }}</td>
+                              <td class="sm:w-1/6 md:w-1/4 lg:w-1/5">{{ ingredienteTabla.stock_ingrediente }}</td>
+                              <td class="sm:w-1/6 md:w-1/4 lg:w-1/5">{{ ingredienteTabla.tipo_unidad_ingrediente | titlecase }}</td>
+                              <td class="sm:w-1/6 md:w-1/4 lg:w-1/5">
+                               <ng-container *ngIf="ingredienteTabla.stock_ingrediente">
                                     <div class="mr-10"><!--Inicio dropdown Agregar Stock-->
                                         <div class="dropdown dropdown-left">
                                             <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black" tabindex="0"
@@ -111,75 +127,78 @@
                                             </div>
                                         </div>
                                     </div> <!--FIN dropdown Agregar Stock-->
-                                </td>
-                                <td class="text-center sm:w-1/4 md:w-1/2 lg:w-1/3">
-                                    <div class="mr-10 ">
-                                        <div class="dropdown dropdown-left"><!--Inicio dropdown actualizar ingrediente-->
-                                            <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black" tabindex="0"
-                                            (click)="seleccionarId(ingredienteTabla.id_ingre) ; rellenarFormulario('formIngre')">Editar
-                                            <i class="pl-2 fa-solid fa-pencil text-green-600"></i></label>
-                                            <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-neutral-focus ">
-                                                <div class="card-body">
-                                                    <h1 class="text-4xl font-bold pb-10 text-white text-center">Actualizar Ingrediente</h1>
-                                                    <form [formGroup]="formIngrediente" (ngSubmit)="onActualizar('editIngre', this.idSeleccionado)">
-                                                        <div class="relative">
-                                                            <div class="form-control">
-                                                                <label class="input-group input-group-vertical mt-2 w-full max-w-xl">
-                                                                    <span>Ingrese una nueva descripción</span>
-                                                                    <input (keyup)="passToLower(formIngrediente, 'nombre_ingre')" formControlName="nombre_ingre" type="text"
-                                                                        placeholder="Ingrese una nueva descripción"
-                                                                        class="input input-bordered" />
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-control">
-                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                                    <span>Ingrese el nuevo stock</span>
-                                                                    <input min="0" formControlName="stock_ingrediente" type="number"
-                                                                        placeholder="Ingrese el nuevo stock"
-                                                                        class="input input-bordered" />
-                                                                </label>
-                                                            </div>
-                                                            <div class="mt-2 form-control">
-                                                                <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
-                                                                    <span>Unidad de medida</span>
-                                                                    <select formControlName="tipo_unidad_ingrediente" name="mlgr" required
-                                                                        class="select select-bordered  w-full max-w-xl">
-                                                                        <option selected disabled>ML o GR</option>
-                                                                        <option value="ml">(Ml) Mililitro</option>
-                                                                        <option value="gr">(Gr) Gramos</option>
-                                                                    </select>
-                                                                </label>
-                                                            </div>
-                                                            <button class="mt-4 btn w-full max-w-xl" type="submit">Actualizar</button><!--Al enviar el form si el envio fue valido, cambiar el contenido a un cambio realizado, que el modal se pueda cerrar haciendo click fuera tambien aparte de la x-->
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div><!--Fin dropdown actualizar ingrediente-->
-                                        <swal
-                                            #deleteIngreSwal
-                                            title="¿Estás seguro de eliminar {{ ingredienteTabla.nombre_ingre| titlecase}}?"
-                                            icon="question"
-                                            iconColor="#f8bb86"
-                                            fontText="bold"
-                                            confirmButtonText="<b>Sí,quiero eliminar</b>"
-                                            cancelButtonText="<b>Cancelar</b>"
-                                            confirmButtonColor = "#2b8565"
-                                            [showCancelButton]="true"
-                                            [focusCancel]="true"
-                                            (confirm)="(onDelete('deleteIngre', this.idSeleccionado))">
-                                        </swal>
-                                        <button 
-                                            [swal]="deleteIngreSwal"
-                                            class="btn bg-slate-700  btn-group-horizontal hover:text-black font-bold hover:bg-red-200"
-                                            (click)="seleccionarId(ingredienteTabla.id_ingre);  ">Eliminar
-                                            <i class="pl-2 fa-solid fa-trash text-red-600"></i>
-                                        </button>
-                                    </div>
-                                </td>
+                                   </ng-container>
+                              </td>
+                              <td class="sm:w-1/6 md:w-1/4 lg:w-1/5">
+                                <ng-container *ngIf="ingredienteTabla.stock_ingrediente && ingredienteTabla.id_ingre &&  ingredienteTabla.nombre_ingre">
+                                   <div class="mr-10 ">
+                                       <div class="dropdown dropdown-left"><!--Inicio dropdown actualizar ingrediente-->
+                                           <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black" tabindex="0"
+                                           (click)="seleccionarId(ingredienteTabla.id_ingre) ; rellenarFormulario('formIngre')">Editar
+                                           <i class="pl-2 fa-solid fa-pencil text-green-600"></i></label>
+                                           <div tabindex="0" class="dropdown-content card  w-92 p-2 shadow bg-neutral-focus ">
+                                               <div class="card-body">
+                                                   <h1 class="text-4xl font-bold pb-10 text-white text-center">Actualizar Ingrediente</h1>
+                                                   <form [formGroup]="formIngrediente" (ngSubmit)="onActualizar('editIngre', this.idSeleccionado)">
+                                                       <div class="relative">
+                                                           <div class="form-control">
+                                                               <label class="input-group input-group-vertical mt-2 w-full max-w-xl">
+                                                                   <span>Ingrese una nueva descripción</span>
+                                                                   <input (keyup)="passToLower(formIngrediente, 'nombre_ingre')" formControlName="nombre_ingre" type="text"
+                                                                       placeholder="Ingrese una nueva descripción"
+                                                                       class="input input-bordered" />
+                                                               </label>
+                                                           </div>
+                                                           <div class="form-control">
+                                                               <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
+                                                                   <span>Ingrese el nuevo stock</span>
+                                                                   <input min="0" formControlName="stock_ingrediente" type="number"
+                                                                       placeholder="Ingrese el nuevo stock"
+                                                                       class="input input-bordered" />
+                                                               </label>
+                                                           </div>
+                                                           <div class="mt-2 form-control">
+                                                               <label class="input-group input-group-vertical mt-4 w-full max-w-xl">
+                                                                   <span>Unidad de medida</span>
+                                                                   <select formControlName="tipo_unidad_ingrediente" name="mlgr" required
+                                                                       class="select select-bordered  w-full max-w-xl">
+                                                                       <option selected disabled>ML o GR</option>
+                                                                       <option value="ml">(Ml) Mililitro</option>
+                                                                       <option value="gr">(Gr) Gramos</option>
+                                                                   </select>
+                                                               </label>
+                                                           </div>
+                                                           <button class="mt-4 btn w-full max-w-xl" type="submit">Actualizar</button><!--Al enviar el form si el envio fue valido, cambiar el contenido a un cambio realizado, que el modal se pueda cerrar haciendo click fuera tambien aparte de la x-->
+                                                       </div>
+                                                   </form>
+                                               </div>
+                                           </div>
+                                       </div><!--Fin dropdown actualizar ingrediente-->
+                                       <swal
+                                           #deleteIngreSwal
+                                           title="¿Estás seguro de eliminar {{ ingredienteTabla.nombre_ingre| titlecase}}?"
+                                           icon="question"
+                                           iconColor="#f8bb86"
+                                           fontText="bold"
+                                           confirmButtonText="<b>Sí,quiero eliminar</b>"
+                                           cancelButtonText="<b>Cancelar</b>"
+                                           confirmButtonColor = "#2b8565"
+                                           [showCancelButton]="true"
+                                           [focusCancel]="true"
+                                           (confirm)="(onDelete('deleteIngre', this.idSeleccionado))">
+                                       </swal>
+                                       <button 
+                                           [swal]="deleteIngreSwal"
+                                           class="btn bg-slate-700  btn-group-horizontal hover:text-black font-bold hover:bg-red-200"
+                                           (click)="seleccionarId(ingredienteTabla.id_ingre);  ">Eliminar
+                                           <i class="pl-2 fa-solid fa-trash text-red-600"></i>
+                                       </button>
+                                   </div>
+                                </ng-container>
+                              </td>
                             </tr>
-                        </tbody>
-                        <tfoot><!-- foot -->
+                          </tbody>
+                          <tfoot><!-- foot -->
                             <tr><th></th>
                                 <th></th>
                                 <th></th>
@@ -197,15 +216,26 @@
                                     [autoHide]="true"
                                     [responsive]="true"
                                     [maxSize]="5"
-                                    class="font-bold text-sm pb-1 pt-5 items-center"></pagination-controls></th>
+                                     class=" font-bold text-sm pb-1 pt-5 items-center my-pagination badge bg-base-content">
+                                    <style>
+                                        .my-pagination ::ng-deep .ngx-pagination .current {
+                                            background-color: #364634;
+                                            color: #ffff;
+                                            border-color: red;
+                                            border-radius: 1;
+                                        }
+                                    </style>
+                                </pagination-controls></th>
                                 
                             </tr>
                         </tfoot>
-                    </table>
-                </div>
+                        </table>   
+                     </div>
+                   </div> 
             </section>
-            <!-- Fin Tabla INGREDIENTE -->
+            <!-- Fin Tabla INGREDIENTE -->    
         </section>
     </div>
     <app-footer-admin></app-footer-admin>
 </main>
+

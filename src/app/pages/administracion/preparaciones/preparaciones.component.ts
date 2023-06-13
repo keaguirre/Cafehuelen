@@ -218,7 +218,18 @@ toastError = Swal.mixin({
     popup: 'colored-toast'
   },
 })
-//FIN DECLARACION TOASTSs
+//FIN DECLARACION TOASTS
+//rellenar las tablas con lineas vacias---------------------------------------------------------
+padTableData(data: any[]) {
+  const remainingItems = 5 - (data.length % 5);
+  if (remainingItems !== 5) {
+    for (let i = 0; i < remainingItems; i++) {
+      data.push({ id_cat: null, nombre_cat: null }); // Agrega objetos vacíos a la lista
+    }
+  }
+  return data;
+}
+//FIN rellenar las tablas con lineas vacias-------------------------------------------------------
 //LISTADOS----------------------------------------------------------------------------------------
   onList(cod: string): void{
     switch(cod) { 

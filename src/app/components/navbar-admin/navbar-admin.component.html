@@ -1,17 +1,20 @@
-<div  class="md:relative md:h-full md:w-48 content-center fixed pt-0"><!--Nav Izquierda-->
-    <div class="mt-40 md:relative md:h-full z-10 w-full md:w-96 content-center fixed">
-        <div [class.navbar-fixed]="isNavbarFixed" class="mt-navbar" >
-            <!-- <img src="https://img.icons8.com/color/96/null/coffee-to-go.png%22/%3E"> -->
-            <ul class="menu w-48 list-reset flex flex-row md:flex-col pt-5 md:py-5 md:text-left">
-                <li><a routerLink="/admin/home" routerLinkActive="active">Home</a></li>
-                <li><a class="" routerLink="/admin/categoria" routerLinkActive="active">Categorias</a></li>
-                <li><a routerLink="/admin/ingredientes" routerLinkActive="active">Ingredientes</a></li>
-                <li><a routerLink="/admin/preparaciones" routerLinkActive="active">Preparaciones</a></li>
-                <li><a routerLink="/admin/detalle-prep" routerLinkActive="active">Detalles preparaciones</a></li>
-            </ul>
-            <div class="mt-96">
-                <a class="fixed bottom-0 left-0 mt-20 mb-10 ml-5 btn btn-secondary" (click)="cerrarSesion()">Cerrar sesión</a>
-              </div>
+<div class="md:relative md:h-full md:w-48 content-center fixed pt-0"><!--Nav Izquierda-->
+    <div class="hidden md:block mt-36 md:relative md:h-full z-10 w-full md:w-96 content-center fixed">
+      <!-- Este contenido se mostrará solo en pantallas grandes -->
+      <div [class.navbar-fixed]="isNavbarFixed" class="mt-navbar">
+        <!-- <img src="https://img.icons8.com/color/96/null/coffee-to-go.png%22/%3E"> -->
+        <ul class="menu w-48 list-reset flex flex-row md:flex-col pt-5 md:py-5 md:text-left">
+          <li><a routerLink="/admin/home" routerLinkActive="active">Home</a></li>
+          <li><a class="" routerLink="/admin/categoria" routerLinkActive="active">Categorias</a></li>
+          <li><a routerLink="/admin/ingredientes" routerLinkActive="active">Ingredientes</a></li>
+          <li><a routerLink="/admin/preparaciones" routerLinkActive="active">Preparaciones</a></li>
+          <li><a routerLink="/admin/detalle-prep" routerLinkActive="active">Detalles preparaciones</a></li>
+        </ul>
+        <div class="mt-96">
+          <a class="fixed bottom-0 left-0 mt-20 mb-10 ml-5 btn btn-secondary" (click)="cerrarSesion()">Cerrar sesión</a>
         </div>
-    </div>
-</div><!-- fin barra izquierda -->
+      </div>
+    </div><!-- fin barra izquierda -->
+  
+    <!-- Botón para abrir el sidebar -->
+    

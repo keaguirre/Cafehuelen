@@ -13,12 +13,7 @@ import { ImgServiceService } from 'src/app/services/imgService/img-service.servi
 })
 export class IngredientesComponent {
   response!: any
-  responseListadoCategorias: any = []
-  responseListadoCategoriasDes: any = []
-  responseListadoPreparacionesDes: any = []
-  responseListadoPreparacion: any = [];
   responseListadoIngrediente: any = [];
-  responseListadoDetallePrep: any = [];
   private refrescar= new Subject<void>();
   idSeleccionado!: number;
   modalDelete: boolean = false;
@@ -29,73 +24,24 @@ export class IngredientesComponent {
   showToast!: boolean;
   suscripcion!:Subscription;
   isChecked:Boolean=false;
-  pagesCat: number = 1;
   pagesIngre: number = 1;
-  pagesPrep: number = 1;
-  pagesDetallePrep: number = 1;
-  pagesPrepDes: number = 1;
-  pagesCatDes: number = 1;
   totalItems:number=0;
   missingCategories: any[] = [];
   imagenSelecta: any | undefined;
   base64Image:any;
-  formularioActivo: string = '';
-  
+  formularioActivo: string ='';
   ngOnInit(): void {
-    this.onList('listCat');
-    this.onList('listPrep');
     this.onList('listIngre');
-    this.onList('listCatDesh'); 
-    this.onList('listDetallePrep'); 
-    this.onList('listPrepDesh');
     this.suscripcion=this.refrescar.subscribe(()=>{
-      this.onList('listCat');
-      this.onList('listPrep');
       this.onList('listIngre');
-      this.onList('listDetallePrep');
-      this.onList('listCatDesh');
-      this.onList('listPrepDesh');
     });
   }
   ngOnDestroy():void{
     this.suscripcion.unsubscribe();
   }
-  // ngOnChange();void{}; pasarle la funcion del checkbox 
+
   constructor(private prodService:ProductosService, private imgService:ImgServiceService){}
 
-  //API subir imagen a imgbb-----------------------------------------------------------------
-async onImagenSelecta(event: any) {
-  const imagen: FileList | null = event?.target?.files;
-  if (imagen && imagen.length > 0) {
-    this.imagenSelecta = imagen.item(0);
-    this.convertToBase64(this.imagenSelecta);
-    const imagenUrl = await this.imgService.uploadImage(this.imagenSelecta);
-
-    if (this.formIngrediente.controls['imagen_ingre']) {
-      this.formIngrediente.controls['imagen_ingre'].setValue(imagenUrl);
-    }
-    if (this.formPreparaciones.controls['imagen_prep']) {
-      this.formPreparaciones.controls['imagen_prep'].setValue(imagenUrl);
-    }
-  }
-}
-convertToBase64(file: File) {
-  const reader = new FileReader();
-  reader.onloadstart = () => {
-    this.base64Image = reader.result as string;
-  };
-  reader.readAsDataURL(file);
-}
-async uploadImage() {
-  if (this.imagenSelecta) {
-    const imagenUrl = await this.imgService.uploadImage(this.imagenSelecta);
-    console.log('URL', imagenUrl);
-    this.formIngrediente.controls['imagen_ingre'].setValue(imagenUrl);
-    this.formPreparaciones.controls['imagen_prep'].setValue(imagenUrl);
-  
-  }
-}
-//FIN API subir imagen a imgbb-------------------------------------------------------------------
   //Esta funcion le pasa el id a la variable para que en el update se la injecte al formulario edit para enviarlo
   public seleccionarId(id: number): void { 
     this.idSeleccionado = id;
@@ -110,13 +56,6 @@ async uploadImage() {
     }
   }  
 ​//Fin Validaciones--------------------------------------------------------------------------
-//Encontrar el nombre de la categoria-------------------------------------------------------
-  encontrarNombreCat(id:number): string{
-    this.nombreCatBuscada = this.responseListadoCategorias.find((i:any) => i.id_cat === id);
-      let nombreCat = this.nombreCatBuscada['nombre_cat']
-    return nombreCat;
-  }  
-//Fin encontrar el nombre de la categoria---------------------------------------------------
   //toggle-tabla cat deshabilitadas---------------------------------------------------------
   toggleChecked() {this.isChecked = !this.isChecked;}
  // Fin toggle-tabla cat deshabilitadas-----------------------------------------------------
@@ -137,30 +76,7 @@ async uploadImage() {
     tamano_envase: new FormControl(''),
     cantidad_envase: new FormControl(''),
   });
-  public formPreparaciones: FormGroup = new FormGroup({
-    id_prep: new FormControl('',[Validators.required]), 
-    nombre_prep: new FormControl('',[Validators.required]), 
-    descripcion_prep: new FormControl('',[Validators.required]),
-    imagen_prep: new FormControl('',[Validators.required]),
-    id_cat_prep: new FormControl('',[Validators.required]),
-    precio_prep: new FormControl('',[Validators.required]),
-  });
-  public formDetallePrep: FormGroup = new FormGroup({
-    id_detalle_prep: new FormControl('',[Validators.required],),
-    id_prep: new FormControl('',[Validators.required],),
-    id_ingre: new FormControl('',[Validators.required]),
-    cantidad_necesaria: new FormControl('',[Validators.required]),
-    tipo_unidad: new FormControl('',[Validators.required]),
-  });
-  public formCategorias: FormGroup = new FormGroup({
-    id_cat: new FormControl('',[Validators.required]),
-    nombre_cat: new FormControl('',[Validators.required, Validators.minLength(3)]),
-               
-  });
-  public formCategoriasEdit: FormGroup = new FormGroup({
-    id_cat: new FormControl('',[Validators.required]),
-    nombre_cat: new FormControl('',[Validators.required, Validators.minLength(3)]),
-  });
+
 //FIN FORMULARIOS---------------------------------------------------------------------------------
 //DECLARACION DE TOASTS---------------------------------------------------------------------------
 //TOAST OK
@@ -198,26 +114,27 @@ toastError = Swal.mixin({
   },
 })
 //FIN DECLARACION TOASTSs
+//rellenar las tablas con lineas vacias---------------------------------------------------------
+padTableData(data: any[]) {
+  const remainingItems = 5 - (data.length % 5);
+  if (remainingItems !== 5) {
+    for (let i = 0; i < remainingItems; i++) {
+      data.push({ id_cat: null, nombre_cat: null }); // Agrega objetos vacíos a la lista
+    }
+  }
+  return data;
+}
+//FIN rellenar las tablas con lineas vacias-------------------------------------------------------
 //LISTADOS----------------------------------------------------------------------------------------
   onList(cod: string): void{
-    switch(cod) { 
-      case 'listCat': { 
-        try{  
-          this.prodService.obtenerListadoCategoria().then(respuesta => {
-            this.responseListadoCategorias = respuesta; //obj con listado ngFor
-            this.totalItems = this.responseListadoCategorias.length;
-          });
-        }catch (e: any){
-            console.log(e);
-        }
-        break; 
-      } 
+    switch(cod) {  
       case 'listIngre': { 
         try{
           this.prodService.obtenerListadoIngrediente().then(respuesta => {
             this.responseListadoIngrediente = respuesta; //obj con listado ngFor
             this.responseListadoIngrediente = this.responseListadoIngrediente.sort()
             this.totalItems  = respuesta.length;
+            this.responseListadoIngrediente = this.padTableData(respuesta);
             
           });
         }catch (e: any){
@@ -225,54 +142,6 @@ toastError = Swal.mixin({
         }
       break; 
       } 
-      case 'listDetallePrep': { 
-        try{
-          this.prodService.obtenerListadoDetallePrep().then(respuesta => {
-            this.responseListadoDetallePrep = respuesta; //obj con listado ngFor
-            
-            
-          });
-        }catch (e: any){
-          console.log(e);
-        }
-      break; 
-      } 
-      case 'listPrep': { 
-        try{
-          this.prodService.obtenerListadoPreparacion().then(respuesta => {
-            this.responseListadoPreparacion = respuesta; //obj con listado ngFor
-            
-            
-          });
-        }catch (e: any){
-          console.log(e);
-        }
-      break; 
-      }
-      case 'listCatDesh': { 
-        try{
-          this.prodService.obtenerListadoCategoriaDesahabilitadas().then(respuesta => {
-            this.responseListadoCategoriasDes = respuesta; //obj con listado ngFor
-            
-            
-          });
-        }catch (e: any){
-          console.log(e);
-        }
-      break; 
-      }
-      case 'listPrepDesh': { 
-        try{
-          this.prodService.obtenerListadoPreparacionesDesahabilitadas().then(respuesta => {
-            this.responseListadoPreparacionesDes = respuesta; //obj con listado ngFor
-            
-            
-          });
-        }catch (e: any){
-          console.log(e);
-        }
-      break; 
-      }
       default: { 
         console.log('Error codigo: '+cod)
       break; 
@@ -283,30 +152,7 @@ toastError = Swal.mixin({
 //CREACIONES----------------------------------------------------------------------------------------
   onCreate(cod: string): void{
     switch(cod) { 
-      case 'createCat': { 
-        try{
-          let formCatValue = JSON.stringify(this.formCategorias.value);
-          this.prodService.crearCategoria(formCatValue).then(respuesta => { this.response = respuesta;
-            if(this.response.includes(this.formCategorias.value.nombre_cat)){
-              this.toastCheck.fire({icon: 'success',title: 'categoria correctamente creada'})  
-              this.refrescar.next();
-              this.totalItems = this.responseListadoCategorias.length;
-              this.formCategorias.reset();
-            }else{
-              this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al crear la categoría. Inténtelo nuevamente más tarde.'})  
-              this.formCategorias.reset();
-            }
-            this.formCategorias.reset();
-          })
-          .catch(err => { //cachea el error de promise al crear una categoria
-            this.toastError.fire({icon: 'error',title: err});
-            this.formCategorias.reset();
-          });
-        }catch (e: any){
-          console.log(e);
-        }
-      break; 
-      } 
+      
       case 'createIngre': {
         try{
           let formIngreValue = JSON.stringify(this.formIngrediente.value);
@@ -330,53 +176,7 @@ toastError = Swal.mixin({
         }
       break; 
       } 
-      case 'createDetallePrep': { 
-        try{
-          let formDetallePrepValue = JSON.stringify(this.formDetallePrep.value);
-          this.prodService.crearDetallePrep(formDetallePrepValue).then(respuesta => {
-            this.response = respuesta;
-            if (typeof this.response.id_prep == 'number' && typeof this.response.id_ingre == 'number'){
-              this.toastCheck.fire({icon: 'success',title: 'Ingrediente de receta creado correctamente'})  
-              this.formDetallePrep.reset();
-              this.refrescar.next();
-            }else{
-              this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al crear la preparacion. Inténtelo nuevamente más tarde.'})  
-              this.formDetallePrep.reset();
-            }
-            this.formDetallePrep.reset();
-          })
-          .catch(err => {
-            this.toastError.fire({icon: 'error', title: err})
-            this.formDetallePrep.reset();
-          });
-        }catch (e: any){
-          console.log(e);
-        }
-      break;
-      } 
-      case 'createPrep': { 
-        try{
-          let formPrepValue = JSON.stringify(this.formPreparaciones.value);
-          this.prodService.crearPreparaciones(formPrepValue).then(respuesta => {
-            this.response = respuesta;
-            if (this.formPreparaciones.value.nombre_prep === this.response.nombre_prep){
-              this.toastCheck.fire({icon: 'success',title: 'Preparación creada correctamente'})  
-              this.refrescar.next()
-              this.formPreparaciones.reset();
-            }else{
-              this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al crear la preparación. Inténtelo nuevamente más tarde.'})  
-              this.formPreparaciones.reset();
-            }
-            this.formPreparaciones.reset();
-            ;
-          })
-          .catch(err => {
-            this.toastError.fire({icon: 'error', title: err})
-            this.formPreparaciones.reset();
-          });
-        }catch (e: any){console.log(e);}
-      break; 
-      }default: { 
+      default: { 
         console.log('Error codigo: '+cod)
         this.toastCheck.fire({icon: 'error',title: 'Error desconocido, intente nuevamente más tarde. Inténtelo nuevamente más tarde.'})  
       break; 
@@ -387,27 +187,6 @@ toastError = Swal.mixin({
 //ACTUALIZACIONES----------------------------------------------------------------------------------------
   onActualizar(cod: string, id: number): void{
     switch(cod) { 
-      case 'editCat': { 
-        try{
-          this.idSeleccionado = id;
-          this.formCategorias.controls['id_cat'].setValue(this.idSeleccionado)
-          let formCatValue = JSON.stringify(this.formCategorias.value);
-          this.rellenarFormulario('formCat');
-          this.prodService.actualizarCategoria(this.formCategorias.value.id_cat, formCatValue).then(respuesta => {
-            this.response = respuesta;
-            if(this.formCategorias.value.id_cat === this.response.id_cat){
-              this.toastCheck.fire({icon: 'success', title: 'La categoria se actualizó correctamente.'})
-              this.refrescar.next();  
-              this.formCategorias.reset();
-            }else{
-              this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al actualizar la categoría. Inténtelo nuevamente más tarde.'})  
-              this.formCategorias.reset();
-            }
-            this.formCategorias.reset();
-          });
-        }catch (e: any){console.log(e);}
-      break; 
-      } 
       case 'editIngre': { 
         try{
           this.idSeleccionado = id;
@@ -429,90 +208,6 @@ toastError = Swal.mixin({
         }catch (e: any){console.log(e);}
       break; 
       }
-      case 'editDetallePrep': { 
-        try{
-          this.idSeleccionado = id;
-          this.formDetallePrep.controls['id_detalle_prep'].setValue(this.idSeleccionado)
-          let formDetallePrepValue = JSON.stringify(this.formDetallePrep.value);
-          console.log(formDetallePrepValue);
-          this.prodService.actualizarDetallePrep(this.formDetallePrep.value.id_detalle_prep, formDetallePrepValue).then(respuesta => {
-            console.log('val: '+Object.keys(respuesta))
-            this.response = respuesta
-            if(this.formDetallePrep.value.id_detalle_prep === this.response.id_detalle_prep){
-              this.toastCheck.fire({ icon: 'success', title: 'El detalle de preparación se actualizó correctamente.'})  
-              this.refrescar.next();
-              this.formDetallePrep.reset();
-            }else{
-              this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al actualizar el ingrediente de receta. Inténtelo nuevamente más tarde.'})  
-              this.formDetallePrep.reset();
-            }
-            this.formDetallePrep.reset();
-          });
-        }catch (e: any){console.log(e);}
-      break; 
-      } 
-      case 'editPrep': { 
-        try{
-          this.idSeleccionado = id;
-          this.formPreparaciones.controls['id_prep'].setValue(this.idSeleccionado)
-          let formPrepValue = JSON.stringify(this.formPreparaciones.value);
-          this.prodService.actualizarPreparacion(this.formPreparaciones.value.id_prep, formPrepValue).then(respuesta => {
-            this.response = respuesta;
-            if(this.formPreparaciones.value.id_prep == this.response.id_prep){
-              this.toastCheck.fire({icon: 'success', title: 'La preparación se actualizó correctamente.'})  
-              this.refrescar.next();
-              this.formPreparaciones.reset();
-            }else{
-              this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al actualizar la preparación. Inténtelo nuevamente más tarde.'})  
-              this.formPreparaciones.reset();
-            }
-            this.formPreparaciones.reset();
-          });
-        }catch (e: any){
-          console.log(e);
-        }
-      break; 
-      }
-      case 'editCatDesh': {
-      try {
-        this.idSeleccionado = id;
-        let formCatValue = JSON.stringify({"id_cat":this.idSeleccionado,"estado":true});
-        this.prodService.actualizarCategoriaDesh(this.idSeleccionado, formCatValue).then(respuesta => {
-            this.response= respuesta;
-          if(this.idSeleccionado == this.response.id_cat){
-            this.toastCheck.fire({icon: 'success', title: 'El cambio de estado se realizó exitosamente.'})  
-              this.refrescar.next();
-              this.toggleChecked();
-          }else{
-            this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al cambiar el estado. Inténtelo nuevamente más tarde.'})  
-            this.formPreparaciones.reset();
-          }
-          });
-        }catch (e: any) {
-        console.log(e);
-        } 
-      break;
-      }
-      case 'editPrepDesh': {
-        try {
-          this.idSeleccionado = id;
-          let formPrepValue = JSON.stringify({"id_ingre":this.idSeleccionado,"estado":true});
-          this.prodService.actualizarPreparacionDesh(this.idSeleccionado, formPrepValue).then(respuesta => {
-              this.response= respuesta;
-            if(this.idSeleccionado == this.response.id_prep){
-              this.toastCheck.fire({icon: 'success', title: 'El cambio de estado se realizó exitosamente.'})  
-                this.refrescar.next();
-                this.toggleChecked();
-            }else{
-              this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al cambiar el estado. Inténtelo nuevamente más tarde.'})  
-              this.formPreparaciones.reset();
-            }
-            });
-          }catch (e: any) {
-          console.log(e);
-          } 
-        break;
-        }
       default: { 
         console.log('Error codigo: '+cod)
         this.toastCheck.fire({icon: 'error',title: 'Error desconocido, intente nuevamente más tarde. Inténtelo nuevamente más tarde.'})  
@@ -527,19 +222,6 @@ toastError = Swal.mixin({
 //ELIMINAR DESHABILITAR----------------------------------------------------------------------------------------
 onDelete(cod: string, id: number): void{
   switch(cod) { 
-    case 'deleteCat': {  
-      this.idSeleccionado = id;
-      this.prodService.disableCategoria(this.idSeleccionado).then(respuesta => {
-        this.response = respuesta;
-        if(this.idSeleccionado == this.response.id_cat){
-          this.toastCheck.fire({ icon: 'success', title: 'Categoria eliminada correctamente.'})
-          this.refrescar.next();
-        }else{
-          this.toastError.fire({ icon: 'error',title: 'Ha ocurrido un error al eliminar la categoría. Inténtelo nuevamente más tarde.'})  
-        }
-      });
-    break; 
-    } 
     case 'deleteIngre': { 
       this.idSeleccionado = id;
       this.prodService.disableIngrediente(this.idSeleccionado).then(respuesta => {
@@ -553,32 +235,7 @@ onDelete(cod: string, id: number): void{
       });
     break; 
     } 
-    case 'deleteDetallePrep': { 
-      this.idSeleccionado = id;
-      this.prodService.disableDetallePrep(this.idSeleccionado).then(respuesta => {
-        this.response = respuesta;
-        if(this.idSeleccionado == this.response.id_detalle_prep){
-          this.toastCheck.fire({icon: 'success', title: 'Detalle de preparación deshabilitado correctamente.'})
-          this.refrescar.next();  
-        }else{
-          this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al eliminar el ingrediente de receta. Inténtelo nuevamente más tarde.'})  
-        }
-      });
-    break;
-    }
-    case 'deletePrep': { 
-      this.idSeleccionado = id;
-      this.prodService.disablePreparacion(this.idSeleccionado).then(respuesta => {
-        this.response = respuesta;
-        if(this.idSeleccionado == this.response.id_prep){
-          this.toastCheck.fire({ icon: 'success', title: 'Preparación deshabilitada correctamente.' }) 
-          this.refrescar.next(); 
-        }else{
-          this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al eliminar la preparación. Inténtelo nuevamente más tarde.'})  
-        }
-      });
-    break;
-    }default: {
+    default: {
       console.log('Error codigo: '+cod)
       this.toastError.fire({icon: 'error',title: 'Error desconocido, intente nuevamente más tarde. Inténtelo nuevamente más tarde.'})  
     break; 
@@ -588,61 +245,23 @@ onDelete(cod: string, id: number): void{
 //RELLENAR CAMPOS EDIT
 rellenarFormulario(cod:string): void{
     switch(cod){
-      case 'formCat':{
-        this.prodService.obtenerCategoriaDetalle(this.idSeleccionado).then(respuesta =>{
-          this.formCategorias.patchValue({
-            id_cat: this.idSeleccionado,
-            nombre_cat: respuesta['nombre_cat'],
-            estado: respuesta['estado']
-          })
-        })
-        break
-      }
       case 'formIngre':{
         this.prodService.obtenerIngredienteDetalle(this.idSeleccionado).then(respuesta =>{
           this.formIngrediente.patchValue({
             id_ingre: this.idSeleccionado,
             nombre_ingre: respuesta['nombre_ingre'],
-            stock_ingrediente: respuesta['stock_ingre'],
+            stock_ingrediente: respuesta['stock_ingrediente'],
             tipo_unidad_ingrediente: respuesta['tipo_unidad_ingrediente'],
-            estado: respuesta['estado']
           })
         })
         break
       }
-      case 'formPreparaciones': {
-        this.prodService.obtenerPreparacionDetalle(this.idSeleccionado).then(respuesta =>{
-          this.formPreparaciones.patchValue({
-            id_prep: this.idSeleccionado,
-            nombre_prep: respuesta['nombre_prep'],
-            descripcion_prep: respuesta['descripcion_prep'],
-            imagen_prep: respuesta['imagen_prep'],
-            precio_prep: respuesta['precio_prep'],
-            id_cat_prep: respuesta['id_cat_prep'],
-            estado: respuesta['estado']
-          })
-        })
-        break
-      }
-      case 'formDetallePrep':{
-        this.prodService.obtenerDetallePrepDetalle(this.idSeleccionado).then(respuesta =>{
-          this.formDetallePrep.patchValue({
-            id_detalle_prep: this.idSeleccionado,
-            id_prep: respuesta['id_prep'],
-            id_ingre: respuesta['id_ingre'],
-            cantidad_necesaria: respuesta['cantidad_necesaria'],
-            tipo_unidad: respuesta['tipo_unidad'],
-            estado: respuesta['estado']
-          })
-        })
-        break
-      }default:{
+     default:{
         console.log('Error codigo: '+cod)
         this.toastCheck.fire({icon: 'error',title: 'Error desconocido, intente nuevamente más tarde. Inténtelo nuevamente más tarde.'})  
       }
     }
   }  
-
 //Agregar Stock
   agregarStock(id:number){
     this.idSeleccionado= id;
@@ -667,80 +286,4 @@ rellenarFormulario(cod:string): void{
   }
 //Fin Agregar Stock
 
-
-
 }
-
-//ELIMINAR ----------------------------------------------------------------------------------------
-
-  // onDelete(cod: string, id: number): void{
-  //   switch(cod) { 
-  //     case 'deleteCat': {  
-  //       this.idSeleccionado = id;
-  //       this.prodService.borrarCategoria(this.idSeleccionado).then(respuesta => {
-  //         this.response = respuesta.message;
-  //         console .log('response: '+this.response)
-  //         if(this.response.includes('eliminada correctamente')){
-  //           this.toastCheck.fire({
-  //             icon: 'success',
-  //             title: this.response
-  //           })  
-  //         }else{
-  //           this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al eliminar la categoría. Inténtelo nuevamente más tarde.'})  
-  //         }
-  //       });
-  //     break; 
-  //     } 
-  //     case 'deleteIngre': { 
-  //       this.idSeleccionado = id;
-  //       this.prodService.borrarIngrediente(this.idSeleccionado).then(respuesta => {
-  //         console.log('k: '+Object.keys(respuesta))
-  //         if(this.response.includes('eliminado correctamente')){
-  //           this.toastCheck.fire({
-  //             icon: 'success',
-  //             title: this.response
-  //           })  
-  //         }else{
-  //           this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al eliminar la categoría. Inténtelo nuevamente más tarde.'})  
-  //         }
-  //       });
-  //     break; 
-  //     } 
-  //     case 'deleteDetallePrep': { 
-  //       this.idSeleccionado = id;
-  //       this.prodService.borrarDetallePrep(this.idSeleccionado).then(respuesta => {
-  //         this.response = respuesta.message;
-  //         if(this.response.contains('correctamente eliminado')){
-  //           this.toastCheck.fire({
-  //             icon: 'success',
-  //             title: this.response
-  //           })  
-  //         }else{
-  //           this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al eliminar el ingrediente de receta. Inténtelo nuevamente más tarde.'})  
-  //         }
-  //       });
-  //     break; 
-  //     }
-  //     case 'deletePrep': { 
-  //       this.idSeleccionado = id;
-  //       this.prodService.borrarPreparacion(this.idSeleccionado).then(respuesta => {
-  //         this.response = respuesta.message;
-  //         if(this.response.includes('eliminada correctamente')){
-  //           this.toastCheck.fire({
-  //             icon: 'success',
-  //             title: this.response
-  //           })  
-  //         }else{
-  //           this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al eliminar la preparación. Inténtelo nuevamente más tarde.'})  
-  //         }
-  //       });
-  //     break; 
-  //     }default: { 
-  //       console.log('Error codigo: '+cod)
-  //       this.toastError.fire({icon: 'error',title: 'Error desconocido, intente nuevamente más tarde. Inténtelo nuevamente más tarde.'})  
-  //     break; 
-  //     } 
-  //   } 
-  // }
-//FIN ELIMINAR----------------------------------------------------------------------------------------
-

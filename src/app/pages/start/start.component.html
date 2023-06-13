@@ -1,50 +1,28 @@
-<!-- 
-    <div class=" hero bg-neutral-content" >
-        <div class="card-normal bg-base-100 rounded-xl ">
-            <div class="card-body items-center text-center">
-                
-            </div>   
+<div class="bg-neutral-focus items-center mx-auto min-h-screen flex">
+    <section class="card border bg-base-300 text-center p-20 mx-auto flex items-center">
+      <div class="text-center">
+        <span class="text-base-content text-7xl font-semibold">
+          {{'{...}'}}
+          bienvenidoScript
+        </span>
+        <p class="text-secondary text-3xl mt-10">Seleccione un modo de arranque</p>
+      </div>
+      <div class="mt-14 mb-14 flex flex-wrap justify-center items-center mx-auto">
+        <div class="sm:w-full md:w-auto lg:w-auto mb-4 sm:mx-2 md:mx-4 lg:mx-4">
+          <button routerLink="/catalogo" class="bg-neutral btn sm:btn-sm md:btn-md lg:btn-lg glass mx-auto btn-wide">
+            <p class="text-base-content text-end text-xl">Modo Catálogo</p>
+          </button>
         </div>
-            <input type="checkbox" id="my-modal-5" class="modal-toggle " />
-            <label for="my-modal-5" class="modal cursor-pointer ">
-                <label class="rounded-xl bg-BeigeHuelen" >
-                    <label for="my-modal-5" class="btn btn-l text-xl btn-circle btn-ghost ml-72 mt-3">✕</label>
-                    <app-login-admin></app-login-admin>
-                </label>
-            </label>
-    </div> -->
-    <div class=" bg-neutral-focus items-center mx-auto min-h-screen flex">
-
-        <section class=" card border bg-base-300 text-center p-20  mx-auto flex items-center ">
-            <div class=" text-center">
-                <span class=" text-base-content text-7xl font-semibold" >{{'{...}'}}
-                    bienvenidoScript</span>
-                <p class="text-secondary text-3xl mt-10">Seleccione un modo de arranque</p>
-            </div>
-            <div class="mt-14 mb-14 flex justify-center items-center mx-auto">
-                <table class="">
-                    <tr>
-                        <th>
-                            <button routerLink="/catalogo" class="bg-neutral btn  sm:btn-sm md:btn-md lg:btn-lg glass mx-auto btn-wide mr-5">
-                                <p class="text-base-content text-end text-xl">Modo Catálogo</p>
-                            </button>
-                        </th>
-                        <th>
-                            <label routerLink="/admin/home" for="my-modal-5" class="bg-neutral btn  sm:btn-sm md:btn-md lg:btn-lg glass btn-wide  mx-5">
-                                <p class="text-base-content text-end text-xl">Administrador</p>
-                            </label>
-                        </th>
-                        <th>
-                            <label routerLink="/api-watcher" for="my-modal-5" class="bg-neutral btn  sm:btn-sm md:btn-md lg:btn-lg glass mx-auto btn-wide ml-5 ">
-                                <p class="text-base-content text-center text-xl">Compras recientes</p>
-                            </label>
-                        </th>
-                    </tr>
-                </table>
-            </div>
-        </section>
-    </div>
-    <!---->
-    
-    
-    
+        <div class="sm:w-full md:w-auto lg:w-auto mb-4 sm:mx-2 md:mx-4 lg:mx-4">
+          <label routerLink="/admin/home" for="my-modal-5" class="bg-neutral btn sm:btn-sm md:btn-md lg:btn-lg glass btn-wide">
+            <p class="text-base-content text-end text-xl">Administrador</p>
+          </label>
+        </div>
+        <div class="sm:w-full md:w-auto lg:w-auto mb-4 sm:mx-2 md:mx-4 lg:mx-4">
+          <label routerLink="/api-watcher" for="my-modal-5" class="bg-neutral btn sm:btn-sm md:btn-md lg:btn-lg glass mx-auto btn-wide">
+            <p class="text-base-content text-center text-xl">Compras recientes</p>
+          </label>
+        </div>
+      </div>
+    </section>
+  </div>
