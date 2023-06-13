@@ -10,6 +10,12 @@ export class NavbarAdminComponent {
   constructor(private router:Router) { }
   isNavbarFixed = false;
 
+  sidebarVisible = false;
+  abrirSidebar() {
+    this.sidebarVisible = true;
+  }
+
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(event: Event) {
   const verticalOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -23,5 +29,18 @@ export class NavbarAdminComponent {
       this.router.navigateByUrl('/admin');
     }
   }
-}
+
+  esconderNav() {
+    let prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("navbar")!.style.top = "0";
+      } else {
+        document.getElementById("navbar")!.style.top = "-50px";
+      }
+      prevScrollpos = currentScrollPos;
+    };
+  }
+}  
 

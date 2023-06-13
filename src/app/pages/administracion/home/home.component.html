@@ -1,22 +1,34 @@
-<main>
-    <nav class="bg-gray-900">
-        <a class="text-2xl font-bold text-base-content m-5 fixed">
-            <span>{{'{..'}}</span><span class="text-warning">.</span><span>{{'}'}}cafe</span><span
-                class="text-warning">S</span><span>cript</span>
-        </a>
-        <div class=" ml-44">
-            <div class="bg-neutral py-4 ml-4 pl-4 shadow  text-2xl  text-white ">
-                <h1 class="font-bold pl-2">Bienvenido al panel de administrador</h1>
+<main class="min-h-screen flex flex-col">
+    <nav class="bg-gray-900 flex">
+        <div class=" md:block items-center ml-5 mt-3 hidden">
+            <div class="text-2xl font-bold text-base-content" style="width: 172px;">
+                <span>{{'{..'}}</span><span class="text-warning">.</span><span>{{'}'}}cafe</span><span class="text-warning">S</span><span>cript</span>
+            </div>
+        </div>
+        <div class="flex-grow hidden md:block">
+            <div class="bg-neutral p-4 shadow text-2xl text-white text-left">
+                <h1 class="font-bold">Categorias</h1>
+            </div>
+        </div>
+        <div class="md:hidden">
+            <div class="navbar bg-base-100" id="navbar">
+            <div class="flex-none">
+                <ul class="menu menu-horizontal px-1">
+                <li><a routerLink="/admin/home" routerLinkActive="active">Home</a></li>
+                <li><a class="" routerLink="/admin/categoria" routerLinkActive="active">Categorias</a></li>
+                <li><a routerLink="/admin/ingredientes" routerLinkActive="active">Ingredientes</a></li>
+                <li><a routerLink="/admin/preparaciones" routerLinkActive="active">Preparaciones</a></li>
+                <li><a routerLink="/admin/detalle-prep" routerLinkActive="active">Detalles preparaciones</a></li>
+                </ul>
+            </div>
             </div>
         </div>
     </nav>
-    <div class="flex flex-col md:flex-row bg-gray-900 "><!--Bg fondo-->
+    <div class="flex flex-col md:flex-row flex-1"><!-- Bg fondo -->
         <app-navbar-admin></app-navbar-admin>
-        <section id="main" class="bg-base-content  flex-1 mx-auto  "><!-- Cartas y Formularios-->
+        <section id="main" class="bg-base-content flex-1"><!-- Cartas y Formularios -->
             <app-graficos-admin></app-graficos-admin>
         </section>
-        
     </div>
     <app-footer-admin></app-footer-admin>
 </main>
-

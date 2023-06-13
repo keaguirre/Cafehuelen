@@ -1,64 +1,65 @@
-<section class="bg-base-content display-inline m-10 ">
-    <!--cards-->
-    <table class=" my-auto mx-12 p-3  ">
-        <th class="w-2/12 h-2/6 "> 
-            <div class=" card  m-5 bg-neutral">
-                <div class="items-center card-body text-center">
+<div class="container mx-auto">
+    <section class="bg-base-content display-inline m-10">
+        <div class="flex flex-wrap justify-center mx-10">
+            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 p-3">
+                <div class="card h-full m-5 bg-neutral">
+                    <div class="items-center card-body text-center">
                     <h2 class="card-title text-primary text-2xl">Numero de ventas</h2>
                     <div class="stat">
                         <div class="stat-title">Total hoy</div>
                         <div class="stat-value">{{responseComprasHoy.count | thousands}}</div>
                     </div>
-                </div>
-            </div>
-        </th>
-        <th class="w-2/12 h-2/6 "> 
-            <div class=" card m-5 bg-neutral">
-                <div class="items-center card-body text-center">
-                    <h2 class="card-title text-primary text-2xl">Total recaudado</h2>
-                    <div class="stat">
-                        <div class="stat-title">Total hoy</div>
-                        <div class="stat-value">{{responseRecaudacionHoy.total_compra | thousands}}</div>
                     </div>
                 </div>
             </div>
-        </th>
-        <th class="w-2/12 h-2/6 ">
-            <div class=" card m-5 bg-neutral">
-                <div class="items-center card-body text-center">
-                    <h2 class="card-title text-primary text-2xl">Numero de ventas</h2>
-                    <div class="stat">
-                        <div class="stat-title">Esta semana</div>
-                        <div class="stat-value">{{responseComprasSemanal.count | thousands}}</div>
+            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 p-3">
+                <div class="card h-full m-5 bg-neutral">
+                    <div class="items-center card-body text-center">
+                        <h2 class="card-title text-primary text-2xl">Total recaudado</h2>
+                        <div class="stat">
+                            <div class="stat-title">Total hoy</div>
+                            <div class="stat-value">{{responseRecaudacionHoy.total_compra | thousands}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </th>
-        <th class="w-2/12 h-2/6  "> 
-            <div class=" card m-5 bg-neutral ">
-                <div class="items-center card-body text-center">
-                    <h2 class="card-title text-primary text-2xl">Total recaudado</h2>
-                    <div class="stat">
-                        <div class="stat-title">Esta semana</div>
-                        <div class="stat-value">{{responseRecaudacionSemanal.total_compra | thousands}}</div>
+            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 p-3">
+                <div class="card h-full m-5 bg-neutral">
+                    <div class="items-center card-body text-center">
+                        <h2 class="card-title text-primary text-2xl">Numero de ventas</h2>
+                        <div class="stat">
+                            <div class="stat-title">Esta semana</div>
+                            <div class="stat-value">{{responseComprasSemanal.count | thousands}}</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </th>
-    </table>
-    <div ><!-- cards-->
-    </div>
-    <div class="chart-container bg-neutral-focus mx-16 p-3 my-10 rounded-lg">
-        <canvas  id="comprasDiarias" ></canvas>
-    </div> 
-    <div class="chart-container bg-neutral-focus mx-16 pl-3 my-10 rounded-lg">
-        <canvas id="ingresoDiario" ></canvas>
-    </div>
-    <div class="chart-container bg-neutral-focus mx-16 pl-3 my-10 rounded-lg">
-        <canvas id="compraSemanalMes" ></canvas>
-    </div>
-    <div class="chart-container bg-neutral-focus mx-16 pl-3 my-10 rounded-lg">
-        <canvas id="ingresoSemanalMes" ></canvas>
-    </div>
-</section>
-
+            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 p-3">
+                <div class="card h-full m-5 bg-neutral">
+                    <div class="items-center card-body text-center">
+                        <h2 class="card-title text-primary text-2xl">Total recaudado</h2>
+                        <div class="stat">
+                            <div class="stat-title">Esta semana</div>
+                            <div class="stat-value">{{responseRecaudacionSemanal.total_compra | thousands}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-40"><!-- cards-->
+            
+            <div class="chart-container bg-neutral-focus mx-4 sm:mx-8 md:mx-12 lg:mx-16 xl:mx-16 pl-3 my-10 rounded-lg">
+                <canvas  id="comprasDiarias" ></canvas>
+            </div> 
+            <div class="chart-container bg-neutral-focus mx-4 sm:mx-8 md:mx-12 lg:mx-16 xl:mx-16 pl-3 my-10 rounded-lg">
+                <canvas id="ingresoDiario" ></canvas>
+            </div>
+            <div class="chart-container bg-neutral-focus mx-4 sm:mx-8 md:mx-12 lg:mx-16 xl:mx-16 pl-3 my-10 rounded-lg">
+                <canvas id="compraSemanalMes" ></canvas>
+            </div>
+            <div class="chart-container bg-neutral-focus mx-4 sm:mx-8 md:mx-12 lg:mx-16 xl:mx-16 pl-3 my-10 rounded-lg">
+                <canvas id="ingresoSemanalMes" ></canvas>
+            </div>
+        </div>
+    </section>
+</div>
