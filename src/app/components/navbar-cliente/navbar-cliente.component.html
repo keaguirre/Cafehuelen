@@ -33,7 +33,7 @@
 
     <ng-template #carrito>
 
-        <div class="w-72 bg-neutral flex-grow overflow-y-auto lg:h-96 md:h-40" >
+        <div class="w-72 bg-neutral flex-grow overflow-y-auto lg:h-96 md:h-40">
             <ul class=" list-none p-0">
                 <li class="mb-2" *ngFor="let item of itemsCarrito()">
                     <div class="flex items-center">
@@ -43,7 +43,7 @@
                         <div class="flex items-center justify-between flex-grow">
                             <div class="w-16">
                                 <div class="my-4 flex items-center">
-                                    <p  class="font-semibold  text-neutral-content mx-2">{{ item.producto.nombre_prep |
+                                    <p class="font-semibold  text-neutral-content mx-2">{{ item.producto.nombre_prep |
                                         titlecase}}
                                     </p>
                                     <p class="font-semibold text-accent"> $ {{item.producto.precio_prep *
@@ -53,15 +53,14 @@
                                     <p class=" text-s font-semibold p-2 text-neutral-content">Un. </p>
                                     <button class="btn btn-s bg-neutral-focus"
                                         (click)="decrementarCantidad(item)">-</button>
-                                    <span
-                                        class="text-error-content font-semibold ">{{item.cantidad}}</span>
+                                    <span class="text-error-content font-semibold ">{{item.cantidad}}</span>
                                     <button class="btn btn-s bg-neutral-focus"
                                         (click)="incrementarCantidad(item)">+</button>
                                 </div>
                             </div>
 
                             <div class="flex items-center">
-                                <button class="btn btn-square btn-lg btn-error" (click)="eliminarItem(item)"><i
+                                <button class="btn btn-square btn-lg btn-error no-animation" (click)="eliminarItem(item)"><i
                                         class="fa-regular fa-trash-can"></i></button>
                             </div>
                         </div>
@@ -73,26 +72,31 @@
 
 
     <div class="absolute bottom-0 w-full bg-neutral ">
-        <div class="container mx-auto lg:py-4 lg:h-52 md:py-0 md:h-24">
+        <div class="container mx-auto lg:py-4 lg:h-52 md:py-0 md:h-24 mb-10 ml-5">
             <h3 class="text-center items-start font-bold text-base-content mb-4 lg:text-3xl md:text-xl">Total</h3>
-
             <ul>
                 <li *ngIf="itemsCarrito().length === 0; else totalcompra">
                     <p class="text-center">Tu carrito está vacío.</p>
                     <br>
                 </li>
             </ul>
-            <ng-template #totalcompra>
-                <div>
-                    <p class="text-center text-accent lg:text-4xl md:text-2xl mb-5 ">$ {{totalCarrito() | thousands}}
-                    </p>
-                    <div class="container justify-center mx-auto btn-group">
-                        <button class="btn text-xs btn-success" (click)="botonPreCheckout()">Ir a pagar</button>
-                        <button class="btn text-xs btn-error" (click)="botonClearCart()">Limpiar bolsa</button>
-                    </div>
-                </div>
+            <ng-template #totalcompra >
+                    <p class="text-center text-accent lg:text-4xl md:text-2xl mb-5">$ {{totalCarrito() | thousands}}</p>
+                    <ul class="">
+                        <li>
+                            <button class="btn btn-wide text-neutral text-xs btn-success mb-4" (click)="verCarrito()">
+                                Ver carrito
+                                <i class=" ml-3 fa-solid fa-cart-shopping"><span class="ml-2 badge badge-sm indicator-item">{{carritoLength()}}</span></i>
+                            </button>
+                        </li>
+                        <li>
+                            <button class="btn text-xs text-base-content btn-wide btn-error" (click)="botonClearCart()">Limpiar bolsa</button>
+                        </li>        
+                    </ul>
+                                
                 <br>
             </ng-template>
         </div>
     </div>
+    
 </nav>

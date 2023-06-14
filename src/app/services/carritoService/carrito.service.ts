@@ -334,33 +334,7 @@ export class CarritoService {
         this.sendOrder(this.getCart);
         Swal.fire({
             html:
-                '<div class="row">' +
-                '<div class="col-md-6">' +
-                // '<img src="https://icons8.com/icon/5biqtJIXNcxO/shopping-cart" class="img-fluid" alt="Responsive image">' +
-                '</div>' +
-                '<h3 class="card-title text-3xl text-center font-bold text-gray-800 mb-2"> Carrito de compras </h3>' +
-                '<div class="col-md-6">' +
-                '<ul>' +
-                this.itemsCarrito().map((item: any) => {
-                    const nombreProductoTitleCase =
-                        this.titleCasePipe.transform(item.producto.nombre_prep);
-                    return (
-                        '<li>' +
-                        nombreProductoTitleCase +
-                        ' x ' +
-                        item.cantidad +
-                        ' = $ ' +
-                        item.producto.precio_prep * item.cantidad +
-                        '</li>'
-                    );
-                }) +
-                '</div>' +
-                '<div class="col-md-6">' +
-                '<p class="text-center">Total: $ ' +
-                this.getCartTotal() +
-                '</p>' +
-                '</div>' +
-                '</div>',
+                '<app-carrito></app-carrito>',
             focusConfirm: false,
             confirmButtonText: '<b>Finalizar compra</b>',
             confirmButtonColor: '#2b8565',

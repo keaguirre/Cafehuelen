@@ -16,7 +16,8 @@
             <ng-container *ngFor="let item of Menu?.items, let i = index">
                 <section id="card_Item{{ item.id_prep }}" class="card card-compact overflow-clip w-60 h-96 ">
                     <label (click)="ModalPreparacion(item)">
-                        <figure class="cardFig"><img style="display: inline-block; background-repeat: no-repeat;background-position-y: bottom;background-position-x: center;   background-size: 100%; background-image: url(../../../assets/catalogo/dracula4.svg);"
+                        <figure class="cardFig"><img style="display: inline-block; background-repeat: no-repeat;background-position-y: bottom;background-position-x: center;
+                                                                   background-size: 100%; background-image: url(../../../assets/Catalogo/dracula4.svg);"
                                             class="" src="{{ item.imagen_prep }}" alt="{{ item.nombre_prep }}" class="">
                         </figure>
                         <div class="card-body content-center ghost h-40">

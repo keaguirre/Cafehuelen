@@ -7,6 +7,7 @@ import { TitleCasePipe } from '@angular/common';
 import { CompraService } from 'src/app/services/compraService/compra.service';
 import { HttpHeaders } from '@angular/common/http';
 import { CatalogoComponent } from 'src/app/pages/catalogo/catalogo.component';
+import { ThousandsPipe } from 'src/app/pipes/thousands.pipe';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class MenuComponent implements OnInit {
     public compraDetalle: any;
     mostrarCarrito: boolean = false;
     mostrarCatalogo: boolean = true;
+    public cantidadItem: number = 1;
 
     httpOptions = {
         headers: new HttpHeaders({
@@ -57,7 +59,9 @@ export class MenuComponent implements OnInit {
         private prodService: ProductosService,
         private carritoService: CarritoService,
         private titlecasePipe: TitleCasePipe,
-        private compraService: CompraService
+        private compraService: CompraService,
+        private thousandsPipe: ThousandsPipe,
+        
     ) {}
 
     //LISTADO OBJETOS DE LA API
@@ -155,6 +159,8 @@ export class MenuComponent implements OnInit {
         const nombreProductoTitleCase = this.titlecasePipe.transform(
             item.nombre_prep
         );
+        const precioProducto = this.thousandsPipe.transform(item.precio_prep);
+        
         Swal.fire({
             html:
                 '<div class="row">' +
@@ -169,9 +175,19 @@ export class MenuComponent implements OnInit {
                 '<div class="col-md-6">' +
                 //'<p class="text-left">Ingredientes: ' + item.ingredientes_prep + '</p>' +
                 // '<p class="text-left">Descripción: ' + item.descripcion_prep + '</p>' +
-                '<p class="text-gray-800 font-bold mb-0">Precio: $ ' +
-                item.precio_prep +
+                '<p class="text-gray-800 font-bold mb-0">Precio: $' +
+                 precioProducto +
                 '</p>' +
+                // '<p class="text-gray-800 font-bold mb-0">Cantidad: ' +
+                // this.cantidadItem +
+                // '</p>' +
+                '<div class="input-group mb-3">' +
+                '<button class="btn btn-s bg-neutral-focus no-animation" (click)="disminuirCantidad()">-' +
+                '</button>' +
+                '<span class="text-error-content font-semibold ">'+ this.cantidadItem +'</span>' +
+                '<button class="btn btn-s bg-neutral-focus no-animation" (click)="aumentarCantidad()">+' +
+                '</button>' +
+                '</div>' +
                 '</div>' +
                 '</div>',
             focusConfirm: false,
@@ -185,6 +201,18 @@ export class MenuComponent implements OnInit {
             },
         });
     }
+
+    aumentarCantidad() {
+        this.cantidadItem = this.cantidadItem + 1;
+    }
+
+    disminuirCantidad() {
+        if (this.cantidadItem > 1) {
+            this.cantidadItem = this.cantidadItem - 1;
+        }
+    }
+
+
 
     refrescarMenu() {
         this.refrescar.next();

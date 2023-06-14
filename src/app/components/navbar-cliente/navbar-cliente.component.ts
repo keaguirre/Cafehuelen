@@ -5,6 +5,7 @@ import { TitleCasePipe } from '@angular/common';
 import { CarritoComponent } from '../carrito/carrito.component';
 import { ProductosService } from 'src/app/services/ProductosService/productos.service';
 import { CompraService } from 'src/app/services/compraService/compra.service';
+import { CatalogoComponent } from 'src/app/pages/catalogo/catalogo.component';
 
 @Component({
     selector: 'app-navbar-cliente',
@@ -14,14 +15,14 @@ import { CompraService } from 'src/app/services/compraService/compra.service';
 export class NavbarClienteComponent {
     ngOnInit(): void {
         this.CatalogoMenunavbar();
-        
     }
 
     constructor(
         private carritoService: CarritoService,
         private titlecasePipe: TitleCasePipe,
         private prodService: ProductosService,
-        private compraService: CompraService
+        private compraService: CompraService,
+        private catalogo: CatalogoComponent
     ) {}
 
     public MenuCatalogonavbar: any[] = [];
@@ -93,9 +94,16 @@ export class NavbarClienteComponent {
     clearOrderData() {
         this.carritoService.clearOrderData();
     }
-    
 
     botonPreCheckout() {
         this.carritoService.botonPreCheckout();
+    }
+
+    carritoLength() {
+        return this.carritoService.getCartTotalItems();
+    }
+
+    verCarrito() {
+        this.catalogo.mostrarComponenteCarrito();
     }
 }

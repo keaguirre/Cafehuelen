@@ -59,7 +59,10 @@ import { QRCodeModule } from 'angularx-qrcode';
     NgxPaginationModule,
     QRCodeModule
   ],
-  providers: [TitleCasePipe],
+  providers: [
+              TitleCasePipe,
+              ThousandsPipe
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
