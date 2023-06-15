@@ -263,27 +263,30 @@ rellenarFormulario(cod:string): void{
     }
   }  
 //Agregar Stock
-  agregarStock(id:number){
-    this.idSeleccionado= id;
-     const tamanoEnvase = this.formIngrediente.get('tamano_envase')!.value;
-     const cantidadEnvase = this.formIngrediente.get('cantidad_envase')!.value;
-    const stockIngre= tamanoEnvase * cantidadEnvase;
+agregarStock(id: number) {
+  this.idSeleccionado = id;
+  const tamanoEnvase = this.formIngrediente.get('tamano_envase')!.value;
+  const cantidadEnvase = this.formIngrediente.get('cantidad_envase')!.value;
+  const stockIngre = tamanoEnvase * cantidadEnvase;
 
-    this.formIngrediente.patchValue({stock_ingrediente:stockIngre});
-    
-    this.prodService.agregarStockIngre(this.idSeleccionado, this.formIngrediente.value).then(respuesta =>{
-      this.response= respuesta;
-      if(this.formIngrediente.value.id_ingre === this.response.id_ingre){
-        this.toastCheck.fire({ icon: 'success', title: 'Stock actualizado correctamente.'})  
-        this.refrescar.next(); 
-        this.formIngrediente.reset();
-      }else{
-        this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al ingresar el stock. Inténtelo nuevamente más tarde.'})  
-        this.formIngrediente.reset();
-      }
+  const stockActual = this.formIngrediente.get('stock_ingrediente')!.value;
+  const nuevoStock = stockActual + stockIngre;
+
+  this.formIngrediente.patchValue({ stock_ingrediente: nuevoStock });
+
+  this.prodService.agregarStockIngre(this.idSeleccionado, this.formIngrediente.value).then(respuesta => {
+    this.response = respuesta;
+    if (this.formIngrediente.value.id_ingre === this.response.id_ingre) {
+      this.toastCheck.fire({ icon: 'success', title: 'Stock actualizado correctamente.' });
+      this.refrescar.next();
       this.formIngrediente.reset();
-    })
-  }
+    } else {
+      this.toastError.fire({ icon: 'error', title: 'Ha ocurrido un error al ingresar el stock. Inténtelo nuevamente más tarde.' });
+      this.formIngrediente.reset();
+    }
+    this.formIngrediente.reset();
+  });
+}
 //Fin Agregar Stock
 
 }
