@@ -8,7 +8,7 @@
                 </a>
             </li>
             <div class="divider font-bold text-success text-2xl">Categorias</div>
-            <div class="overflow-y-auto overflow-x-hidden lg:h-52 md:h-32">
+            <div class="overflow-y-auto overflow-x-hidden lg:h-1/3 md:h-32">
                 <!-- <h2 class=" font-bold text-success mb-4 text-2xl text-center">Categorias</h2> -->
                 <ng-container *ngFor="let categoria of MenuCatalogonavbar">
                     <div class="">
@@ -33,7 +33,7 @@
 
     <ng-template #carrito>
 
-        <div class="animate__animated animate__fadeIn w-72 bg-neutral flex-grow overflow-y-auto lg:h-72 md:h-40">
+        <div class="animate__animated animate__fadeIn w-72 bg-neutral flex-grow overflow-y-auto overflow-x-hidden lg:h-96 md:h-40">
             <ul class=" list-none p-0">
                 <li class="mb-2" *ngFor="let item of itemsCarrito()">
                     <div class="flex items-center">
