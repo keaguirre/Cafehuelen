@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CarritoService } from 'src/app/services/carritoService/carrito.service';
 import Swal from 'sweetalert2';
 import { TitleCasePipe } from '@angular/common';
@@ -106,4 +106,35 @@ export class NavbarClienteComponent {
     verCarrito() {
         this.catalogo.mostrarComponenteCarrito();
     }
+    
+    @ViewChild('carritoComponent', { static: false })
+    carritoComponent!: ElementRef;
+    
+    ngAfterViewInit() {
+        this.hideCarritoComponent(); // Oculta el componente inicialmente
+      }
+    
+      verBolsa() {
+        const carritoContent = this.carritoComponent.nativeElement.innerHTML;
+    
+        Swal.fire({
+          html: carritoContent,
+          background: 'rgb(24, 25, 32)',
+          width: '80%',
+          focusConfirm: false,
+          confirmButtonText: '<b>Finalizar compra</b>',
+          confirmButtonColor: '#2b8565',
+          showCancelButton: true,
+          cancelButtonText: '<b>Seguir comprando</b>',
+        });
+      }
+    
+      hideCarritoComponent() {
+        this.carritoComponent.nativeElement.style.display = 'none';
+      }
+    
+      showCarritoComponent() {
+        this.carritoComponent.nativeElement.style.display = 'block';
+      }
+    
 }

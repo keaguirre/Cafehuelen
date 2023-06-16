@@ -2,3 +2,7 @@
     height: 15rem;
     object-fit: cover;
 }
+
+.w-100{
+    width: 36rem;
+}

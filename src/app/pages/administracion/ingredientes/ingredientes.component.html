@@ -93,7 +93,7 @@
                               <td class="sm:w-1/6 md:w-1/4 lg:w-1/5">{{ ingredienteTabla.stock_ingrediente }}</td>
                               <td class="sm:w-1/6 md:w-1/4 lg:w-1/5">{{ ingredienteTabla.tipo_unidad_ingrediente | titlecase }}</td>
                               <td class="sm:w-1/6 md:w-1/4 lg:w-1/5">
-                               <ng-container *ngIf="ingredienteTabla.stock_ingrediente">
+                               <ng-container *ngIf="ingredienteTabla.stock_ingrediente >= 0 ">
                                     <div class="mr-10"><!--Inicio dropdown Agregar Stock-->
                                         <div class="dropdown dropdown-left">
                                             <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black" tabindex="0"
@@ -130,7 +130,7 @@
                                    </ng-container>
                               </td>
                               <td class="sm:w-1/6 md:w-1/4 lg:w-1/5">
-                                <ng-container *ngIf="ingredienteTabla.stock_ingrediente && ingredienteTabla.id_ingre &&  ingredienteTabla.nombre_ingre">
+                                <ng-container *ngIf="ingredienteTabla.stock_ingrediente >= 0 && ingredienteTabla.id_ingre &&  ingredienteTabla.nombre_ingre">
                                    <div class="mr-10 ">
                                        <div class="dropdown dropdown-left"><!--Inicio dropdown actualizar ingrediente-->
                                            <label class="btn bg-slate-700 hover:bg-green-500 hover:text-black" tabindex="0"

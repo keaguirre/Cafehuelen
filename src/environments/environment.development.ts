@@ -33,7 +33,8 @@ export const environment = {
     
     //Bloque compras----------------------------------------
     urlCompras: 'http://127.0.0.1:8000/api/v1/compras/',
-    urlItemCompra:'http://127.0.0.1:8000/api/v1/items_compra/'
+    urlItemCompra:'http://127.0.0.1:8000/api/v1/items_compra/',
+    urlItemCompraAuto:'http://127.0.0.1:8000/api/v1/items_compra_auto/',
         
     // urlApiLogin: 'https://cafehuelenbackend.onrender.com/api/superv_local/',
     // urlApiIngredientes: 'https://cafehuelenbackend.onrender.com/api/ingrediente/',

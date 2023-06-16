@@ -3,7 +3,7 @@
 </head>
 
 <body class="">
-    <header class="mx-auto px-4 py-6 containerWidthWithoutCart">
+    <header class="ml-10 py-6 containerWidthWithoutCart">
         <div class="container containerWidthWithoutCart ">
             <div class="navbar bg-base-100">
                 <div class="flex-1">
@@ -11,9 +11,9 @@
                         <span>{{'{..'}}</span><span class="text-warning">.</span><span>{{'}'}}cafe</span><span
                             class="text-warning">S</span><span>cript</span>
                     </a>
-                    <div class="animate__animated animate__fadeIn">
-                        <a class="btn btn-ghost ml-7 normal-case text-end text-xl">Preparaciones</a>
-                        <a class="btn btn-ghost ml-7 normal-case text-end text-xl">¿Cómo comprar?</a>
+                    <div class="animate__animated animate__fadeIn flex ">
+                        <!-- <a class="btn btn-ghost ml-7 normal-case text-end text-xl">Preparaciones</a> -->
+                        <a class="btn btn-ghost ml-7 normal-case object-end text-end text-xl">¿Cómo comprar?</a>
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
 
     <main>
         <ng-container *ngIf="mostrarCarrito; else Hero">
-            <div class="content-center">
+            <div class=" animate__animated animate__fadeIn content-center">
                 <app-carrito></app-carrito>
             </div>
             <div class="bg-neutral btm-nav">
@@ -79,8 +79,10 @@
 
 
         <ng-container *ngIf="mostrarCatalogo ">
-            <app-navbar-cliente></app-navbar-cliente>
-            <app-menu></app-menu>
+            <div class="animate__animated animate__fadeIn">
+                <app-navbar-cliente></app-navbar-cliente>
+                <app-menu></app-menu>
+            </div>
         </ng-container>
 
         <br>

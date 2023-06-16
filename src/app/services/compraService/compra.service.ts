@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment.development';
 export class CompraService {
   urlCompras:string = environment.urlCompras;
   urlItemCompra:string = environment.urlItemCompra
+  urlItemCompraAuto:string = environment.urlItemCompraAuto
 
   constructor(private http: HttpClient) { }
 
@@ -57,6 +58,39 @@ export class CompraService {
         error: err => {
           if (err.status == 500){
             console.log(err.statusText)
+            //internal server error
+          }
+          else if(err.status == 400){
+            console.log(err.statusText)
+            //bad request
+          }
+          else if(err.status == 404){
+            console.log(err.statusText)
+            //404 not found
+          }
+          else if(err.status == 409){
+            console.log(err.statusText)
+            //409 Conflict
+          }
+          else {
+            // console.log(err.status)
+            reject(err.status);
+          }
+        }
+      });
+    });
+  }
+
+  //Crear ItemCompraAuto 
+  mandarItemCompraAuto(itCompra: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.urlItemCompraAuto, itCompra).subscribe({
+        next: respuesta => {
+          resolve(respuesta);
+        },
+        error: err => {
+          if (err.status == 500){
+            console.log(err)
             //internal server error
           }
           else if(err.status == 400){

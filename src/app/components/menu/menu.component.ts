@@ -162,12 +162,13 @@ export class MenuComponent implements OnInit {
         const precioProducto = this.thousandsPipe.transform(item.precio_prep);
         
         Swal.fire({
+            width: '30%',
             html:
                 '<div class="row">' +
                 '<div class="col-md-6">' +
                 '<img src="' +
                 item.imagen_prep +
-                '" class="img-fluid" alt="Responsive image">' +
+                '" class="img-fluid w-96 h-96 object-cover" alt="Responsive image">' +
                 '</div>' +
                 '<h3 class="card-title text-3xl text-center font-bold text-gray-800 mb-2"> Agregar ' +
                 nombreProductoTitleCase +
@@ -195,6 +196,7 @@ export class MenuComponent implements OnInit {
             cancelButtonText: '<b>Cancelar</b>',
             confirmButtonColor: '#2b8565',
             showCancelButton: true,
+            
             preConfirm: () => {
                 this.carritoService.addtoCart(item);
                 this.refrescarMenu();

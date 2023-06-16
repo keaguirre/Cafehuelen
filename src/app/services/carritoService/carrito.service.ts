@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
+import { ThousandsPipe } from 'src/app/pipes/thousands.pipe';
 import { CompraService } from '../compraService/compra.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { _isClickEvent } from 'chart.js/dist/helpers/helpers.core';
 
 @Injectable({
     providedIn: 'root',
 })
-
 export class CarritoService {
     response!: any;
     ultimaCompra: any;
 
     constructor(
+        private thousandsPipe: ThousandsPipe,
         private titleCasePipe: TitleCasePipe,
         private compraService: CompraService,
         private Router: Router
@@ -204,20 +206,20 @@ export class CarritoService {
         return total * 0.19;
     }
 
-    OnSubmitItemCompra(id_compra: number) {
-        let cart = this.getCart();
+    // OnSubmitItemCompra(id_compra: number) {
+    //     let cart = this.getCart();
 
-        for (let item in cart) {
-            let id_prep = cart[item].producto.id_prep;
-            let cantidad = cart[item].cantidad;
-            let precio = cart[item].producto.precio_prep;
-            let itemCompra = { id_compra, id_prep, cantidad, precio };
-            this.compraService.crearItemCompra(itemCompra).then((res) => {
-                this.response = res;
-                console.log('response', this.response);
-            });
-        }
-    }
+    //     for (let item in cart) {
+    //         let id_prep = cart[item].producto.id_prep;
+    //         let cantidad = cart[item].cantidad;
+    //         let precio = cart[item].producto.precio_prep;
+    //         let itemCompra = { id_compra, id_prep, cantidad, precio };
+    //         this.compraService.crearItemCompra(itemCompra).then((res) => {
+    //             this.response = res;
+    //             console.log('response', this.response);
+    //         });
+    //     }
+    // }
 
     sendOrder(order: any): void {
         let tipo_servicio_compra = 'Pa LLevar'; // Pa LLevar, Delivery
@@ -236,10 +238,57 @@ export class CarritoService {
             iva,
             procesador_pago_compra,
             id_transaccion_compra,
-            totem_compra
+            totem_compra,
         };
         localStorage.setItem('orderData', JSON.stringify(orderData));
     }
+   
+    public verificadorBoolean: boolean = false;
+
+
+    async verificadorStock(): Promise<boolean> {
+        console.log('verificadorStock corriendo');
+        
+        let ArraydescuentoInventario: any = [];
+        
+        this.getCartItems().map((item: any) => {
+            let id_prep = item.producto.id_prep;
+            let cantidad_item = item.cantidad;
+            let descuentoInventario = {
+                id_prep,
+                cantidad_item,
+            };
+            ArraydescuentoInventario = [
+                ...ArraydescuentoInventario,
+                descuentoInventario,
+            ];
+        });
+        console.log('---- valor antes consulta', this.verificadorBoolean)
+        // console.log('ArraydescuentoInventario', ArraydescuentoInventario);
+        const resp = await this.compraService
+            .mandarItemCompraAuto(ArraydescuentoInventario)
+            .then((res) => {
+                this.response = res;
+                console.log('response', this.response);
+                console.log('res ', res);
+                if (res[0].includes('Stock actualizado correctamente')) {
+                    this.verificadorBoolean = true;
+                    return true
+                } else {
+                    this.verificadorBoolean = false;
+                    return false
+                }
+            })
+            .catch((err) => {
+                console.log('err', err);
+                this.verificadorBoolean = false;
+                console.log('---- valor en error', this.verificadorBoolean)
+               return false;
+            });
+            console.log('---- valor después', this.verificadorBoolean)
+        return resp;
+    }
+
     sendOrderItem(orderItem: any): void {
         this.getCartItems().map((item: any) => {
             let id_prep = item.producto.id_prep;
@@ -255,13 +304,12 @@ export class CarritoService {
                 total_item,
             };
 
+            // console.log('ArraydescuentoInventario', ArraydescuentoInventario);
             // console.log('itemCompra', itemCompra);
-
             this.compraService
                 .crearItemCompra(itemCompra)
                 .then((res) => {
                     this.response = res;
-
                 })
                 .catch((err) => {
                     console.log('err', err);
@@ -281,6 +329,7 @@ export class CarritoService {
             return null;
         }
     }
+
     itemsCarritoservice: any;
 
     onCreate(cod: string): void {
@@ -302,9 +351,13 @@ export class CarritoService {
                                         timer: 1125,
                                     });
                                     this.ultimaCompra = respuesta;
-                                    this.Router.navigate(['print'], {queryParams: this.retirarInfoOrden(), skipLocationChange: true});
+                                    this.Router.navigate(['print'], {
+                                        queryParams: this.retirarInfoOrden(),
+                                        skipLocationChange: true,
+                                    });
                                     this.clearOrderData();
-                                    this.itemsCarritoservice = this.getCartItems();
+                                    this.itemsCarritoservice =
+                                        this.getCartItems();
                                     this.sendOrderItem(this.getCartItems());
                                     this.clearCart();
                                 }
@@ -329,12 +382,82 @@ export class CarritoService {
     }
 
     botonPreCheckout() {
-        // console.log('Items Carrito', this.itemsCarrito());
-        // console.log('CarritoArray', this.carritoArray());
+        console.log('Items Carrito', this.itemsCarrito());
+        const verificadorBoolean2 = this.verificadorBoolean;
+
+        const total = this.thousandsPipe.transform(this.getCartTotal());
         this.sendOrder(this.getCart);
         Swal.fire({
             html:
-                '<app-carrito></app-carrito>',
+                '<div class="cart">' +
+                '<div class="flex justify-center">' +
+                '<table class="table object-center">' +
+                '<thead class="table-header-group">' +
+                '<tr>' +
+                '<th></th>' +
+                '<th>Producto</th>' +
+                '<th>Precio</th>' +
+                '<th>Cantidad</th>' +
+                '<th>Total</th>' +
+                // '<th></th>' +
+                '</tr>' +
+                '</thead>' +
+                '<tbody class="">' +
+                this.itemsCarrito().map((item: any) => {
+                    const nombreProductoTitleCase =
+                        this.titleCasePipe.transform(item.producto.nombre_prep);
+                    const precioProducto = this.thousandsPipe.transform(
+                        item.producto.precio_prep
+                    );
+                    const totalxItem = this.thousandsPipe.transform(
+                        item.producto.precio_prep * item.cantidad
+                    );
+                    return (
+                        '<tr>' +
+                        '<td><img src="' +
+                        item.producto.imagen_prep +
+                        '" class=" h-10 w-10"></td>' +
+                        '<td class="text-lg">' +
+                        nombreProductoTitleCase +
+                        '</td>' +
+                        '<td class="text-lg">$ ' +
+                        precioProducto +
+                        '</td>' +
+                        '<td>' +
+                        // '<button class="btn btn-xs" (click)="decrementarCantidad(item)"'+
+                        //     '[disabled]="item.cantidad === 1">-</button>'+
+                        item.cantidad +
+                        // '<button class="btn btn-xs" (click)="incrementarCantidad(item)">+</button>'+
+                        '</td>' +
+                        '<td class="text-lg">$' +
+                        totalxItem +
+                        '</td>' +
+                        // '<td>'+
+                        //     '<button class="btn btn-error no-animation" (click)="eliminarItem(item)">Eliminar'+
+                        //         'item</button>'+
+                        // '</td>'+
+                        '</tr>'
+                    );
+                }) +
+                '</tbody>' +
+                '<tfoot class="table-footer-group">' +
+                '<tr>' +
+                '<td colspan="3" class="text-xl">Total:</td>' +
+                '<td></td>' +
+                '<td class="text-xl">$' +
+                total +
+                '</td>' +
+                // '<td></td>' +
+                '</tr>' +
+                '</tfoot>' +
+                '</table>' +
+                '</div>' +
+                '<div class="flex justify-center">' +
+                '<button class="object-center btn btn-error" onclick="clearCart();" ">Limpiar carrito de compras</button>' +
+                '</div>' +
+                '</div>',
+            background: 'rgb(24, 25, 32)',
+            width: '80%',
             focusConfirm: false,
             confirmButtonText: '<b>Finalizar compra</b>',
             confirmButtonColor: '#2b8565',
@@ -342,29 +465,41 @@ export class CarritoService {
             cancelButtonText: '<b>Seguir comprando</b>',
         }).then((result) => {
             if (result.isConfirmed) {
+                //this.verificadorStock();
+                this.checkStock();
                 Swal.fire({
                     title: 'Espere mientras procesamos su pedido',
                     html:
                         '<div class="spinner-border" role="status">' +
-                        '<span class="sr-only">Loading...</span>' +
+                        '<span class="sr-only">Cargando...</span>' +
                         '</div>',
-                    
+
                     showConfirmButton: true,
                     allowOutsideClick: false,
                     allowEscapeKey: false,
                     allowEnterKey: false,
-                    timer: 2000,
+                    timer: 2250,
                     didOpen: () => {
                         Swal.showLoading();
+                        console.log('verificadorBoolean2', verificadorBoolean2);
+                        console.log('didopen', this.verificadorBoolean);
+                        // if (this.verificadorBoolean === false) {
+                        //     result.isDenied 
+                        //     Swal.fire({
+                        //         title: 'Error',
+                        //         text:
+                        //             'No hay stock suficiente para realizar su pedido',
+                        //         icon: 'error',
+                        //         confirmButtonColor: '#2b8565',
+                        //         timer: 1250,
+                        //         showConfirmButton: false,
+                        //     });
+                        // }
                     },
                 }).then((result) => {
-                    if (result.dismiss === Swal.DismissReason.timer) {
-                        this.onCreate('crearCompra');                        
-                    }
-                    
+
                 });
-            }
-            else if (result.isDismissed) {
+            } else if (result.isDismissed) {
                 this.clearOrderData();
                 Swal.fire({
                     title: 'Seguimos comprando',
@@ -377,4 +512,32 @@ export class CarritoService {
             }
         });
     }
+
+
+    async checkStock() {
+        try {
+          const stockDisponible = await this.verificadorStock();
+          console.log('---RESPUESTA STOCKKK ---', stockDisponible)
+          if (stockDisponible) {
+            // Mostrar alerta para indicar que el stock está disponible
+            // alert('El stock está disponible');
+            this.onCreate('crearCompra');
+          } else {
+            // Mostrar alerta para indicar que el stock no está disponible
+            // alert('El stock no está disponible');
+            Swal.fire({
+                title: 'Error',
+                text:
+                    'No hay stock suficiente para realizar su pedido',
+                icon: 'error',
+                timer: 1250,
+                showConfirmButton: false,
+            });
+
+          }
+        } catch (error) {
+          // Mostrar alerta para indicar un error en la verificación de stock
+        //   alert('Error al verificar el stock');
+        }
+      }
 }
