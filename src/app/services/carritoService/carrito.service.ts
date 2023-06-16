@@ -394,11 +394,11 @@ export class CarritoService {
                 '<table class="table object-center">' +
                 '<thead class="table-header-group">' +
                 '<tr>' +
-                '<th></th>' +
-                '<th>Producto</th>' +
-                '<th>Precio</th>' +
-                '<th>Cantidad</th>' +
-                '<th>Total</th>' +
+                '<th ></th>' +
+                '<th class="text-base-content text-center">Producto</th>' +
+                '<th class="text-base-content text-center">Precio</th>' +
+                '<th class="text-base-content text-center">Cantidad</th>' +
+                '<th class="text-base-content text-center">Total</th>' +
                 // '<th></th>' +
                 '</tr>' +
                 '</thead>' +
@@ -417,19 +417,19 @@ export class CarritoService {
                         '<td><img src="' +
                         item.producto.imagen_prep +
                         '" class=" h-10 w-10"></td>' +
-                        '<td class="text-lg">' +
+                        '<td class="text-lg text-base-content">' +
                         nombreProductoTitleCase +
                         '</td>' +
-                        '<td class="text-lg">$ ' +
+                        '<td class="text-lg text-base-content">$ ' +
                         precioProducto +
                         '</td>' +
-                        '<td>' +
+                        '<td class="text-base-content text-center">' +
                         // '<button class="btn btn-xs" (click)="decrementarCantidad(item)"'+
                         //     '[disabled]="item.cantidad === 1">-</button>'+
                         item.cantidad +
                         // '<button class="btn btn-xs" (click)="incrementarCantidad(item)">+</button>'+
                         '</td>' +
-                        '<td class="text-lg">$' +
+                        '<td class="text-lg text-base-content">$' +
                         totalxItem +
                         '</td>' +
                         // '<td>'+
@@ -442,9 +442,9 @@ export class CarritoService {
                 '</tbody>' +
                 '<tfoot class="table-footer-group">' +
                 '<tr>' +
-                '<td colspan="3" class="text-xl">Total:</td>' +
+                '<td colspan="3" class="text-xl text-base-content">Total:</td>' +
                 '<td></td>' +
-                '<td class="text-xl">$' +
+                '<td class="text-xl text-base-content">$' +
                 total +
                 '</td>' +
                 // '<td></td>' +
@@ -452,12 +452,12 @@ export class CarritoService {
                 '</tfoot>' +
                 '</table>' +
                 '</div>' +
-                '<div class="flex justify-center">' +
-                '<button class="object-center btn btn-error" onclick="clearCart();" ">Limpiar carrito de compras</button>' +
-                '</div>' +
+                // '<div class="flex justify-center">' +
+                // '<button class="object-center btn btn-error" onclick="clearCart();" ">Limpiar carrito de compras</button>' +
+                // '</div>' +
                 '</div>',
-            background: 'rgb(24, 25, 32)',
-            width: '80%',
+            background: 'rgb(65, 69, 88)',
+            width: '40%',
             focusConfirm: false,
             confirmButtonText: '<b>Finalizar compra</b>',
             confirmButtonColor: '#2b8565',
@@ -539,5 +539,5 @@ export class CarritoService {
           // Mostrar alerta para indicar un error en la verificación de stock
         //   alert('Error al verificar el stock');
         }
-      }
+    }
 }

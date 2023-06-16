@@ -170,31 +170,32 @@ export class MenuComponent implements OnInit {
                 item.imagen_prep +
                 '" class="img-fluid w-96 h-96 object-cover" alt="Responsive image">' +
                 '</div>' +
-                '<h3 class="card-title text-3xl text-center font-bold text-gray-800 mb-2"> Agregar ' +
+                '<h3 class="card-title text-3xl text-center font-bold text-base-content mb-2"> Agregar ' +
                 nombreProductoTitleCase +
                 ' a la bolsa? </h3>' +
                 '<div class="col-md-6">' +
                 //'<p class="text-left">Ingredientes: ' + item.ingredientes_prep + '</p>' +
                 // '<p class="text-left">Descripción: ' + item.descripcion_prep + '</p>' +
-                '<p class="text-gray-800 font-bold mb-0">Precio: $' +
+                '<p class="text-accent font-bold mb-0">Precio: $' +
                  precioProducto +
                 '</p>' +
                 // '<p class="text-gray-800 font-bold mb-0">Cantidad: ' +
                 // this.cantidadItem +
                 // '</p>' +
-                '<div class="input-group mb-3">' +
-                '<button class="btn btn-s bg-neutral-focus no-animation" (click)="disminuirCantidad()">-' +
-                '</button>' +
-                '<span class="text-error-content font-semibold ">'+ this.cantidadItem +'</span>' +
-                '<button class="btn btn-s bg-neutral-focus no-animation" (click)="aumentarCantidad()">+' +
-                '</button>' +
-                '</div>' +
+                // '<div class="input-group mb-3">' +
+                // '<button class="btn btn-s bg-neutral-focus no-animation" (click)="disminuirCantidad()">-' +
+                // '</button>' +
+                // '<span class="text-error-content font-semibold ">'+ this.cantidadItem +'</span>' +
+                // '<button class="btn btn-s bg-neutral-focus no-animation" (click)="aumentarCantidad()">+' +
+                // '</button>' +
+                // '</div>' +
                 '</div>' +
                 '</div>',
+            background:'rgb(65, 69, 88)',
             focusConfirm: false,
             confirmButtonText: '<b>Sí, agregar</b>',
             cancelButtonText: '<b>Cancelar</b>',
-            confirmButtonColor: '#2b8565',
+            confirmButtonColor: 'success',
             showCancelButton: true,
             
             preConfirm: () => {
