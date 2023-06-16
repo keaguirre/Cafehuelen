@@ -25,11 +25,12 @@ export class GraficosAdminComponent implements OnInit {
   responseComprasHoy: any = [];
   responseComprasSemanal: any = [];
   responseRecaudacionSemanalMes:any=[];
-
+  responseCompraPorSemana:any=[];
   //------dineros---------
   responseRecaudacionHoy: any = [];
   responseRecaudacionSemanal: any = [];
   responseRecaudacionDiaSemanal: any = [];
+  responseCompraMesAnual:any=[];
 
   constructor(private analiticasServices: AnaliticasService) { }
 
@@ -42,6 +43,7 @@ export class GraficosAdminComponent implements OnInit {
     this.listRecaudacionDiaSemanal();
     this.listComprasSemanalMes();
     this.listRecaudacionSemanalMes();
+    this.listCompraMesActual();
   };
 
   listComprasHoy() { //total compras(pedidos) hoy
@@ -51,7 +53,7 @@ export class GraficosAdminComponent implements OnInit {
   }
   listComprasSemanal() { //total de compras(pedidos) semana actual
     this.analiticasServices.obtenerListadoComprasHoy().then(respuesta => {
-      this.responseComprasSemanal = respuesta;
+      this.responseCompraPorSemana = respuesta;
     })
   }
   listCompraDiaSemana() { //compras(pedidos) por cada dia de la semana actual
@@ -78,7 +80,7 @@ export class GraficosAdminComponent implements OnInit {
   }
   listComprasPorMesAnual() {
     this.analiticasServices.obtenerListadoTotalComprasPorMesAnual().then(respuesta => {
-      this.responseCompraMesActual = respuesta;
+      this.responseCompraMesAnual = respuesta;
 
     })
   }
@@ -124,8 +126,8 @@ export class GraficosAdminComponent implements OnInit {
     this.chart = new Chart("comprasDiarias", {
       type: 'line', //this denotes tha type of chart
       data: {
-        labels: ['Domingo', 'Lunes', 'Martes', 'Miercoles',
-          'Jueves', 'Viernes', 'Sabado',],
+        labels: [ 'Lunes', 'Martes', 'Miercoles',
+          'Jueves', 'Viernes', 'Sabado','Domingo',],
           
         datasets: [{
           label: 'Compras por dia de esta semana',

@@ -71,7 +71,7 @@
             <div *ngFor="let c of listadoComprasRecientes" class="mockup-code text-3xl my-8">
                 <pre data-prefix="#" class="text-start p-2"><code class="bg-neutral-focus text-base-content font-jb">Nro Compra: {{c.id_compra}}</code></pre>
                 <pre data-prefix=">" class="mt-3 text-base-content p-2"><code class="font-jb">"Servir o llevar?": "{{c.tipo_servicio_compra}}"</code></pre>
-                <pre data-prefix=">" class="mb-5 text-base-content "><code class="font-jb">"Preparaciones": </code><code class="text-info font-jb"></code></pre>
+                <pre data-prefix=">" class="mb-5 text-base-content p-2"><code class="font-jb">"Preparaciones": </code><code class="text-info font-jb"></code></pre>
                 <ng-container *ngFor="let p of c.preparaciones">
                     <div>
                         <div class="flex items-center">

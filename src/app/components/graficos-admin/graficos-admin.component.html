@@ -1,7 +1,7 @@
-<div class="container mx-auto">
+<div class="container ml-56">
     <section class="bg-base-content display-inline m-10">
         <div class="flex flex-wrap justify-center mx-10">
-            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 p-3">
+            <!-- <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 p-3">
                 <div class="card h-full m-5 bg-neutral">
                     <div class="items-center card-body text-center">
                     <h2 class="card-title text-primary text-2xl">Numero de ventas</h2>
@@ -11,7 +11,7 @@
                     </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 p-3">
                 <div class="card h-full m-5 bg-neutral">
                     <div class="items-center card-body text-center">
@@ -28,8 +28,8 @@
                     <div class="items-center card-body text-center">
                         <h2 class="card-title text-primary text-2xl">Numero de ventas</h2>
                         <div class="stat">
-                            <div class="stat-title">Esta semana</div>
-                            <div class="stat-value">{{responseComprasSemanal.count | thousands}}</div>
+                            <div class="stat-title">Mes Actual</div>
+                            <div class="stat-value">{{responseCompraMesActual.total_compras_mes_actual }}</div>
                         </div>
                     </div>
                 </div>
