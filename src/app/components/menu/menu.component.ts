@@ -195,7 +195,7 @@ export class MenuComponent implements OnInit {
             focusConfirm: false,
             confirmButtonText: '<b>Sí, agregar</b>',
             cancelButtonText: '<b>Cancelar</b>',
-            confirmButtonColor: 'success',
+            confirmButtonColor: 'rgb(101, 92, 201)',
             showCancelButton: true,
             
             preConfirm: () => {

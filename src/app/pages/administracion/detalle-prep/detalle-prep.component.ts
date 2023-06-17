@@ -253,39 +253,71 @@ padTableData(data: any[]) {
   }
 //FIN LISTADOS----------------------------------------------------------------------------------------
 //CREACIONES----------------------------------------------------------------------------------------
-  onCreate(cod: string): void{
-    switch(cod) { 
-      case 'createDetallePrep': { 
-        try{
-          let formDetallePrepValue = JSON.stringify(this.formDetallePrep.value);
-          console.log('form: ',formDetallePrepValue);
-          this.prodService.crearDetallePrep(formDetallePrepValue).then(respuesta => { this.response = respuesta;
-            console.log('detalle prep',respuesta);
-            if (typeof this.response.id_prep == 'number' && typeof this.response.id_ingre == 'number'){
-              this.toastCheck.fire({icon: 'success',title: 'Ingrediente de receta creado correctamente'})  
-              this.formDetallePrep.reset();
-              this.refrescar.next();
-            }else{
-              this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al crear la preparacion. Inténtelo nuevamente más tarde.'})  
-              
-            }
-
-          })
+onCreate(cod: string): void {
+  switch (cod) {
+    case 'createDetallePrep': {
+      try {
+        this.formDetallePrep.controls['estado'].setValue(true);
+        let formDetallePrepValue = JSON.stringify(this.formDetallePrep.value);
+        console.log('form', formDetallePrepValue);
+        this.prodService.crearDetallePrep(formDetallePrepValue).then(respuesta => {
+          this.response = respuesta;
+          console.log('respuesta', respuesta);
+          if (typeof this.response.id_prep == 'number' && typeof this.response.id_ingre == 'number') {
+            this.toastCheck.fire({ icon: 'success', title: 'Ingrediente de receta creado correctamente' })
+            this.formDetallePrep.reset();
+            this.refrescar.next();
+          } else {
+            this.toastError.fire({ icon: 'error', title: 'Ha ocurrido un error al crear la preparacion. IntÃ©ntelo nuevamente mÃ¡s tarde.' })
+          }
+        })
           .catch(err => {
-            this.toastError.fire({icon: 'error', title: err})
-            
+            this.toastError.fire({ icon: 'error', title: err })
           });
-        }catch (e: any){
-          console.log(e);
-        }
+      } catch (e: any) {
+        console.log(e);
+      }
       break;
-      }  default: { 
-        console.log('Error codigo: '+cod)
-        this.toastCheck.fire({icon: 'error',title: 'Error desconocido, intente nuevamente más tarde. Inténtelo nuevamente más tarde.'})  
-      break; 
-      } 
-    } 
+    } default: {
+      console.log('Error codigo: ' + cod)
+      this.toastCheck.fire({ icon: 'error', title: 'Error desconocido, intente nuevamente mÃ¡s tarde. IntÃ©ntelo nuevamente mÃ¡s tarde.' })
+      break;
+    }
   }
+}
+  // onCreate(cod: string): void{
+  //   switch(cod) { 
+  //     case 'createDetallePrep': { 
+  //       try{
+  //         let formDetallePrepValue = JSON.stringify(this.formDetallePrep.value);
+  //         console.log('form: ',formDetallePrepValue);
+  //         this.prodService.crearDetallePrep(formDetallePrepValue).then(respuesta => { this.response = respuesta;
+  //           console.log('detalle prep',respuesta);
+  //           if (typeof this.response.id_prep == 'number' && typeof this.response.id_ingre == 'number'){
+  //             this.toastCheck.fire({icon: 'success',title: 'Ingrediente de receta creado correctamente'})  
+  //             this.formDetallePrep.reset();
+  //             this.refrescar.next();
+  //           }else{
+  //             this.toastError.fire({icon: 'error',title: 'Ha ocurrido un error al crear la preparacion. Inténtelo nuevamente más tarde.'})  
+              
+  //           }
+
+  //         })
+  //         .catch(err => {
+  //           this.toastError.fire({icon: 'error', title: err})
+            
+  //         });
+  //       }catch (e: any){
+  //         console.log(e);
+  //       }
+  //     break;
+  //     }  default: { 
+  //       console.log('Error codigo: '+cod)
+  //       this.toastCheck.fire({icon: 'error',title: 'Error desconocido, intente nuevamente más tarde. Inténtelo nuevamente más tarde.'})  
+  //     break; 
+  //     } 
+  //   } 
+  // }
 // FIN CREACIONES----------------------------------------------------------------------------------------
 
 
