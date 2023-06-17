@@ -141,6 +141,11 @@
 - Correcciones del catalogo
 - qrcode en el voucher
 
+# 16/06/23
+- Botones de proceso de pedido a api-watcher.
+- Audios en toast de ok en api-watcher para las respuestas ok del back.
+- Boleta simplificada.
+
 # To do:
 - [ ] Carousel en cafeCommit
 - [ ] post print, volver al catalogo
