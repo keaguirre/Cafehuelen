@@ -37,7 +37,7 @@ export class PrintComponent implements OnInit {
       this.itemsCarrito = this.carritoService.itemsCarritoservice
       this.infoBack = this.carritoService.ultimaCompra
       this.infoQr = JSON.stringify(this.infoBack)
-      console.log('qr: ',this.infoQr)
+      // console.log('qr: ',this.infoQr)
     })
       console.log('print')
     }

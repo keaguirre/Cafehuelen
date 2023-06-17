@@ -223,7 +223,7 @@ export class CarritoService {
 
     sendOrder(order: any): void {
         let tipo_servicio_compra = 'Pa LLevar'; // Pa LLevar, Delivery
-        let estado_compra = 'Pendiente'; // Pendiente, Aprobado, Rechazado
+        let estado_compra = 'Espere su llamado'; // Pendiente, Aprobado, Rechazado
         let total_compra = this.getCartTotal(); // Precio total de la compra
         let procesador_pago_compra = 'MercadoPago'; // MercadoPago, PayPal, Stripe
         let id_transaccion_compra = '123456789'; // Id del pago en el procesador de pagos

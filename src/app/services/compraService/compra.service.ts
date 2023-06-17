@@ -174,9 +174,9 @@ export class CompraService {
 
 
   //Actualizar compra
-  actualizarCompra(id_compra: any, compraObj: any,): Promise<any> {
+  actualizarCompra(id_compra: any, estadoObj: any,): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.patch(this.urlCompras + id_compra, compraObj)
+      this.http.patch(this.urlCompras + id_compra, estadoObj)
       .subscribe({
         next: respuesta => {
           resolve(respuesta);
@@ -206,6 +206,42 @@ export class CompraService {
       });
     });
   }
+
+  //Actualizar ApiWatcher
+  actualizarApiWatcher(id_compra: any, estadoCompra: any,): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.patch(this.urlCompras + id_compra, estadoCompra)
+      .subscribe({
+        next: respuesta => {
+          resolve(respuesta);
+        },
+        error: err => {
+          if (err.status == 500){ 
+            console.log(err.statusText)
+            //internal server error
+          }
+          else if(err.status == 400){
+            console.log(err.statusText)
+            //bad request
+          }
+          else if(err.status == 404){
+            console.log(err.statusText)
+            //404 not found
+          }
+          else if(err.status == 409){
+            console.log(err.statusText)
+            //409 Conflict
+          }
+          else {
+            // console.log(err.status)
+            reject(err.status);
+          }
+        }
+      });
+    });
+  }
+
+
 
 
 }

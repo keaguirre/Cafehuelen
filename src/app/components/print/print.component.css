@@ -2,8 +2,8 @@
     box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
     padding: 2mm;
     margin: 0 auto;
-    width: 50mm;
-    background: #fff;
+    width: 44mm;
+    background: #ffffff;
 }
 
 /* #invoice-POS h1 {
@@ -25,9 +25,9 @@
     line-height: 1.2em; 
 }*/
 
-/* #invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
-    Targets all id with 'col-' 
-    border-bottom: 1px solid #eee; 
+#invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
+   /* Targets all id with 'col-' */
+    border-bottom: 1px solid #ffffff;
 }
 #invoice-POS #top {
     min-height: 100px;
@@ -68,10 +68,10 @@
 }
 #invoice-POS .tabletitle {
     font-size: 0.5em;
-    background: #eee;
+    background: #ffffff;
 }
 #invoice-POS .service {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #ffffff;
 }
 #invoice-POS .item {
     width: 24mm;
@@ -82,7 +82,7 @@
 #invoice-POS #legalcopy {
     margin-top: 5mm;
 }
-*/
+
 /* The div container 
 .qrcodeImage {
     display: flex;
