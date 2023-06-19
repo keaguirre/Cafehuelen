@@ -13,17 +13,23 @@ import { CatalogoComponent } from 'src/app/pages/catalogo/catalogo.component';
     styleUrls: ['./navbar-cliente.component.css'],
 })
 export class NavbarClienteComponent {
+    audioTap!: HTMLAudioElement;
+    audioConfirm!: HTMLAudioElement;
     ngOnInit(): void {
         this.CatalogoMenunavbar();
     }
-
     constructor(
         private carritoService: CarritoService,
         private titlecasePipe: TitleCasePipe,
         private prodService: ProductosService,
         private compraService: CompraService,
         private catalogo: CatalogoComponent
-    ) {}
+    ) {
+        this.audioTap = new Audio();
+        this.audioTap.src = '../../../assets/audios/tap.mp3'
+        this.audioConfirm = new Audio();
+        this.audioConfirm.src = '../../../assets/audios/confirme_accion.mp3'
+    }
 
     public MenuCatalogonavbar: any[] = [];
 
@@ -81,14 +87,18 @@ export class NavbarClienteComponent {
 
     decrementarCantidad(item: any) {
         this.carritoService.decrementarCantidad(item);
+        this.audioTap.play();
+        
     }
-
+    
     incrementarCantidad(item: any) {
         this.carritoService.incrementarCantidad(item);
+        this.audioTap.play();
     }
 
     eliminarItem(item: any) {
         this.carritoService.botonEliminarItem(item);
+        this.audioTap.play();
     }
 
     clearOrderData() {
@@ -97,6 +107,7 @@ export class NavbarClienteComponent {
 
     botonPreCheckout() {
         this.carritoService.botonPreCheckout();
+        this.audioConfirm.play();
     }
 
     carritoLength() {

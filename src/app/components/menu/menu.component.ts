@@ -36,7 +36,7 @@ export class MenuComponent implements OnInit {
             'Access-Control-Allow-Headers': 'Content-Type',
         }),
     };
-
+    audioTap!: HTMLAudioElement;
     static responseListadoCategorias: any;
     static MenuCatalogo: any;
     response: any;
@@ -61,8 +61,10 @@ export class MenuComponent implements OnInit {
         private titlecasePipe: TitleCasePipe,
         private compraService: CompraService,
         private thousandsPipe: ThousandsPipe,
-        
-    ) {}
+    ) {
+        this.audioTap = new Audio();
+        this.audioTap.src = '../../../assets/audios/tap.mp3'
+    }
 
     //LISTADO OBJETOS DE LA API
     onList(cod: string): void {
@@ -156,6 +158,7 @@ export class MenuComponent implements OnInit {
     }
 
     ModalPreparacion(item: any) {
+        this.audioTap.play();
         const nombreProductoTitleCase = this.titlecasePipe.transform(
             item.nombre_prep
         );
@@ -200,6 +203,7 @@ export class MenuComponent implements OnInit {
             
             preConfirm: () => {
                 this.carritoService.addtoCart(item);
+                this.audioTap.play();
                 this.refrescarMenu();
             },
         });
@@ -207,11 +211,13 @@ export class MenuComponent implements OnInit {
 
     aumentarCantidad() {
         this.cantidadItem = this.cantidadItem + 1;
+        this.audioTap.play();
     }
 
     disminuirCantidad() {
         if (this.cantidadItem > 1) {
             this.cantidadItem = this.cantidadItem - 1;
+            this.audioTap.play();
         }
     }
 

@@ -8,7 +8,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./carrito.component.css']
 })
 export class CarritoComponent {
-  constructor(private carritoService: CarritoService) {}
+  audioTap!: HTMLAudioElement;
+  constructor(private carritoService: CarritoService) {
+    this.audioTap = new Audio();
+    this.audioTap.src = '../../../assets/audios/tap.mp3'
+  }
 
   carritoArray() {
     return this.carritoService.getCart();
@@ -36,6 +40,7 @@ export class CarritoComponent {
 
   eliminarItem(item: any) {
     this.carritoService.botonEliminarItem(item);
+    this.audioTap.play();
   }
 
  

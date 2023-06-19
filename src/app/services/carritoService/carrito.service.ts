@@ -12,13 +12,14 @@ import { _isClickEvent } from 'chart.js/dist/helpers/helpers.core';
 export class CarritoService {
     response!: any;
     ultimaCompra: any;
-
     constructor(
         private thousandsPipe: ThousandsPipe,
         private titleCasePipe: TitleCasePipe,
         private compraService: CompraService,
         private Router: Router
-    ) {}
+    ) {
+
+    }
 
     getCart(): any {
         return JSON.parse(localStorage.getItem('cart') || '{}');
@@ -186,6 +187,7 @@ export class CarritoService {
                 }
             });
         }
+        
     }
 
     getCartTotal(): number {
