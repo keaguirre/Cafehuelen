@@ -11,6 +11,7 @@ import { _isClickEvent } from 'chart.js/dist/helpers/helpers.core';
 })
 export class CarritoService {
     response!: any;
+    responseAuto!: any;
     ultimaCompra: any;
     constructor(
         private thousandsPipe: ThousandsPipe,
@@ -208,20 +209,6 @@ export class CarritoService {
         return total * 0.19;
     }
 
-    // OnSubmitItemCompra(id_compra: number) {
-    //     let cart = this.getCart();
-
-    //     for (let item in cart) {
-    //         let id_prep = cart[item].producto.id_prep;
-    //         let cantidad = cart[item].cantidad;
-    //         let precio = cart[item].producto.precio_prep;
-    //         let itemCompra = { id_compra, id_prep, cantidad, precio };
-    //         this.compraService.crearItemCompra(itemCompra).then((res) => {
-    //             this.response = res;
-    //             console.log('response', this.response);
-    //         });
-    //     }
-    // }
 
     sendOrder(order: any): void {
         let tipo_servicio_compra = 'Pa LLevar'; // Pa LLevar, Delivery
@@ -256,9 +243,11 @@ export class CarritoService {
         this.getCartItems().map((item: any) => {
             let id_prep = item.producto.id_prep;
             let cantidad_item = item.cantidad;
+            let nombre_prep = item.producto.nombre_prep;
             let descuentoInventario = {
                 id_prep,
                 cantidad_item,
+                nombre_prep,
             };
             ArraydescuentoInventario = [
                 ...ArraydescuentoInventario,
@@ -270,8 +259,8 @@ export class CarritoService {
         const resp = await this.compraService
             .mandarItemCompraAuto(ArraydescuentoInventario)
             .then((res) => {
-                this.response = res;
-                console.log('response', this.response);
+                this.responseAuto = res;
+                console.log('response', this.responseAuto);
                 console.log('res ', res);
                 if (res[0].includes('Stock actualizado correctamente')) {
                     this.verificadorBoolean = true;
@@ -345,6 +334,7 @@ export class CarritoService {
                             .crearCompra(InfoOrden)
                             .then((respuesta) => {
                                 if (respuesta) {
+                                    
                                     // console.log(respuesta, 'respuesta del if ');
                                     Swal.fire({
                                         icon: 'success',
@@ -386,7 +376,6 @@ export class CarritoService {
     botonPreCheckout() {
         console.log('Items Carrito', this.itemsCarrito());
         const verificadorBoolean2 = this.verificadorBoolean;
-
         const total = this.thousandsPipe.transform(this.getCartTotal());
         this.sendOrder(this.getCart);
         Swal.fire({
@@ -485,18 +474,6 @@ export class CarritoService {
                         Swal.showLoading();
                         console.log('verificadorBoolean2', verificadorBoolean2);
                         console.log('didopen', this.verificadorBoolean);
-                        // if (this.verificadorBoolean === false) {
-                        //     result.isDenied 
-                        //     Swal.fire({
-                        //         title: 'Error',
-                        //         text:
-                        //             'No hay stock suficiente para realizar su pedido',
-                        //         icon: 'error',
-                        //         confirmButtonColor: '#2b8565',
-                        //         timer: 1250,
-                        //         showConfirmButton: false,
-                        //     });
-                        // }
                     },
                 }).then((result) => {
 
@@ -520,6 +497,7 @@ export class CarritoService {
         try {
           const stockDisponible = await this.verificadorStock();
           console.log('---RESPUESTA STOCKKK ---', stockDisponible)
+          
           if (stockDisponible) {
             // Mostrar alerta para indicar que el stock está disponible
             // alert('El stock está disponible');
@@ -530,10 +508,10 @@ export class CarritoService {
             Swal.fire({
                 title: 'Error',
                 text:
-                    'No hay stock suficiente para realizar su pedido',
+                    this.responseAuto,
                 icon: 'error',
-                timer: 1250,
-                showConfirmButton: false,
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar',
             });
 
           }
