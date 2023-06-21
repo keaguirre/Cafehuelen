@@ -5,6 +5,8 @@ import { CompraService } from '../compraService/compra.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { _isClickEvent } from 'chart.js/dist/helpers/helpers.core';
+import { jsPDF } from 'jspdf';
+import { EventEmitter } from '@angular/core';
 
 @Injectable({
     providedIn: 'root',
@@ -13,12 +15,20 @@ export class CarritoService {
     response!: any;
     responseAuto!: any;
     ultimaCompra: any;
+    audioSinStock!: HTMLAudioElement;
+    audioPedRealizado!: HTMLAudioElement;
+    imprimirBoleta: EventEmitter<void> = new EventEmitter<void>();
+
     constructor(
         private thousandsPipe: ThousandsPipe,
         private titleCasePipe: TitleCasePipe,
         private compraService: CompraService,
         private Router: Router
     ) {
+        this.audioSinStock = new Audio();
+        this.audioSinStock.src = '../../../assets/audios/atencion-preparacion.mp3'
+        this.audioPedRealizado = new Audio();
+        this.audioPedRealizado.src = '../../../assets/audios/Pedido_realizado.m4a'    
 
     }
 
@@ -48,9 +58,10 @@ export class CarritoService {
         // console.log('cart', item);
         Swal.fire({
             icon: 'success',
-            title: `${nombreProductoTitleCase} agregado`,
+            title: "<h5 class=' text-base-content'> "+`${nombreProductoTitleCase} agregado`+"</h5>",
             showConfirmButton: false,
             timer: 1125,
+            background:'rgb(65, 69, 88)'
         });
     }
 
@@ -61,26 +72,29 @@ export class CarritoService {
     botonClearCart(): void {
         Swal.fire({
             icon: 'error',
-            title: `¿Deseas eliminar todos los productos de la lista?`,
+            title: "<h5 class=' text-base-content'> ¿Deseas eliminar todos los productos de la lista?</h5>",
             showCancelButton: true,
             confirmButtonText: `Eliminar`,
             cancelButtonText: `Cancelar`,
             confirmButtonColor: '#2b8565',
+            background:'rgb(65, 69, 88)'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.clearCart();
                 Swal.fire({
                     icon: 'success',
-                    title: `Lista de productos eliminada`,
+                    title: "<h5 class=' text-base-content'> Lista de productos eliminada</h5>",
                     showConfirmButton: false,
                     timer: 1125,
+                    background:'rgb(65, 69, 88)'
                 });
             } else if (result.isDismissed) {
                 Swal.fire({
                     icon: 'info',
-                    title: `Lista de productos no eliminada`,
+                    title: "<h5 class=' text-base-content'> Lista de productos no eliminada</h5>",
                     showConfirmButton: false,
                     timer: 1125,
+                    background:'rgb(65, 69, 88)'
                 });
             }
         });
@@ -113,26 +127,29 @@ export class CarritoService {
         );
         Swal.fire({
             icon: 'error',
-            title: `¿Deseas eliminar ${nombreProductoTitleCase} de la lista?`,
+            title: "<h5 class=' text-base-content'> "+`¿Deseas eliminar ${nombreProductoTitleCase} de la lista?`+"</h5>",
             showCancelButton: true,
             confirmButtonText: `Eliminar`,
             cancelButtonText: `Cancelar`,
             confirmButtonColor: '#2b8565',
+            background:'rgb(65, 69, 88)'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.eliminarItem(item);
                 Swal.fire({
                     icon: 'success',
-                    title: `${nombreProductoTitleCase} eliminado`,
+                    title: "<h5 class=' text-base-content'> "+`${nombreProductoTitleCase} eliminado`+"</h5>",
                     showConfirmButton: false,
                     timer: 1125,
+                    background:'rgb(65, 69, 88)'
                 });
             } else if (result.isDismissed) {
                 Swal.fire({
                     icon: 'info',
-                    title: `${nombreProductoTitleCase} no eliminado`,
+                    title: "<h5 class=' text-base-content'> "+`${nombreProductoTitleCase} no eliminado`+"</h5>",
                     showConfirmButton: false,
                     timer: 1125,
+                    background:'rgb(65, 69, 88)'
                 });
             }
         });
@@ -162,26 +179,29 @@ export class CarritoService {
         if (item.cantidad === 0) {
             Swal.fire({
                 icon: 'error',
-                title: `¿Deseas eliminar ${nombreProductoTitleCase} de la lista?`,
+                title: "<h5 class=' text-base-content'> "+`¿Deseas eliminar ${nombreProductoTitleCase} de la lista?`+"</h5>",
                 showCancelButton: true,
                 confirmButtonText: `Eliminar`,
                 cancelButtonText: `Cancelar`,
                 confirmButtonColor: '#2b8565',
+                background:'rgb(65, 69, 88)'
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.eliminarItem(producto);
                     Swal.fire({
                         icon: 'success',
-                        title: `${nombreProductoTitleCase} eliminado`,
+                        title: "<h5 class=' text-base-content'> "+`${nombreProductoTitleCase} eliminado`+"</h5>",
                         showConfirmButton: false,
                         timer: 1125,
+                        background:'rgb(65, 69, 88)'
                     });
                 } else if (result.isDismissed) {
                     Swal.fire({
                         icon: 'info',
-                        title: `${nombreProductoTitleCase} no eliminado`,
+                        title: "<h5 class=' text-base-content'> "+`${nombreProductoTitleCase} no eliminado`+"</h5>",
                         showConfirmButton: false,
                         timer: 1125,
+                        background:'rgb(65, 69, 88)'
                     });
                     item.cantidad = item.cantidad + 1;
                     localStorage.setItem('cart', JSON.stringify(cart));
@@ -334,15 +354,17 @@ export class CarritoService {
                             .crearCompra(InfoOrden)
                             .then((respuesta) => {
                                 if (respuesta) {
-                                    
+                                    this.audioPedRealizado.play();                                    
                                     // console.log(respuesta, 'respuesta del if ');
                                     Swal.fire({
                                         icon: 'success',
-                                        title: `Compra realizada con éxito`,
+                                        title: "<h5 class=' text-base-content'> Compra realizada con éxito </h5>",
                                         showConfirmButton: false,
                                         timer: 1125,
+                                        background:'rgb(65, 69, 88)'
                                     });
                                     this.ultimaCompra = respuesta;
+                                    this.imprimirBoleta.emit();
                                     this.Router.navigate(['print'], {
                                         queryParams: this.retirarInfoOrden(),
                                         skipLocationChange: true,
@@ -353,6 +375,7 @@ export class CarritoService {
                                     this.sendOrderItem(this.getCartItems());
                                     this.clearCart();
                                 }
+                               
                                 // console.log('ultimaCompra', this.ultimaCompra);
                             });
                     }
@@ -360,9 +383,10 @@ export class CarritoService {
                     console.log(error);
                     Swal.fire({
                         icon: 'error',
-                        title: `Error al realizar la compra`,
+                            title: "<h5 class=' text-base-content'>  Error al realizar la compra </h5>",
                         showConfirmButton: false,
                         timer: 1125,
+                        background:'rgb(65, 69, 88)'
                     });
                 }
                 break;
@@ -459,17 +483,18 @@ export class CarritoService {
                 //this.verificadorStock();
                 this.checkStock();
                 Swal.fire({
-                    title: 'Espere mientras procesamos su pedido',
+                    title: "<h5 class=' text-base-content'> Espere mientras procesamos su pedido </h5>",
                     html:
                         '<div class="spinner-border" role="status">' +
                         '<span class="sr-only">Cargando...</span>' +
                         '</div>',
-
+                    background:'rgb(65, 69, 88)',
                     showConfirmButton: true,
                     allowOutsideClick: false,
                     allowEscapeKey: false,
                     allowEnterKey: false,
                     timer: 2250,
+                    
                     didOpen: () => {
                         Swal.showLoading();
                         console.log('verificadorBoolean2', verificadorBoolean2);
@@ -481,12 +506,13 @@ export class CarritoService {
             } else if (result.isDismissed) {
                 this.clearOrderData();
                 Swal.fire({
-                    title: 'Seguimos comprando',
-                    text: 'Su pedido no se ha procesado',
+                    title:"<h5 class=' text-base-content'> Seguimos comprando </h5>",
+                    html: '<span class="text-base-content text-lg"> Su pedido no se ha procesado </span>',
                     icon: 'info',
                     confirmButtonColor: '#2b8565',
                     timer: 1250,
                     showConfirmButton: false,
+                    background:'rgb(65, 69, 88)'
                 });
             }
         });
@@ -503,15 +529,18 @@ export class CarritoService {
             // alert('El stock está disponible');
             this.onCreate('crearCompra');
           } else {
+            this.audioSinStock.play();
             // Mostrar alerta para indicar que el stock no está disponible
             // alert('El stock no está disponible');
             Swal.fire({
-                title: 'Error',
-                text:
-                    this.responseAuto,
+                title: "<h5 class=' text-base-content'> Error </h5>",
+                html:
+                '<span class="text-base-content text-lg">'+ this.responseAuto +'</span>',
                 icon: 'error',
                 showConfirmButton: true,
                 confirmButtonText: 'Aceptar',
+                background:'rgb(65, 69, 88)',
+                
             });
 
           }
@@ -520,4 +549,29 @@ export class CarritoService {
         //   alert('Error al verificar el stock');
         }
     }
+    // imprimirPDF(): void {
+    //     const contenidoBoleta = document.getElementById().innerHTML;
+    //     const doc = new jsPDF();
+    //     doc.fromHTML(contenidoBoleta, 15, 15);
+    //     doc.save('boleta.pdf');
+    //   }
+    print(data: string): void {
+        const contenidoBoleta = document.getElementById(data);
+        const elementosBody = Array.from(document.body.children) as HTMLElement[];
+    
+        elementosBody.forEach((elemento: HTMLElement) => {
+          if (elemento !== contenidoBoleta) {
+            elemento.style.display = 'none';
+          }
+        });
+    
+        window.print();
+    
+        elementosBody.forEach((elemento: HTMLElement) => {
+          if (elemento !== contenidoBoleta) {
+            elemento.style.display = '';
+          }
+        });
+      }
+    
 }

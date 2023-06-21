@@ -11,7 +11,7 @@
 
 #invoice-POS h1 {
     font-size: 1.0em;
-    color: #222;
+    color: #050000;
 }
 #invoice-POS h2 {
     font-size: 0.9em;
@@ -19,12 +19,12 @@
 #invoice-POS h3 {
     font-size: 0.6em;
     line-height: 1.2em;
-    color: #666;
+    color: #000000;
 }
 
 #invoice-POS p {
     font-size: 0.5em;
-    color: #666;
+    color: #000000;
     line-height: 1.2em;
 }
 
@@ -100,7 +100,7 @@
   }
 .darkItem{
     background-color: #414558;
-    color: #F8F8F2;
+    color: #ffffff;
 }
 
 

@@ -15,6 +15,8 @@ import { CatalogoComponent } from 'src/app/pages/catalogo/catalogo.component';
 export class NavbarClienteComponent {
     audioTap!: HTMLAudioElement;
     audioConfirm!: HTMLAudioElement;
+    audioTapLow!: HTMLAudioElement;
+    
     ngOnInit(): void {
         this.CatalogoMenunavbar();
     }
@@ -25,6 +27,8 @@ export class NavbarClienteComponent {
         private compraService: CompraService,
         private catalogo: CatalogoComponent
     ) {
+        this.audioTapLow = new Audio();
+        this.audioTapLow.src = '../../../assets/audios/tap_low.mp3'
         this.audioTap = new Audio();
         this.audioTap.src = '../../../assets/audios/tap.mp3'
         this.audioConfirm = new Audio();
@@ -83,12 +87,12 @@ export class NavbarClienteComponent {
 
     botonClearCart() {
         this.carritoService.botonClearCart();
+        this.audioTapLow.play();
     }
 
     decrementarCantidad(item: any) {
         this.carritoService.decrementarCantidad(item);
-        this.audioTap.play();
-        
+        this.audioTapLow.play();
     }
     
     incrementarCantidad(item: any) {
@@ -98,7 +102,7 @@ export class NavbarClienteComponent {
 
     eliminarItem(item: any) {
         this.carritoService.botonEliminarItem(item);
-        this.audioTap.play();
+        this.audioTapLow.play();
     }
 
     clearOrderData() {

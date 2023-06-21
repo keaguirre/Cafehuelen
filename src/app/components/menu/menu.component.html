@@ -4,7 +4,7 @@
 <ng-container *ngFor="let Menu of MenuCatalogo, let i = index">
     <div  class="max-w-full containerWidthWithoutCart px-10" style="font-family: 'Noto Sans', sans-serif;">
         <div class=" flex justify-center">
-            <div class=" btn btn-active bg-secondary my-14 no-a"> <!--  style="display: inline-block; background-repeat: no-repeat; background-position: 50%; background-size: 100%; background-image: url(../../../assets/Catalogo/categorias/1.svg);" -->
+            <div class="badge px-8 py-6 bg-secondary my-14"> <!--  style="display: inline-block; background-repeat: no-repeat; background-position: 50%; background-size: 100%; background-image: url(../../../assets/Catalogo/categorias/1.svg);" -->
                 <h1 class=" text-center  text-3xl text-neutral " style="font-family: 'Kanit', sans-serif;"
                     id="Categoria_{{Menu?.categoria?.id_cat}}">
                     {{Menu?.categoria?.nombre_cat| titlecase }}

@@ -37,6 +37,7 @@ export class MenuComponent implements OnInit {
         }),
     };
     audioTap!: HTMLAudioElement;
+    audioProdAgregado!: HTMLAudioElement;
     static responseListadoCategorias: any;
     static MenuCatalogo: any;
     response: any;
@@ -64,6 +65,8 @@ export class MenuComponent implements OnInit {
     ) {
         this.audioTap = new Audio();
         this.audioTap.src = '../../../assets/audios/tap.mp3'
+        this.audioProdAgregado = new Audio();
+        this.audioProdAgregado.src = '../../../assets/audios/Producto_agregado.m4a'
     }
 
     //LISTADO OBJETOS DE LA API
@@ -167,11 +170,11 @@ export class MenuComponent implements OnInit {
         Swal.fire({
             width: '30%',
             html:
-                '<div class="row">' +
-                '<div class="col-md-6">' +
+                '<div class="row object-center">' +
+                '<div class="col-md-6 content-center">' +
                 '<img src="' +
                 item.imagen_prep +
-                '" class="img-fluid w-96 h-96 object-cover" alt="Responsive image">' +
+                '" class="img-fluid w-96 h-96 object-cover content-center" alt="Responsive image">' +
                 '</div>' +
                 '<h3 class="card-title text-3xl text-center font-bold text-base-content mb-2"> Agregar ' +
                 nombreProductoTitleCase +
@@ -203,7 +206,7 @@ export class MenuComponent implements OnInit {
             
             preConfirm: () => {
                 this.carritoService.addtoCart(item);
-                this.audioTap.play();
+                this.audioProdAgregado.play();
                 this.refrescarMenu();
             },
         });
@@ -220,8 +223,6 @@ export class MenuComponent implements OnInit {
             this.audioTap.play();
         }
     }
-
-
 
     refrescarMenu() {
         this.refrescar.next();

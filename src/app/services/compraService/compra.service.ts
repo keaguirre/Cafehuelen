@@ -10,8 +10,11 @@ export class CompraService {
   urlCompras:string = environment.urlCompras;
   urlItemCompra:string = environment.urlItemCompra
   urlItemCompraAuto:string = environment.urlItemCompraAuto
+  
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+
+  }
 
   //Crear compras
   crearCompra(compra: any): Promise<any> {
@@ -241,7 +244,7 @@ export class CompraService {
     });
   }
 
-
+  
 
 
 }

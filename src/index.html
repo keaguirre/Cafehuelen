@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <title>{...}cafeScript</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/> disable mobile zoom -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <script src="https://kit.fontawesome.com/3322dace45.js" crossorigin="anonymous"></script>
   <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
   <!-- fonts-->
@@ -16,5 +18,18 @@
 </head>
 <body>
   <app-root></app-root>
+  <div class="cursor"></div>
 </body>
+<script>
+  document.addEventListener("mousemove", event => {
+  document.getElementsByClassName("cursor")[0].style.transform = "translate(" + event.pageX + "px, " + event.pageY + "px)";
+})
+
+document.addEventListener("click", event => {
+  document.getElementsByClassName("cursor")[0].classList.add("click")
+  setTimeout(() => {
+    document.getElementsByClassName("cursor")[0].classList.remove("click")
+  }, 250)
+})
+</script>
 </html>

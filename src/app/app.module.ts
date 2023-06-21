@@ -26,6 +26,7 @@ import { GraficosAdminComponent } from './components/graficos-admin/graficos-adm
 import { FooterAdminComponent } from './components/footer-admin/footer-admin.component';
 import { PrintComponent } from './components/print/print.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { NgxPrintModule } from 'ngx-print';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     ThousandsPipe,
     FooterAdminComponent,
     PrintComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -59,6 +61,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     FormsModule,
     NgxPaginationModule,
     QRCodeModule,
+    NgxPrintModule
     
     
   ],
