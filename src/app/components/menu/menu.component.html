@@ -21,7 +21,7 @@
                                             class="" src="{{ item.imagen_prep }}" alt="{{ item.nombre_prep }}" class="">
                         </figure>
                         <div class="card-body content-center ghost h-40">
-                            <h2 class="card-title text-xl justify-center font-bold ">{{ item.nombre_prep |
+                            <h2 class="card-title text-xl justify-center text-center font-bold ">{{ item.nombre_prep |
                                 titlecase }}</h2>
                             <h3 class=" text-secondary text-center font-semibold">{{ item.descripcion_prep | titlecase }}</h3>
                             <p class="text-info font-bold mb-0 text-center">Precio: $ {{ item.precio_prep | thousands }}</p>

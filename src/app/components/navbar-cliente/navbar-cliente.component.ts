@@ -118,9 +118,6 @@ export class NavbarClienteComponent {
         return this.carritoService.getCartTotalItems();
     }
 
-    verCarrito() {
-        this.catalogo.mostrarComponenteCarrito();
-    }
     
     @ViewChild('carritoComponent', { static: false })
     carritoComponent!: ElementRef;

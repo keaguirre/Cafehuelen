@@ -5,7 +5,7 @@ import { CompraService } from '../compraService/compra.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { _isClickEvent } from 'chart.js/dist/helpers/helpers.core';
-import { jsPDF } from 'jspdf';
+import { CarritoComponent } from 'src/app/components/carrito/carrito.component';
 import { EventEmitter } from '@angular/core';
 
 @Injectable({
@@ -18,6 +18,7 @@ export class CarritoService {
     audioSinStock!: HTMLAudioElement;
     audioPedRealizado!: HTMLAudioElement;
     imprimirBoleta: EventEmitter<void> = new EventEmitter<void>();
+    decision!: string;
 
     constructor(
         private thousandsPipe: ThousandsPipe,
@@ -26,10 +27,11 @@ export class CarritoService {
         private Router: Router
     ) {
         this.audioSinStock = new Audio();
-        this.audioSinStock.src = '../../../assets/audios/atencion-preparacion.mp3'
+        this.audioSinStock.src =
+            '../../../assets/audios/atencion-preparacion.mp3';
         this.audioPedRealizado = new Audio();
-        this.audioPedRealizado.src = '../../../assets/audios/Pedido_realizado.m4a'    
-
+        this.audioPedRealizado.src =
+            '../../../assets/audios/Pedido_realizado.m4a';
     }
 
     getCart(): any {
@@ -58,10 +60,13 @@ export class CarritoService {
         // console.log('cart', item);
         Swal.fire({
             icon: 'success',
-            title: "<h5 class=' text-base-content'> "+`${nombreProductoTitleCase} agregado`+"</h5>",
+            title:
+                "<h5 class=' text-base-content'> " +
+                `${nombreProductoTitleCase} agregado` +
+                '</h5>',
             showConfirmButton: false,
             timer: 1125,
-            background:'rgb(65, 69, 88)'
+            background: 'rgb(65, 69, 88)',
         });
     }
 
@@ -77,7 +82,7 @@ export class CarritoService {
             confirmButtonText: `Eliminar`,
             cancelButtonText: `Cancelar`,
             confirmButtonColor: '#2b8565',
-            background:'rgb(65, 69, 88)'
+            background: 'rgb(65, 69, 88)',
         }).then((result) => {
             if (result.isConfirmed) {
                 this.clearCart();
@@ -86,7 +91,7 @@ export class CarritoService {
                     title: "<h5 class=' text-base-content'> Lista de productos eliminada</h5>",
                     showConfirmButton: false,
                     timer: 1125,
-                    background:'rgb(65, 69, 88)'
+                    background: 'rgb(65, 69, 88)',
                 });
             } else if (result.isDismissed) {
                 Swal.fire({
@@ -94,7 +99,7 @@ export class CarritoService {
                     title: "<h5 class=' text-base-content'> Lista de productos no eliminada</h5>",
                     showConfirmButton: false,
                     timer: 1125,
-                    background:'rgb(65, 69, 88)'
+                    background: 'rgb(65, 69, 88)',
                 });
             }
         });
@@ -127,29 +132,38 @@ export class CarritoService {
         );
         Swal.fire({
             icon: 'error',
-            title: "<h5 class=' text-base-content'> "+`¿Deseas eliminar ${nombreProductoTitleCase} de la lista?`+"</h5>",
+            title:
+                "<h5 class=' text-base-content'> " +
+                `¿Deseas eliminar ${nombreProductoTitleCase} de la lista?` +
+                '</h5>',
             showCancelButton: true,
             confirmButtonText: `Eliminar`,
             cancelButtonText: `Cancelar`,
             confirmButtonColor: '#2b8565',
-            background:'rgb(65, 69, 88)'
+            background: 'rgb(65, 69, 88)',
         }).then((result) => {
             if (result.isConfirmed) {
                 this.eliminarItem(item);
                 Swal.fire({
                     icon: 'success',
-                    title: "<h5 class=' text-base-content'> "+`${nombreProductoTitleCase} eliminado`+"</h5>",
+                    title:
+                        "<h5 class=' text-base-content'> " +
+                        `${nombreProductoTitleCase} eliminado` +
+                        '</h5>',
                     showConfirmButton: false,
                     timer: 1125,
-                    background:'rgb(65, 69, 88)'
+                    background: 'rgb(65, 69, 88)',
                 });
             } else if (result.isDismissed) {
                 Swal.fire({
                     icon: 'info',
-                    title: "<h5 class=' text-base-content'> "+`${nombreProductoTitleCase} no eliminado`+"</h5>",
+                    title:
+                        "<h5 class=' text-base-content'> " +
+                        `${nombreProductoTitleCase} no eliminado` +
+                        '</h5>',
                     showConfirmButton: false,
                     timer: 1125,
-                    background:'rgb(65, 69, 88)'
+                    background: 'rgb(65, 69, 88)',
                 });
             }
         });
@@ -179,36 +193,44 @@ export class CarritoService {
         if (item.cantidad === 0) {
             Swal.fire({
                 icon: 'error',
-                title: "<h5 class=' text-base-content'> "+`¿Deseas eliminar ${nombreProductoTitleCase} de la lista?`+"</h5>",
+                title:
+                    "<h5 class=' text-base-content'> " +
+                    `¿Deseas eliminar ${nombreProductoTitleCase} de la lista?` +
+                    '</h5>',
                 showCancelButton: true,
                 confirmButtonText: `Eliminar`,
                 cancelButtonText: `Cancelar`,
                 confirmButtonColor: '#2b8565',
-                background:'rgb(65, 69, 88)'
+                background: 'rgb(65, 69, 88)',
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.eliminarItem(producto);
                     Swal.fire({
                         icon: 'success',
-                        title: "<h5 class=' text-base-content'> "+`${nombreProductoTitleCase} eliminado`+"</h5>",
+                        title:
+                            "<h5 class=' text-base-content'> " +
+                            `${nombreProductoTitleCase} eliminado` +
+                            '</h5>',
                         showConfirmButton: false,
                         timer: 1125,
-                        background:'rgb(65, 69, 88)'
+                        background: 'rgb(65, 69, 88)',
                     });
                 } else if (result.isDismissed) {
                     Swal.fire({
                         icon: 'info',
-                        title: "<h5 class=' text-base-content'> "+`${nombreProductoTitleCase} no eliminado`+"</h5>",
+                        title:
+                            "<h5 class=' text-base-content'> " +
+                            `${nombreProductoTitleCase} no eliminado` +
+                            '</h5>',
                         showConfirmButton: false,
                         timer: 1125,
-                        background:'rgb(65, 69, 88)'
+                        background: 'rgb(65, 69, 88)',
                     });
                     item.cantidad = item.cantidad + 1;
                     localStorage.setItem('cart', JSON.stringify(cart));
                 }
             });
         }
-        
     }
 
     getCartTotal(): number {
@@ -229,9 +251,8 @@ export class CarritoService {
         return total * 0.19;
     }
 
-
     sendOrder(order: any): void {
-        let tipo_servicio_compra = 'Pa LLevar'; // Pa LLevar, Delivery
+        let tipo_servicio_compra = this.decision; // Pa LLevar, Delivery
         let estado_compra = 'Espere su llamado'; // Pendiente, Aprobado, Rechazado
         let total_compra = this.getCartTotal(); // Precio total de la compra
         let procesador_pago_compra = 'MercadoPago'; // MercadoPago, PayPal, Stripe
@@ -251,15 +272,14 @@ export class CarritoService {
         };
         localStorage.setItem('orderData', JSON.stringify(orderData));
     }
-   
-    public verificadorBoolean: boolean = false;
 
+    public verificadorBoolean: boolean = false;
 
     async verificadorStock(): Promise<boolean> {
         console.log('verificadorStock corriendo');
-        
+
         let ArraydescuentoInventario: any = [];
-        
+
         this.getCartItems().map((item: any) => {
             let id_prep = item.producto.id_prep;
             let cantidad_item = item.cantidad;
@@ -274,7 +294,7 @@ export class CarritoService {
                 descuentoInventario,
             ];
         });
-        console.log('---- valor antes consulta', this.verificadorBoolean)
+        console.log('---- valor antes consulta', this.verificadorBoolean);
         // console.log('ArraydescuentoInventario', ArraydescuentoInventario);
         const resp = await this.compraService
             .mandarItemCompraAuto(ArraydescuentoInventario)
@@ -284,19 +304,19 @@ export class CarritoService {
                 console.log('res ', res);
                 if (res[0].includes('Stock actualizado correctamente')) {
                     this.verificadorBoolean = true;
-                    return true
+                    return true;
                 } else {
                     this.verificadorBoolean = false;
-                    return false
+                    return false;
                 }
             })
             .catch((err) => {
                 console.log('err', err);
                 this.verificadorBoolean = false;
-                console.log('---- valor en error', this.verificadorBoolean)
-               return false;
+                console.log('---- valor en error', this.verificadorBoolean);
+                return false;
             });
-            console.log('---- valor después', this.verificadorBoolean)
+        console.log('---- valor después', this.verificadorBoolean);
         return resp;
     }
 
@@ -354,14 +374,14 @@ export class CarritoService {
                             .crearCompra(InfoOrden)
                             .then((respuesta) => {
                                 if (respuesta) {
-                                    this.audioPedRealizado.play();                                    
+                                    this.audioPedRealizado.play();
                                     // console.log(respuesta, 'respuesta del if ');
                                     Swal.fire({
                                         icon: 'success',
                                         title: "<h5 class=' text-base-content'> Compra realizada con éxito </h5>",
                                         showConfirmButton: false,
                                         timer: 1125,
-                                        background:'rgb(65, 69, 88)'
+                                        background: 'rgb(65, 69, 88)',
                                     });
                                     this.ultimaCompra = respuesta;
                                     this.imprimirBoleta.emit();
@@ -375,7 +395,7 @@ export class CarritoService {
                                     this.sendOrderItem(this.getCartItems());
                                     this.clearCart();
                                 }
-                               
+
                                 // console.log('ultimaCompra', this.ultimaCompra);
                             });
                     }
@@ -383,10 +403,10 @@ export class CarritoService {
                     console.log(error);
                     Swal.fire({
                         icon: 'error',
-                            title: "<h5 class=' text-base-content'>  Error al realizar la compra </h5>",
+                        title: "<h5 class=' text-base-content'>  Error al realizar la compra </h5>",
                         showConfirmButton: false,
                         timer: 1125,
-                        background:'rgb(65, 69, 88)'
+                        background: 'rgb(65, 69, 88)',
                     });
                 }
                 break;
@@ -400,77 +420,10 @@ export class CarritoService {
     botonPreCheckout() {
         console.log('Items Carrito', this.itemsCarrito());
         const verificadorBoolean2 = this.verificadorBoolean;
-        const total = this.thousandsPipe.transform(this.getCartTotal());
+
         this.sendOrder(this.getCart);
         Swal.fire({
-            html:
-                '<div class="cart">' +
-                '<div class="flex justify-center">' +
-                '<table class="table object-center">' +
-                '<thead class="table-header-group">' +
-                '<tr>' +
-                '<th ></th>' +
-                '<th class="text-base-content text-center">Producto</th>' +
-                '<th class="text-base-content text-center">Precio</th>' +
-                '<th class="text-base-content text-center">Cantidad</th>' +
-                '<th class="text-base-content text-center">Total</th>' +
-                // '<th></th>' +
-                '</tr>' +
-                '</thead>' +
-                '<tbody class="">' +
-                this.itemsCarrito().map((item: any) => {
-                    const nombreProductoTitleCase =
-                        this.titleCasePipe.transform(item.producto.nombre_prep);
-                    const precioProducto = this.thousandsPipe.transform(
-                        item.producto.precio_prep
-                    );
-                    const totalxItem = this.thousandsPipe.transform(
-                        item.producto.precio_prep * item.cantidad
-                    );
-                    return (
-                        '<tr>' +
-                        '<td><img src="' +
-                        item.producto.imagen_prep +
-                        '" class=" h-10 w-10"></td>' +
-                        '<td class="text-lg text-base-content">' +
-                        nombreProductoTitleCase +
-                        '</td>' +
-                        '<td class="text-lg text-base-content">$ ' +
-                        precioProducto +
-                        '</td>' +
-                        '<td class="text-base-content text-center">' +
-                        // '<button class="btn btn-xs" (click)="decrementarCantidad(item)"'+
-                        //     '[disabled]="item.cantidad === 1">-</button>'+
-                        item.cantidad +
-                        // '<button class="btn btn-xs" (click)="incrementarCantidad(item)">+</button>'+
-                        '</td>' +
-                        '<td class="text-lg text-base-content">$' +
-                        totalxItem +
-                        '</td>' +
-                        // '<td>'+
-                        //     '<button class="btn btn-error no-animation" (click)="eliminarItem(item)">Eliminar'+
-                        //         'item</button>'+
-                        // '</td>'+
-                        '</tr>'
-                    );
-                }) +
-                '</tbody>' +
-                '<tfoot class="table-footer-group">' +
-                '<tr>' +
-                '<td colspan="3" class="text-xl text-base-content">Total:</td>' +
-                '<td></td>' +
-                '<td class="text-xl text-base-content">$' +
-                total +
-                '</td>' +
-                // '<td></td>' +
-                '</tr>' +
-                '</tfoot>' +
-                '</table>' +
-                '</div>' +
-                // '<div class="flex justify-center">' +
-                // '<button class="object-center btn btn-error" onclick="clearCart();" ">Limpiar carrito de compras</button>' +
-                // '</div>' +
-                '</div>',
+            // html:,
             background: 'rgb(65, 69, 88)',
             width: '40%',
             focusConfirm: false,
@@ -488,90 +441,67 @@ export class CarritoService {
                         '<div class="spinner-border" role="status">' +
                         '<span class="sr-only">Cargando...</span>' +
                         '</div>',
-                    background:'rgb(65, 69, 88)',
+                    background: 'rgb(65, 69, 88)',
                     showConfirmButton: true,
                     allowOutsideClick: false,
                     allowEscapeKey: false,
                     allowEnterKey: false,
                     timer: 2250,
-                    
+
                     didOpen: () => {
                         Swal.showLoading();
                         console.log('verificadorBoolean2', verificadorBoolean2);
                         console.log('didopen', this.verificadorBoolean);
                     },
-                }).then((result) => {
-
-                });
+                }).then((result) => {});
             } else if (result.isDismissed) {
                 this.clearOrderData();
                 Swal.fire({
-                    title:"<h5 class=' text-base-content'> Seguimos comprando </h5>",
+                    title: "<h5 class=' text-base-content'> Seguimos comprando </h5>",
                     html: '<span class="text-base-content text-lg"> Su pedido no se ha procesado </span>',
                     icon: 'info',
                     confirmButtonColor: '#2b8565',
                     timer: 1250,
                     showConfirmButton: false,
-                    background:'rgb(65, 69, 88)'
+                    background: 'rgb(65, 69, 88)',
                 });
             }
         });
     }
 
-
     async checkStock() {
         try {
-          const stockDisponible = await this.verificadorStock();
-          console.log('---RESPUESTA STOCKKK ---', stockDisponible)
-          
-          if (stockDisponible) {
-            // Mostrar alerta para indicar que el stock está disponible
-            // alert('El stock está disponible');
-            this.onCreate('crearCompra');
-          } else {
-            this.audioSinStock.play();
-            // Mostrar alerta para indicar que el stock no está disponible
-            // alert('El stock no está disponible');
-            Swal.fire({
-                title: "<h5 class=' text-base-content'> Error </h5>",
-                html:
-                '<span class="text-base-content text-lg">'+ this.responseAuto +'</span>',
-                icon: 'error',
-                showConfirmButton: true,
-                confirmButtonText: 'Aceptar',
-                background:'rgb(65, 69, 88)',
-                
-            });
+            const stockDisponible = await this.verificadorStock();
+            console.log('---RESPUESTA STOCKKK ---', stockDisponible);
 
-          }
+            if (stockDisponible) {
+                // Mostrar alerta para indicar que el stock está disponible
+                // alert('El stock está disponible');
+                this.onCreate('crearCompra');
+            } else {
+                this.audioSinStock.play();
+                // Mostrar alerta para indicar que el stock no está disponible
+                // alert('El stock no está disponible');
+                Swal.fire({
+                    title: "<h5 class=' text-base-content'> Error </h5>",
+                    html:
+                        '<span class="text-base-content text-lg">' +
+                        this.responseAuto +
+                        '</span>',
+                    icon: 'error',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Aceptar',
+                    background: 'rgb(65, 69, 88)',
+                });
+            }
         } catch (error) {
-          // Mostrar alerta para indicar un error en la verificación de stock
-        //   alert('Error al verificar el stock');
+            // Mostrar alerta para indicar un error en la verificación de stock
+            //   alert('Error al verificar el stock');
         }
     }
-    // imprimirPDF(): void {
-    //     const contenidoBoleta = document.getElementById().innerHTML;
-    //     const doc = new jsPDF();
-    //     doc.fromHTML(contenidoBoleta, 15, 15);
-    //     doc.save('boleta.pdf');
-    //   }
-    print(data: string): void {
-        const contenidoBoleta = document.getElementById(data);
-        const elementosBody = Array.from(document.body.children) as HTMLElement[];
-    
-        elementosBody.forEach((elemento: HTMLElement) => {
-          if (elemento !== contenidoBoleta) {
-            elemento.style.display = 'none';
-          }
-        });
-    
-        window.print();
-    
-        elementosBody.forEach((elemento: HTMLElement) => {
-          if (elemento !== contenidoBoleta) {
-            elemento.style.display = '';
-          }
-        });
-      }
-    
+
+    setDecision(decision: string) {
+        this.decision = decision;
+    }
+
 }

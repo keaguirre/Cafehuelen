@@ -56,31 +56,63 @@ export class PrintComponent implements OnInit {
     });
   }
 
-  imprimirPDF(): void {
+//   imprimirPDF(): void {
+//   const contenidoBoleta = this.elementRef.nativeElement.querySelector('#invoice-POS');
+
+//   html2canvas(contenidoBoleta, { scrollX: 0, scrollY: -window.scrollY, scale: 5 }).then(canvas => {
+//     const imgData = canvas.toDataURL('image/png');
+//     const doc = new jsPDF({
+//       unit: 'mm',
+//       format: [80, 297] // Ajusta las dimensiones según el tamaño de tu boleta POS 59 en milímetros
+//     });
+
+//     const imgProps = doc.getImageProperties(imgData);
+//     const pdfWidth = doc.internal.pageSize.getWidth();
+//     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+//     // Agregar imagen
+//     doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+//     // Envía el archivo PDF a imprimir
+//     doc.autoPrint();
+//     const blob = doc.output('blob');
+//     const url = URL.createObjectURL(blob);
+//     window.open(url, '_blank');
+
+//     // Liberar recursos después de imprimir
+//     URL.revokeObjectURL(url);
+//   });
+// }
+imprimirPDF(): void {
   const contenidoBoleta = this.elementRef.nativeElement.querySelector('#invoice-POS');
 
+  // Convierto el contenido de la boleta en una imagen y luego la exporto a pdf
   html2canvas(contenidoBoleta, { scrollX: 0, scrollY: -window.scrollY, scale: 5 }).then(canvas => {
     const imgData = canvas.toDataURL('image/png');
     const doc = new jsPDF({
       unit: 'mm',
-      format: [80, 297] // Ajusta las dimensiones según el tamaño de tu boleta POS 59 en milímetros
+      format: [80, 297] 
     });
-
+    //Configuro la imagen segun el tamano necesario
     const imgProps = doc.getImageProperties(imgData);
     const pdfWidth = doc.internal.pageSize.getWidth();
     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-    // Agregar imagen
+    // exporto la  imagen a pdf 
     doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
 
-    // Envía el archivo PDF a imprimir
-    doc.autoPrint();
+    // Generar el archivo PDF y luego imprimirlo usando print-js
     const blob = doc.output('blob');
     const url = URL.createObjectURL(blob);
-    window.open(url, '_blank');
+    printJS(url);
 
-    // Liberar recursos después de imprimir
+    // Limpia los recursos después de imprimir
     URL.revokeObjectURL(url);
+
+    // Recargar la página después de 10 segundos
+    setTimeout(() => {
+      window.location.reload();
+    }, 6000);
   });
 }
 }

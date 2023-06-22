@@ -8,7 +8,7 @@
                 </a>
             </li>
             <div class="divider font-bold text-success text-2xl">Categorias</div>
-            <div class="overflow-y-auto overflow-x-hidden lg:h-1/3 md:h-32">
+            <div class="overflow-y-auto overflow-x-hidden lg:h-48 md:h-32">
                 <!-- <h2 class=" font-bold text-success mb-4 text-2xl text-center">Categorias</h2> -->
                 <ng-container *ngFor="let categoria of MenuCatalogonavbar">
                     <div class="">
@@ -33,7 +33,7 @@
 
     <ng-template #carrito>
 
-        <div class="animate__animated animate__fadeIn w-72 bg-neutral flex-grow overflow-y-auto overflow-x-hidden lg:h-96 md:h-40">
+        <div class="animate__animated animate__fadeIn w-72 bg-neutral flex-grow overflow-y-auto overflow-x-hidden lg:h-72 md:h-40">
             <ul class=" list-none p-0">
                 <li class="mb-2" *ngFor="let item of itemsCarrito()">
                     <div class="flex items-center">
@@ -85,10 +85,11 @@
                     <p class="text-center text-accent lg:text-4xl md:text-2xl mb-3">$ {{totalCarrito() | thousands}}</p>
                     <ul class="">
                         <li>
-                            <button class="btn btn-wide text-neutral text-xs btn-success mb-4" (click)="botonPreCheckout()">
+                            <label for="my-modal-4" class="btn btn-wide text-neutral text-xs btn-success mb-4" >
                                 Ver carrito
                                 <i class=" ml-3 fa-solid fa-cart-shopping"><span class="ml-2 badge badge-sm indicator-item">{{carritoLength()}}</span></i>
-                            </button>
+                            </label>
+                           
                         </li>
                         <li>
                             <button class="btn text-xs text-base-content btn-wide btn-error" (click)="botonClearCart()">Limpiar carrito</button>
@@ -99,9 +100,10 @@
             </ng-template>
         </div>
     </div>
+
     <div #carritoComponent>
         <app-carrito></app-carrito>
-      </div>
+    </div>
     <!-- <template id="carritoComponent">
         
     </template> -->

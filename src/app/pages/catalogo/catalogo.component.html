@@ -21,9 +21,47 @@
     </header>
 
 
-    <ng-template class="hero h-96" #Hero>
+    <div class="hero h-96">
         <div class="hero-content flex-col lg:flex-row-reverse containerWidthWithoutCart">
-            <!-- <div class="carousel w-full">
+           
+            <img src="../../../assets/Catalogo/dracula1.1.svg"
+                class="animate__animated animate__fadeIn h-96 max-w-sm rounded-lg " />
+            <div class="">
+                <h1 class="animate__animated animate__fadeIn text-5xl font-bold ">Café Commit</h1>
+                <h1 class="animate__animated animate__fadeIn py-6 text-2xl">El café lleno de conflictos</h1>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="animate__animated animate__fadeIn">
+            <app-navbar-cliente></app-navbar-cliente>
+            <app-menu></app-menu>
+        </div>
+        <!-- Put this part before </body> tag -->
+        <input type="checkbox" id="my-modal-4" class="modal-toggle" />
+        <div class="modal">
+            <div class="modal-box w-auto y-auto max-w-5xl">
+              
+                <app-carrito></app-carrito>
+                
+                <div class="modal-action">
+                    <label for="my-modal-4" class="btn btn-circle absolute top-2 right-2">X</label>
+                </div>
+            </div>
+        </div>
+        <br>
+    </main>
+
+    <footer class="footer bg-gray-800 text-white text-center p-10 ">
+        <p class="text-sm">© 2023 BrewSoftware - Todos los derechos reservados</p>
+    </footer>
+
+
+
+</body>
+
+ <!-- <div class="carousel w-full">
                 <div id="slide1" class="carousel-item relative w-full">
                   <img src="../../../assets/Catalogo/dracula1.1.svg" class="" />
                   <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -53,46 +91,3 @@
                   </div>
                 </div>
               </div> -->
-            <img src="../../../assets/Catalogo/dracula1.1.svg"
-                class="animate__animated animate__fadeIn h-96 max-w-sm rounded-lg " />
-            <div class="">
-                <h1 class="animate__animated animate__fadeIn text-5xl font-bold ">Café Commit</h1>
-                <h1 class="animate__animated animate__fadeIn py-6 text-2xl">El café lleno de conflictos</h1>
-            </div>
-        </div>
-    </ng-template>
-
-    <main>
-        <ng-container *ngIf="mostrarCarrito; else Hero">
-            <div class=" animate__animated animate__fadeIn content-center">
-                <app-carrito></app-carrito>
-            </div>
-            <div class="bg-neutral btm-nav">
-                <button (click)="mostrarCatalogoMenu()">
-                    <i class="fa-solid fa-mug-saucer"></i>
-                </button>
-            </div>
-        </ng-container>
-        <!-- <div class="content-center">
-            <app-carrito></app-carrito>
-            </div> -->
-
-
-        <ng-container *ngIf="mostrarCatalogo ">
-            <div class="animate__animated animate__fadeIn">
-                <app-navbar-cliente></app-navbar-cliente>
-                <app-menu></app-menu>
-            </div>
-        </ng-container>
-
-        <br>
-    </main>
-
-
-    <!-- <footer class="footer bg-gray-800 text-white text-center p-10 ">
-            <p class="text-sm">© 2023 BrewSoftware - Todos los derechos reservados</p>
-        </footer> -->
-
-
-
-</body>
