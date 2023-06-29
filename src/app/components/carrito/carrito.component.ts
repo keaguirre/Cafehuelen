@@ -24,7 +24,6 @@ export class CarritoComponent {
       this.audioConfirm.src = '../../../assets/audios/confirme_accion.mp3'
 
     }
-
     carritoArray() {
         return this.carritoService.getCart();
     }

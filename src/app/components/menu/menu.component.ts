@@ -71,18 +71,18 @@ export class MenuComponent implements OnInit {
 
     //LISTADO OBJETOS DE LA API
     onList(cod: string): void {
-        // console.log('testmethod: ', this.responseListadoCategorias);
+        
         switch (cod) {
             case 'listCat': {
                 try {
                     this.prodService
                         .obtenerListadoCategoria()
                         .then((respuesta) => {
-                            // console.log('test listCat: ', this.responseListadoCategorias);
+                          
                             this.responseListadoCategorias = respuesta; //obj con listado ngFor
                         });
                 } catch (e: any) {
-                    // console.log(e);
+                    console.log(e);
                 }
                 break;
             }
@@ -95,7 +95,7 @@ export class MenuComponent implements OnInit {
                             this.refrescar.next();
                         });
                 } catch (e: any) {
-                    // console.log(e);
+                    console.log(e);
                 }
                 break;
             }
@@ -107,7 +107,7 @@ export class MenuComponent implements OnInit {
                             this.responseListadoIngredPrep = respuesta; //obj con listado ngFor
                         });
                 } catch (e: any) {
-                    // console.log(e);
+                    console.log(e);
                 }
                 break;
             }
@@ -119,7 +119,7 @@ export class MenuComponent implements OnInit {
                             this.responseListadoPreparacion = respuesta; //obj con listado ngFor
                         });
                 } catch (e: any) {
-                    // console.log(e);
+                    console.log(e);
                 }
                 break;
             }
@@ -138,8 +138,6 @@ export class MenuComponent implements OnInit {
 
             this.prodService.obtenerListadoCategoria().then((respuesta2) => {
                 categorias = respuesta2; //obj con listado ngFor
-                // console.log('categorias', categorias);
-                // console.log('preparaciones', preparaciones);
 
                 preparaciones.forEach((Item: any) => {
                     if (!respuestaFinal[Item.nombre_cat]) {
@@ -154,8 +152,7 @@ export class MenuComponent implements OnInit {
                 });
                 menu = respuestaFinal;
                 this.MenuCatalogo = Object.values(menu);
-                // console.log('MENUCATALOGO', this.MenuCatalogo);
-                // console.log('RESPUESTA FINAL', respuestaFinal);
+
             });
         });
     }
@@ -166,6 +163,9 @@ export class MenuComponent implements OnInit {
             item.nombre_prep
         );
         const precioProducto = this.thousandsPipe.transform(item.precio_prep);
+
+        let descripcionPrep:string = item.descripcion_prep;
+        descripcionPrep = descripcionPrep[0].toUpperCase() + descripcionPrep.slice(1);
         
         Swal.fire({
             width: '30%',
@@ -179,22 +179,11 @@ export class MenuComponent implements OnInit {
                 '<h3 class="card-title text-3xl text-center font-bold text-base-content mb-2"> Agregar ' +
                 nombreProductoTitleCase +
                 ' a la bolsa? </h3>' +
-                '<div class="col-md-6">' +
-                //'<p class="text-left">Ingredientes: ' + item.ingredientes_prep + '</p>' +
-                // '<p class="text-left">Descripción: ' + item.descripcion_prep + '</p>' +
+                '<h3 class=" text-secondary text-center font-semibold">'+ descripcionPrep +'</h3>' +
+                '<div class="col-md-6">' +                
                 '<p class="text-accent font-bold mb-0">Precio: $' +
                  precioProducto +
                 '</p>' +
-                // '<p class="text-gray-800 font-bold mb-0">Cantidad: ' +
-                // this.cantidadItem +
-                // '</p>' +
-                // '<div class="input-group mb-3">' +
-                // '<button class="btn btn-s bg-neutral-focus no-animation" (click)="disminuirCantidad()">-' +
-                // '</button>' +
-                // '<span class="text-error-content font-semibold ">'+ this.cantidadItem +'</span>' +
-                // '<button class="btn btn-s bg-neutral-focus no-animation" (click)="aumentarCantidad()">+' +
-                // '</button>' +
-                // '</div>' +
                 '</div>' +
                 '</div>',
             background:'rgb(65, 69, 88)',
@@ -231,6 +220,4 @@ export class MenuComponent implements OnInit {
     addtoCart(item: any) {
         this.carritoService.addtoCart(item);
     }
-
-
 }

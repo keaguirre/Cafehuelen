@@ -9,7 +9,6 @@
             </li>
             <div class="divider font-bold text-success text-2xl">Categorias</div>
             <div class="overflow-y-auto overflow-x-hidden lg:h-48 md:h-32">
-                <!-- <h2 class=" font-bold text-success mb-4 text-2xl text-center">Categorias</h2> -->
                 <ng-container *ngFor="let categoria of MenuCatalogonavbar">
                     <div class="">
                         <li>
@@ -42,13 +41,11 @@
                         </div>
                         <div class="flex items-center justify-between flex-grow">
                             <div class="w-36">
-                                <!-- <div class="my-4 flex items-center"> -->
                                     <p class="font-semibold  text-neutral-content mx-1">{{ item.producto.nombre_prep |
                                         titlecase}}
                                     </p>
                                     <p class="font-semibold text-accent mx-1"> $ {{item.producto.precio_prep *
                                         item.cantidad | thousands }}</p>
-                                <!-- </div> -->
                                 <div class="flex items-center">
                                     <p class=" text-s font-semibold p-2 text-neutral-content">Un. </p>
                                     <button class="btn btn-s bg-neutral-focus"
@@ -104,7 +101,4 @@
     <div #carritoComponent>
         <app-carrito></app-carrito>
     </div>
-    <!-- <template id="carritoComponent">
-        
-    </template> -->
 </nav>

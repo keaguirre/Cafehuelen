@@ -47,8 +47,6 @@ export class NavbarClienteComponent {
 
             this.prodService.obtenerListadoCategoria().then((respuesta2) => {
                 categorias = respuesta2; //obj con listado ngFor
-                // console.log('categorias', categorias);
-                // console.log('preparaciones', preparaciones);
 
                 preparaciones.forEach((Item: any) => {
                     if (!respuestaFinal[Item.nombre_cat]) {
@@ -63,8 +61,6 @@ export class NavbarClienteComponent {
                 });
                 menu = respuestaFinal;
                 this.MenuCatalogonavbar = Object.values(menu);
-                // console.log('MENUCATALOGO', this.MenuCatalogo);
-                // console.log('RESPUESTA FINAL', respuestaFinal);
             });
         });
     }
