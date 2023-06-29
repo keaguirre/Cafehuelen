@@ -1,0 +1,7 @@
+.description-cell {
+    max-width: 150px; /* Ajusta este valor según tus necesidades */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
