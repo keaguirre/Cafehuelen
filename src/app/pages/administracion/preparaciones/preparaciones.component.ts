@@ -66,6 +66,11 @@ export class PreparacionesComponent {
       this.onList('listPrepDesh');
     });
   }
+
+  toggleDescription(preparacionTabla: any) {
+    preparacionTabla.showDescription = !preparacionTabla.showDescription;
+  }
+
   ngOnDestroy():void{
     this.suscripcion.unsubscribe();
   }
