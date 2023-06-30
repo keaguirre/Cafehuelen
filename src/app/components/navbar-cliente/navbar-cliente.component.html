@@ -13,7 +13,7 @@
                     <div class="">
                         <li>
                             <a class="text-gray-600 hover:text-gray-800 block mb-2 text-4xl"
-                                href="catalogo#Categoria_{{categoria?.categoria?.id_cat}}"> <button
+                                href="catalogo#Categoria_{{categoria?.categoria?.id_cat}}"> <button (click)="sonidoTap()"
                                     class="text-base-content btn btn-wide bg-secondary-focus">{{categoria?.categoria?.nombre_cat
                                     | titlecase }}</button>
                             </a>
@@ -82,7 +82,7 @@
                     <p class="text-center text-accent lg:text-4xl md:text-2xl mb-3">$ {{totalCarrito() | thousands}}</p>
                     <ul class="">
                         <li>
-                            <label for="my-modal-4" class="btn btn-wide text-neutral text-xs btn-success mb-4" >
+                            <label for="my-modal-4" (click)="sonidoTap()" class="btn btn-wide text-neutral text-xs btn-success mb-4" >
                                 Ver carrito
                                 <i class=" ml-3 fa-solid fa-cart-shopping"><span class="ml-2 badge badge-sm indicator-item">{{carritoLength()}}</span></i>
                             </label>

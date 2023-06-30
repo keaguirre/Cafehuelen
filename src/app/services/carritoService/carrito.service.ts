@@ -17,6 +17,9 @@ export class CarritoService {
     ultimaCompra: any;
     audioSinStock!: HTMLAudioElement;
     audioPedRealizado!: HTMLAudioElement;
+    audioProdEliminado!: HTMLAudioElement;
+    audioBolsaVaciada!: HTMLAudioElement;
+    audioConfirmeAccion!: HTMLAudioElement;
     imprimirBoleta: EventEmitter<void> = new EventEmitter<void>();
     decision!: string;
 
@@ -27,11 +30,16 @@ export class CarritoService {
         private Router: Router
     ) {
         this.audioSinStock = new Audio();
-        this.audioSinStock.src =
-            '../../../assets/audios/atencion-preparacion.mp3';
+        this.audioSinStock.src = '../../../assets/audios/atencion-preparacion.mp3';
         this.audioPedRealizado = new Audio();
-        this.audioPedRealizado.src =
-            '../../../assets/audios/Pedido_realizado.m4a';
+        this.audioPedRealizado.src = '../../../assets/audios/Pedido_realizado.m4a';
+        this.audioProdEliminado = new Audio();
+        this.audioProdEliminado.src = '../../../assets/audios/Producto-eliminado.mp3';
+        this.audioBolsaVaciada = new Audio();
+        this.audioBolsaVaciada.src = '../../../assets/audios/Bolsa-vaciada.mp3';
+        this.audioConfirmeAccion = new Audio();
+        this.audioConfirmeAccion.src = '../../../assets/audios/confirme_accion.mp3';
+            
     }
 
     getCart(): any {
@@ -72,9 +80,11 @@ export class CarritoService {
 
     clearCart(): void {
         localStorage.removeItem('cart');
+        this.audioBolsaVaciada.play();
     }
 
     botonClearCart(): void {
+        this.audioConfirmeAccion.play();
         Swal.fire({
             icon: 'error',
             title: "<h5 class=' text-base-content'> ¿Deseas eliminar todos los productos de la lista?</h5>",
@@ -130,6 +140,7 @@ export class CarritoService {
         const nombreProductoTitleCase = this.titleCasePipe.transform(
             item.producto.nombre_prep
         );
+        this.audioConfirmeAccion.play();
         Swal.fire({
             icon: 'error',
             title:
@@ -143,6 +154,7 @@ export class CarritoService {
             background: 'rgb(65, 69, 88)',
         }).then((result) => {
             if (result.isConfirmed) {
+                this.audioProdEliminado.play();
                 this.eliminarItem(item);
                 Swal.fire({
                     icon: 'success',
@@ -204,6 +216,7 @@ export class CarritoService {
                 background: 'rgb(65, 69, 88)',
             }).then((result) => {
                 if (result.isConfirmed) {
+                    this.audioProdEliminado.play();
                     this.eliminarItem(producto);
                     Swal.fire({
                         icon: 'success',

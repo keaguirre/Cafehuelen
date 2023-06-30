@@ -114,6 +114,9 @@ export class NavbarClienteComponent {
         return this.carritoService.getCartTotalItems();
     }
 
+    sonidoTap() {
+        this.audioTap.play();
+    }
     
     @ViewChild('carritoComponent', { static: false })
     carritoComponent!: ElementRef;
