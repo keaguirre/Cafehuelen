@@ -146,12 +146,8 @@
 - Audios en toast de ok en api-watcher para las respuestas ok del back.
 - Boleta simplificada.
 
-# To do:
-- [ ] Carousel en cafeCommit
-- [ ] post print, volver al catalogo
-- [ ] Catalogo biblioteca de audios investigar ['Howler.js', 'SoundJS', 'Web Audio API'].
-- [ ] SheperdJS para el tutorial.
-- [ ] Integrar audio y tutorial juntos en la seccion de enseñame a comprar del catalogo.
-- [ ] Cambiar el fondo de las categorias en el catalogo.
-- [ ] Nuevas cartas con ajuste de imagenes, por si las imagenes son mas chicas, se deberán estirar en base a su marco.
-- [ ] Adaptar mejor el catalogo a las distintas resoluciones.
+# 01/07/23
+- Ultima actualización de catalogo, audios incluidos sin errores.
+- Arreglo instancia de confirmación de pedido.
+- Arreglo menor en registro de hora en el voucher.
+

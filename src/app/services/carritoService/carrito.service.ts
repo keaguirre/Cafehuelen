@@ -83,6 +83,10 @@ export class CarritoService {
         this.audioBolsaVaciada.play();
     }
 
+    clearCartNoAudio(): void {
+        localStorage.removeItem('cart');
+    }
+
     botonClearCart(): void {
         this.audioConfirmeAccion.play();
         Swal.fire({
@@ -391,7 +395,7 @@ export class CarritoService {
                                     // console.log(respuesta, 'respuesta del if ');
                                     Swal.fire({
                                         icon: 'success',
-                                        title: "<h5 class=' text-base-content'> Compra realizada con éxito </h5>",
+                                        title: "<h5 class=' text-base-content'> Pedido realizada con éxito </h5>",
                                         showConfirmButton: false,
                                         timer: 1125,
                                         background: 'rgb(65, 69, 88)',
@@ -406,7 +410,7 @@ export class CarritoService {
                                     this.itemsCarritoservice =
                                         this.getCartItems();
                                     this.sendOrderItem(this.getCartItems());
-                                    this.clearCart();
+                                    this.clearCartNoAudio();
                                 }
 
                                 // console.log('ultimaCompra', this.ultimaCompra);
