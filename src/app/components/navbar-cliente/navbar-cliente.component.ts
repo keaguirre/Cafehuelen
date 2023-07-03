@@ -1,8 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CarritoService } from 'src/app/services/carritoService/carrito.service';
 import Swal from 'sweetalert2';
-import { TitleCasePipe } from '@angular/common';
-import { CarritoComponent } from '../carrito/carrito.component';
+import { TitleCasePipe } from '@angular/common'; 
 import { ProductosService } from 'src/app/services/ProductosService/productos.service';
 import { CompraService } from 'src/app/services/compraService/compra.service';
 import { CatalogoComponent } from 'src/app/pages/catalogo/catalogo.component';
@@ -26,6 +25,7 @@ export class NavbarClienteComponent {
         private prodService: ProductosService,
         private compraService: CompraService,
         private catalogo: CatalogoComponent
+        
     ) {
         this.audioTapLow = new Audio();
         this.audioTapLow.src = '../../../assets/audios/tap_low.mp3'
@@ -148,4 +148,10 @@ export class NavbarClienteComponent {
         this.carritoComponent.nativeElement.style.display = 'block';
       }
     
+      scrollToCategoria(categoria: string) {
+        const categoriaElement = document.getElementById('Categoria_' + categoria);
+        categoriaElement?.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      
 }

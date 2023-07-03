@@ -12,11 +12,11 @@
                 <ng-container *ngFor="let categoria of MenuCatalogonavbar">
                     <div class="">
                         <li>
-                            <a class="text-gray-600 hover:text-gray-800 block mb-2 text-4xl"
-                                href="#/catalogo#Categoria_{{categoria?.categoria?.id_cat}}"> <button (click)="sonidoTap()"
+                            <div class="text-gray-600 hover:text-gray-800 block mb-2 text-4xl"
+                                > <button (click)="scrollToCategoria(categoria?.categoria?.id_cat); sonidoTap()"
                                     class="text-base-content btn btn-wide bg-secondary-focus">{{categoria?.categoria?.nombre_cat
                                     | titlecase }}</button>
-                            </a>
+                            </div>
                         </li>
                     </div>
                 </ng-container>

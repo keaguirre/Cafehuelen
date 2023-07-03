@@ -38,6 +38,16 @@ export class CatalogoComponent {
     }
     // BOTTOM NAV BAR
 
+    closeMenu() {
+        let menu = document.getElementById('menu');
+        menu?.classList.remove('show');
+    }
 
+    openMenu() {
+        let menu = document.getElementById('menu');
+        menu?.classList.add('show');
+    }
+
+    
 
 }

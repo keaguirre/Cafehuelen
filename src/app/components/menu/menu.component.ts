@@ -220,4 +220,14 @@ export class MenuComponent implements OnInit {
     addtoCart(item: any) {
         this.carritoService.addtoCart(item);
     }
+    
+    scrollToElement($element: any): void {
+        $element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+        
+    }
+
+    sonidoTap() {
+        this.audioTap.play();
+    }
+    
 }
