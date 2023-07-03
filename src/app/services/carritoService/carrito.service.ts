@@ -395,7 +395,7 @@ export class CarritoService {
                                     // console.log(respuesta, 'respuesta del if ');
                                     Swal.fire({
                                         icon: 'success',
-                                        title: "<h5 class=' text-base-content'> Pedido realizada con éxito </h5>",
+                                        title: "<h5 class=' text-base-content'> Pedido realizado con éxito </h5>",
                                         showConfirmButton: false,
                                         timer: 1125,
                                         background: 'rgb(65, 69, 88)',

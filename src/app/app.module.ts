@@ -27,6 +27,7 @@ import { FooterAdminComponent } from './components/footer-admin/footer-admin.com
 import { PrintComponent } from './components/print/print.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxPrintModule } from 'ngx-print';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { NgxPrintModule } from 'ngx-print';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule.forRoot([], { useHash: true }),
     ReactiveFormsModule,
     HttpClientModule,
     SweetAlert2Module.forRoot(),
@@ -62,8 +64,6 @@ import { NgxPrintModule } from 'ngx-print';
     NgxPaginationModule,
     QRCodeModule,
     NgxPrintModule
-    
-    
   ],
   providers: [
               TitleCasePipe,

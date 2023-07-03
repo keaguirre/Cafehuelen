@@ -171,12 +171,12 @@ export class MenuComponent implements OnInit {
             width: '30%',
             html:
                 '<div class="row object-center">' +
-                '<div class="col-md-6 content-center">' +
+                '<div class="col-md-6 flex justify-center content-center">' +
                 '<img src="' +
                 item.imagen_prep +
                 '" class="img-fluid w-96 h-96 object-cover content-center" alt="Responsive image">' +
                 '</div>' +
-                '<h3 class="card-title text-3xl text-center font-bold text-base-content mb-2"> Agregar ' +
+                '<h3 class="card-title text-3xl flex justify-center content-center text-center font-bold text-base-content mb-2"> ¿Agregar ' +
                 nombreProductoTitleCase +
                 ' a la bolsa? </h3>' +
                 '<h3 class=" text-secondary text-center font-semibold">'+ descripcionPrep +'</h3>' +
