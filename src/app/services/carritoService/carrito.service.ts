@@ -420,7 +420,7 @@ export class CarritoService {
                     console.log(error);
                     Swal.fire({
                         icon: 'error',
-                        title: "<h5 class=' text-base-content'>  Error al realizar la compra </h5>",
+                        title: "<h5 class=' text-base-content'>  Error al realizar el pedido </h5>",
                         showConfirmButton: false,
                         timer: 1125,
                         background: 'rgb(65, 69, 88)',
@@ -441,13 +441,14 @@ export class CarritoService {
         this.sendOrder(this.getCart);
         Swal.fire({
             // html:,
+            title: "<h5 class=' text-base-content'> ¿Desea finalizar su pedido? </h5>",
             background: 'rgb(65, 69, 88)',
             width: '40%',
             focusConfirm: false,
-            confirmButtonText: '<b>Finalizar compra</b>',
+            confirmButtonText: '<b>Finalizar pedido </b>',
             confirmButtonColor: '#2b8565',
             showCancelButton: true,
-            cancelButtonText: '<b>Seguir comprando</b>',
+            cancelButtonText: '<b>Seguir comprando </b>',
         }).then((result) => {
             if (result.isConfirmed) {
                 //this.verificadorStock();
